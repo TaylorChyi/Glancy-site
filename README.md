@@ -13,6 +13,22 @@
 
 每次向 `main` 分支或以 `feature-` 开头的分支推送代码时，`部署到云服务器` 工作流程都会自动执行。
 
+前端构建完成后只需将 `dist` 目录同步到服务器，通过 Nginx 托管即可。示例配置见 `nginx.conf.example`，后端服务独立运行在 `8080` 端口，通过 `/api` 前缀与前端通信。
+
+开发环境下需要在 `vite.config.js` 中开启代理并设置相对路径：
+
+```js
+export default defineConfig({
+  base: './',
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+  }
+})
+```
+
 ## 常见问题
 
 ### HTTP 503 错误
