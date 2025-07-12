@@ -17,8 +17,22 @@
 
 ### HTTP 503 错误
 
-如果访问站点时返回 `HTTP ERROR 503`，通常是服务器未正确提供静态文件导致。可以按以下步骤排查：
+如果访问站点时返回 `HTTP ERROR 503`，通常是服务器未正确提供静态文件导致。可以按以下步骤排查并定位问题：
 
-1. 确认 GitHub Actions 构建任务是否执行成功，`dist` 目录是否同步到了服务器。
-2. 在服务器上进入项目目录，运行 `npm run build` 后执行 `npm start`，使用内置的 Node 服务临时验证页面是否可以正常访问。
-3. 建议使用 Nginx 等 Web 服务器直接托管 `dist` 目录，避免 Node 服务异常导致 503。
+1. 确认 GitHub Actions 构建任务执行成功，`dist` 目录已同步到服务器。
+2. 在服务器上运行 `npm run build && npm start`，通过内置的 Node 服务验证页面能否正常访问。
+3. 如果 Node 服务可访问但通过域名仍返回 503，检查 Nginx 配置是否指向正确的 `dist` 路径，并查看 `/var/log/nginx/error.log` 是否有报错信息。
+4. Nginx 示例配置：
+
+   ```nginx
+   server {
+     listen 80;
+     server_name glancy.xyz;
+     root /path/to/dist;
+     location / {
+       try_files $uri $uri/ /index.html;
+     }
+   }
+   ```
+
+5. 调整配置并重载 Nginx 后再次访问页面，确认问题是否解决。
