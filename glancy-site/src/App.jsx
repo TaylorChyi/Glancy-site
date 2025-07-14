@@ -2,15 +2,32 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Home from './Home.jsx'
 import Login from './Login.jsx'
 import Portal from './Portal.jsx'
+import { LanguageProvider, useLanguage } from './LanguageContext.jsx'
+import { translations } from './translations.js'
 import './App.css'
 
+function Nav() {
+  const { t, setLang, lang } = useLanguage()
+  return (
+    <nav>
+      <Link to="/">{t.navHome}</Link> | <Link to="/login">{t.navLogin}</Link>
+      <select value={lang} onChange={(e) => setLang(e.target.value)}>
+        {Object.keys(translations).map((l) => (
+          <option key={l} value={l}>
+            {l}
+          </option>
+        ))}
+      </select>
+    </nav>
+  )
+}
+
 function App() {
+  const { t } = useLanguage()
   return (
     <>
       <BrowserRouter>
-        <nav>
-          <Link to="/">首页</Link> | <Link to="/login">登录</Link>
-        </nav>
+        <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -18,9 +35,8 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className="App">
-        <h1>Glancy 电子词典官网</h1>
-        <p>欢迎来到 Glancy，这是一个专注于词汇学习的电子词典。</p>
-        <Login />
+        <h1>{t.welcomeTitle}</h1>
+        <p>{t.welcomeMsg}</p>
       </div>
     </>
   )

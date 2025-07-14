@@ -1,10 +1,12 @@
 import './App.css'
+import { useLanguage } from './LanguageContext.jsx'
 
 function Home() {
+  const { t } = useLanguage()
   return (
     <div className="App">
-      <h1>Glancy 电子词典官网</h1>
-      <p>欢迎来到 Glancy，这是一个专注于词汇学习的电子词典。</p>
+      <h1>{t.welcomeTitle}</h1>
+      <p>{t.welcomeMsg}</p>
     </div>
   )
 }

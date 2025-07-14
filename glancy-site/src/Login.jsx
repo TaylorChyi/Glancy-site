@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './App.css'
+import { useLanguage } from './LanguageContext.jsx'
 
 function Login() {
+  const { t } = useLanguage()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
@@ -19,10 +21,10 @@ function Login() {
       })
       if (!resp.ok) {
         const text = await resp.text()
-        throw new Error(text || '登录失败')
+        throw new Error(text || t.loginButton + '失败')
       }
       const data = await resp.json()
-      setMessage(`欢迎，${data.username}`)
+      setMessage(`${t.loginButton} ${data.username}`)
       if (data.username === 'admin') {
         navigate('/portal')
       } else {
@@ -35,10 +37,10 @@ function Login() {
 
   return (
     <div className="App">
-      <h2>用户登录</h2>
+      <h2>{t.loginTitle}</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">用户名：</label>
+          <label htmlFor="username">{t.username}</label>
           <input
             id="username"
             value={username}
@@ -46,7 +48,7 @@ function Login() {
           />
         </div>
         <div>
-          <label htmlFor="password">密码：</label>
+          <label htmlFor="password">{t.password}</label>
           <input
             id="password"
             type="password"
@@ -54,7 +56,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">登录</button>
+        <button type="submit">{t.loginButton}</button>
         {message && <p>{message}</p>}
       </form>
     </div>

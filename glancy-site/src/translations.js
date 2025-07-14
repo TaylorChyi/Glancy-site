@@ -1,0 +1,86 @@
+export const translations = {
+  zh: {
+    navHome: '首页',
+    navLogin: '登录',
+    welcomeTitle: 'Glancy 电子词典官网',
+    welcomeMsg: '欢迎来到 Glancy，这是一个专注于词汇学习的电子词典。',
+    loginTitle: '用户登录',
+    username: '用户名：',
+    password: '密码：',
+    loginButton: '登录',
+    adminPortal: '管理门户',
+    adminWelcome: '欢迎进入后台管理界面。'
+  },
+  en: {
+    navHome: 'Home',
+    navLogin: 'Login',
+    welcomeTitle: 'Glancy Dictionary',
+    welcomeMsg: 'Welcome to Glancy, a dictionary focused on vocabulary learning.',
+    loginTitle: 'User Login',
+    username: 'Username:',
+    password: 'Password:',
+    loginButton: 'Login',
+    adminPortal: 'Admin Portal',
+    adminWelcome: 'Welcome to the administration page.'
+  },
+  de: {
+    navHome: 'Startseite',
+    navLogin: 'Anmelden',
+    welcomeTitle: 'Glancy Wörterbuch',
+    welcomeMsg: 'Willkommen bei Glancy, einem Wörterbuch für Vokabellernen.',
+    loginTitle: 'Benutzeranmeldung',
+    username: 'Benutzername:',
+    password: 'Passwort:',
+    loginButton: 'Anmelden',
+    adminPortal: 'Admin-Bereich',
+    adminWelcome: 'Willkommen im Administrationsbereich.'
+  },
+  fr: {
+    navHome: 'Accueil',
+    navLogin: 'Connexion',
+    welcomeTitle: 'Dictionnaire Glancy',
+    welcomeMsg: 'Bienvenue sur Glancy, un dictionnaire dédié à l\'apprentissage du vocabulaire.',
+    loginTitle: 'Connexion utilisateur',
+    username: 'Nom d\'utilisateur :',
+    password: 'Mot de passe :',
+    loginButton: 'Connexion',
+    adminPortal: 'Portail admin',
+    adminWelcome: 'Bienvenue sur la page d\'administration.'
+  },
+  ru: {
+    navHome: 'Главная',
+    navLogin: 'Вход',
+    welcomeTitle: 'Словарь Glancy',
+    welcomeMsg: 'Добро пожаловать в Glancy, словарь для изучения слов.',
+    loginTitle: 'Вход пользователя',
+    username: 'Имя пользователя:',
+    password: 'Пароль:',
+    loginButton: 'Войти',
+    adminPortal: 'Админ-портал',
+    adminWelcome: 'Добро пожаловать в административный раздел.'
+  },
+  ja: {
+    navHome: 'ホーム',
+    navLogin: 'ログイン',
+    welcomeTitle: 'Glancy 辞書',
+    welcomeMsg: '語彙学習に特化した Glancy へようこそ。',
+    loginTitle: 'ユーザーログイン',
+    username: 'ユーザー名：',
+    password: 'パスワード：',
+    loginButton: 'ログイン',
+    adminPortal: '管理ポータル',
+    adminWelcome: '管理ページへようこそ。'
+  },
+  es: {
+    navHome: 'Inicio',
+    navLogin: 'Iniciar sesión',
+    welcomeTitle: 'Diccionario Glancy',
+    welcomeMsg: 'Bienvenido a Glancy, un diccionario centrado en el aprendizaje de vocabulario.',
+    loginTitle: 'Inicio de sesión',
+    username: 'Usuario:',
+    password: 'Contraseña:',
+    loginButton: 'Entrar',
+    adminPortal: 'Portal de administración',
+    adminWelcome: 'Bienvenido a la página de administración.'
+  }
+}
