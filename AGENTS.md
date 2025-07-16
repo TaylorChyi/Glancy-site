@@ -9,6 +9,11 @@
 2. 修改代码后执行 `npm run lint` 保证代码风格一致。
 3. 通过 `npm run build` 确认项目可以正常构建。
 
+## 版本规范
+- 版本号记录在 `glancy-site/package.json`，格式为 `主.次.补丁`。
+- 每次合并后应将补丁号加一。
+- 仅当次版本号提升时会触发自动部署流程。
+
 ## 忽略文件
 - `dist` 和 `node_modules` 目录已在 `.gitignore` 中排除，请勿提交。
 
