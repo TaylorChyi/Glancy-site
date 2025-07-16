@@ -13,17 +13,33 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v3
+      - name: 检查版本号
+        id: version
+        run: |
+          old=$(git show HEAD^:glancy-site/package.json | jq -r .version || echo "0.0.0")
+          new=$(jq -r .version glancy-site/package.json)
+          old_minor=$(echo "$old" | cut -d. -f2)
+          new_minor=$(echo "$new" | cut -d. -f2)
+          if [ "$old_minor" != "$new_minor" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: 设置 Node.js
+        if: steps.version.outputs.deploy == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 20
       - name: 安装依赖
+        if: steps.version.outputs.deploy == 'true'
         run: npm ci
         working-directory: glancy-site
       - name: 构建项目
+        if: steps.version.outputs.deploy == 'true'
         run: npm run build
         working-directory: glancy-site
       - name: 同步到服务器
+        if: steps.version.outputs.deploy == 'true'
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.DEPLOY_HOST }}
