@@ -19,8 +19,6 @@ function Home() {
 
   return (
     <div className="App">
-      <h1>{t.welcomeTitle}</h1>
-      <p>{t.welcomeMsg}</p>
       <p>{t.userCount}: {count}</p>
       <button onClick={refresh}>{t.refresh}</button>
     </div>
