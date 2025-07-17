@@ -17,7 +17,7 @@ function App() {
             <Avatar width={32} height={32} />
           </div>
         </header>
-        <main className="display">Display Area</main>
+        <main className="display">What are we querying next?</main>
         <div className="chatbox">
           <input
             type="text"
