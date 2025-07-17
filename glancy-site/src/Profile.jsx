@@ -25,16 +25,16 @@ function Profile() {
     if (avatar) {
       formData.append('avatar', avatar)
     }
-    await fetch('/api/users/profile', {
+    const resp = await fetch('/api/users/profile', {
       method: 'POST',
       body: formData
     })
-    setMessage(t.updateSuccess)
+    setMessage(resp.ok ? t.updateSuccess : t.submitFail)
   }
 
   const handleBind = async () => {
-    await fetch('/api/bind/third-party')
-    setMessage(t.bindSuccess)
+    const resp = await fetch('/api/bind/third-party')
+    setMessage(resp.ok ? t.bindSuccess : t.submitFail)
   }
 
   return (

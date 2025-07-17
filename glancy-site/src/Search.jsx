@@ -23,7 +23,9 @@ function Search() {
     try {
       const data = await fetchWord(word)
       setResult(data)
-      setHistory((h) => [word, ...h])
+      setHistory((h) => {
+        const unique = Array.from(new Set([word, ...h]))
+        return unique.slice(0, 20)
     } catch (err) {
       setMessage(err.message)
     }
