@@ -42,18 +42,12 @@ function Chat() {
         ))}
         {loading && <div className="chat-bubble">...</div>}
       </div>
-      <form
-        onSubmit={sendMessage}
-        style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
-      >
+      <form className="chat-input" onSubmit={sendMessage}>
         <input
           value={text}
           onChange={(e) => setText(e.target.value)}
-          style={{ width: '80%' }}
         />
-        <button type="submit" style={{ width: '20%' }}>
-          Send
-        </button>
+        <button type="submit">Send</button>
       </form>
     </div>
   )
