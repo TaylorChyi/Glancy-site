@@ -30,17 +30,17 @@ function Chat() {
   }, [messages, loading])
 
   return (
-    <div className="App">
-      <div
-        ref={listRef}
-        style={{ maxHeight: '60vh', overflowY: 'auto', textAlign: 'left' }}
-      >
+    <div className="chat-window">
+      <div className="chat-messages" ref={listRef}>
         {messages.map((m, i) => (
-          <p key={i}>
-            <strong>{m.from === 'user' ? 'You:' : 'Bot:'}</strong> {m.text}
-          </p>
+          <div
+            key={i}
+            className={`chat-bubble ${m.from === 'user' ? 'user' : ''}`}
+          >
+            {m.text}
+          </div>
         ))}
-        {loading && <p>...</p>}
+        {loading && <div className="chat-bubble">...</div>}
       </div>
       <form
         onSubmit={sendMessage}
