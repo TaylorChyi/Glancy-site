@@ -35,6 +35,7 @@ export const translations = {
     searchButton: '搜索',
     playAudio: '播放语音',
     searchHistory: '搜索记录',
+    clearHistory: '清空记录',
     notifications: '通知',
     markRead: '标为已读',
     faqTitle: '常见问题',
@@ -91,6 +92,7 @@ export const translations = {
     searchButton: 'Search',
     playAudio: 'Play',
     searchHistory: 'History',
+    clearHistory: 'Clear History',
     notifications: 'Notifications',
     markRead: 'Mark read',
     faqTitle: 'FAQ',
@@ -123,7 +125,8 @@ export const translations = {
     loginButton: 'Anmelden',
     adminLoginTitle: 'Admin-Login',
     adminPortal: 'Admin-Bereich',
-    adminWelcome: 'Willkommen im Administrationsbereich.'
+    adminWelcome: 'Willkommen im Administrationsbereich.',
+    clearHistory: 'Verlauf löschen'
   },
   fr: {
     navHome: 'Accueil',
@@ -137,7 +140,8 @@ export const translations = {
     loginButton: 'Connexion',
     adminLoginTitle: 'Connexion admin',
     adminPortal: 'Portail admin',
-    adminWelcome: 'Bienvenue sur la page d\'administration.'
+    adminWelcome: 'Bienvenue sur la page d\'administration.',
+    clearHistory: 'Effacer l\'historique'
   },
   ru: {
     navHome: 'Главная',
@@ -151,7 +155,8 @@ export const translations = {
     loginButton: 'Войти',
     adminLoginTitle: 'Вход администратора',
     adminPortal: 'Админ-портал',
-    adminWelcome: 'Добро пожаловать в административный раздел.'
+    adminWelcome: 'Добро пожаловать в административный раздел.',
+    clearHistory: 'Очистить историю'
   },
   ja: {
     navHome: 'ホーム',
@@ -165,7 +170,8 @@ export const translations = {
     loginButton: 'ログイン',
     adminLoginTitle: '管理者ログイン',
     adminPortal: '管理ポータル',
-    adminWelcome: '管理ページへようこそ。'
+    adminWelcome: '管理ページへようこそ。',
+    clearHistory: '履歴をクリア'
   },
   es: {
     navHome: 'Inicio',
@@ -179,6 +185,7 @@ export const translations = {
     loginButton: 'Entrar',
     adminLoginTitle: 'Acceso de administrador',
     adminPortal: 'Portal de administración',
-    adminWelcome: 'Bienvenido a la página de administración.'
+    adminWelcome: 'Bienvenido a la página de administración.',
+    clearHistory: 'Borrar historial'
   }
 }

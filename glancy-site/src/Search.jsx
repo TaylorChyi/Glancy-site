@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 
@@ -6,7 +6,14 @@ function Search() {
   const { t } = useLanguage()
   const [word, setWord] = useState('')
   const [result, setResult] = useState(null)
-  const [history, setHistory] = useState([])
+  const [history, setHistory] = useState(() => {
+    const stored = localStorage.getItem('searchHistory')
+    return stored ? JSON.parse(stored) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem('searchHistory', JSON.stringify(history))
+  }, [history])
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -39,6 +46,7 @@ function Search() {
       {history.length > 0 && (
         <div>
           <h3>{t.searchHistory}</h3>
+          <button onClick={() => setHistory([])}>{t.clearHistory}</button>
           <ul>
             {history.map((h, i) => (
               <li key={i}>{h}</li>
