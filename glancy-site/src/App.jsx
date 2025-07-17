@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Home.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
@@ -14,36 +14,14 @@ import Contact from './Contact.jsx'
 import Health from './Health.jsx'
 import AdminLogin from './AdminLogin.jsx'
 import Portal from './Portal.jsx'
-import { LanguageProvider, useLanguage } from './LanguageContext.jsx'
-import { LANGUAGES } from './config/languages.js'
+import Layout from './components/Layout.jsx'
 import './App.css'
-
-function Nav() {
-  const { t, setLang, lang } = useLanguage()
-  return (
-    <nav>
-      <Link to="/">{t.navHome}</Link> | <Link to="/login">{t.navLogin}</Link> |
-      <Link to="/register">{t.navRegister}</Link> |{' '}
-      <Link to="/users">{t.navUsers}</Link> | <Link to="/search">{t.navSearch}</Link> |
-      <Link to="/chat">{t.navChat}</Link> | <Link to="/faq">{t.navFaq}</Link> | <Link to="/contact">{t.navContact}</Link> |
-      <Link to="/portal/login">{t.navAdmin}</Link>
-      <select value={lang} onChange={(e) => setLang(e.target.value)}>
-        {LANGUAGES.map((l) => (
-          <option key={l} value={l}>
-            {l}
-          </option>
-        ))}
-      </select>
-    </nav>
-  )
-}
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Nav />
-        <Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -59,9 +37,9 @@ function App() {
           <Route path="/health" element={<Health />} />
           <Route path="/portal/login" element={<AdminLogin />} />
           <Route path="/portal" element={<Portal />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
