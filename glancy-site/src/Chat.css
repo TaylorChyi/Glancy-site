@@ -5,7 +5,7 @@
   height: 60vh;
   border: 1px solid #ccc;
   background: var(--chat-window-bg);
-  border-radius: 10px;
+  border-radius: 20px;
   transition: width 0.3s ease, height 0.3s ease;
 }
 
@@ -22,7 +22,7 @@
 .chat-bubble {
   max-width: 70%;
   padding: 0.5rem 1rem;
-  border-radius: 12px;
+  border-radius: 20px;
   background-color: var(--chat-bubble-bg);
   align-self: flex-start;
 }
