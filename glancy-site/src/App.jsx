@@ -25,7 +25,7 @@ function App() {
         <header className="topbar">
           <UserMenu size={32} />
         </header>
-        <main className="display">Display Area</main>
+        <main className="display">What are we querying next?</main>
         <div className="chatbox">
           <input
             type="text"
