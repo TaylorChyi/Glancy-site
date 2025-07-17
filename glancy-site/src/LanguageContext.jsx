@@ -2,14 +2,14 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import { translations } from './translations.js'
 
 const LanguageContext = createContext({
-  lang: 'en',
-  t: translations.en,
+  lang: 'zh',
+  t: translations.zh,
   setLang: () => {}
 })
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState('en')
-  const [t, setT] = useState(translations.en)
+  const [lang, setLang] = useState('zh')
+  const [t, setT] = useState(translations.zh)
 
   useEffect(() => {
     fetch('/api/locale')
