@@ -25,10 +25,10 @@
   position: absolute;
   right: 0;
   margin-top: 0.5rem;
-  background: var(--app-bg);
-  color: var(--app-color);
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background: #2d2d2d;
+  color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   padding: 0.5rem;
   width: 180px;
   z-index: 1000;
@@ -42,7 +42,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #ddd;
+  background: #666;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +51,7 @@
 }
 .user-menu .pro-tag-small {
   position: absolute;
-  bottom: -4px;
+  top: -4px;
   right: -4px;
   background: #fff;
   color: #000;
@@ -75,7 +75,10 @@
   cursor: pointer;
 }
 .user-menu li .icon {
+  display: inline-block;
+  width: 16px;
   margin-right: 0.5rem;
+  text-align: center;
 }
 .user-menu li .arrow {
   margin-left: auto;
@@ -85,6 +88,6 @@
 }
 .user-menu ul + ul {
   margin-top: 0.5rem;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #444;
   padding-top: 0.5rem;
 }
