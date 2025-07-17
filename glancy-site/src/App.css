@@ -1,10 +1,12 @@
 .container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
   width: 240px;
+  height: 100vh;
   background: #000;
   color: #fff;
   padding: 20px;
@@ -28,6 +30,7 @@
 
 .right {
   flex: 1;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -50,6 +53,7 @@
 .display {
   flex: 1;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .chatbox {
