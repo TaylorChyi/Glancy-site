@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { useTheme } from './ThemeContext.jsx'
 
 function Preferences() {
   const { t } = useLanguage()
+  const { theme, setTheme } = useTheme()
   const [language, setLanguage] = useState('en')
-  const [theme, setTheme] = useState('light')
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -13,10 +14,10 @@ function Preferences() {
       .then((res) => res.json())
       .then((data) => {
         setLanguage(data.language || 'en')
-        setTheme(data.theme || 'light')
+        setTheme(data.theme || 'system')
       })
       .catch(() => {})
-  }, [])
+  }, [setTheme])
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -38,7 +39,11 @@ function Preferences() {
         </div>
         <div>
           <label>{t.prefTheme}</label>
-          <input value={theme} onChange={(e) => setTheme(e.target.value)} />
+          <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+            <option value="light">light</option>
+            <option value="dark">dark</option>
+            <option value="system">system</option>
+          </select>
         </div>
         <button type="submit">{t.saveButton}</button>
       </form>

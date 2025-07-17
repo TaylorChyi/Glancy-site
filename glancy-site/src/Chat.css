@@ -4,7 +4,7 @@
   flex-direction: column;
   height: 60vh;
   border: 1px solid #ccc;
-  background: #fafafa;
+  background: var(--chat-window-bg);
   border-radius: 10px;
 }
 
@@ -21,11 +21,11 @@
   max-width: 70%;
   padding: 0.5rem 1rem;
   border-radius: 12px;
-  background-color: #e0e0e0;
+  background-color: var(--chat-bubble-bg);
   align-self: flex-start;
 }
 
 .chat-bubble.user {
-  background-color: #d4e5ff;
+  background-color: var(--chat-bubble-user-bg);
   align-self: flex-end;
 }
