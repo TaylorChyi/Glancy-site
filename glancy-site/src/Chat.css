@@ -35,13 +35,14 @@
 .chat-input {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.75rem 1.5rem;
   border-top: 1px solid #ccc;
+  gap: 1rem;
 }
 
 .chat-input input {
   flex: 1;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -49,14 +50,14 @@
 .chat-input button {
   border: none;
   background: none;
-  padding: 0;
+  padding: 0.5rem;
 }
 
 .chat-input button + button {
-  margin-left: 0.5rem;
+  margin-left: 1rem;
 }
 
 .chat-input button img {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
 }
