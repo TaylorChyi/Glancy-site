@@ -1,11 +1,21 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import { sendChatMessage } from './api/chat.js'
+import { useTheme } from './ThemeContext.jsx'
+import sendLight from './assets/send-button-light.svg'
+import sendDark from './assets/send-button-dark.svg'
+import voiceLight from './assets/voice-button-light.svg'
+import voiceDark from './assets/voice-button-dark.svg'
 
 function Chat() {
   const [messages, setMessages] = useState([])
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(false)
+  const { theme } = useTheme()
+  const current =
+    theme === 'system' ? document.documentElement.dataset.theme : theme
+  const sendIcon = current === 'dark' ? sendDark : sendLight
+  const voiceIcon = current === 'dark' ? voiceDark : voiceLight
   const listRef = useRef(null)
 
   const sendMessage = async (e) => {
@@ -47,7 +57,12 @@ function Chat() {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit">Send</button>
+        <button type="submit">
+          <img
+            src={text.trim() === '' ? voiceIcon : sendIcon}
+            alt={text.trim() === '' ? 'voice' : 'send'}
+          />
+        </button>
       </form>
     </div>
   )

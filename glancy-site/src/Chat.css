@@ -47,5 +47,16 @@
 }
 
 .chat-input button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.chat-input button + button {
   margin-left: 0.5rem;
+}
+
+.chat-input button img {
+  width: 24px;
+  height: 24px;
 }
