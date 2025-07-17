@@ -11,6 +11,7 @@ function Portal() {
   const [logLevel, setLogLevel] = useState('info')
   const [recipients, setRecipients] = useState([])
   const [newRecipient, setNewRecipient] = useState('')
+  const [error, setError] = useState('')
 
   const loadStats = () => {
     fetch('/api/stats/users')
@@ -42,41 +43,81 @@ function Portal() {
 
   const addConfig = async (e) => {
     e.preventDefault()
-    await fetch('/api/config', {
+    setError('')
+    try {
+      const resp = await fetch('/api/config', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ key: configKey, value: configValue })
     })
-    setConfigKey('')
-    setConfigValue('')
-    loadConfig()
+      if (!resp.ok) {
+        const text = await resp.text()
+        setError(text || 'Request failed')
+        return
+      }
+      setConfigKey('')
+      setConfigValue('')
+      loadConfig()
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   const updateLogLevel = async () => {
-    await fetch('/api/log-level', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ level: logLevel })
-    })
-    loadLogLevel()
+    setError('')
+    try {
+      const resp = await fetch('/api/log-level', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ level: logLevel })
+      })
+      if (!resp.ok) {
+        const text = await resp.text()
+        setError(text || 'Request failed')
+        return
+      }
+      loadLogLevel()
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   const addRecipient = async (e) => {
     e.preventDefault()
-    await fetch('/api/alerts/recipients', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: newRecipient })
-    })
-    setNewRecipient('')
-    loadRecipients()
+    setError('')
+    try {
+      const resp = await fetch('/api/alerts/recipients', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: newRecipient })
+      })
+      if (!resp.ok) {
+        const text = await resp.text()
+        setError(text || 'Request failed')
+        return
+      }
+      setNewRecipient('')
+      loadRecipients()
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   const deleteRecipient = async (email) => {
-    await fetch(`/api/alerts/recipients/${encodeURIComponent(email)}`, {
-      method: 'DELETE'
-    })
-    loadRecipients()
+    setError('')
+    try {
+      const resp = await fetch(`/api/alerts/recipients/${encodeURIComponent(email)}`, {
+        method: 'DELETE'
+      })
+      if (!resp.ok) {
+        const text = await resp.text()
+        setError(text || 'Request failed')
+        return
+      }
+      loadRecipients()
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   useEffect(() => {
@@ -90,6 +131,7 @@ function Portal() {
     <div className="App">
       <h2>{t.adminPortal}</h2>
       <p>{t.adminWelcome}</p>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>{t.totalUsers}: {stats.total}</p>
       <p>{t.dailyActive}: {stats.daily}</p>
       <h3>System Config</h3>
