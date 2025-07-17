@@ -15,7 +15,7 @@ import Health from './Health.jsx'
 import AdminLogin from './AdminLogin.jsx'
 import Portal from './Portal.jsx'
 import { LanguageProvider, useLanguage } from './LanguageContext.jsx'
-import { translations } from './translations.js'
+import { LANGUAGES } from './config/languages.js'
 import './App.css'
 
 function Nav() {
@@ -28,7 +28,7 @@ function Nav() {
       <Link to="/chat">{t.navChat}</Link> | <Link to="/faq">{t.navFaq}</Link> | <Link to="/contact">{t.navContact}</Link> |
       <Link to="/portal/login">{t.navAdmin}</Link>
       <select value={lang} onChange={(e) => setLang(e.target.value)}>
-        {Object.keys(translations).map((l) => (
+        {LANGUAGES.map((l) => (
           <option key={l} value={l}>
             {l}
           </option>
