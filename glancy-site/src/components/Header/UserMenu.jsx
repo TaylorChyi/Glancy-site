@@ -3,7 +3,9 @@ import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 
-function UserMenu() {
+// size 控制触发按钮中头像的尺寸
+
+function UserMenu({ size = 24 }) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
   const email = 'user@example.com'
@@ -24,7 +26,7 @@ function UserMenu() {
   return (
     <div className="header-section user-menu" ref={menuRef}>
       <button onClick={() => setOpen(!open)}>
-        <Avatar width={24} height={24} />
+        <Avatar width={size} height={size} />
         {isPro && <ProTag />}
       </button>
       {open && (
