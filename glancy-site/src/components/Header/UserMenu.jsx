@@ -22,13 +22,13 @@ function UserMenu() {
             <div className="email">{email}</div>
           </div>
           <ul>
-            <li><span className="icon">⬆️</span>Upgrade plan</li>
-            <li><span className="icon">🎛️</span>Customize ChatGPT</li>
-            <li><span className="icon">⚙️</span>Settings</li>
+            <li><span className="icon">⬆</span>Upgrade plan</li>
+            <li><span className="icon">⚙</span>Customize ChatGPT</li>
+            <li><span className="icon">🛠</span>Settings</li>
           </ul>
           <ul>
-            <li><span className="icon">❓</span>Help<span className="arrow">›</span></li>
-            <li><span className="icon">↩️</span>Log out</li>
+            <li><span className="icon">?</span>Help<span className="arrow">›</span></li>
+            <li><span className="icon">↩</span>Log out</li>
           </ul>
         </div>
       )}
