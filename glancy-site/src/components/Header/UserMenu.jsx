@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Header.css'
 import ProTag from './ProTag.jsx'
+import Avatar from '../Avatar.jsx'
 
 function UserMenu() {
   const [open, setOpen] = useState(false)
@@ -10,14 +11,14 @@ function UserMenu() {
   return (
     <div className="header-section user-menu">
       <button onClick={() => setOpen(!open)}>
-        <span role="img" aria-label="user">👤</span>
+        <Avatar width={24} height={24} />
         {isPro && <ProTag />}
       </button>
       {open && (
         <div className="menu">
           <div className="menu-header">
             <div className="avatar">
-              <span role="img" aria-label="user">👤</span>
+              <Avatar width={32} height={32} />
               {isPro && <ProTag small />}
             </div>
             <div className="email">{email}</div>
