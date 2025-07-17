@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
-import './Chat.css'
+import { sendChatMessage } from './api/chat.js'
 
 function Chat() {
   const [messages, setMessages] = useState([])
@@ -16,12 +16,7 @@ function Chat() {
     setText('')
     setLoading(true)
     try {
-      const resp = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: msg.text })
-      })
-      const data = await resp.json()
+      const data = await sendChatMessage(msg.text)
       setMessages((m) => [...m, { from: 'bot', text: data.reply }])
     } catch (err) {
       setMessages((m) => [...m, { from: 'bot', text: err.message }])

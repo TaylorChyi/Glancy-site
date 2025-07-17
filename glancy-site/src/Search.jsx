@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { fetchWord, fetchWordAudio } from './api/words.js'
 
 function Search() {
   const { t } = useLanguage()
@@ -17,15 +18,13 @@ function Search() {
 
   const handleSearch = async (e) => {
     e.preventDefault()
-    const resp = await fetch(`/api/words?word=${encodeURIComponent(word)}`)
-    const data = await resp.json()
+    const data = await fetchWord(word)
     setResult(data)
     setHistory((h) => [word, ...h])
   }
 
   const playAudio = async () => {
-    const resp = await fetch(`/api/words/audio?word=${encodeURIComponent(word)}`)
-    const blob = await resp.blob()
+    const blob = await fetchWordAudio(word)
     const url = URL.createObjectURL(blob)
     new Audio(url).play()
   }
