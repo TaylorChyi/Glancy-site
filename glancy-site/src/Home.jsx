@@ -4,8 +4,7 @@ import { useLanguage } from './LanguageContext.jsx'
 import LanguageSelector from './components/Sidebar/LanguageSelector.jsx'
 import HistoryList from './components/Sidebar/HistoryList.jsx'
 import Favorites from './components/Sidebar/Favorites.jsx'
-import UserProfile from './components/Header/UserProfile.jsx'
-import SettingsMenu from './components/Header/SettingsMenu.jsx'
+import UserMenu from './components/Header/UserMenu.jsx'
 import ViewModeToggle from './components/Header/ViewModeToggle.jsx'
 import ModelSelector from './components/Toolbar/ModelSelector.jsx'
 import VoiceInputButton from './components/Toolbar/VoiceInputButton.jsx'
@@ -29,9 +28,8 @@ function Home() {
   return (
     <div className="App">
       <header>
-        <UserProfile />
-        <SettingsMenu />
         <ViewModeToggle />
+        <UserMenu />
       </header>
       <aside>
         <LanguageSelector />

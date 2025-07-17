@@ -2,3 +2,89 @@
   display: inline-block;
   margin-right: 1rem;
 }
+.user-menu {
+  position: relative;
+}
+.user-menu button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+.user-menu .pro-tag {
+  position: absolute;
+  top: -4px;
+  right: -8px;
+  background: #fff;
+  color: #000;
+  font-size: 0.6rem;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+.user-menu .menu {
+  position: absolute;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--app-bg);
+  color: var(--app-color);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 180px;
+  z-index: 1000;
+}
+.user-menu .menu-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.user-menu .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  position: relative;
+}
+.user-menu .pro-tag-small {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: #fff;
+  color: #000;
+  font-size: 0.5rem;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+.user-menu .email {
+  color: gray;
+  font-size: 0.8rem;
+}
+.user-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.user-menu li {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  cursor: pointer;
+}
+.user-menu li .icon {
+  margin-right: 0.5rem;
+}
+.user-menu li .arrow {
+  margin-left: auto;
+}
+.user-menu li + li {
+  margin-top: 0.25rem;
+}
+.user-menu ul + ul {
+  margin-top: 0.5rem;
+  border-top: 1px solid #ccc;
+  padding-top: 0.5rem;
+}
