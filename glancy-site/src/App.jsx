@@ -25,7 +25,7 @@ function Nav() {
       <Link to="/">{t.navHome}</Link> | <Link to="/login">{t.navLogin}</Link> |
       <Link to="/register">{t.navRegister}</Link> |{' '}
       <Link to="/users">{t.navUsers}</Link> | <Link to="/search">{t.navSearch}</Link> |
-      <Link to="/chat">{t.navChat}</Link> | <Link to="/faq">{t.navFaq}</Link> |
+      <Link to="/chat">{t.navChat}</Link> | <Link to="/faq">{t.navFaq}</Link> | <Link to="/contact">{t.navContact}</Link> |
       <Link to="/contact">{t.navContact}</Link> | <Link to="/portal/login">{t.navAdmin}</Link> |
       <Link to="/portal/login">{t.navAdmin}</Link>
       <select value={lang} onChange={(e) => setLang(e.target.value)}>
