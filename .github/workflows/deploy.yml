@@ -10,20 +10,26 @@ jobs:
   build_and_deploy:
     name: 构建并部署
     runs-on: ubuntu-latest
+    env:
+      DEPLOY_CHECK_VERSION: ${{ vars.DEPLOY_CHECK_VERSION || 'false' }}
     steps:
       - name: 检出代码
         uses: actions/checkout@v3
       - name: 检查版本号
         id: version
         run: |
-          old=$(git show HEAD^:glancy-site/package.json | jq -r .version || echo "0.0.0")
-          new=$(jq -r .version glancy-site/package.json)
-          old_minor=$(echo "$old" | cut -d. -f2)
-          new_minor=$(echo "$new" | cut -d. -f2)
-          if [ "$old_minor" != "$new_minor" ]; then
-            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          if [ "$DEPLOY_CHECK_VERSION" = "true" ]; then
+            old=$(git show HEAD^:glancy-site/package.json | jq -r .version || echo "0.0.0")
+            new=$(jq -r .version glancy-site/package.json)
+            old_minor=$(echo "$old" | cut -d. -f2)
+            new_minor=$(echo "$new" | cut -d. -f2)
+            if [ "$old_minor" != "$new_minor" ]; then
+              echo "deploy=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "deploy=false" >> "$GITHUB_OUTPUT"
+            fi
           else
-            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
           fi
       - name: 设置 Node.js
         if: steps.version.outputs.deploy == 'true'
