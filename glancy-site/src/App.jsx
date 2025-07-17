@@ -1,45 +1,32 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './Home.jsx'
-import Login from './Login.jsx'
-import Register from './Register.jsx'
-import Users from './Users.jsx'
-import UserDetail from './UserDetail.jsx'
-import Profile from './Profile.jsx'
-import Preferences from './Preferences.jsx'
-import Search from './Search.jsx'
-import Chat from './Chat.jsx'
-import Notifications from './Notifications.jsx'
-import Faq from './Faq.jsx'
-import Contact from './Contact.jsx'
-import Health from './Health.jsx'
-import AdminLogin from './AdminLogin.jsx'
-import Portal from './Portal.jsx'
-import Layout from './components/Layout.jsx'
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+  const [text, setText] = useState('')
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/:id" element={<UserDetail />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/preferences" element={<Preferences />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/health" element={<Health />} />
-          <Route path="/portal/login" element={<AdminLogin />} />
-          <Route path="/portal" element={<Portal />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="container">
+      <aside className="sidebar">
+        <h2>Sidebar</h2>
+      </aside>
+      <div className="right">
+        <header className="topbar">
+          <div className="avatar">
+            <img src="https://via.placeholder.com/32" alt="avatar" />
+          </div>
+        </header>
+        <main className="display">Display Area</main>
+        <div className="chatbox">
+          <input
+            type="text"
+            placeholder="Word, Phrase or Sentence"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button>{text.trim() === '' ? '🎤' : '➤'}</button>
+        </div>
+      </div>
+    </div>
   )
 }
 
