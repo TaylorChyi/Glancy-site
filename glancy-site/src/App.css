@@ -9,6 +9,22 @@
   color: #fff;
   padding: 20px;
 }
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: inherit;
+  padding-bottom: 1rem;
+}
+.sidebar-brand img {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+.sidebar-brand span {
+  font-size: 1.25rem;
+}
 
 .right {
   flex: 1;
