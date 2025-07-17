@@ -51,8 +51,14 @@
 
 .display {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   overflow-y: auto;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .chatbox {
@@ -70,9 +76,17 @@
 }
 
 .chatbox button {
-  margin-left: 10px;
   border: none;
   background: none;
-  font-size: 20px;
+  padding: 0;
   cursor: pointer;
+}
+
+.chatbox button + button {
+  margin-left: 10px;
+}
+
+.chatbox button img {
+  width: 24px;
+  height: 24px;
 }
