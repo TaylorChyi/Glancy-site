@@ -1,6 +1,6 @@
-# Glancy 网站
+# 格律词典网站
 
-此仓库包含 Glancy 电子词典官网的前端代码，采用 React + Vite 构建。
+此仓库包含格律词典前端代码，采用 React + Vite 构建。
 
 ## 部署方式
 
@@ -47,3 +47,54 @@ export default defineConfig({
 ## 登录界面
 
 首页已新增用户登录表单，提交信息后会调用后端 `/api/users/login` 接口进行验证。
+
+## 用户注册
+
+注册页通过 `/api/users/register` 创建新账号。
+
+## 用户列表与删除
+
+`/users` 页面展示所有用户，数据来自 `GET /api/users`。在列表中点击删除会调用
+`DELETE /api/users/{id}`。
+
+## 个人资料编辑
+
+`/profile` 页面通过 `GET /api/users/profile` 载入信息，提交表单时向
+`POST /api/users/profile` 上传昵称和头像；同时可点击绑定按钮触发
+`/api/bind/third-party` 完成第三方账号绑定。
+
+## 偏好设置
+
+`/preferences` 先从 `GET /api/preferences` 获取当前配置，保存时发送
+`POST /api/preferences`。
+
+## 词汇查询
+
+`/search` 调用 `/api/words?word=xxx` 获取单词释义，点击播放按钮则访问
+`/api/words/audio?word=xxx` 播放语音。
+
+## 通知中心
+
+`/notifications` 页面通过 `GET /api/notifications` 获取通知列表，标记已读时调
+用 `POST /api/notifications/{id}`。
+
+## FAQ 页面
+
+`/faq` 通过 `GET /api/faqs` 拉取常见问题内容。
+
+## 联系表单
+
+`/contact` 页面会把填写的信息提交到 `POST /api/contact`。
+
+## 管理门户
+
+管理员可在 `/portal/login` 使用 `/api/admin/login` 登录，登录后在 `/portal`
+展示的统计数据来自 `GET /api/stats/users`。
+
+## 服务状态
+
+`/health` 页面会定期请求 `/api/ping` 检查服务是否可用。
+
+## 用户总数
+
+首页会调用 `/api/users/count` 显示当前注册人数，并提供刷新按钮重新获取。
