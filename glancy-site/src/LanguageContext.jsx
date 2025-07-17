@@ -23,6 +23,11 @@ export function LanguageProvider({ children }) {
       .catch(() => {})
   }, [])
 
+  useEffect(() => {
+    document.title = t.welcomeTitle
+    document.documentElement.lang = lang
+  }, [lang, t])
+
   const changeLanguage = (l) => {
     if (translations[l]) {
       setLang(l)
