@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function UserDetail() {
   const { t } = useLanguage()
@@ -10,7 +11,7 @@ function UserDetail() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    fetch(`/api/users/${id}`)
+    fetch(`${API_PATHS.users}/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setUsername(data.username)
@@ -20,7 +21,7 @@ function UserDetail() {
 
   const handleUpdate = async (e) => {
     e.preventDefault()
-    await fetch(`/api/users/${id}`, {
+    await fetch(`${API_PATHS.users}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username })

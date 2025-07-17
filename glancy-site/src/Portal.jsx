@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function Portal() {
   const { t } = useLanguage()
@@ -13,28 +14,28 @@ function Portal() {
   const [newRecipient, setNewRecipient] = useState('')
 
   const loadStats = () => {
-    fetch('/api/stats/users')
+    fetch(API_PATHS.stats)
       .then((res) => res.json())
       .then((data) => setStats(data))
       .catch(() => {})
   }
 
   const loadConfig = () => {
-    fetch('/api/config')
+    fetch(API_PATHS.config)
       .then((res) => res.json())
       .then((data) => setConfig(Object.entries(data)))
       .catch(() => {})
   }
 
   const loadLogLevel = () => {
-    fetch('/api/log-level')
+    fetch(API_PATHS.logLevel)
       .then((res) => res.json())
       .then((data) => setLogLevel(data.level || 'info'))
       .catch(() => {})
   }
 
   const loadRecipients = () => {
-    fetch('/api/alerts/recipients')
+    fetch(API_PATHS.alertsRecipients)
       .then((res) => res.json())
       .then((data) => setRecipients(data))
       .catch(() => {})
@@ -42,7 +43,7 @@ function Portal() {
 
   const addConfig = async (e) => {
     e.preventDefault()
-    await fetch('/api/config', {
+    await fetch(API_PATHS.config, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ key: configKey, value: configValue })
@@ -53,7 +54,7 @@ function Portal() {
   }
 
   const updateLogLevel = async () => {
-    await fetch('/api/log-level', {
+    await fetch(API_PATHS.logLevel, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ level: logLevel })
@@ -63,7 +64,7 @@ function Portal() {
 
   const addRecipient = async (e) => {
     e.preventDefault()
-    await fetch('/api/alerts/recipients', {
+    await fetch(API_PATHS.alertsRecipients, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: newRecipient })
@@ -73,7 +74,7 @@ function Portal() {
   }
 
   const deleteRecipient = async (email) => {
-    await fetch(`/api/alerts/recipients/${encodeURIComponent(email)}`, {
+    await fetch(`${API_PATHS.alertsRecipients}/${encodeURIComponent(email)}`, {
       method: 'DELETE'
     })
     loadRecipients()

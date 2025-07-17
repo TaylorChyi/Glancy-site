@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { useTheme } from './ThemeContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function Preferences() {
   const { t } = useLanguage()
@@ -10,7 +11,7 @@ function Preferences() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    fetch('/api/preferences')
+    fetch(API_PATHS.preferences)
       .then((res) => res.json())
       .then((data) => {
         setLanguage(data.language || 'en')
@@ -21,7 +22,7 @@ function Preferences() {
 
   const handleSave = async (e) => {
     e.preventDefault()
-    await fetch('/api/preferences', {
+    await fetch(API_PATHS.preferences, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ language, theme })

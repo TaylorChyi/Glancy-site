@@ -13,5 +13,11 @@ export const API_PATHS = {
   locale: `${API_BASE}/locale`,
   notifications: `${API_BASE}/notifications`,
   profile: `${API_BASE}/users/profile`,
-  preferences: `${API_BASE}/preferences`
+  preferences: `${API_BASE}/preferences`,
+  login: `${API_BASE}/users/login`,
+  register: `${API_BASE}/users/register`,
+  count: `${API_BASE}/users/count`,
+  faqs: `${API_BASE}/faqs`,
+  contact: `${API_BASE}/contact`,
+  bindThirdParty: `${API_BASE}/bind/third-party`
 }

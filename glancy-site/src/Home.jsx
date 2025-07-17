@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 import LanguageSelector from './components/Sidebar/LanguageSelector.jsx'
 import HistoryList from './components/Sidebar/HistoryList.jsx'
 import Favorites from './components/Sidebar/Favorites.jsx'
@@ -16,7 +17,7 @@ function Home() {
   const [count, setCount] = useState(0)
 
   const refresh = () => {
-    fetch('/api/users/count')
+    fetch(API_PATHS.count)
       .then((res) => res.json())
       .then((data) => setCount(data.count))
       .catch(() => {})
