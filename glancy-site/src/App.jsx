@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Brand from './components/Brand.jsx'
+import Avatar from './components/Avatar.jsx'
 
 function App() {
   const [text, setText] = useState('')
@@ -13,7 +14,7 @@ function App() {
       <div className="right">
         <header className="topbar">
           <div className="avatar">
-            <img src="https://via.placeholder.com/32" alt="avatar" />
+            <Avatar width={32} height={32} />
           </div>
         </header>
         <main className="display">Display Area</main>

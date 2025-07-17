@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import './Layout.css'
+import Avatar from './Avatar.jsx'
 
 function Layout() {
   return (
@@ -27,7 +28,7 @@ function Layout() {
       <main className="main">
         <div className="avatar-wrapper">
           <div className="avatar">
-            <img src="https://via.placeholder.com/36" alt="User Avatar" />
+            <Avatar />
           </div>
           <div className="plus-badge">PLUS</div>
         </div>
