@@ -7,6 +7,7 @@ function Search() {
   const { t } = useLanguage()
   const [word, setWord] = useState('')
   const [result, setResult] = useState(null)
+  const [message, setMessage] = useState('')
   const [history, setHistory] = useState(() => {
     const stored = localStorage.getItem('searchHistory')
     return stored ? JSON.parse(stored) : []
@@ -18,15 +19,22 @@ function Search() {
 
   const handleSearch = async (e) => {
     e.preventDefault()
-    const data = await fetchWord(word)
-    setResult(data)
-    setHistory((h) => [word, ...h])
+    setMessage('')
+    try {
+      const data = await fetchWord(word)
+      setResult(data)
+      setHistory((h) => [word, ...h])
+    } catch (err) {
+      setMessage(err.message)
+    }
   }
 
   const playAudio = async () => {
     const blob = await fetchWordAudio(word)
     const url = URL.createObjectURL(blob)
-    new Audio(url).play()
+    const audio = new Audio(url)
+    audio.onended = () => URL.revokeObjectURL(url)
+    audio.play()
   }
 
   return (
@@ -35,6 +43,7 @@ function Search() {
       <form onSubmit={handleSearch}>
         <input value={word} onChange={(e) => setWord(e.target.value)} />
         <button type="submit">{t.searchButton}</button>
+        {message && <p>{message}</p>}
       </form>
       {result && (
         <div>
