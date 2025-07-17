@@ -26,6 +26,7 @@ function Search() {
       setHistory((h) => {
         const unique = Array.from(new Set([word, ...h]))
         return unique.slice(0, 20)
+      })
     } catch (err) {
       setMessage(err.message)
     }
