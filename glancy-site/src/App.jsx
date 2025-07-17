@@ -32,6 +32,7 @@ function App() {
             placeholder="Word, Phrase or Sentence"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            style={{ borderRadius: '20px' }}
           />
           <button>
             <img
