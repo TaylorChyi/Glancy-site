@@ -6,7 +6,7 @@ import voiceLight from './assets/voice-button-light.svg'
 import voiceDark from './assets/voice-button-dark.svg'
 import './App.css'
 import Brand from './components/Brand.jsx'
-import Avatar from './components/Avatar.jsx'
+import UserMenu from './components/Header/UserMenu.jsx'
 
 function App() {
   const [text, setText] = useState('')
@@ -23,9 +23,7 @@ function App() {
       </aside>
       <div className="right">
         <header className="topbar">
-          <div className="avatar">
-            <Avatar width={32} height={32} />
-          </div>
+          <UserMenu size={32} />
         </header>
         <main className="display">Display Area</main>
         <div className="chatbox">
