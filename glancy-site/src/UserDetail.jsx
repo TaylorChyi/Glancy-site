@@ -20,12 +20,12 @@ function UserDetail() {
 
   const handleUpdate = async (e) => {
     e.preventDefault()
-    await fetch(`/api/users/${id}`, {
+    const resp = await fetch(`/api/users/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username })
     })
-    setMessage(t.updateSuccess)
+    setMessage(resp.ok ? t.updateSuccess : t.submitFail)
   }
 
   return (
