@@ -5,12 +5,85 @@ import { useLanguage } from './LanguageContext.jsx'
 function Portal() {
   const { t } = useLanguage()
   const [stats, setStats] = useState({})
+  const [config, setConfig] = useState([])
+  const [configKey, setConfigKey] = useState('')
+  const [configValue, setConfigValue] = useState('')
+  const [logLevel, setLogLevel] = useState('info')
+  const [recipients, setRecipients] = useState([])
+  const [newRecipient, setNewRecipient] = useState('')
 
-  useEffect(() => {
+  const loadStats = () => {
     fetch('/api/stats/users')
       .then((res) => res.json())
       .then((data) => setStats(data))
       .catch(() => {})
+  }
+
+  const loadConfig = () => {
+    fetch('/api/config')
+      .then((res) => res.json())
+      .then((data) => setConfig(Object.entries(data)))
+      .catch(() => {})
+  }
+
+  const loadLogLevel = () => {
+    fetch('/api/log-level')
+      .then((res) => res.json())
+      .then((data) => setLogLevel(data.level || 'info'))
+      .catch(() => {})
+  }
+
+  const loadRecipients = () => {
+    fetch('/api/alerts/recipients')
+      .then((res) => res.json())
+      .then((data) => setRecipients(data))
+      .catch(() => {})
+  }
+
+  const addConfig = async (e) => {
+    e.preventDefault()
+    await fetch('/api/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: configKey, value: configValue })
+    })
+    setConfigKey('')
+    setConfigValue('')
+    loadConfig()
+  }
+
+  const updateLogLevel = async () => {
+    await fetch('/api/log-level', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ level: logLevel })
+    })
+    loadLogLevel()
+  }
+
+  const addRecipient = async (e) => {
+    e.preventDefault()
+    await fetch('/api/alerts/recipients', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: newRecipient })
+    })
+    setNewRecipient('')
+    loadRecipients()
+  }
+
+  const deleteRecipient = async (email) => {
+    await fetch(`/api/alerts/recipients/${encodeURIComponent(email)}`, {
+      method: 'DELETE'
+    })
+    loadRecipients()
+  }
+
+  useEffect(() => {
+    loadStats()
+    loadConfig()
+    loadLogLevel()
+    loadRecipients()
   }, [])
 
   return (
@@ -19,6 +92,56 @@ function Portal() {
       <p>{t.adminWelcome}</p>
       <p>{t.totalUsers}: {stats.total}</p>
       <p>{t.dailyActive}: {stats.daily}</p>
+      <h3>System Config</h3>
+      <ul>
+        {config.map(([k, v]) => (
+          <li key={k}>
+            {k}: {String(v)}
+          </li>
+        ))}
+      </ul>
+      <form onSubmit={addConfig}>
+        <input
+          placeholder="key"
+          value={configKey}
+          onChange={(e) => setConfigKey(e.target.value)}
+        />
+        <input
+          placeholder="value"
+          value={configValue}
+          onChange={(e) => setConfigValue(e.target.value)}
+        />
+        <button type="submit">{t.saveButton}</button>
+      </form>
+
+      <h3>Log Level</h3>
+      <select value={logLevel} onChange={(e) => setLogLevel(e.target.value)}>
+        <option value="debug">debug</option>
+        <option value="info">info</option>
+        <option value="warn">warn</option>
+        <option value="error">error</option>
+      </select>
+      <button onClick={updateLogLevel}>{t.saveButton}</button>
+
+      <h3>Email Recipients</h3>
+      <ul>
+        {recipients.map((r) => (
+          <li key={r}>
+            {r}
+            <button type="button" onClick={() => deleteRecipient(r)}>
+              {t.deleteButton}
+            </button>
+          </li>
+        ))}
+      </ul>
+      <form onSubmit={addRecipient}>
+        <input
+          placeholder="email"
+          value={newRecipient}
+          onChange={(e) => setNewRecipient(e.target.value)}
+        />
+        <button type="submit">{t.saveButton}</button>
+      </form>
     </div>
   )
 }
