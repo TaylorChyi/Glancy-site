@@ -64,21 +64,23 @@
 .chatbox {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 12px 20px;
+  gap: 12px;
 }
 
 .chatbox input {
   flex: 1;
   border: 1px solid #ccc;
   border-radius: 20px;
-  padding: 8px 12px;
+  padding: 10px 16px;
   outline: none;
+  font-size: 1rem;
 }
 
 .chatbox button {
   border: none;
   background: none;
-  padding: 0;
+  padding: 6px;
   cursor: pointer;
 }
 
@@ -87,6 +89,6 @@
 }
 
 .chatbox button img {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
