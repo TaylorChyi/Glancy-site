@@ -13,7 +13,7 @@ function App() {
       </aside>
       <div className="right">
         <header className="topbar">
-          <UserMenu />
+          <UserMenu size={32} />
         </header>
         <main className="display">Display Area</main>
         <div className="chatbox">
