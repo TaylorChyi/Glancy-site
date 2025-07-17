@@ -1,0 +1,13 @@
+.sidebar-section {
+  margin-bottom: 1rem;
+}
+
+.sidebar-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-section select {
+  padding: 0.25rem;
+}
