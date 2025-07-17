@@ -40,7 +40,6 @@ function Nav() {
 }
 
 function App() {
-  const { t } = useLanguage()
   return (
     <>
       <BrowserRouter>
@@ -63,10 +62,6 @@ function App() {
           <Route path="/portal" element={<Portal />} />
         </Routes>
       </BrowserRouter>
-      <div className="App">
-        <h1>{t.welcomeTitle}</h1>
-        <p>{t.welcomeMsg}</p>
-      </div>
     </>
   )
 }
