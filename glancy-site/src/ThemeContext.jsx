@@ -4,11 +4,13 @@ import darkIcon from './assets/glancy-dark.svg'
 
 const ThemeContext = createContext({
   theme: 'system',
+  resolvedTheme: 'light',
   setTheme: () => {}
 })
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('system')
+  const [resolvedTheme, setResolvedTheme] = useState('light')
 
   useEffect(() => {
     const stored = localStorage.getItem('theme')
@@ -25,6 +27,7 @@ export function ThemeProvider({ children }) {
       if (theme === 'system') {
         current = media.matches ? 'dark' : 'light'
       }
+      setResolvedTheme(current)
       document.documentElement.dataset.theme = current
       const link = document.getElementById('favicon')
       if (link) {
@@ -39,7 +42,7 @@ export function ThemeProvider({ children }) {
   }, [theme])
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   )

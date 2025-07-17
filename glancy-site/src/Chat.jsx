@@ -11,11 +11,9 @@ function Chat() {
   const [messages, setMessages] = useState([])
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(false)
-  const { theme } = useTheme()
-  const current =
-    theme === 'system' ? document.documentElement.dataset.theme : theme
-  const sendIcon = current === 'dark' ? sendDark : sendLight
-  const voiceIcon = current === 'dark' ? voiceDark : voiceLight
+  const { resolvedTheme } = useTheme()
+  const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
+  const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
   const listRef = useRef(null)
 
   const sendMessage = async (e) => {
