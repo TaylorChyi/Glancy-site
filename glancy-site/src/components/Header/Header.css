@@ -82,3 +82,25 @@
   border-top: 1px solid #ccc;
   padding-top: 0.5rem;
 }
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+}
+
+.app-brand img {
+  width: 32px;
+  height: 32px;
+  margin-right: 0.5rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}

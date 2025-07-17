@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { useTheme } from './ThemeContext.jsx'
+import lightLogo from './assets/glancy-light.svg'
+import darkLogo from './assets/glancy-dark.svg'
 import LanguageSelector from './components/Sidebar/LanguageSelector.jsx'
 import HistoryList from './components/Sidebar/HistoryList.jsx'
 import Favorites from './components/Sidebar/Favorites.jsx'
@@ -11,8 +14,12 @@ import VoiceInputButton from './components/Toolbar/VoiceInputButton.jsx'
 import ClearButton from './components/Toolbar/ClearButton.jsx'
 
 function Home() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const { theme } = useTheme()
   const [count, setCount] = useState(0)
+  const current = theme === "system" ? document.documentElement.dataset.theme : theme
+  const logo = current === 'dark' ? darkLogo : lightLogo
+  const appName = lang === 'zh' ? '格律词典' : 'Glancy'
 
   const refresh = () => {
     fetch('/api/users/count')
@@ -27,9 +34,15 @@ function Home() {
 
   return (
     <div className="App">
-      <header>
-        <ViewModeToggle />
-        <UserMenu />
+      <header className="app-header">
+        <div className="app-brand">
+          <img src={logo} alt="logo" />
+          <span className="app-name">{appName}</span>
+        </div>
+        <div className="header-right">
+          <ViewModeToggle />
+          <UserMenu />
+        </div>
       </header>
       <aside>
         <LanguageSelector />
