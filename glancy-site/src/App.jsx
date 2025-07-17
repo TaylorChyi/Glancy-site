@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import Brand from './components/Brand.jsx'
 
 function App() {
   const [text, setText] = useState('')
@@ -7,7 +8,7 @@ function App() {
   return (
     <div className="container">
       <aside className="sidebar">
-        <h2>Sidebar</h2>
+        <Brand />
       </aside>
       <div className="right">
         <header className="topbar">
