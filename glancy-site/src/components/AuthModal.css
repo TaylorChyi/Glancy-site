@@ -40,7 +40,7 @@
 }
 
 .auth-tabs button.active {
-  border-color: #fff;
+  border-color: var(--sidebar-color);
 }
 
 .auth-modal .App {
@@ -67,7 +67,7 @@
 .auth-modal input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   background: var(--app-bg);
   color: var(--app-color);

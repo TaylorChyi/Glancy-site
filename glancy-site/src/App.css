@@ -7,8 +7,8 @@
 .sidebar {
   width: 240px;
   height: var(--vh);
-  background: #121212;
-  color: #fff;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-color);
   padding: 20px;
   display: flex;
   flex-direction: column;

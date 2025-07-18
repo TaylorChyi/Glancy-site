@@ -13,10 +13,10 @@ function Layout() {
         <button>Codex</button>
         <button>Sora</button>
         <button>GPTs</button>
-        <hr style={{ margin: '20px 0', borderColor: '#333' }} />
+        <hr style={{ margin: '20px 0', borderColor: 'var(--border-color)' }} />
         <button>New project</button>
-        <button style={{ color: 'orange' }}>Glancy</button>
-        <div style={{ marginTop: '20px', fontSize: '12px', color: '#aaa' }}>Chats</div>
+        <button style={{ color: 'var(--brand-color)' }}>Glancy</button>
+        <div style={{ marginTop: '20px', fontSize: '12px', color: 'var(--text-muted)' }}>Chats</div>
         <button>UI设计文字描述</button>
         <button>界面模块划分</button>
         <button>高级黑白配色</button>
