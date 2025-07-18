@@ -1,15 +1,16 @@
 import { useRef, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useUserStore } from '../../store/userStore.js'
 import { useLanguage } from '../../LanguageContext.jsx'
 import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
+import AuthModal from '../AuthModal.jsx'
 
 // size 控制触发按钮中头像的尺寸
 
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const { t } = useLanguage()
@@ -62,9 +63,16 @@ function UserMenu({ size = 24, showName = false }) {
         <div className={showName ? 'with-name' : ''}>
           <Avatar width={size} height={size} />
           {showName && (
-            <Link to="/login" className="username login-btn">
-              {t.navRegister}/{t.navLogin}
-            </Link>
+            <>
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
+                className="username login-btn"
+              >
+                {t.navRegister}/{t.navLogin}
+              </button>
+              <AuthModal open={modalOpen} onClose={() => setModalOpen(false)} />
+            </>
           )}
         </div>
       )}
