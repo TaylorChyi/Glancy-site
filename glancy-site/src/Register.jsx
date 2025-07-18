@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
+import MessagePopup from './components/MessagePopup.jsx'
 
 function Register() {
   const { t } = useLanguage()
@@ -11,14 +12,16 @@ function Register() {
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setMessage('')
+    setPopupMsg('')
     if (password !== confirmPassword) {
-      setMessage(t.submitFail)
+      setPopupMsg(t.submitFail)
+      setPopupOpen(true)
       return
     }
     try {
@@ -32,10 +35,12 @@ function Register() {
         throw new Error(text || t.registerButton + '失败')
       }
       await resp.json()
-      setMessage(t.registerButton + '成功')
+      setPopupMsg(t.registerButton + '成功')
+      setPopupOpen(true)
       navigate('/login')
     } catch (err) {
-      setMessage(err.message)
+      setPopupMsg(err.message)
+      setPopupOpen(true)
     }
   }
 
@@ -86,7 +91,11 @@ function Register() {
           />
         </div>
         <button type="submit">{t.registerButton}</button>
-        {message && <p>{message}</p>}
+        <MessagePopup
+          open={popupOpen}
+          message={popupMsg}
+          onClose={() => setPopupOpen(false)}
+        />
       </form>
     </div>
   )
