@@ -32,7 +32,7 @@
 .user-menu .menu {
   position: absolute;
   right: 0;
-  margin-top: 0.5rem;
+  bottom: calc(100% + 0.5rem);
   background: var(--app-bg);
   color: var(--app-color);
   border: 1px solid #ccc;
