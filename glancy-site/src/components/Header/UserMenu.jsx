@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
+import { useUserStore } from '../../store/userStore.js'
 import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
@@ -8,7 +9,8 @@ import Avatar from '../Avatar.jsx'
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
-  const email = 'user@example.com'
+  const user = useUserStore((s) => s.user)
+  const email = user?.email || ''
   const isPro = true
 
   useEffect(() => {
