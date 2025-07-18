@@ -58,6 +58,7 @@
   align-items: center;
   padding: 20px;
   overflow-y: auto;
+  overscroll-behavior: contain;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
