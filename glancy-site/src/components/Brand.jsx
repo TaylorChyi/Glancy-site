@@ -8,8 +8,12 @@ function Brand() {
   const icon = hour >= 6 && hour < 18 ? lightIcon : darkIcon
   const text = lang === 'zh' ? '格律词典' : 'Glancy'
 
+  const handleClick = () => {
+    window.location.reload()
+  }
+
   return (
-    <div className="sidebar-brand">
+    <div className="sidebar-brand" onClick={handleClick}>
       <img src={icon} alt="Glancy" />
       <span>{text}</span>
     </div>
