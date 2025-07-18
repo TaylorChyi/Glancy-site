@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import AuthModal from './components/AuthModal.jsx'
+import { useUserStore } from './store/userStore.js'
 import { useTheme } from './ThemeContext.jsx'
 import sendLight from './assets/send-button-light.svg'
 import sendDark from './assets/send-button-dark.svg'
@@ -14,12 +16,18 @@ function App() {
   const [text, setText] = useState('')
   const [display, setDisplay] = useState('What are we querying next?')
   const [loading, setLoading] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const user = useUserStore((s) => s.user)
   const { resolvedTheme } = useTheme()
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
 
   const handleSend = async (e) => {
     e.preventDefault()
+    if (!user) {
+      setModalOpen(true)
+      return
+    }
     if (!text.trim()) return
     const input = text
     setText('')
@@ -60,6 +68,7 @@ function App() {
           </button>
         </form>
       </div>
+      <AuthModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   )
 }
