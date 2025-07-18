@@ -41,8 +41,37 @@
   border-color: #fff;
 }
 
+.auth-modal .App {
+  width: 100%;
+}
+
 .auth-modal form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
+
+.auth-modal form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-modal label {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.auth-modal input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: var(--app-bg);
+  color: var(--app-color);
+}
+
+.auth-modal button[type='submit'] {
+  width: 100%;
+}
+
