@@ -61,4 +61,3 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           source: "glancy-site/dist/*"
           target: ${{ secrets.DEPLOY_PATH }}
-          strip_components: 2
