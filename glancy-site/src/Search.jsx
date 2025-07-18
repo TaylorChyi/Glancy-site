@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { fetchWord, fetchWordAudio } from './api/words.js'
+import { useUserStore } from './store/userStore.js'
 
 function Search() {
   const { t } = useLanguage()
+  const user = useUserStore((s) => s.user)
   const [word, setWord] = useState('')
   const [result, setResult] = useState(null)
   const [message, setMessage] = useState('')
@@ -54,7 +56,7 @@ function Search() {
           <button onClick={playAudio}>{t.playAudio}</button>
         </div>
       )}
-      {history.length > 0 && (
+      {user && history.length > 0 && (
         <div>
           <h3>{t.searchHistory}</h3>
           <button onClick={() => setHistory([])}>{t.clearHistory}</button>
