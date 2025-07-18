@@ -11,3 +11,10 @@
 .sidebar-section select {
   padding: 0.25rem;
 }
+
+.sidebar-user {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -6,7 +6,7 @@ import voiceLight from './assets/voice-button-light.svg'
 import voiceDark from './assets/voice-button-dark.svg'
 import './App.css'
 import Brand from './components/Brand.jsx'
-import UserMenu from './components/Header/UserMenu.jsx'
+import SidebarUser from './components/Sidebar/SidebarUser.jsx'
 
 function App() {
   const [text, setText] = useState('')
@@ -18,11 +18,10 @@ function App() {
     <div className="container">
       <aside className="sidebar">
         <Brand />
+        <SidebarUser />
       </aside>
       <div className="right">
-        <header className="topbar">
-          <UserMenu size={32} />
-        </header>
+        <header className="topbar"></header>
         <main className="display">What are we querying next?</main>
         <div className="chatbox">
           <input
