@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { translations } from './translations.js'
+import { API_PATHS } from './config/api.js'
 
 const LanguageContext = createContext({
   lang: 'zh',
@@ -12,7 +13,7 @@ export function LanguageProvider({ children }) {
   const [t, setT] = useState(translations.zh)
 
   useEffect(() => {
-    fetch('/api/locale')
+    fetch(API_PATHS.locale)
       .then((res) => res.json())
       .then((data) => {
         if (translations[data.lang]) {

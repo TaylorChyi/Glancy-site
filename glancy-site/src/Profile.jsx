@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function Profile() {
   const { t } = useLanguage()
@@ -9,7 +10,7 @@ function Profile() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    fetch('/api/users/profile')
+    fetch(API_PATHS.profile)
       .then((res) => res.json())
       .then((data) => {
         setUsername(data.username)
@@ -25,7 +26,7 @@ function Profile() {
     if (avatar) {
       formData.append('avatar', avatar)
     }
-    const resp = await fetch('/api/users/profile', {
+    const resp = await fetch(API_PATHS.profile, {
       method: 'POST',
       body: formData
     })
@@ -33,7 +34,7 @@ function Profile() {
   }
 
   const handleBind = async () => {
-    const resp = await fetch('/api/bind/third-party')
+    const resp = await fetch(API_PATHS.bindThirdParty)
     setMessage(resp.ok ? t.bindSuccess : t.submitFail)
   }
 

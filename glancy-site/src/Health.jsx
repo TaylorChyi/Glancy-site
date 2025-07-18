@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function Health() {
   const { t } = useLanguage()
   const [status, setStatus] = useState('')
 
   const check = useCallback(() => {
-    fetch('/api/ping')
+    fetch(API_PATHS.ping)
       .then((res) => setStatus(res.ok ? t.ok : t.fail))
       .catch(() => setStatus(t.fail))
   }, [t])
