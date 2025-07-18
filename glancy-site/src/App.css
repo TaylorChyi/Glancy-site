@@ -94,3 +94,19 @@
   width: 36px;
   height: 36px;
 }
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+  .right {
+    height: auto;
+  }
+  .chatbox {
+    padding: 16px;
+  }
+}
