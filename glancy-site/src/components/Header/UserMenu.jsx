@@ -14,7 +14,7 @@ function UserMenu({ size = 24, showName = false }) {
   const user = useUserStore((s) => s.user)
   const { t } = useLanguage()
   const email = user?.email || ''
-  const isPro = !!user
+  const isPro = user?.isPro
 
   useEffect(() => {
     function handleClick(e) {
