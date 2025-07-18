@@ -13,7 +13,8 @@
   padding: 0;
   border-radius: 0;
 }
-.user-menu button.with-name {
+.user-menu button.with-name,
+.user-menu .with-name {
   display: flex;
   align-items: center;
   gap: 0.5rem;
