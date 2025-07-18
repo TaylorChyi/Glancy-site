@@ -33,7 +33,14 @@
   color: inherit;
 }
 
+.sidebar-functions {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .sidebar-user .user-menu button.with-name:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+background-color: rgba(255, 255, 255, 0.1);
+border-radius: 4px;
 }
