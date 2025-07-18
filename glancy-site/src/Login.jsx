@@ -5,6 +5,7 @@ import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import { useUserStore } from './store/userStore.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import { extractMessage } from './utils.js'
 
 function Login() {
   const { t } = useLanguage()
@@ -26,7 +27,7 @@ function Login() {
       })
       if (!resp.ok) {
         const text = await resp.text()
-        throw new Error(text || t.loginButton + '失败')
+        throw new Error(extractMessage(text) || t.loginButton + '失败')
       }
       const data = await resp.json()
       setUser(data)

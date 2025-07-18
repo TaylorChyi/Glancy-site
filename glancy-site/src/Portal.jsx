@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
+import { extractMessage } from './utils.js'
 
 function Portal() {
   const { t } = useLanguage()
@@ -53,7 +54,7 @@ function Portal() {
     })
       if (!resp.ok) {
         const text = await resp.text()
-        setError(text || 'Request failed')
+        setError(extractMessage(text) || 'Request failed')
         return
       }
       setConfigKey('')
@@ -74,7 +75,7 @@ function Portal() {
       })
       if (!resp.ok) {
         const text = await resp.text()
-        setError(text || 'Request failed')
+        setError(extractMessage(text) || 'Request failed')
         return
       }
       loadLogLevel()
@@ -94,7 +95,7 @@ function Portal() {
       })
       if (!resp.ok) {
         const text = await resp.text()
-        setError(text || 'Request failed')
+        setError(extractMessage(text) || 'Request failed')
         return
       }
       setNewRecipient('')
@@ -112,7 +113,7 @@ function Portal() {
       })
       if (!resp.ok) {
         const text = await resp.text()
-        setError(text || 'Request failed')
+        setError(extractMessage(text) || 'Request failed')
         return
       }
       loadRecipients()
