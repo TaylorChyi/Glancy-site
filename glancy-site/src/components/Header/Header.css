@@ -11,6 +11,14 @@
   cursor: pointer;
   position: relative;
 }
+.user-menu button.with-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.user-menu .username {
+  margin-left: 0.5rem;
+}
 .user-menu .pro-tag {
   position: absolute;
   bottom: -6px;

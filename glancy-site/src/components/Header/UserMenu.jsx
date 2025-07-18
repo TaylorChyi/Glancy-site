@@ -5,7 +5,7 @@ import Avatar from '../Avatar.jsx'
 
 // size 控制触发按钮中头像的尺寸
 
-function UserMenu({ size = 24 }) {
+function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
   const email = 'user@example.com'
@@ -25,9 +25,10 @@ function UserMenu({ size = 24 }) {
 
   return (
     <div className="header-section user-menu" ref={menuRef}>
-      <button onClick={() => setOpen(!open)}>
+      <button onClick={() => setOpen(!open)} className={showName ? 'with-name' : ''}>
         <Avatar width={size} height={size} />
         {isPro && <ProTag />}
+        {showName && <span className="username">{email}</span>}
       </button>
       {open && (
         <div className="menu">
