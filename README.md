@@ -51,7 +51,7 @@ export default defineConfig({
 
 ## 用户注册
 
-注册页通过 `/api/users/register` 创建新账号。
+注册页提供用户名、邮箱、手机号和密码等输入项，提交到 `/api/users/register` 创建新账号。
 
 ## 用户列表与删除
 

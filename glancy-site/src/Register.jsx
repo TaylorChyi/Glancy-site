@@ -7,18 +7,25 @@ import { API_PATHS } from './config/api.js'
 function Register() {
   const { t } = useLanguage()
   const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMessage('')
+    if (password !== confirmPassword) {
+      setMessage(t.submitFail)
+      return
+    }
     try {
       const resp = await fetch(API_PATHS.register, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, email, phone, password })
       })
       if (!resp.ok) {
         const text = await resp.text()
@@ -44,12 +51,38 @@ function Register() {
           />
         </div>
         <div>
+          <label htmlFor="email">{t.email}</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="phone">{t.phone}</label>
+          <input
+            id="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+        <div>
           <label htmlFor="password">{t.password}</label>
           <input
             id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="confirmPassword">{t.confirmPassword}</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
         <button type="submit">{t.registerButton}</button>
