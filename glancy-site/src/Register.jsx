@@ -34,7 +34,6 @@ function Register() {
 
   return (
     <div className="App">
-      <h2>{t.registerTitle}</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">{t.username}</label>

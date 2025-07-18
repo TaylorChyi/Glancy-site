@@ -17,6 +17,9 @@
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .auth-tabs {
@@ -35,5 +38,11 @@
 }
 
 .auth-tabs button.active {
-  border-color: #646cff;
+  border-color: #fff;
+}
+
+.auth-modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
