@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function Notifications() {
   const { t } = useLanguage()
   const [items, setItems] = useState([])
 
   const fetchData = () => {
-    fetch('/api/notifications')
+    fetch(API_PATHS.notifications)
       .then((res) => res.json())
       .then((data) => setItems(data))
       .catch(() => {})
@@ -18,7 +19,7 @@ function Notifications() {
   }, [])
 
   const markRead = async (id) => {
-    await fetch(`/api/notifications/${id}`, { method: 'POST' })
+    await fetch(`${API_PATHS.notifications}/${id}`, { method: 'POST' })
     fetchData()
   }
 

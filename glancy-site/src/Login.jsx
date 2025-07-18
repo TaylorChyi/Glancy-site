@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 import { useUserStore } from './store/userStore.js'
 
 function Login() {
@@ -16,7 +17,7 @@ function Login() {
     e.preventDefault()
     setMessage('')
     try {
-      const resp = await fetch('/api/users/login', {
+      const resp = await fetch(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })

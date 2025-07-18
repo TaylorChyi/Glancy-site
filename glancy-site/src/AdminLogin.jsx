@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function AdminLogin() {
   const { t } = useLanguage()
@@ -14,7 +15,7 @@ function AdminLogin() {
     e.preventDefault()
     setMessage('')
     try {
-      const resp = await fetch('/api/admin/login', {
+      const resp = await fetch(API_PATHS.adminLogin, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })

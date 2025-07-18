@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
+import { API_PATHS } from './config/api.js'
 
 function Contact() {
   const { t } = useLanguage()
@@ -11,7 +12,7 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const resp = await fetch('/api/contact', {
+    const resp = await fetch(API_PATHS.contact, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, message: msg })

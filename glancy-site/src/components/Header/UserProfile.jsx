@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import './Header.css'
+import { API_PATHS } from '../../config/api.js'
 
 function UserProfile() {
   const [name, setName] = useState('')
 
   useEffect(() => {
-    fetch('/api/users/profile')
+    fetch(API_PATHS.profile)
       .then((res) => res.json())
       .then((data) => {
         if (data.username) {
