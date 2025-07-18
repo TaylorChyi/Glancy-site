@@ -4,6 +4,7 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import { extractMessage } from './utils.js'
 
 function Register() {
   const { t } = useLanguage()
@@ -32,7 +33,7 @@ function Register() {
       })
       if (!resp.ok) {
         const text = await resp.text()
-        throw new Error(text || t.registerButton + '失败')
+        throw new Error(extractMessage(text) || t.registerButton + '失败')
       }
       await resp.json()
       setPopupMsg(t.registerButton + '成功')
