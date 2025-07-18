@@ -4,18 +4,20 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import { useUserStore } from './store/userStore.js'
+import MessagePopup from './components/MessagePopup.jsx'
 
 function Login() {
   const { t } = useLanguage()
   const setUser = useUserStore((s) => s.setUser)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setMessage('')
+    setPopupMsg('')
     try {
       const resp = await fetch(API_PATHS.login, {
         method: 'POST',
@@ -28,14 +30,16 @@ function Login() {
       }
       const data = await resp.json()
       setUser(data)
-      setMessage(`${t.loginButton} ${data.username}`)
+      setPopupMsg(`${t.loginButton} ${data.username}`)
+      setPopupOpen(true)
       if (data.username === 'admin') {
         navigate('/portal')
       } else {
         navigate('/')
       }
     } catch (err) {
-      setMessage(err.message)
+      setPopupMsg(err.message)
+      setPopupOpen(true)
     }
   }
 
@@ -60,7 +64,11 @@ function Login() {
           />
         </div>
         <button type="submit">{t.loginButton}</button>
-        {message && <p>{message}</p>}
+        <MessagePopup
+          open={popupOpen}
+          message={popupMsg}
+          onClose={() => setPopupOpen(false)}
+        />
       </form>
     </div>
   )

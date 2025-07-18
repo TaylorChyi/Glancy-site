@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AuthModal from './components/AuthModal.jsx'
+import MessagePopup from './components/MessagePopup.jsx'
 import { useUserStore } from './store/userStore.js'
 import { useTheme } from './ThemeContext.jsx'
 import sendLight from './assets/send-button-light.svg'
@@ -17,6 +18,8 @@ function App() {
   const [display, setDisplay] = useState('What are we querying next?')
   const [loading, setLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
   const { resolvedTheme } = useTheme()
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
@@ -36,7 +39,8 @@ function App() {
       const data = await sendChatMessage(input)
       setDisplay(data.reply)
     } catch (err) {
-      setDisplay(err.message)
+      setPopupMsg(err.message)
+      setPopupOpen(true)
     } finally {
       setLoading(false)
     }
@@ -69,6 +73,11 @@ function App() {
         </form>
       </div>
       <AuthModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <MessagePopup
+        open={popupOpen}
+        message={popupMsg}
+        onClose={() => setPopupOpen(false)}
+      />
     </div>
   )
 }

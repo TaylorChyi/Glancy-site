@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
+import MessagePopup from './components/MessagePopup.jsx'
 
 function UserDetail() {
   const { t } = useLanguage()
   const { id } = useParams()
   const [username, setUsername] = useState('')
-  const [message, setMessage] = useState('')
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
     fetch(`${API_PATHS.users}/${id}`)
@@ -26,7 +28,8 @@ function UserDetail() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username })
     })
-    setMessage(resp.ok ? t.updateSuccess : t.submitFail)
+    setPopupMsg(resp.ok ? t.updateSuccess : t.submitFail)
+    setPopupOpen(true)
   }
 
   return (
@@ -40,7 +43,11 @@ function UserDetail() {
         </label>
         <button type="submit">{t.updateButton}</button>
       </form>
-      {message && <p>{message}</p>}
+      <MessagePopup
+        open={popupOpen}
+        message={popupMsg}
+        onClose={() => setPopupOpen(false)}
+      />
     </div>
   )
 }

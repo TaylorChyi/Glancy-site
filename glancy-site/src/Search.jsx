@@ -3,13 +3,15 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { fetchWord, fetchWordAudio } from './api/words.js'
 import { useUserStore } from './store/userStore.js'
+import MessagePopup from './components/MessagePopup.jsx'
 
 function Search() {
   const { t } = useLanguage()
   const user = useUserStore((s) => s.user)
   const [word, setWord] = useState('')
   const [result, setResult] = useState(null)
-  const [message, setMessage] = useState('')
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
   const [history, setHistory] = useState(() => {
     const stored = localStorage.getItem('searchHistory')
     return stored ? JSON.parse(stored) : []
@@ -21,7 +23,7 @@ function Search() {
 
   const handleSearch = async (e) => {
     e.preventDefault()
-    setMessage('')
+    setPopupMsg('')
     try {
       const data = await fetchWord(word)
       setResult(data)
@@ -30,7 +32,8 @@ function Search() {
         return unique.slice(0, 20)
       })
     } catch (err) {
-      setMessage(err.message)
+      setPopupMsg(err.message)
+      setPopupOpen(true)
     }
   }
 
@@ -48,7 +51,11 @@ function Search() {
       <form onSubmit={handleSearch}>
         <input value={word} onChange={(e) => setWord(e.target.value)} />
         <button type="submit">{t.searchButton}</button>
-        {message && <p>{message}</p>}
+        <MessagePopup
+          open={popupOpen}
+          message={popupMsg}
+          onClose={() => setPopupOpen(false)}
+        />
       </form>
       {result && (
         <div>

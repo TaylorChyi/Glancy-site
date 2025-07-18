@@ -3,12 +3,14 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { useTheme } from './ThemeContext.jsx'
 import { API_PATHS } from './config/api.js'
+import MessagePopup from './components/MessagePopup.jsx'
 
 function Preferences() {
   const { t } = useLanguage()
   const { theme, setTheme } = useTheme()
   const [language, setLanguage] = useState('en')
-  const [message, setMessage] = useState('')
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
     fetch(API_PATHS.preferences)
@@ -27,7 +29,8 @@ function Preferences() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ language, theme })
     })
-    setMessage(t.saveSuccess)
+    setPopupMsg(t.saveSuccess)
+    setPopupOpen(true)
   }
 
   return (
@@ -48,7 +51,11 @@ function Preferences() {
         </div>
         <button type="submit">{t.saveButton}</button>
       </form>
-      {message && <p>{message}</p>}
+      <MessagePopup
+        open={popupOpen}
+        message={popupMsg}
+        onClose={() => setPopupOpen(false)}
+      />
     </div>
   )
 }

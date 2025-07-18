@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
+import MessagePopup from './components/MessagePopup.jsx'
 
 function Profile() {
   const { t } = useLanguage()
   const [username, setUsername] = useState('')
   const [avatar, setAvatar] = useState('')
-  const [message, setMessage] = useState('')
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
     fetch(API_PATHS.profile)
@@ -30,12 +32,14 @@ function Profile() {
       method: 'POST',
       body: formData
     })
-    setMessage(resp.ok ? t.updateSuccess : t.submitFail)
+    setPopupMsg(resp.ok ? t.updateSuccess : t.submitFail)
+    setPopupOpen(true)
   }
 
   const handleBind = async () => {
     const resp = await fetch(API_PATHS.bindThirdParty)
-    setMessage(resp.ok ? t.bindSuccess : t.submitFail)
+    setPopupMsg(resp.ok ? t.bindSuccess : t.submitFail)
+    setPopupOpen(true)
   }
 
   return (
@@ -53,7 +57,11 @@ function Profile() {
         <button type="submit">{t.saveButton}</button>
       </form>
       <button onClick={handleBind}>{t.bindButton}</button>
-      {message && <p>{message}</p>}
+      <MessagePopup
+        open={popupOpen}
+        message={popupMsg}
+        onClose={() => setPopupOpen(false)}
+      />
     </div>
   )
 }

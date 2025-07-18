@@ -3,17 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
+import MessagePopup from './components/MessagePopup.jsx'
 
 function AdminLogin() {
   const { t } = useLanguage()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const [popupOpen, setPopupOpen] = useState(false)
+  const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setMessage('')
+    setPopupMsg('')
     try {
       const resp = await fetch(API_PATHS.adminLogin, {
         method: 'POST',
@@ -25,10 +27,12 @@ function AdminLogin() {
         throw new Error(text || t.loginButton + '失败')
       }
       await resp.json()
-      setMessage(t.loginButton + '成功')
+      setPopupMsg(t.loginButton + '成功')
+      setPopupOpen(true)
       navigate('/portal')
     } catch (err) {
-      setMessage(err.message)
+      setPopupMsg(err.message)
+      setPopupOpen(true)
     }
   }
 
@@ -54,7 +58,11 @@ function AdminLogin() {
           />
         </div>
         <button type="submit">{t.loginButton}</button>
-        {message && <p>{message}</p>}
+        <MessagePopup
+          open={popupOpen}
+          message={popupMsg}
+          onClose={() => setPopupOpen(false)}
+        />
       </form>
     </div>
   )
