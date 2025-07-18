@@ -10,7 +10,7 @@ import { extractMessage } from './utils.js'
 function Login() {
   const { t } = useLanguage()
   const setUser = useUserStore((s) => s.setUser)
-  const [username, setUsername] = useState('')
+  const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
@@ -23,7 +23,7 @@ function Login() {
       const resp = await fetch(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ account, password })
       })
       if (!resp.ok) {
         const text = await resp.text()
@@ -31,7 +31,7 @@ function Login() {
       }
       const data = await resp.json()
       setUser(data)
-      setPopupMsg(`${t.loginButton} ${data.username}`)
+      setPopupMsg(`${t.loginButton} ${account}`)
       setPopupOpen(true)
       if (data.username === 'admin') {
         navigate('/portal')
@@ -48,11 +48,11 @@ function Login() {
     <div className="App">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">{t.account}</label>
+          <label htmlFor="account">{t.account}</label>
           <input
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="account"
+            value={account}
+            onChange={(e) => setAccount(e.target.value)}
           />
         </div>
         <div>
