@@ -41,7 +41,6 @@ function Login() {
 
   return (
     <div className="App">
-      <h2>{t.loginTitle}</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">{t.username}</label>
