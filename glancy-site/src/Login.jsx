@@ -43,7 +43,7 @@ function Login() {
     <div className="App">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">{t.username}</label>
+          <label htmlFor="username">{t.account}</label>
           <input
             id="username"
             value={username}
