@@ -10,6 +10,8 @@
   border: none;
   cursor: pointer;
   position: relative;
+  padding: 0;
+  border-radius: 0;
 }
 .user-menu button.with-name {
   display: flex;
