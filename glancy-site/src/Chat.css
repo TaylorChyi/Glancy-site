@@ -1,12 +1,25 @@
 /* Styles for chat components */
 .chat-window {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 360px;
+  max-height: 60vh;
   display: flex;
   flex-direction: column;
-  height: 60vh;
   border: 1px solid var(--border-color);
   background: var(--chat-window-bg);
   border-radius: 20px;
+  overflow: hidden;
   transition: width 0.3s ease, height 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .chat-window {
+    width: calc(100% - 2rem);
+    right: 1rem;
+    left: 1rem;
+  }
 }
 
 .chat-messages {
