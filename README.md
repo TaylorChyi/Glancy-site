@@ -65,7 +65,8 @@ export default defineConfig({
 
 ## 词汇查询
 
-`/search` 调用 `/api/words?word=xxx` 获取单词释义，点击播放按钮则访问
+`/search` 调用 `/api/words?userId=1&term=hello&language=ENGLISH` 获取单词释义，
+实际请求需在头部加入 `X-USER-TOKEN`。点击播放按钮访问
 `/api/words/audio?word=xxx` 播放语音。
 
 ## 通知中心
