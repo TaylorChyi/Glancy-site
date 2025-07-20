@@ -1,7 +1,6 @@
 {
   "name": "glancy-site",
   "private": true,
-  "version": "0.0.40",
   "type": "module",
   "scripts": {
     "dev": "vite",
