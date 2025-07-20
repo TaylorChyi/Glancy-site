@@ -63,35 +63,35 @@ function Search() {
         />
       </form>
       {result && (
-        <div className="result">
+        <div className="word-result">
           <h3>{result.term}</h3>
           {result.phonetic && (
             <p>
-              <strong>{t.phonetic}:</strong> {result.phonetic}
+              {t.phoneticLabel}: {result.phonetic}
             </p>
           )}
           {result.language && (
             <p>
-              <strong>{t.languageLabel}:</strong> {result.language}
+              {t.languageLabel}: {result.language}
             </p>
           )}
           {result.definitions && result.definitions.length > 0 ? (
-            <div>
-              <h4>{t.definitions}</h4>
+            <section>
+              <h4>{t.definitionsLabel}</h4>
               <ul>
                 {result.definitions.map((d, i) => (
                   <li key={i}>{d}</li>
                 ))}
               </ul>
-            </div>
+            </section>
           ) : (
             <p>{t.noDefinition}</p>
           )}
           {result.example && (
-            <div>
-              <h4>{t.example}</h4>
+            <section>
+              <h4>{t.exampleLabel}</h4>
               <p>{result.example}</p>
-            </div>
+            </section>
           )}
           <button onClick={playAudio}>{t.playAudio}</button>
         </div>
