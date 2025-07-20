@@ -7,7 +7,8 @@ import sendLight from './assets/send-button-light.svg'
 import sendDark from './assets/send-button-dark.svg'
 import voiceLight from './assets/voice-button-light.svg'
 import voiceDark from './assets/voice-button-dark.svg'
-import { sendChatMessage } from './api/chat.js'
+import { fetchWord } from './api/words.js'
+import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
 import Brand from './components/Brand.jsx'
 import SidebarFunctions from './components/Sidebar/SidebarFunctions.jsx'
@@ -22,6 +23,7 @@ function App() {
   const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
   const { resolvedTheme } = useTheme()
+  const { lang } = useLanguage()
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
 
@@ -32,12 +34,17 @@ function App() {
       return
     }
     if (!text.trim()) return
-    const input = text
+    const input = text.trim()
     setText('')
     setLoading(true)
     try {
-      const data = await sendChatMessage(input)
-      setDisplay(data.reply)
+      const data = await fetchWord({
+        userId: user.id,
+        term: input,
+        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        token: user.token
+      })
+      setDisplay(data.definition)
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)

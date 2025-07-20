@@ -6,7 +6,7 @@ import { useUserStore } from './store/userStore.js'
 import MessagePopup from './components/MessagePopup.jsx'
 
 function Search() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const user = useUserStore((s) => s.user)
   const [word, setWord] = useState('')
   const [result, setResult] = useState(null)
@@ -25,7 +25,12 @@ function Search() {
     e.preventDefault()
     setPopupMsg('')
     try {
-      const data = await fetchWord(word)
+      const data = await fetchWord({
+        userId: user?.id,
+        term: word,
+        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        token: user?.token
+      })
       setResult(data)
       setHistory((h) => {
         const unique = Array.from(new Set([word, ...h]))
