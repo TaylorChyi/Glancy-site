@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
+import './Chat.css'
 import { sendChatMessage } from './api/chat.js'
 import { useTheme } from './ThemeContext.jsx'
 import sendLight from './assets/send-button-light.svg'
