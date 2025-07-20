@@ -39,6 +39,7 @@ export const translations = {
     playAudio: '播放语音',
     favorites: '收藏夹',
     searchHistory: '搜索记录',
+    noDefinition: '暂无释义',
     clearHistory: '清空记录',
     notifications: '通知',
     markRead: '标为已读',
@@ -103,6 +104,7 @@ export const translations = {
     playAudio: 'Play',
     favorites: 'Favorites',
     searchHistory: 'History',
+    noDefinition: 'No definition',
     clearHistory: 'Clear History',
     notifications: 'Notifications',
     markRead: 'Mark read',
@@ -151,6 +153,7 @@ export const translations = {
     adminLoginTitle: 'Admin-Login',
     adminPortal: 'Admin-Bereich',
     adminWelcome: 'Willkommen im Administrationsbereich.',
+    noDefinition: 'Keine Definition',
     clearHistory: 'Verlauf löschen'
   },
   fr: {
@@ -177,6 +180,7 @@ export const translations = {
     adminLoginTitle: 'Connexion admin',
     adminPortal: 'Portail admin',
     adminWelcome: 'Bienvenue sur la page d\'administration.',
+    noDefinition: 'Pas de définition',
     clearHistory: 'Effacer l\'historique'
   },
   ru: {
@@ -203,6 +207,7 @@ export const translations = {
     adminLoginTitle: 'Вход администратора',
     adminPortal: 'Админ-портал',
     adminWelcome: 'Добро пожаловать в административный раздел.',
+    noDefinition: 'Нет определения',
     clearHistory: 'Очистить историю'
   },
   ja: {
@@ -229,6 +234,7 @@ export const translations = {
     adminLoginTitle: '管理者ログイン',
     adminPortal: '管理ポータル',
     adminWelcome: '管理ページへようこそ。',
+    noDefinition: '定義がありません',
     clearHistory: '履歴をクリア'
   },
   es: {
@@ -255,6 +261,7 @@ export const translations = {
     adminLoginTitle: 'Acceso de administrador',
     adminPortal: 'Portal de administración',
     adminWelcome: 'Bienvenido a la página de administración.',
+    noDefinition: 'Sin definición',
     clearHistory: 'Borrar historial'
   }
 }

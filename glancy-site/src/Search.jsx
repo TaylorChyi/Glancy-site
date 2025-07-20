@@ -64,7 +64,16 @@ function Search() {
       </form>
       {result && (
         <div>
-          <p>{result.definition}</p>
+          <h3>{result.term}</h3>
+          {result.definitions && result.definitions.length > 0 ? (
+            <ul>
+              {result.definitions.map((d, i) => (
+                <li key={i}>{d}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>{t.noDefinition}</p>
+          )}
           <button onClick={playAudio}>{t.playAudio}</button>
         </div>
       )}
