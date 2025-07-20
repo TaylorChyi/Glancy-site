@@ -15,12 +15,6 @@
 
 前端构建完成后只需将 `dist` 目录同步到服务器，通过 Nginx 托管即可。示例配置见 `nginx.conf.example`，后端服务独立运行在 `8080` 端口，通过 `/api` 前缀与前端通信。
 
-## 版本管理
-
-项目版本号记录在 `glancy-site/package.json` 中，采用 `主.次.补丁` 的格式。
-默认每次合并后请将补丁号加一。若在仓库 `Actions` 变量中将 `DEPLOY_CHECK_VERSION` 设为 `true`，
-只有当次版本号变化时 `deploy.yml` 工作流程才会执行自动部署，未开启时会在每次推送后直接部署。
-
 开发环境下需要在 `vite.config.js` 中开启代理并设置相对路径：
 
 ```js
