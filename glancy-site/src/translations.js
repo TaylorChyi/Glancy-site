@@ -166,7 +166,11 @@ export const translations = {
     adminPortal: 'Admin-Bereich',
     adminWelcome: 'Willkommen im Administrationsbereich.',
     noDefinition: 'Keine Definition',
-    clearHistory: 'Verlauf löschen'
+    clearHistory: 'Verlauf löschen',
+    phonetic: 'Aussprache',
+    example: 'Beispiel',
+    languageLabel: 'Sprache',
+    definitions: 'Definitionen'
   },
   fr: {
     navHome: 'Accueil',
@@ -197,7 +201,11 @@ export const translations = {
     adminPortal: 'Portail admin',
     adminWelcome: 'Bienvenue sur la page d\'administration.',
     noDefinition: 'Pas de définition',
-    clearHistory: 'Effacer l\'historique'
+    clearHistory: 'Effacer l\'historique',
+    phonetic: 'Phonétique',
+    example: 'Exemple',
+    languageLabel: 'Langue',
+    definitions: 'Définitions'
   },
   ru: {
     navHome: 'Главная',
@@ -228,7 +236,11 @@ export const translations = {
     adminPortal: 'Админ-портал',
     adminWelcome: 'Добро пожаловать в административный раздел.',
     noDefinition: 'Нет определения',
-    clearHistory: 'Очистить историю'
+    clearHistory: 'Очистить историю',
+    phonetic: 'Фонетика',
+    example: 'Пример',
+    languageLabel: 'Язык',
+    definitions: 'Определения'
   },
   ja: {
     navHome: 'ホーム',
@@ -259,7 +271,11 @@ export const translations = {
     adminPortal: '管理ポータル',
     adminWelcome: '管理ページへようこそ。',
     noDefinition: '定義がありません',
-    clearHistory: '履歴をクリア'
+    clearHistory: '履歴をクリア',
+    phonetic: '発音',
+    example: '例文',
+    languageLabel: '言語',
+    definitions: '定義'
   },
   es: {
     navHome: 'Inicio',
@@ -290,6 +306,10 @@ export const translations = {
     adminPortal: 'Portal de administración',
     adminWelcome: 'Bienvenido a la página de administración.',
     noDefinition: 'Sin definición',
-    clearHistory: 'Borrar historial'
+    clearHistory: 'Borrar historial',
+    phonetic: 'Fonética',
+    example: 'Ejemplo',
+    languageLabel: 'Idioma',
+    definitions: 'Definiciones'
   }
 }
