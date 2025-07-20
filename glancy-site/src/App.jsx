@@ -23,7 +23,7 @@ function App() {
   const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
   const { resolvedTheme } = useTheme()
-  const { lang } = useLanguage()
+  const { lang, t } = useLanguage()
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
 
@@ -44,7 +44,12 @@ function App() {
         language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
         token: user.token
       })
-      setDisplay(data.definition)
+      const text = data.definition ||
+        (data.definitions && data.definitions.length > 0
+          ? data.definitions.join('; ')
+          : '')
+      const output = [data.term, text].filter(Boolean).join(' ')
+      setDisplay(output || t.noDefinition)
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
