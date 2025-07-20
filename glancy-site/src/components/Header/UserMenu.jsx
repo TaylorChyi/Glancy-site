@@ -14,7 +14,7 @@ function UserMenu({ size = 24, showName = false }) {
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const { t } = useLanguage()
-  const email = user?.email || ''
+  const username = user?.username || ''
   const isPro = user?.isPro
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function UserMenu({ size = 24, showName = false }) {
           <button onClick={() => setOpen(!open)} className={showName ? 'with-name' : ''}>
             <Avatar width={size} height={size} />
             {isPro && <ProTag />}
-            {showName && <span className="username">{email}</span>}
+            {showName && <span className="username">{username}</span>}
           </button>
           {open && (
             <div className="menu">
@@ -45,7 +45,7 @@ function UserMenu({ size = 24, showName = false }) {
                   <Avatar width={32} height={32} />
                   {isPro && <ProTag small />}
                 </div>
-                <div className="email">{email}</div>
+                <div className="username">{username}</div>
               </div>
               <ul>
                 <li><span className="icon">👤</span>Profile</li>
