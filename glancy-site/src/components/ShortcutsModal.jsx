@@ -1,13 +1,15 @@
 import './ShortcutsModal.css'
+import { getModifierKey } from '../utils.js'
 
 function ShortcutsModal({ open, onClose }) {
   if (!open) return null
 
+  const mod = getModifierKey()
   const shortcuts = [
-    { keys: 'Ctrl + /', action: 'Focus search input' },
-    { keys: 'Ctrl + L', action: 'Switch language' },
-    { keys: 'Ctrl + M', action: 'Toggle theme' },
-    { keys: 'Ctrl + K', action: 'Open shortcuts help' },
+    { keys: `${mod} + /`, action: 'Focus search input' },
+    { keys: `${mod} + L`, action: 'Switch language' },
+    { keys: `${mod} + M`, action: 'Toggle theme' },
+    { keys: `${mod} + K`, action: 'Open shortcuts help' },
   ]
 
   return (
