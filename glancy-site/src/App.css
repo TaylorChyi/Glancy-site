@@ -45,6 +45,9 @@
   align-items: center;
   padding: 0 20px;
 }
+.topbar .user-menu {
+  display: none;
+}
 
 .avatar img {
   width: 32px;
@@ -109,6 +112,12 @@
   }
   .right {
     height: auto;
+  }
+  .sidebar-user {
+    display: none;
+  }
+  .topbar .user-menu {
+    display: flex;
   }
   .chatbox {
     padding: 16px;
