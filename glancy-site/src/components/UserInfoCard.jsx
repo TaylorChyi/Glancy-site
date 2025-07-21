@@ -1,8 +1,19 @@
 import './UserInfoCard.css'
 import Avatar from './Avatar.jsx'
 
-function UserInfoCard({ user = {} }) {
-  const { username = '', email = '', age = '', gender = '', interests = '', goal = '' } = user
+function UserInfoCard({
+  user = {},
+  onMouseEnter = () => {},
+  onMouseLeave = () => {},
+}) {
+  const {
+    username = '',
+    email = '',
+    age = '',
+    gender = '',
+    interests = '',
+    goal = '',
+  } = user
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -10,7 +21,11 @@ function UserInfoCard({ user = {} }) {
   }
 
   return (
-    <div className="user-card">
+    <div
+      className="user-card"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="avatar-area">
         <Avatar width={80} height={80} style={{ borderRadius: '20px' }} />
       </div>
