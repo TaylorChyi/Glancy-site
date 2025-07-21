@@ -45,6 +45,7 @@ function App() {
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
   const unfavoriteHistory = useHistoryStore((s) => s.unfavoriteHistory)
   const isMobile = useIsMobile()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const handleToggleFavorites = () => {
     // always show favorites when invoked
@@ -53,11 +54,6 @@ function App() {
     setFromFavorites(false)
   }
 
-  const handleToggleHistory = () => {
-    setShowHistory((v) => !v)
-    setShowFavorites(false)
-    setFromFavorites(false)
-  }
 
   const handleUnfavorite = (term) => {
     unfavoriteHistory(term, user)
@@ -176,7 +172,15 @@ function App() {
 
   return (
     <div className="container">
-      <aside className="sidebar">
+      {isMobile && sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      <aside
+        className={`sidebar${isMobile ? (sidebarOpen ? ' mobile-open' : '') : ''}`}
+      >
         <Brand />
         <SidebarFunctions
           onToggleFavorites={handleToggleFavorites}
@@ -188,8 +192,13 @@ function App() {
         {isMobile ? (
           <header className="topbar">
             <MobileTopBar
-              onToggleFavorites={handleToggleFavorites}
-              onToggleHistory={handleToggleHistory}
+              term={entry?.term || ''}
+              showBack={!showFavorites && fromFavorites}
+              onBack={handleBackFromFavorite}
+              favorited={favorites.includes(entry?.term)}
+              onToggleFavorite={() => entry && toggleFavorite(entry.term)}
+              canFavorite={!!entry && !showFavorites && !showHistory}
+              onOpenSidebar={() => setSidebarOpen(true)}
             />
           </header>
         ) : (
