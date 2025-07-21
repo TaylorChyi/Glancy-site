@@ -51,7 +51,12 @@ function Layout() {
             </div>
           </div>
           <div className="plus-badge">PLUS</div>
-          {hover && <UserInfoCard />}
+          {hover && (
+            <UserInfoCard
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+            />
+          )}
         </div>
         <Outlet />
       </main>
