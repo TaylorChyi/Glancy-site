@@ -9,6 +9,7 @@ import HelpModal from '../HelpModal.jsx'
 import SettingsModal from '../SettingsModal.jsx'
 import ShortcutsModal from '../ShortcutsModal.jsx'
 import ProfileModal from '../ProfileModal.jsx'
+import UpgradeModal from '../UpgradeModal.jsx'
 
 // size 控制触发按钮中头像的尺寸
 
@@ -19,6 +20,7 @@ function UserMenu({ size = 24, showName = false }) {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [upgradeOpen, setUpgradeOpen] = useState(false)
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const clearUser = useUserStore((s) => s.clearUser)
@@ -63,6 +65,11 @@ function UserMenu({ size = 24, showName = false }) {
                 <div className="username">{username}</div>
               </div>
               <ul>
+                {!isPro && (
+                  <li onClick={() => setUpgradeOpen(true)}>
+                    <span className="icon">💳</span>Upgrade
+                  </li>
+                )}
                 <li onClick={() => setProfileOpen(true)}>
                   <span className="icon">👤</span>Profile
                 </li>
@@ -104,6 +111,7 @@ function UserMenu({ size = 24, showName = false }) {
             </div>
           )}
           <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
+          <UpgradeModal open={upgradeOpen} onClose={() => setUpgradeOpen(false)} />
         </>
       ) : (
         <div className={showName ? 'with-name' : ''}>
