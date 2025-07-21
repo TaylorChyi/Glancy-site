@@ -38,6 +38,12 @@ function UserMenu({ size = 24, showName = false }) {
     return () => document.removeEventListener('click', handleClick)
   }, [open])
 
+  useEffect(() => {
+    const handler = () => setShortcutsOpen(true)
+    document.addEventListener('open-shortcuts', handler)
+    return () => document.removeEventListener('open-shortcuts', handler)
+  }, [])
+
   return (
     <div className="header-section user-menu" ref={menuRef}>
       {user ? (

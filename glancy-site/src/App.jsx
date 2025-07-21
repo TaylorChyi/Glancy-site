@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import AuthModal from './components/AuthModal.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useUserStore } from './store/userStore.js'
 import { useTheme } from './ThemeContext.jsx'
+import { translations } from './translations.js'
 import sendLight from './assets/send-button-light.svg'
 import sendDark from './assets/send-button-dark.svg'
 import voiceLight from './assets/voice-button-light.svg'
@@ -22,8 +23,9 @@ function App() {
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
-  const { resolvedTheme } = useTheme()
-  const { lang, t } = useLanguage()
+  const { theme, resolvedTheme, setTheme } = useTheme()
+  const { lang, t, setLang } = useLanguage()
+  const inputRef = useRef(null)
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
 
@@ -63,6 +65,44 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    function handleShortcut(e) {
+      const platform =
+        navigator.userAgentData?.platform || navigator.platform || ''
+      const mod = /Mac|iPhone|iPod|iPad/i.test(platform) ? e.metaKey : e.ctrlKey
+      if (!mod || !e.shiftKey) return
+      switch (e.key.toLowerCase()) {
+        case 'f':
+          e.preventDefault()
+          inputRef.current?.focus()
+          break
+        case 'l':
+          e.preventDefault()
+          {
+            const langs = Object.keys(translations)
+            const next = langs[(langs.indexOf(lang) + 1) % langs.length]
+            setLang(next)
+          }
+          break
+        case 'm':
+          e.preventDefault()
+          {
+            const seq = { dark: 'light', light: 'system', system: 'dark' }
+            setTheme(seq[theme] || 'light')
+          }
+          break
+        case 'k':
+          e.preventDefault()
+          document.dispatchEvent(new Event('open-shortcuts'))
+          break
+        default:
+          break
+      }
+    }
+    document.addEventListener('keydown', handleShortcut)
+    return () => document.removeEventListener('keydown', handleShortcut)
+  }, [lang, setLang, theme, setTheme])
+
   return (
     <div className="container">
       <aside className="sidebar">
@@ -75,6 +115,7 @@ function App() {
         <main className="display">{loading ? '...' : display}</main>
         <form className="chatbox" onSubmit={handleSend}>
           <input
+            ref={inputRef}
             type="text"
             placeholder="Word, Phrase or Sentence"
             value={text}
