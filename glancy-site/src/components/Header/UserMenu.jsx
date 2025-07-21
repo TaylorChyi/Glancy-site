@@ -5,12 +5,14 @@ import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 import AuthModal from '../AuthModal.jsx'
+import HelpModal from '../HelpModal.jsx'
 
 // size 控制触发按钮中头像的尺寸
 
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const clearUser = useUserStore((s) => s.clearUser)
@@ -54,7 +56,19 @@ function UserMenu({ size = 24, showName = false }) {
                 <li><span className="icon">⌨️</span>Shortcuts</li>
               </ul>
               <ul>
-                <li><span className="icon">❓</span>Help</li>
+                <li>
+                  <span className="icon">❓</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHelpOpen(true)
+                      setOpen(false)
+                    }}
+                    className="menu-btn"
+                  >
+                    Help
+                  </button>
+                </li>
                 <li>
                   <span className="icon">🔑</span>
                   <button
@@ -89,6 +103,7 @@ function UserMenu({ size = 24, showName = false }) {
           )}
         </div>
       )}
+      <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
     </div>
   )
 }
