@@ -5,6 +5,7 @@ import { fetchWord, fetchWordAudio } from './api/words.js'
 import { useUserStore } from './store/userStore.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import DictionaryEntry from './components/DictionaryEntry.jsx'
+import { useHistoryStore } from './store/historyStore.js'
 
 function Search() {
   const { t, lang } = useLanguage()
@@ -13,14 +14,14 @@ function Search() {
   const [result, setResult] = useState(null)
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
-  const [history, setHistory] = useState(() => {
-    const stored = localStorage.getItem('searchHistory')
-    return stored ? JSON.parse(stored) : []
-  })
+  const history = useHistoryStore((s) => s.history)
+  const addHistory = useHistoryStore((s) => s.addHistory)
+  const clearHistory = useHistoryStore((s) => s.clearHistory)
+  const loadHistory = useHistoryStore((s) => s.loadHistory)
 
   useEffect(() => {
-    localStorage.setItem('searchHistory', JSON.stringify(history))
-  }, [history])
+    loadHistory(user)
+  }, [user, loadHistory])
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -33,10 +34,7 @@ function Search() {
         token: user?.token
       })
       setResult(data)
-      setHistory((h) => {
-        const unique = Array.from(new Set([word, ...h]))
-        return unique.slice(0, 20)
-      })
+      addHistory(word, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
@@ -69,10 +67,10 @@ function Search() {
           <button onClick={playAudio}>{t.playAudio}</button>
         </div>
       )}
-      {user && history.length > 0 && (
+      {history.length > 0 && (
         <div>
           <h3>{t.searchHistory}</h3>
-          <button onClick={() => setHistory([])}>{t.clearHistory}</button>
+          <button onClick={() => clearHistory(user)}>{t.clearHistory}</button>
           <ul>
             {history.map((h, i) => (
               <li key={i}>{h}</li>
