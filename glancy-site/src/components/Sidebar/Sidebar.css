@@ -33,6 +33,25 @@
   color: inherit;
 }
 
+/* dropdown style inside sidebar */
+.sidebar-user .user-menu .menu {
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-user .user-menu li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme='dark'] .sidebar-user .user-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .sidebar-functions {
   flex: 1;
   overflow-y: auto;
