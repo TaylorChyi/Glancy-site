@@ -2,32 +2,45 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { useTheme } from './ThemeContext.jsx'
+import { useUserStore } from './store/userStore.js'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 
 function Preferences() {
   const { t } = useLanguage()
   const { theme, setTheme } = useTheme()
-  const [language, setLanguage] = useState('en')
+  const user = useUserStore((s) => s.user)
+  const [systemLanguage, setSystemLanguage] = useState('en')
+  const [searchLanguage, setSearchLanguage] = useState('ENGLISH')
+  const [dictionaryModel, setDictionaryModel] = useState('')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
-    fetch(API_PATHS.preferences)
+    if (!user) return
+    fetch(`${API_PATHS.preferences}/user/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
-        setLanguage(data.language || 'en')
+        setSystemLanguage(data.systemLanguage || 'en')
+        setSearchLanguage(data.searchLanguage || 'ENGLISH')
+        setDictionaryModel(data.dictionaryModel || '')
         setTheme(data.theme || 'system')
       })
       .catch(() => {})
-  }, [setTheme])
+  }, [setTheme, user])
 
   const handleSave = async (e) => {
     e.preventDefault()
-    await fetch(API_PATHS.preferences, {
+    if (!user) return
+    await fetch(`${API_PATHS.preferences}/user/${user.id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ language, theme })
+      body: JSON.stringify({
+        systemLanguage,
+        searchLanguage,
+        dictionaryModel,
+        theme
+      })
     })
     setPopupMsg(t.saveSuccess)
     setPopupOpen(true)
@@ -39,7 +52,27 @@ function Preferences() {
       <form onSubmit={handleSave}>
         <div>
           <label>{t.prefLanguage}</label>
-          <input value={language} onChange={(e) => setLanguage(e.target.value)} />
+          <input
+            value={systemLanguage}
+            onChange={(e) => setSystemLanguage(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>{t.prefSearchLanguage}</label>
+          <select
+            value={searchLanguage}
+            onChange={(e) => setSearchLanguage(e.target.value)}
+          >
+            <option value="CHINESE">CHINESE</option>
+            <option value="ENGLISH">ENGLISH</option>
+          </select>
+        </div>
+        <div>
+          <label>{t.prefDictionaryModel}</label>
+          <input
+            value={dictionaryModel}
+            onChange={(e) => setDictionaryModel(e.target.value)}
+          />
         </div>
         <div>
           <label>{t.prefTheme}</label>
