@@ -15,18 +15,25 @@ function DictionaryEntry({ entry }) {
 
   return (
     <article className="dictionaryEntry">
-      <header className="entryHeader">
-        <h1 className="term">
-          {term}
-          {phonetic && <span className="phonetic"> [{phonetic}]</span>}
-        </h1>
-        {language && <div className="language">{langLabel}</div>}
-      </header>
+      <section className="termSection" aria-labelledby="term-title">
+        <h2 id="term-title" className="sectionTitle">【{t.termLabel}】</h2>
+        <p className="term">{term}</p>
+      </section>
+      {phonetic && (
+        <section className="phoneticSection" aria-labelledby="phon-title">
+          <h2 id="phon-title" className="sectionTitle">【{t.phoneticLabel}】</h2>
+          <p className="phonetic">{phonetic}</p>
+        </section>
+      )}
+      {language && (
+        <section className="languageSection" aria-labelledby="lang-title">
+          <h2 id="lang-title" className="sectionTitle">【{t.languageLabel}】</h2>
+          <p className="language">{langLabel}</p>
+        </section>
+      )}
       {definitions && definitions.length > 0 ? (
         <section className="definitions" aria-labelledby="def-title">
-          <h2 id="def-title" className="sectionTitle">
-            {t.definitionsLabel}
-          </h2>
+          <h2 id="def-title" className="sectionTitle">【{t.definitionsLabel}】</h2>
           <ol>
             {definitions.map((d, i) => (
               <li key={i}>{d}</li>
@@ -38,9 +45,7 @@ function DictionaryEntry({ entry }) {
       )}
       {example && (
         <section className="example" aria-labelledby="ex-title">
-          <h2 id="ex-title" className="sectionTitle">
-            {t.exampleLabel}
-          </h2>
+          <h2 id="ex-title" className="sectionTitle">【{t.exampleLabel}】</h2>
           <blockquote>{example}</blockquote>
         </section>
       )}
