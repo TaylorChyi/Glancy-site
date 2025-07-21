@@ -32,15 +32,16 @@
 }
 
 
+
 .plan.current {
-  /* highlight current plan using system black */
-  border-color: #000;
+  /* highlight current plan using custom black */
+  border-color: #121212;
 }
 
 .plan.selected {
-  /* highlight selected plan with transparent system black */
-  border-color: #000;
-  background: color-mix(in srgb, #000, transparent 80%);
+  /* highlight selected plan with semi-transparent black */
+  border-color: #121212;
+  background: color-mix(in srgb, #121212, transparent 20%);
 }
 
 .actions {
