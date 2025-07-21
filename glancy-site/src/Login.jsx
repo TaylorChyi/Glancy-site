@@ -28,11 +28,7 @@ function Login() {
       setUser(data)
       setPopupMsg(`${t.loginButton} ${account}`)
       setPopupOpen(true)
-      if (data.username === 'admin') {
-        navigate('/portal')
-      } else {
-        navigate('/')
-      }
+      navigate('/')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)

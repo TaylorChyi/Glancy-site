@@ -82,10 +82,6 @@ export default defineConfig({
 
 `/contact` 页面会把填写的信息提交到 `POST /api/contact`。
 
-## 管理门户
-
-管理员可在 `/portal/login` 使用 `/api/admin/login` 登录，登录后在 `/portal`
-展示的统计数据来自 `GET /api/stats/users`。
 
 ## 服务状态
 
