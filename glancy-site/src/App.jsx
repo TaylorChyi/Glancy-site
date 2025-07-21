@@ -76,6 +76,28 @@ function App() {
     }
   }
 
+  const handleSelectHistory = async (term) => {
+    if (!user) {
+      setModalOpen(true)
+      return
+    }
+    setLoading(true)
+    try {
+      const data = await fetchWord({
+        userId: user.id,
+        term,
+        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        token: user.token
+      })
+      setEntry(data)
+    } catch (err) {
+      setPopupMsg(err.message)
+      setPopupOpen(true)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     function handleShortcut(e) {
       const platform =
@@ -122,7 +144,10 @@ function App() {
     <div className="container">
       <aside className="sidebar">
         <Brand />
-        <SidebarFunctions onToggleFavorites={handleToggleFavorites} />
+        <SidebarFunctions
+          onToggleFavorites={handleToggleFavorites}
+          onSelectHistory={handleSelectHistory}
+        />
         <SidebarUser />
       </aside>
       <div className="right">

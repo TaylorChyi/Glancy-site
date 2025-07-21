@@ -44,6 +44,11 @@ export const useHistoryStore = create((set, get) => {
       }
       localStorage.removeItem(STORAGE_KEY)
       set({ history: [] })
+    },
+    removeHistory: (term) => {
+      const updated = get().history.filter((t) => t !== term)
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
+      set({ history: updated })
     }
   }
 })
