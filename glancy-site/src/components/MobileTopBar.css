@@ -7,6 +7,7 @@
   align-items: center;
 }
 .topbar-text {
-  margin-left: auto;
+  margin-left: 8px;
+  margin-right: auto;
   font-size: 1.1rem;
 }

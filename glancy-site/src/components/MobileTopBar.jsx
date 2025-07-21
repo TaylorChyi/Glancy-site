@@ -15,10 +15,10 @@ function MobileTopBar({ onToggleFavorites, onToggleHistory }) {
       <button className="topbar-btn" onClick={() => window.location.reload()}>
         <img src={icon} alt="brand" width={24} height={24} />
       </button>
+      <span className="topbar-text">{text}</span>
       <button className="topbar-btn" onClick={onToggleFavorites}>⭐</button>
       <button className="topbar-btn" onClick={onToggleHistory}>📜</button>
       <div className="topbar-btn"><UserMenu size={24} /></div>
-      <span className="topbar-text">{text}</span>
     </>
   )
 }
