@@ -1,0 +1,42 @@
+.shortcuts-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.shortcuts-modal {
+  background: var(--app-bg);
+  color: var(--app-color);
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 90%;
+}
+
+.shortcuts-modal h3 {
+  margin-top: 0;
+}
+
+.shortcuts-modal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.shortcuts-modal li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+
+.keys {
+  font-weight: bold;
+}
+
+.close-btn {
+  width: 100%;
+}
