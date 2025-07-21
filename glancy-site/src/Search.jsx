@@ -8,10 +8,13 @@ import DictionaryEntry from './components/DictionaryEntry.jsx'
 import { useHistoryStore } from './store/historyStore.js'
 
 function Search() {
-  const { t, lang } = useLanguage()
+  const { t } = useLanguage()
   const user = useUserStore((s) => s.user)
   const [word, setWord] = useState('')
   const [result, setResult] = useState(null)
+  const [sourceLang] = useState(
+    localStorage.getItem('sourceLang') || 'ENGLISH'
+  )
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const history = useHistoryStore((s) => s.history)
@@ -29,12 +32,12 @@ function Search() {
       const data = await fetchWord({
         userId: user?.id,
         term,
-        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        language: sourceLang,
         token: user?.token
       })
       setResult(data)
       if (updateHistory) {
-        addHistory(term, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
+        addHistory(term, user, sourceLang)
       }
     } catch (err) {
       setPopupMsg(err.message)

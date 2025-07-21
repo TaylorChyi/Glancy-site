@@ -3,8 +3,9 @@ import './Toolbar.css'
 import { useLanguage } from '../../LanguageContext.jsx'
 
 function ModelSelector() {
-  const [model, setModel] = useState('model-a')
-  const { t } = useLanguage()
+  const [model, setModel] = useState(
+    () => localStorage.getItem('dictionaryModel') || 'model-a'
+  )
 
   return (
     <div className="toolbar-section">
