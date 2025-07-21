@@ -49,9 +49,10 @@
 .topbar {
   height: 60px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   padding: 0 20px;
+  gap: 8px;
 }
 
 .avatar img {
@@ -122,18 +123,17 @@
     flex-direction: column;
   }
   .sidebar {
-    width: 100%;
-    height: auto;
-    padding: 10px;
+    display: none;
   }
   .sidebar-user {
     display: none;
   }
   .mobile-user-menu {
-    display: block;
+    display: none;
   }
   .topbar {
-    display: none;
+    display: flex;
+    padding: 10px;
   }
   .chatbox {
     padding: 16px;

@@ -1,0 +1,12 @@
+.topbar-btn {
+  background: none;
+  border: none;
+  padding: 0 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.topbar-text {
+  margin-left: auto;
+  font-size: 1.1rem;
+}

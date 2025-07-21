@@ -1,0 +1,8 @@
+.history-grid-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
