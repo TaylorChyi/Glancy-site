@@ -67,8 +67,8 @@
 
 .history-menu {
   position: absolute;
-  right: 0;
-  top: 100%;
+  left: 100%;
+  top: 0;
   background: var(--sidebar-bg);
   color: var(--sidebar-color);
   border: 1px solid var(--border-color);
