@@ -44,11 +44,16 @@ function App() {
         language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
         token: user.token
       })
-      const text = data.definition ||
+      const defs =
+        data.definition ||
         (data.definitions && data.definitions.length > 0
           ? data.definitions.join('; ')
           : '')
-      const output = [data.term, text].filter(Boolean).join(' ')
+      const parts = [data.term]
+      if (data.phonetic) parts.push(`(${data.phonetic})`)
+      if (defs) parts.push(defs)
+      if (data.example) parts.push(`"${data.example}"`)
+      const output = parts.join(' ')
       setDisplay(output || t.noDefinition)
     } catch (err) {
       setPopupMsg(err.message)
