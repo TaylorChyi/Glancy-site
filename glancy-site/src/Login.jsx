@@ -26,9 +26,7 @@ function Login() {
         body: JSON.stringify({ account, password })
       })
       setUser(data)
-      setPopupMsg(`${t.loginButton} ${account}`)
-      setPopupOpen(true)
-      navigate('/')
+      navigate(0)
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
