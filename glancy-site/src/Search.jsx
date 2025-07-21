@@ -23,22 +23,31 @@ function Search() {
     loadHistory(user)
   }, [user, loadHistory])
 
-  const handleSearch = async (e) => {
-    e.preventDefault()
+  const searchTerm = async (term) => {
     setPopupMsg('')
     try {
       const data = await fetchWord({
         userId: user?.id,
-        term: word,
+        term,
         language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
         token: user?.token
       })
       setResult(data)
-      addHistory(word, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
+      addHistory(term, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
     }
+  }
+
+  const handleSearch = async (e) => {
+    e.preventDefault()
+    searchTerm(word)
+  }
+
+  const handleHistoryClick = (term) => {
+    setWord(term)
+    searchTerm(term)
   }
 
   const playAudio = async () => {
@@ -73,7 +82,11 @@ function Search() {
           <button onClick={() => clearHistory(user)}>{t.clearHistory}</button>
           <ul>
             {history.map((h, i) => (
-              <li key={i}>{h}</li>
+              <li key={i}>
+                <button type="button" onClick={() => handleHistoryClick(h)}>
+                  {h}
+                </button>
+              </li>
             ))}
           </ul>
         </div>
