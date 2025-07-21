@@ -13,6 +13,7 @@ function Profile({ onCancel }) {
   const currentUser = useUserStore((s) => s.user)
   const [username, setUsername] = useState(currentUser?.username || '')
   const [email, setEmail] = useState(currentUser?.email || '')
+  const [phone, setPhone] = useState(currentUser?.phone || '')
   const [age, setAge] = useState('')
   const [gender, setGender] = useState('')
   const [interests, setInterests] = useState('')
@@ -20,12 +21,18 @@ function Profile({ onCancel }) {
   const [avatar, setAvatar] = useState('')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
+  const [editable, setEditable] = useState({
+    username: false,
+    email: false,
+    phone: false
+  })
 
   useEffect(() => {
     apiRequest(API_PATHS.profile)
       .then((data) => {
         setUsername(data.username)
         setEmail(data.email)
+        setPhone(data.phone)
         setAge(data.age)
         setGender(data.gender)
         setInterests(data.interests)
@@ -40,6 +47,7 @@ function Profile({ onCancel }) {
     const formData = new FormData()
     formData.append('username', username)
     formData.append('email', email)
+    formData.append('phone', phone)
     formData.append('age', age)
     formData.append('gender', gender)
     formData.append('interests', interests)
@@ -77,35 +85,104 @@ function Profile({ onCancel }) {
             style={{ position: 'absolute', inset: 0, opacity: 0 }}
           />
         </div>
-        <input
-          className="username-input"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          className="email-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <div className="editable-item">
+          <input
+            className="username-input"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder={t.usernamePlaceholder}
+            disabled={!editable.username}
+          />
+          {!editable.username && (
+            <button
+              type="button"
+              className="edit-btn"
+              onClick={() => setEditable({ ...editable, username: true })}
+            >
+              {t.editButton}
+            </button>
+          )}
+        </div>
+        <div className="editable-item">
+          <input
+            className="email-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t.emailPlaceholder}
+            disabled={!editable.email}
+          />
+          {!editable.email && (
+            <button
+              type="button"
+              className="edit-btn"
+              onClick={() => setEditable({ ...editable, email: true })}
+            >
+              {t.editButton}
+            </button>
+          )}
+        </div>
+        <div className="editable-item">
+          <input
+            className="phone-input"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder={t.phonePlaceholder}
+            disabled={!editable.phone}
+          />
+          {!editable.phone && (
+            <button
+              type="button"
+              className="edit-btn"
+              onClick={() => setEditable({ ...editable, phone: true })}
+            >
+              {t.editButton}
+            </button>
+          )}
+        </div>
         <div className="basic">
           <div className="item">
-            <span>🎂</span>
-            <input value={age} onChange={(e) => setAge(e.target.value)} />
+            <span>🎂 {t.ageLabel}</span>
+            <input
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              placeholder={t.agePlaceholder}
+            />
+            <span className="tooltip">
+              ?<span className="tooltip-text">{t.ageHelp}</span>
+            </span>
           </div>
           <div className="item">
-            <span>👤</span>
-            <input value={gender} onChange={(e) => setGender(e.target.value)} />
+            <span>👤 {t.genderLabel}</span>
+            <input
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              placeholder={t.genderPlaceholder}
+            />
+            <span className="tooltip">
+              ?<span className="tooltip-text">{t.genderHelp}</span>
+            </span>
           </div>
           <div className="item">
-            <span>⭐</span>
+            <span>⭐ {t.interestsLabel}</span>
             <input
               value={interests}
               onChange={(e) => setInterests(e.target.value)}
+              placeholder={t.interestsPlaceholder}
             />
+            <span className="tooltip">
+              ?<span className="tooltip-text">{t.interestsHelp}</span>
+            </span>
           </div>
           <div className="item">
-            <span>🎯</span>
-            <input value={goal} onChange={(e) => setGoal(e.target.value)} />
+            <span>🎯 {t.goalLabel}</span>
+            <input
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              placeholder={t.goalPlaceholder}
+            />
+            <span className="tooltip">
+              ?<span className="tooltip-text">{t.goalHelp}</span>
+            </span>
           </div>
         </div>
         <div className="actions">
