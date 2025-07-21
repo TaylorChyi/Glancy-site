@@ -38,11 +38,17 @@ function MobileTopBar({
       <button className="topbar-btn" onClick={onOpenSidebar}>
         <img src={icon} alt="brand" width={24} height={24} />
       </button>
-      {showBack && (
-        <button type="button" className="back-btn" onClick={onBack}>
-          ←
-        </button>
-      )}
+      <button
+        type="button"
+        className="back-btn"
+        onClick={onBack}
+        style={{
+          visibility: showBack ? 'visible' : 'hidden',
+          pointerEvents: showBack ? 'auto' : 'none'
+        }}
+      >
+        ←
+      </button>
       <div className="term-text">{term || (lang === 'zh' ? '格律词典' : 'Glancy')}</div>
       <div className="topbar-right">
         {canFavorite && (

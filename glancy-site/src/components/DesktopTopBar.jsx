@@ -29,11 +29,17 @@ function DesktopTopBar({
 
   return (
     <header className="desktop-topbar">
-      {showBack && (
-        <button type="button" className="back-btn" onClick={onBack}>
-          ←
-        </button>
-      )}
+      <button
+        type="button"
+        className="back-btn"
+        onClick={onBack}
+        style={{
+          visibility: showBack ? 'visible' : 'hidden',
+          pointerEvents: showBack ? 'auto' : 'none'
+        }}
+      >
+        ←
+      </button>
       <div className="term-text">{term}</div>
       <div className="topbar-right">
         {canFavorite && (
