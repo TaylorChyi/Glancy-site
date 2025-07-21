@@ -31,6 +31,7 @@ function App() {
   const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
   const loadHistory = useHistoryStore((s) => s.loadHistory)
+  const addHistory = useHistoryStore((s) => s.addHistory)
   const { theme, resolvedTheme, setTheme } = useTheme()
   const { t, lang, setLang } = useLanguage()
   const inputRef = useRef(null)
@@ -70,6 +71,7 @@ function App() {
         token: user.token
       })
       setEntry(data)
+      addHistory(input, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
@@ -92,6 +94,7 @@ function App() {
         token: user.token
       })
       setEntry(data)
+      addHistory(term, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
