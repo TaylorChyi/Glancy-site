@@ -96,6 +96,10 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.history-menu .delete-btn {
+  color: #e34343;
+}
+
 .sidebar-user .user-menu button.with-name:hover {
 background-color: rgba(255, 255, 255, 0.1);
 border-radius: 4px;
