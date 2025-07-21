@@ -1,0 +1,54 @@
+.dictionaryEntry {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.entryHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.term {
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.phonetic {
+  font-size: 0.9em;
+  color: #666;
+  margin-left: 8px;
+}
+
+.language {
+  display: inline-block;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  color: #333;
+}
+
+.definitions ol {
+  padding-left: 1.2em;
+}
+
+.definitions li {
+  margin-bottom: 0.6em;
+}
+
+.example blockquote {
+  margin: 0;
+  padding-left: 12px;
+  border-left: 3px solid #ddd;
+  font-style: italic;
+  color: #555;
+}
+
+.noDefinition {
+  color: #999;
+  margin: 12px 0;
+}

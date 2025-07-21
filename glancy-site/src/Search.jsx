@@ -4,6 +4,7 @@ import { useLanguage } from './LanguageContext.jsx'
 import { fetchWord, fetchWordAudio } from './api/words.js'
 import { useUserStore } from './store/userStore.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import DictionaryEntry from './components/DictionaryEntry.jsx'
 
 function Search() {
   const { t, lang } = useLanguage()
@@ -64,35 +65,7 @@ function Search() {
       </form>
       {result && (
         <div className="result">
-          <h3>{result.term}</h3>
-          {result.phonetic && (
-            <p>
-              {t.phoneticLabel}: {result.phonetic}
-            </p>
-          )}
-          {result.language && (
-            <p>
-              {t.languageLabel}: {result.language}
-            </p>
-          )}
-          {result.definitions && result.definitions.length > 0 ? (
-            <section>
-              <h4>{t.definitionsLabel}</h4>
-              <ul>
-                {result.definitions.map((d, i) => (
-                  <li key={i}>{d}</li>
-                ))}
-              </ul>
-            </section>
-          ) : (
-            <p>{t.noDefinition}</p>
-          )}
-          {result.example && (
-            <section>
-              <h4>{t.exampleLabel}</h4>
-              <p>{result.example}</p>
-            </section>
-          )}
+          <DictionaryEntry entry={result} />
           <button onClick={playAudio}>{t.playAudio}</button>
         </div>
       )}
