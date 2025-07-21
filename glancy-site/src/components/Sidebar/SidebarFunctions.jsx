@@ -8,7 +8,7 @@ function SidebarFunctions() {
   return (
     <div className="sidebar-functions">
       {user && <Favorites />}
-      {user && <HistoryList />}
+      <HistoryList />
     </div>
   )
 }

@@ -13,5 +13,6 @@ export const API_PATHS = {
   preferences: `${API_BASE}/preferences`,
   contact: `${API_BASE}/contact`,
   bindThirdParty: `${API_BASE}/bind/third-party`,
-  faqs: `${API_BASE}/faqs`
+  faqs: `${API_BASE}/faqs`,
+  searchRecords: `${API_BASE}/search-records`
 }
