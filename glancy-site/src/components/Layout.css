@@ -108,11 +108,17 @@ body {
 }
 .avatar-wrapper .avatar {
   position: relative;
+  transition: transform 0.2s;
 }
 .avatar-wrapper .change-avatar {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
   background: rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -125,4 +131,7 @@ body {
 }
 .avatar-wrapper:hover .change-avatar {
   opacity: 1;
+}
+.avatar-wrapper:hover .avatar {
+  transform: scale(1.1);
 }
