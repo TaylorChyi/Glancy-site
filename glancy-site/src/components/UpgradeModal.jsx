@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { useUserStore } from '../store/userStore.js'
 import PaymentModal from './PaymentModal.jsx'
 import './UpgradeModal.css'
+import { useLanguage } from '../LanguageContext.jsx'
 
 function UpgradeModal({ open, onClose }) {
   const user = useUserStore((s) => s.user)
   const currentPlan = user?.plan || 'free'
   const [selected, setSelected] = useState(currentPlan)
   const [payOpen, setPayOpen] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     if (open) {
@@ -35,7 +37,7 @@ function UpgradeModal({ open, onClose }) {
   return (
     <div className="upgrade-overlay" onClick={onClose}>
       <div className="upgrade-modal" onClick={(e) => e.stopPropagation()}>
-        <h3>Choose Plan</h3>
+        <h3>{t.choosePlan}</h3>
         <div className="plans">
           {plans.map((p) => (
             <div
@@ -49,8 +51,8 @@ function UpgradeModal({ open, onClose }) {
           ))}
         </div>
         <div className="actions">
-          <button type="button" onClick={confirm}>Confirm</button>
-          <button type="button" onClick={onClose}>Cancel</button>
+          <button type="button" onClick={confirm}>{t.confirm}</button>
+          <button type="button" onClick={onClose}>{t.cancelButton}</button>
         </div>
         <PaymentModal
           open={payOpen}

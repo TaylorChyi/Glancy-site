@@ -1,8 +1,10 @@
 import './Toolbar.css'
+import { useLanguage } from '../../LanguageContext.jsx'
 
 function VoiceInputButton() {
+  const { t } = useLanguage()
   const handleClick = () => {
-    alert('Voice input not implemented')
+    alert(t.voiceNotImplemented)
   }
 
   return (

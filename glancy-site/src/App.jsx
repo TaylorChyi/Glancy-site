@@ -25,7 +25,8 @@ import { useFavoritesStore } from './store/favoritesStore.js'
 function App() {
   const [text, setText] = useState('')
   const [entry, setEntry] = useState(null)
-  const placeholder = 'What are we querying next?'
+  const { t, lang, setLang } = useLanguage()
+  const placeholder = t.searchPlaceholder
   const [loading, setLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [popupOpen, setPopupOpen] = useState(false)
@@ -34,7 +35,6 @@ function App() {
   const loadHistory = useHistoryStore((s) => s.loadHistory)
   const addHistory = useHistoryStore((s) => s.addHistory)
   const { theme, resolvedTheme, setTheme } = useTheme()
-  const { t, lang, setLang } = useLanguage()
   const inputRef = useRef(null)
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
@@ -254,7 +254,7 @@ function App() {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Word, Phrase or Sentence"
+            placeholder={t.inputPlaceholder}
             value={text}
             onChange={(e) => setText(e.target.value)}
             style={{ borderRadius: '20px' }}

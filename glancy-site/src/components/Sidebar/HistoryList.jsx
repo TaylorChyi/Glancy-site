@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useHistoryStore } from '../../store/historyStore.js'
 import { useFavoritesStore } from '../../store/favoritesStore.js'
 import { useUserStore } from '../../store/userStore.js'
+import { useLanguage } from '../../LanguageContext.jsx'
 import './Sidebar.css'
 
 function HistoryList({ onSelect }) {
@@ -13,6 +14,7 @@ function HistoryList({ onSelect }) {
   const user = useUserStore((s) => s.user)
   const [openIndex, setOpenIndex] = useState(null)
   const listRef = useRef(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     function handlePointerDown(e) {
@@ -62,7 +64,7 @@ function HistoryList({ onSelect }) {
                       setOpenIndex(null)
                     }}
                   >
-                    ★ 收藏
+                    ★ {t.favoriteAction}
                   </button>
                   <button
                     type="button"
@@ -73,7 +75,7 @@ function HistoryList({ onSelect }) {
                       setOpenIndex(null)
                     }}
                   >
-                    🗑 删除
+                    🗑 {t.deleteAction}
                   </button>
                 </div>
               )}
