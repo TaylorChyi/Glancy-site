@@ -13,6 +13,7 @@ import voiceDark from './assets/voice-button-dark.svg'
 import { fetchWord } from './api/words.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
+import { useIsMobile } from './utils.js'
 import Brand from './components/Brand.jsx'
 import SidebarFunctions from './components/Sidebar/SidebarFunctions.jsx'
 import SidebarUser from './components/Sidebar/SidebarUser.jsx'
@@ -39,6 +40,7 @@ function App() {
   const [showHistory, setShowHistory] = useState(false)
   const favorites = useFavoritesStore((s) => s.favorites)
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
+  const isMobile = useIsMobile()
 
   const handleToggleFavorites = () => {
     setShowFavorites((v) => !v)
@@ -151,12 +153,14 @@ function App() {
         <SidebarUser />
       </aside>
       <div className="right">
-        <header className="topbar">
-          <MobileTopBar
-            onToggleFavorites={handleToggleFavorites}
-            onToggleHistory={handleToggleHistory}
-          />
-        </header>
+        {isMobile && (
+          <header className="topbar">
+            <MobileTopBar
+              onToggleFavorites={handleToggleFavorites}
+              onToggleHistory={handleToggleHistory}
+            />
+          </header>
+        )}
         <main className="display">
           {showFavorites ? (
             favorites.length ? (
