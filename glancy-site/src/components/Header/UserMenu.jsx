@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { useUserStore } from '../../store/userStore.js'
+import { useHistoryStore } from '../../store/historyStore.js'
 import { useLanguage } from '../../LanguageContext.jsx'
 import './Header.css'
 import ProTag from './ProTag.jsx'
@@ -24,6 +25,7 @@ function UserMenu({ size = 24, showName = false }) {
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const clearUser = useUserStore((s) => s.clearUser)
+  const clearHistory = useHistoryStore((s) => s.clearHistory)
   const { t } = useLanguage()
   const username = user?.username || ''
   const isPro =
@@ -100,6 +102,7 @@ function UserMenu({ size = 24, showName = false }) {
                   <button
                     type="button"
                     onClick={() => {
+                      clearHistory(user)
                       clearUser()
                       setOpen(false)
                     }}
