@@ -5,6 +5,7 @@ import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 import AuthModal from '../AuthModal.jsx'
+import SettingsModal from '../SettingsModal.jsx'
 import ShortcutsModal from '../ShortcutsModal.jsx'
 import ProfileModal from '../ProfileModal.jsx'
 
@@ -13,6 +14,7 @@ import ProfileModal from '../ProfileModal.jsx'
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
   const menuRef = useRef(null)
@@ -53,8 +55,12 @@ function UserMenu({ size = 24, showName = false }) {
                 <div className="username">{username}</div>
               </div>
               <ul>
-                <li onClick={() => setProfileOpen(true)}><span className="icon">👤</span>Profile</li>
-                <li><span className="icon">⚙️</span>Settings</li>
+                <li onClick={() => setProfileOpen(true)}>
+                  <span className="icon">👤</span>Profile
+                </li>
+                <li onClick={() => setSettingsOpen(true)}>
+                  <span className="icon">⚙️</span>Settings
+                </li>
                 <li onClick={() => setShortcutsOpen(true)}>
                   <span className="icon">⌨️</span>Shortcuts
                 </li>
@@ -96,10 +102,8 @@ function UserMenu({ size = 24, showName = false }) {
           )}
         </div>
       )}
-      <ShortcutsModal
-        open={shortcutsOpen}
-        onClose={() => setShortcutsOpen(false)}
-      />
+      <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <ShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false) />
     </div>
   )
 }
