@@ -41,9 +41,9 @@
 
 .right {
   flex: 1;
-  height: var(--vh);
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 .topbar {
@@ -114,9 +114,6 @@
     width: 100%;
     height: auto;
     padding: 10px;
-  }
-  .right {
-    height: auto;
   }
   .sidebar-user {
     display: none;
