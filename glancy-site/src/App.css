@@ -16,11 +16,19 @@
 .sidebar-brand {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: sticky;
   top: 0;
   background: inherit;
   padding-bottom: 1rem;
   cursor: pointer;
+}
+.brand-main {
+  display: flex;
+  align-items: center;
+}
+.mobile-user-menu {
+  display: none;
 }
 .sidebar-brand img {
   width: 32px;
@@ -44,9 +52,6 @@
   justify-content: flex-end;
   align-items: center;
   padding: 0 20px;
-}
-.topbar .user-menu {
-  display: none;
 }
 
 .avatar img {
@@ -116,8 +121,11 @@
   .sidebar-user {
     display: none;
   }
-  .topbar .user-menu {
-    display: flex;
+  .mobile-user-menu {
+    display: block;
+  }
+  .topbar {
+    display: none;
   }
   .chatbox {
     padding: 16px;

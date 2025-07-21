@@ -14,7 +14,6 @@ import './App.css'
 import Brand from './components/Brand.jsx'
 import SidebarFunctions from './components/Sidebar/SidebarFunctions.jsx'
 import SidebarUser from './components/Sidebar/SidebarUser.jsx'
-import UserMenu from './components/Header/UserMenu.jsx'
 
 function App() {
   const [text, setText] = useState('')
@@ -112,9 +111,7 @@ function App() {
         <SidebarUser />
       </aside>
       <div className="right">
-        <header className="topbar">
-          <UserMenu size={32} />
-        </header>
+        <header className="topbar"></header>
         <main className="display">{loading ? '...' : display}</main>
         <form className="chatbox" onSubmit={handleSend}>
           <input
