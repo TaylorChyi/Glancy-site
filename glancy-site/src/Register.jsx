@@ -5,6 +5,7 @@ import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
+import { useUserStore } from './store/userStore.js'
 
 function Register() {
   const { t } = useLanguage()
@@ -16,6 +17,7 @@ function Register() {
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
+  const setUser = useUserStore((s) => s.setUser)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -31,9 +33,15 @@ function Register() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, phone, password })
       })
-      setPopupMsg(t.registerButton + '成功')
+      const loginData = await apiRequest(API_PATHS.login, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ account: email, password: email })
+      })
+      setUser(loginData)
+      setPopupMsg(t.loginButton + ' ' + email)
       setPopupOpen(true)
-      navigate('/login')
+      navigate('/')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
