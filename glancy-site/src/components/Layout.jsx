@@ -37,16 +37,13 @@ function Layout() {
         >
           <div className="avatar">
             <Avatar />
-            <div
-              className="change-avatar"
-              onClick={() => fileRef.current && fileRef.current.click()}
-            >
+            <div className="change-avatar" onClick={() => fileRef.current && fileRef.current.click()}>
               <span style={{ fontSize: '16px' }}>📷</span>
               <span>更换头像</span>
               <input
                 ref={fileRef}
                 type="file"
-                style={{ display: 'none' }}
+                style={{ position: 'absolute', inset: 0, opacity: 0 }}
               />
             </div>
           </div>
