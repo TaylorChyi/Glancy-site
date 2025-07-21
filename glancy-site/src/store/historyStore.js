@@ -3,7 +3,8 @@ import {
   fetchSearchRecords,
   saveSearchRecord,
   clearSearchRecords,
-  deleteSearchRecord
+  deleteSearchRecord，
+  favoriteSearchRecord
 } from '../api/searchRecords.js'
 
 const STORAGE_KEY = 'searchHistory'
@@ -15,6 +16,7 @@ export const useHistoryStore = create((set, get) => {
   return {
     history: initial,
     recordMap: initialMap,
+    recordMap: {},
     loadHistory: async (user) => {
       if (user) {
         try {
@@ -39,7 +41,13 @@ export const useHistoryStore = create((set, get) => {
     },
     addHistory: async (term, user, language) => {
       if (user) {
-        saveSearchRecord({ userId: user.id, token: user.token, term, language }).catch(() => {})
+        saveSearchRecord({ userId: user.id, token: user.token, term, language })
+          .then((record) => {
+            set((state) => ({
+              recordMap: { ...state.recordMap, [term]: record.id }
+            }))
+          })
+          .catch(() => {})
       }
       const unique = Array.from(new Set([term, ...get().history])).slice(0, 20)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(unique))
@@ -66,6 +74,12 @@ export const useHistoryStore = create((set, get) => {
         delete map[term]
         return { history: updated, recordMap: map }
       })
+    },
+    favoriteHistory: async (term, user) => {
+      const id = get().recordMap[term]
+      if (user && id) {
+        favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch(() => {})
+      }
     }
   }
 })
