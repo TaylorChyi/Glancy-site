@@ -63,7 +63,7 @@ function Search() {
         />
       </form>
       {result && (
-        <div className="word-result">
+        <div className="result">
           <h3>{result.term}</h3>
           {result.phonetic && (
             <p>
