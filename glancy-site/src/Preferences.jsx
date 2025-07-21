@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import './Preferences.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { useTheme } from './ThemeContext.jsx'
 import { useUserStore } from './store/userStore.js'
@@ -49,7 +50,7 @@ function Preferences() {
   return (
     <div className="App">
       <h2>{t.prefTitle}</h2>
-      <form onSubmit={handleSave}>
+      <form className="preferences-form" onSubmit={handleSave}>
         <div>
           <label>{t.prefLanguage}</label>
           <input
