@@ -13,6 +13,7 @@ function UserMenu({ size = 24, showName = false }) {
   const [modalOpen, setModalOpen] = useState(false)
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
+  const clearUser = useUserStore((s) => s.clearUser)
   const { t } = useLanguage()
   const username = user?.username || ''
   const isPro = user?.isPro
@@ -54,7 +55,19 @@ function UserMenu({ size = 24, showName = false }) {
               </ul>
               <ul>
                 <li><span className="icon">❓</span>Help</li>
-                <li><span className="icon">🔑</span>Log in</li>
+                <li>
+                  <span className="icon">🔑</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      clearUser()
+                      setOpen(false)
+                    }}
+                    className="menu-btn"
+                  >
+                    Log out
+                  </button>
+                </li>
               </ul>
             </div>
           )}
