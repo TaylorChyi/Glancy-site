@@ -1,7 +1,9 @@
 .dictionaryEntry {
-  width: 100%;
-  padding: 20px;
-  text-align: left; /* override container centering */
+  width: auto;
+  margin: 0 2cm;
+  padding: 20px 0;
+  text-align: justify;
+  text-align-last: left;
   font-size: 1rem;
   font-weight: normal;
 }
