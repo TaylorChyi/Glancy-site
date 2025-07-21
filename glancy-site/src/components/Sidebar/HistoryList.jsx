@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useHistoryStore } from '../../store/historyStore.js'
 import { useFavoritesStore } from '../../store/favoritesStore.js'
 import { useUserStore } from '../../store/userStore.js'
@@ -12,6 +12,19 @@ function HistoryList({ onSelect }) {
   const favoriteHistory = useHistoryStore((s) => s.favoriteHistory)
   const user = useUserStore((s) => s.user)
   const [openIndex, setOpenIndex] = useState(null)
+  const listRef = useRef(null)
+
+  useEffect(() => {
+    function handlePointerDown(e) {
+      if (listRef.current && !listRef.current.contains(e.target)) {
+        setOpenIndex(null)
+      }
+    }
+    if (openIndex !== null) {
+      document.addEventListener('pointerdown', handlePointerDown)
+    }
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [openIndex])
 
   useEffect(() => {
     loadHistory(user)
@@ -20,7 +33,7 @@ function HistoryList({ onSelect }) {
   if (history.length === 0) return null
 
   return (
-    <div className="sidebar-section history-list">
+    <div className="sidebar-section history-list" ref={listRef}>
       <ul>
         {history.map((h, i) => (
           <li key={i}>
