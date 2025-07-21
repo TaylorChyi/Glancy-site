@@ -27,30 +27,32 @@ function HistoryList({ onSelect }) {
             <span className="history-term" onClick={() => onSelect && onSelect(h)}>
               {h}
             </span>
-            <button
-              type="button"
-              className="history-action"
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            >
-              ⋮
-            </button>
-            {openIndex === i && (
-              <div className="history-menu">
-                <button
-                  type="button"
-                  onClick={() => {
-                    favoriteHistory(h, user)
-                    toggleFavorite(h)
-                    setOpenIndex(null)
-                  }}
-                >
-                  ★ 收藏
-                </button>
-                <button type="button" onClick={() => { removeHistory(h, user); setOpenIndex(null) }}>
-                  删除
-                </button>
-              </div>
-            )}
+            <div className="history-action-wrapper">
+              <button
+                type="button"
+                className="history-action"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              >
+                ⋮
+              </button>
+              {openIndex === i && (
+                <div className="history-menu">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      favoriteHistory(h, user)
+                      toggleFavorite(h)
+                      setOpenIndex(null)
+                    }}
+                  >
+                    ★ 收藏
+                  </button>
+                  <button type="button" onClick={() => { removeHistory(h, user); setOpenIndex(null) }}>
+                    删除
+                  </button>
+                </div>
+              )}
+            </div>
           </li>
         ))}
       </ul>
