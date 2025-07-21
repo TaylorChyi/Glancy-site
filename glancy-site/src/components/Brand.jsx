@@ -15,8 +15,8 @@ function Brand() {
   }
 
   return (
-    <div className="sidebar-brand" onClick={handleClick}>
-      <div className="brand-main">
+    <div className="sidebar-brand">
+      <div className="brand-main" onClick={handleClick}>
         <img src={icon} alt="Glancy" />
         <span>{text}</span>
       </div>
