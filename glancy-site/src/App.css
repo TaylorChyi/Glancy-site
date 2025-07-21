@@ -64,13 +64,23 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 20px;
   overflow-y: auto;
   overscroll-behavior: contain;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
+}
+
+.display-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.display-term {
+  margin-bottom: 1rem;
 }
 
 

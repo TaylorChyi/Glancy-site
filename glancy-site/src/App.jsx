@@ -17,7 +17,7 @@ import SidebarUser from './components/Sidebar/SidebarUser.jsx'
 
 function App() {
   const [text, setText] = useState('')
-  const [display, setDisplay] = useState('What are we querying next?')
+  const [display, setDisplay] = useState(['What are we querying next?'])
   const [loading, setLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [popupOpen, setPopupOpen] = useState(false)
@@ -51,12 +51,12 @@ function App() {
         (data.definitions && data.definitions.length > 0
           ? data.definitions.join('; ')
           : '')
-      const parts = [data.term]
-      if (data.phonetic) parts.push(`(${data.phonetic})`)
-      if (defs) parts.push(defs)
-      if (data.example) parts.push(`"${data.example}"`)
-      const output = parts.join(' ')
-      setDisplay(output || t.noDefinition)
+      const details = []
+      if (data.phonetic) details.push(`(${data.phonetic})`)
+      if (defs) details.push(defs)
+      if (data.example) details.push(`"${data.example}"`)
+      const output = details.join(' ')
+      setDisplay([data.term, output || t.noDefinition])
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
@@ -112,7 +112,22 @@ function App() {
       </aside>
       <div className="right">
         <header className="topbar"></header>
-        <main className="display">{loading ? '...' : display}</main>
+        <main className="display">
+          {loading ? (
+            '...'
+          ) : (
+            <div className="display-content">
+              {display.map((line, idx) => (
+                <div
+                  key={idx}
+                  className={idx === 0 ? 'display-term' : undefined}
+                >
+                  {line}
+                </div>
+              ))}
+            </div>
+          )}
+        </main>
         <form className="chatbox" onSubmit={handleSend}>
           <input
             ref={inputRef}
