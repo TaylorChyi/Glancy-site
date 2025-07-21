@@ -107,7 +107,6 @@ export const translations = {
     searchButton: 'Search',
     playAudio: 'Play',
     phoneticLabel: 'Phonetic',
-    languageLabel: 'Language',
     definitionsLabel: 'Definitions',
     exampleLabel: 'Example',
     favorites: 'Favorites',
@@ -159,7 +158,7 @@ export const translations = {
     chatPlaceholder: 'Nachricht eingeben...',
     sendButton: 'Senden',
     phoneticLabel: 'Phonetic',
-    languageLabel: 'Language',
+    languageLabel: 'Sprache',
     definitionsLabel: 'Definitions',
     exampleLabel: 'Example',
     adminLoginTitle: 'Admin-Login',
@@ -169,7 +168,6 @@ export const translations = {
     clearHistory: 'Verlauf löschen',
     phonetic: 'Aussprache',
     example: 'Beispiel',
-    languageLabel: 'Sprache',
     definitions: 'Definitionen'
   },
   fr: {
@@ -204,7 +202,6 @@ export const translations = {
     clearHistory: 'Effacer l\'historique',
     phonetic: 'Phonétique',
     example: 'Exemple',
-    languageLabel: 'Langue',
     definitions: 'Définitions'
   },
   ru: {
@@ -239,7 +236,6 @@ export const translations = {
     clearHistory: 'Очистить историю',
     phonetic: 'Фонетика',
     example: 'Пример',
-    languageLabel: 'Язык',
     definitions: 'Определения'
   },
   ja: {
@@ -274,7 +270,6 @@ export const translations = {
     clearHistory: '履歴をクリア',
     phonetic: '発音',
     example: '例文',
-    languageLabel: '言語',
     definitions: '定義'
   },
   es: {
@@ -309,7 +304,6 @@ export const translations = {
     clearHistory: 'Borrar historial',
     phonetic: 'Fonética',
     example: 'Ejemplo',
-    languageLabel: 'Idioma',
     definitions: 'Definiciones'
   }
 }
