@@ -36,3 +36,12 @@ export const favoriteSearchRecord = ({ userId, token, recordId }) =>
       headers: { 'X-USER-TOKEN': token }
     }
   )
+
+export const unfavoriteSearchRecord = ({ userId, token, recordId }) =>
+  apiRequest(
+    `${API_PATHS.searchRecords}/user/${userId}/${recordId}/favorite`,
+    {
+      method: 'DELETE',
+      headers: { 'X-USER-TOKEN': token }
+    }
+  )
