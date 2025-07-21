@@ -55,3 +55,15 @@ border-radius: 4px;
     display: none;
   }
 }
+.favorites-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.collection-button {
+  cursor: pointer;
+  user-select: none;
+}
