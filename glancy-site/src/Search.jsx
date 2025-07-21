@@ -23,7 +23,7 @@ function Search() {
     loadHistory(user)
   }, [user, loadHistory])
 
-  const searchTerm = async (term) => {
+  const searchTerm = async (term, updateHistory = true) => {
     setPopupMsg('')
     try {
       const data = await fetchWord({
@@ -33,7 +33,9 @@ function Search() {
         token: user?.token
       })
       setResult(data)
-      addHistory(term, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
+      if (updateHistory) {
+        addHistory(term, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
+      }
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
@@ -47,7 +49,7 @@ function Search() {
 
   const handleHistoryClick = (term) => {
     setWord(term)
-    searchTerm(term)
+    searchTerm(term, false)
   }
 
   const playAudio = async () => {
