@@ -78,7 +78,6 @@ function Search() {
       )}
       {history.length > 0 && (
         <div>
-          <h3>{t.searchHistory}</h3>
           <button onClick={() => clearHistory(user)}>{t.clearHistory}</button>
           <ul>
             {history.map((h, i) => (
