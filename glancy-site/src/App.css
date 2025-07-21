@@ -145,11 +145,12 @@
 }
 .favorites-grid-display {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 12px;
-  max-width: 800px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px 0;
+  font-size: 1rem;
 }
 
 .favorite-toggle {
@@ -164,6 +165,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--app-bg);
+  color: var(--app-color);
 }
 
 .unfavorite-btn {
