@@ -73,6 +73,7 @@ function App() {
   const handleBackFromFavorite = () => {
     setShowFavorites(true)
     setFromFavorites(false)
+    setEntry(null)
   }
 
   const handleSend = async (e) => {
