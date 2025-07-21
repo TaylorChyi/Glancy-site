@@ -5,7 +5,7 @@ import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import { useUserStore } from './store/userStore.js'
 import MessagePopup from './components/MessagePopup.jsx'
-import { extractMessage } from './utils.js'
+import { apiRequest } from './api/client.js'
 
 function Login() {
   const { t } = useLanguage()
@@ -20,16 +20,11 @@ function Login() {
     e.preventDefault()
     setPopupMsg('')
     try {
-      const resp = await fetch(API_PATHS.login, {
+      const data = await apiRequest(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account, password })
       })
-      if (!resp.ok) {
-        const text = await resp.text()
-        throw new Error(extractMessage(text) || t.loginButton + '失败')
-      }
-      const data = await resp.json()
       setUser(data)
       setPopupMsg(`${t.loginButton} ${account}`)
       setPopupOpen(true)

@@ -4,6 +4,7 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import { apiRequest } from './api/client.js'
 
 function UserDetail() {
   const { t } = useLanguage()
@@ -13,8 +14,7 @@ function UserDetail() {
   const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
-    fetch(`${API_PATHS.users}/${id}`)
-      .then((res) => res.json())
+    apiRequest(`${API_PATHS.users}/${id}`)
       .then((data) => {
         setUsername(data.username)
       })
@@ -23,12 +23,12 @@ function UserDetail() {
 
   const handleUpdate = async (e) => {
     e.preventDefault()
-    const resp = await fetch(`${API_PATHS.users}/${id}`, {
+    await apiRequest(`${API_PATHS.users}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username })
     })
-    setPopupMsg(resp.ok ? t.updateSuccess : t.submitFail)
+    setPopupMsg(t.updateSuccess)
     setPopupOpen(true)
   }
 

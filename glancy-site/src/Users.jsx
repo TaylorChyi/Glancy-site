@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
+import { apiRequest } from './api/client.js'
 
 function Users() {
   const { t } = useLanguage()
   const [users, setUsers] = useState([])
 
   const fetchUsers = () => {
-    fetch(API_PATHS.users)
-      .then((res) => res.json())
+    apiRequest(API_PATHS.users)
       .then((data) => setUsers(data))
       .catch(() => {})
   }
@@ -20,7 +20,7 @@ function Users() {
   }, [])
 
   const handleDelete = async (id) => {
-    await fetch(`${API_PATHS.users}/${id}`, { method: 'DELETE' })
+    await apiRequest(`${API_PATHS.users}/${id}`, { method: 'DELETE' })
     fetchUsers()
   }
 

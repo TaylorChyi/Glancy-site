@@ -1,4 +1,5 @@
 import { API_PATHS } from '../config/api.js'
+import { apiRequest } from './client.js'
 
 /**
  * Query a word definition
@@ -14,11 +15,9 @@ export async function fetchWord({ userId, term, language, token }) {
     term,
     language
   })
-  const resp = await fetch(`${API_PATHS.words}?${params.toString()}`, {
+  return apiRequest(`${API_PATHS.words}?${params.toString()}`, {
     headers: token ? { 'X-USER-TOKEN': token } : {}
   })
-  if (!resp.ok) throw new Error('Failed to fetch')
-  return resp.json()
 }
 
 export async function fetchWordAudio(word) {

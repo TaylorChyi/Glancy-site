@@ -5,6 +5,7 @@ import { useTheme } from './ThemeContext.jsx'
 import { useUserStore } from './store/userStore.js'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import { apiRequest } from './api/client.js'
 
 function Preferences() {
   const { t } = useLanguage()
@@ -18,8 +19,7 @@ function Preferences() {
 
   useEffect(() => {
     if (!user) return
-    fetch(`${API_PATHS.preferences}/user/${user.id}`)
-      .then((res) => res.json())
+    apiRequest(`${API_PATHS.preferences}/user/${user.id}`)
       .then((data) => {
         setSystemLanguage(data.systemLanguage || 'en')
         setSearchLanguage(data.searchLanguage || 'ENGLISH')
@@ -32,7 +32,7 @@ function Preferences() {
   const handleSave = async (e) => {
     e.preventDefault()
     if (!user) return
-    await fetch(`${API_PATHS.preferences}/user/${user.id}`, {
+    await apiRequest(`${API_PATHS.preferences}/user/${user.id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
