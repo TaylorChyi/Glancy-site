@@ -1,3 +1,11 @@
 .toolbar-section {
   margin-right: 0.5rem;
 }
+
+.toolbar-section select {
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--app-bg);
+  color: var(--app-color);
+}
