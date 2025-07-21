@@ -198,9 +198,8 @@ function App() {
             showBack={!showFavorites && fromFavorites}
             onBack={handleBackFromFavorite}
             favorited={favorites.includes(entry?.term)}
-            onToggleFavorite={() =>
-              entry && toggleFavorite(entry.term)
-            }
+            onToggleFavorite={() => entry && toggleFavorite(entry.term)}
+            canFavorite={!!entry && !showFavorites && !showHistory}
           />
         )}
         <main className="display">

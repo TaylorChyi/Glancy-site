@@ -7,7 +7,8 @@ function DesktopTopBar({
   showBack = false,
   onBack,
   favorited = false,
-  onToggleFavorite
+  onToggleFavorite,
+  canFavorite = false
 }) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
@@ -33,13 +34,15 @@ function DesktopTopBar({
       )}
       <div className="term-text">{term}</div>
       <div className="topbar-right">
-        <button
-          type="button"
-          className="favorite-toggle"
-          onClick={onToggleFavorite}
-        >
-          {favorited ? '★' : '☆'}
-        </button>
+        {canFavorite && (
+          <button
+            type="button"
+            className="favorite-toggle"
+            onClick={onToggleFavorite}
+          >
+            {favorited ? '★' : '☆'}
+          </button>
+        )}
         <ModelSelector />
         <div className="more-menu" ref={menuRef}>
           <button
