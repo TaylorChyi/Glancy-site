@@ -63,11 +63,6 @@ function Profile({ onCancel }) {
     setPopupOpen(true)
   }
 
-  const handleBind = async () => {
-    await apiRequest(API_PATHS.bindThirdParty)
-    setPopupMsg(t.bindSuccess)
-    setPopupOpen(true)
-  }
 
   return (
     <div className="App">
@@ -195,7 +190,6 @@ function Profile({ onCancel }) {
           </button>
         </div>
       </form>
-      <button onClick={handleBind}>{t.bindButton}</button>
       <MessagePopup
         open={popupOpen}
         message={popupMsg}

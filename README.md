@@ -56,8 +56,7 @@ export default defineConfig({
 ## 个人资料编辑
 
 `/profile` 页面通过 `GET /api/users/profile` 载入信息，提交表单时向
-`POST /api/users/profile` 上传昵称和头像；同时可点击绑定按钮触发
-`/api/bind/third-party` 完成第三方账号绑定。
+`POST /api/users/profile` 上传昵称和头像。
 
 ## 偏好设置
 
