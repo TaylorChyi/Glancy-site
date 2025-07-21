@@ -67,6 +67,9 @@ function App() {
       return
     }
     if (!text.trim()) return
+    // ensure result view is shown when searching from favorites or history
+    setShowFavorites(false)
+    setShowHistory(false)
     const input = text.trim()
     setText('')
     setLoading(true)
@@ -92,6 +95,9 @@ function App() {
       setModalOpen(true)
       return
     }
+    // hide favorites or history display when showing a selected entry
+    setShowFavorites(false)
+    setShowHistory(false)
     setLoading(true)
     try {
       const data = await fetchWord({
