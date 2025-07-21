@@ -16,7 +16,9 @@ import './App.css'
 import Brand from './components/Brand.jsx'
 import SidebarFunctions from './components/Sidebar/SidebarFunctions.jsx'
 import SidebarUser from './components/Sidebar/SidebarUser.jsx'
-import { useFavoritesStore } from "./store/favoritesStore.js"
+import MobileTopBar from './components/MobileTopBar.jsx'
+import HistoryDisplay from './components/HistoryDisplay.jsx'
+import { useFavoritesStore } from './store/favoritesStore.js'
 
 function App() {
   const [text, setText] = useState('')
@@ -34,8 +36,19 @@ function App() {
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
   const [showFavorites, setShowFavorites] = useState(false)
+  const [showHistory, setShowHistory] = useState(false)
   const favorites = useFavoritesStore((s) => s.favorites)
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
+
+  const handleToggleFavorites = () => {
+    setShowFavorites((v) => !v)
+    setShowHistory(false)
+  }
+
+  const handleToggleHistory = () => {
+    setShowHistory((v) => !v)
+    setShowFavorites(false)
+  }
 
   const handleSend = async (e) => {
     e.preventDefault()
@@ -109,11 +122,16 @@ function App() {
     <div className="container">
       <aside className="sidebar">
         <Brand />
-        <SidebarFunctions onToggleFavorites={setShowFavorites} />
+        <SidebarFunctions onToggleFavorites={handleToggleFavorites} />
         <SidebarUser />
       </aside>
       <div className="right">
-        <header className="topbar"></header>
+        <header className="topbar">
+          <MobileTopBar
+            onToggleFavorites={handleToggleFavorites}
+            onToggleHistory={handleToggleHistory}
+          />
+        </header>
         <main className="display">
           {showFavorites ? (
             favorites.length ? (
@@ -127,6 +145,8 @@ function App() {
                 <div className="display-term">{t.noFavorites || 'No favorites'}</div>
               </div>
             )
+          ) : showHistory ? (
+            <HistoryDisplay />
           ) : loading ? (
             '...'
           ) : entry ? (
