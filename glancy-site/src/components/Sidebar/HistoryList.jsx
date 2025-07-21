@@ -9,6 +9,7 @@ function HistoryList({ onSelect }) {
   const loadHistory = useHistoryStore((s) => s.loadHistory)
   const removeHistory = useHistoryStore((s) => s.removeHistory)
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
+  const favoriteHistory = useHistoryStore((s) => s.favoriteHistory)
   const user = useUserStore((s) => s.user)
   const [openIndex, setOpenIndex] = useState(null)
 
@@ -35,7 +36,14 @@ function HistoryList({ onSelect }) {
             </button>
             {openIndex === i && (
               <div className="history-menu">
-                <button type="button" onClick={() => { toggleFavorite(h); setOpenIndex(null) }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    favoriteHistory(h, user)
+                    toggleFavorite(h)
+                    setOpenIndex(null)
+                  }}
+                >
                   ★ 收藏
                 </button>
                 <button type="button" onClick={() => { removeHistory(h); setOpenIndex(null) }}>
