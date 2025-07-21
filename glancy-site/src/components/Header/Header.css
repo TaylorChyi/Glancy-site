@@ -95,6 +95,13 @@
   padding-top: 0.5rem;
 }
 
+@media (max-width: 600px) {
+  .topbar .user-menu .menu {
+    top: calc(100% + 0.5rem);
+    bottom: auto;
+  }
+}
+
 .app-header {
   display: flex;
   justify-content: space-between;
