@@ -115,11 +115,6 @@ background-color: rgba(255, 255, 255, 0.1);
 border-radius: 4px;
 }
 
-@media (max-width: 600px) {
-  .sidebar-user {
-    display: none;
-  }
-}
 .favorites-list ul {
   list-style: none;
   padding: 0;
