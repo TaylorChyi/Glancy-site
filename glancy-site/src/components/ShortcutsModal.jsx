@@ -6,10 +6,10 @@ function ShortcutsModal({ open, onClose }) {
 
   const mod = getModifierKey()
   const shortcuts = [
-    { keys: `${mod} + /`, action: 'Focus search input' },
-    { keys: `${mod} + L`, action: 'Switch language' },
-    { keys: `${mod} + M`, action: 'Toggle theme' },
-    { keys: `${mod} + K`, action: 'Open shortcuts help' },
+    { keys: `${mod} + Shift + F`, action: 'Focus search input' },
+    { keys: `${mod} + Shift + L`, action: 'Switch language' },
+    { keys: `${mod} + Shift + M`, action: 'Toggle theme' },
+    { keys: `${mod} + Shift + K`, action: 'Open shortcuts help' },
   ]
 
   return (
