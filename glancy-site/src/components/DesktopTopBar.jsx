@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import ModelSelector from './Toolbar/ModelSelector.jsx'
 import './DesktopTopBar.css'
+import { useLanguage } from '../LanguageContext.jsx'
 
 function DesktopTopBar({
   term = '',
@@ -12,6 +13,7 @@ function DesktopTopBar({
 }) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     function handlePointerDown(e) {
@@ -55,10 +57,10 @@ function DesktopTopBar({
           {open && (
             <div className="menu">
               <button type="button">
-                <span className="icon">🔗</span>Share
+                <span className="icon">🔗</span>{t.share}
               </button>
               <button type="button">
-                <span className="icon">🚩</span>Report
+                <span className="icon">🚩</span>{t.report}
               </button>
             </div>
           )}
