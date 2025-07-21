@@ -6,7 +6,6 @@ import {
   deleteSearchRecord,
   favoriteSearchRecord,
   unfavoriteSearchRecord,
-  
 } from '../api/searchRecords.js'
 
 const STORAGE_KEY = 'searchHistory'
