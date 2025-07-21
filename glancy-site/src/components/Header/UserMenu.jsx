@@ -27,15 +27,15 @@ function UserMenu({ size = 24, showName = false }) {
   const isPro = user?.isPro
 
   useEffect(() => {
-    function handleClick(e) {
+    function handlePointerDown(e) {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setOpen(false)
       }
     }
     if (open) {
-      document.addEventListener('click', handleClick)
+      document.addEventListener('pointerdown', handlePointerDown)
     }
-    return () => document.removeEventListener('click', handleClick)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
   }, [open])
 
   useEffect(() => {
