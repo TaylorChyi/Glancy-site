@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useHistoryStore } from './store/historyStore.js'
 import AuthModal from './components/AuthModal.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useUserStore } from './store/userStore.js'
@@ -23,6 +24,7 @@ function App() {
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
+  const loadHistory = useHistoryStore((s) => s.loadHistory)
   const { theme, resolvedTheme, setTheme } = useTheme()
   const { lang, t, setLang } = useLanguage()
   const inputRef = useRef(null)
@@ -102,6 +104,10 @@ function App() {
     document.addEventListener('keydown', handleShortcut)
     return () => document.removeEventListener('keydown', handleShortcut)
   }, [lang, setLang, theme, setTheme])
+
+  useEffect(() => {
+    loadHistory(user)
+  }, [user, loadHistory])
 
   return (
     <div className="container">
