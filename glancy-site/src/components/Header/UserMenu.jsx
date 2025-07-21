@@ -26,7 +26,8 @@ function UserMenu({ size = 24, showName = false }) {
   const clearUser = useUserStore((s) => s.clearUser)
   const { t } = useLanguage()
   const username = user?.username || ''
-  const isPro = user?.isPro
+  const isPro =
+    user?.member || user?.isPro || (user?.plan && user.plan !== 'free')
 
   useEffect(() => {
     function handlePointerDown(e) {
@@ -111,7 +112,12 @@ function UserMenu({ size = 24, showName = false }) {
             </div>
           )}
           <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
-          <UpgradeModal open={upgradeOpen} onClose={() => setUpgradeOpen(false)} />
+          {!isPro && (
+            <UpgradeModal
+              open={upgradeOpen}
+              onClose={() => setUpgradeOpen(false)}
+            />
+          )}
         </>
       ) : (
         <div className={showName ? 'with-name' : ''}>
