@@ -1,8 +1,12 @@
+import { useState, useRef } from 'react'
 import { Outlet } from 'react-router-dom'
 import './Layout.css'
 import Avatar from './Avatar.jsx'
+import UserInfoCard from './UserInfoCard.jsx'
 
 function Layout() {
+  const [hover, setHover] = useState(false)
+  const fileRef = useRef(null)
   return (
     <div className="app-container">
       <aside className="sidebar">
@@ -26,11 +30,28 @@ function Layout() {
         <button>斜视视野与成像</button>
       </aside>
       <main className="main">
-        <div className="avatar-wrapper">
+        <div
+          className="avatar-wrapper"
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
           <div className="avatar">
             <Avatar />
+            <div
+              className="change-avatar"
+              onClick={() => fileRef.current && fileRef.current.click()}
+            >
+              <span style={{ fontSize: '16px' }}>📷</span>
+              <span>更换头像</span>
+              <input
+                ref={fileRef}
+                type="file"
+                style={{ display: 'none' }}
+              />
+            </div>
           </div>
           <div className="plus-badge">PLUS</div>
+          {hover && <UserInfoCard />}
         </div>
         <Outlet />
       </main>

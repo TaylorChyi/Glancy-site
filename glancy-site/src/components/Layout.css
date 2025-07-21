@@ -106,3 +106,23 @@ body {
   margin-left: 10px;
   cursor: pointer;
 }
+.avatar-wrapper .avatar {
+  position: relative;
+}
+.avatar-wrapper .change-avatar {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.avatar-wrapper:hover .change-avatar {
+  opacity: 1;
+}
