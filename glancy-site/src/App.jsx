@@ -51,12 +51,12 @@ function App() {
         (data.definitions && data.definitions.length > 0
           ? data.definitions.join('; ')
           : '')
-      const details = []
-      if (data.phonetic) details.push(`(${data.phonetic})`)
-      if (defs) details.push(defs)
-      if (data.example) details.push(`"${data.example}"`)
-      const output = details.join(' ')
-      setDisplay([data.term, output || t.noDefinition])
+      const lines = [data.term]
+      if (data.phonetic) lines.push(`(${data.phonetic})`)
+      if (defs) lines.push(defs)
+      else lines.push(t.noDefinition)
+      if (data.example) lines.push(`"${data.example}"`)
+      setDisplay(lines)
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
