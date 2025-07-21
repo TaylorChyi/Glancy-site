@@ -1,0 +1,83 @@
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.avatar-area {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.avatar-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.username-input {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.email-input {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  border: none;
+  background: none;
+}
+
+.basic {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+.basic .item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.save-btn {
+  background: var(--primary-bg);
+  color: var(--primary-color);
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+}
+
+.save-btn:hover {
+  opacity: 0.9;
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 1px solid var(--primary-bg);
+  color: var(--primary-bg);
+  padding: 6px 16px;
+  border-radius: 4px;
+}
+
+.cancel-btn:hover {
+  opacity: 0.8;
+}

@@ -39,6 +39,8 @@
   --border-color: #333;
   --text-muted: #aaa;
   --brand-color: orange;
+  --primary-bg: #f2f2f2;
+  --primary-color: #121212;
 }
 
 :root[data-theme='light'] {
@@ -58,6 +60,8 @@
   --border-color: #ccc;
   --text-muted: #aaa;
   --brand-color: orange;
+  --primary-bg: #121212;
+  --primary-color: #f2f2f2;
 }
 
 :root[data-theme='system'] {
