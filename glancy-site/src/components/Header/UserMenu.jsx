@@ -102,7 +102,8 @@ function UserMenu({ size = 24, showName = false }) {
                   <button
                     type="button"
                     onClick={() => {
-                      clearHistory(user)
+                      // keep search history on the server when logging out
+                      clearHistory()
                       clearUser()
                       setOpen(false)
                     }}
