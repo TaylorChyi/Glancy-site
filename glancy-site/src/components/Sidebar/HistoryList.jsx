@@ -36,15 +36,18 @@ function HistoryList({ onSelect }) {
     <div className="sidebar-section history-list" ref={listRef}>
       <ul>
         {history.map((h, i) => (
-          <li key={i}>
-            <span className="history-term" onClick={() => onSelect && onSelect(h)}>
+          <li key={i} onClick={() => onSelect && onSelect(h)}>
+            <span className="history-term">
               {h}
             </span>
             <div className="history-action-wrapper">
               <button
                 type="button"
                 className="history-action"
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setOpenIndex(openIndex === i ? null : i)
+                }}
               >
                 ⋮
               </button>
@@ -52,7 +55,8 @@ function HistoryList({ onSelect }) {
                 <div className="history-menu">
                   <button
                     type="button"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation()
                       favoriteHistory(h, user)
                       toggleFavorite(h)
                       setOpenIndex(null)
@@ -63,7 +67,8 @@ function HistoryList({ onSelect }) {
                   <button
                     type="button"
                     className="delete-btn"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation()
                       removeHistory(h, user)
                       setOpenIndex(null)
                     }}
