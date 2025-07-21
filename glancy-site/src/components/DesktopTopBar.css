@@ -20,6 +20,11 @@
   padding: 0 8px;
 }
 
+.back-btn {
+  width: 32px;
+  text-align: center;
+}
+
 .topbar-right {
   display: flex;
   align-items: center;
