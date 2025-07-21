@@ -45,7 +45,8 @@ function App() {
   const isMobile = useIsMobile()
 
   const handleToggleFavorites = () => {
-    setShowFavorites((v) => !v)
+    // always show favorites when invoked
+    setShowFavorites(true)
     setShowHistory(false)
   }
 
