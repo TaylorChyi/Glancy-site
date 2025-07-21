@@ -55,8 +55,14 @@ function UserMenu({ size = 24, showName = false }) {
         <>
           <button onClick={() => setOpen(!open)} className={showName ? 'with-name' : ''}>
             <Avatar width={size} height={size} />
-            {isPro && <ProTag />}
-            {showName && <span className="username">{username}</span>}
+            {showName ? (
+              <div className="info">
+                <span className="username">{username}</span>
+                {isPro && <ProTag />}
+              </div>
+            ) : (
+              isPro && <ProTag />
+            )}
           </button>
           {open && (
             <div className="menu">
