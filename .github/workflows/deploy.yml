@@ -23,6 +23,9 @@ jobs:
       - name: 构建项目
         run: npm run build
         working-directory: glancy-site
+      - name: 删除构建中的错误页面
+        run: rm -f dist/error.html
+        working-directory: glancy-site
       - name: 清理服务器目录
         uses: appleboy/ssh-action@v0.1.8
         with:
