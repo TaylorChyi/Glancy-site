@@ -46,7 +46,7 @@ function HistoryList({ onSelect }) {
                 >
                   ★ 收藏
                 </button>
-                <button type="button" onClick={() => { removeHistory(h); setOpenIndex(null) }}>
+                <button type="button" onClick={() => { removeHistory(h, user); setOpenIndex(null) }}>
                   删除
                 </button>
               </div>

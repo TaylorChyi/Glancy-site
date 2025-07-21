@@ -22,6 +22,12 @@ export const clearSearchRecords = ({ userId, token }) =>
     headers: { 'X-USER-TOKEN': token }
   })
 
+export const deleteSearchRecord = ({ userId, recordId, token }) =>
+  apiRequest(`${API_PATHS.searchRecords}/user/${userId}/${recordId}`, {
+    method: 'DELETE',
+    headers: { 'X-USER-TOKEN': token }
+  })
+
 export const favoriteSearchRecord = ({ userId, token, recordId }) =>
   apiRequest(
     `${API_PATHS.searchRecords}/user/${userId}/${recordId}/favorite`,

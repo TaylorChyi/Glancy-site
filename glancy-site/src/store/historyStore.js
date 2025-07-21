@@ -3,6 +3,7 @@ import {
   fetchSearchRecords,
   saveSearchRecord,
   clearSearchRecords,
+  deleteSearchRecord，
   favoriteSearchRecord
 } from '../api/searchRecords.js'
 
@@ -11,8 +12,10 @@ const STORAGE_KEY = 'searchHistory'
 export const useHistoryStore = create((set, get) => {
   const stored = localStorage.getItem(STORAGE_KEY)
   const initial = stored ? JSON.parse(stored) : []
+  const initialMap = {}
   return {
     history: initial,
+    recordMap: initialMap,
     recordMap: {},
     loadHistory: async (user) => {
       if (user) {
@@ -24,7 +27,7 @@ export const useHistoryStore = create((set, get) => {
           const terms = records.map((r) => r.term)
           const map = {}
           records.forEach((r) => {
-            map[r.term] = r.id
+            if (r.id) map[r.term] = r.id
           })
           localStorage.setItem(STORAGE_KEY, JSON.stringify(terms))
           set({ history: terms, recordMap: map })
@@ -57,7 +60,13 @@ export const useHistoryStore = create((set, get) => {
       localStorage.removeItem(STORAGE_KEY)
       set({ history: [], recordMap: {} })
     },
-    removeHistory: (term) => {
+    removeHistory: async (term, user) => {
+      if (user) {
+        const id = get().recordMap[term]
+        if (id) {
+          deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch(() => {})
+        }
+      }
       const updated = get().history.filter((t) => t !== term)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
       set((state) => {
