@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useUserStore } from '../store/userStore.js'
 import PaymentModal from './PaymentModal.jsx'
 import './UpgradeModal.css'
@@ -8,6 +8,12 @@ function UpgradeModal({ open, onClose }) {
   const currentPlan = user?.plan || 'free'
   const [selected, setSelected] = useState(currentPlan)
   const [payOpen, setPayOpen] = useState(false)
+
+  useEffect(() => {
+    if (open) {
+      setSelected(currentPlan)
+    }
+  }, [open, currentPlan])
 
   if (!open) return null
 
@@ -34,8 +40,8 @@ function UpgradeModal({ open, onClose }) {
           {plans.map((p) => (
             <div
               key={p.id}
-              className={`plan${p.id === currentPlan ? ' current' : ''}$
-                {selected === p.id ? ' selected' : ''}`}
+              className={`plan${p.id === currentPlan ? ' current' : ''}${
+                selected === p.id ? ' selected' : ''}`}
               onClick={() => setSelected(p.id)}
             >
               {p.label}
