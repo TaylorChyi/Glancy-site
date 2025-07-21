@@ -57,3 +57,7 @@
   text-align: left;
   cursor: pointer;
 }
+
+.more-menu .menu .icon {
+  margin-right: 4px;
+}
