@@ -67,17 +67,17 @@ function UserMenu({ size = 24, showName = false }) {
               <ul>
                 {!isPro && (
                   <li onClick={() => setUpgradeOpen(true)}>
-                    <span className="icon">💳</span>Upgrade
+                    <span className="icon">💳</span>{t.upgrade}
                   </li>
                 )}
                 <li onClick={() => setProfileOpen(true)}>
-                  <span className="icon">👤</span>Profile
+                  <span className="icon">👤</span>{t.profile}
                 </li>
                 <li onClick={() => setSettingsOpen(true)}>
-                  <span className="icon">⚙️</span>Settings
+                  <span className="icon">⚙️</span>{t.settings}
                 </li>
                 <li onClick={() => setShortcutsOpen(true)}>
-                  <span className="icon">⌨️</span>Shortcuts
+                  <span className="icon">⌨️</span>{t.shortcuts}
                 </li>
               </ul>
               <ul>
@@ -91,7 +91,7 @@ function UserMenu({ size = 24, showName = false }) {
                     }}
                     className="menu-btn"
                   >
-                    Help
+                    {t.help}
                   </button>
                 </li>
                 <li>
@@ -104,7 +104,7 @@ function UserMenu({ size = 24, showName = false }) {
                     }}
                     className="menu-btn"
                   >
-                    Log out
+                    {t.logout}
                   </button>
                 </li>
               </ul>

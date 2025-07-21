@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { useLanguage } from '../LanguageContext.jsx'
 import { Outlet } from 'react-router-dom'
 import './Layout.css'
 import Avatar from './Avatar.jsx'
@@ -7,6 +8,7 @@ import UserInfoCard from './UserInfoCard.jsx'
 function Layout() {
   const [hover, setHover] = useState(false)
   const fileRef = useRef(null)
+  const { t } = useLanguage()
   return (
     <div className="app-container">
       <aside className="sidebar">
@@ -39,7 +41,7 @@ function Layout() {
             <Avatar />
             <div className="change-avatar" onClick={() => fileRef.current && fileRef.current.click()}>
               <span style={{ fontSize: '16px' }}>📷</span>
-              <span>更换头像</span>
+              <span>{t.changeAvatar}</span>
               <input
                 ref={fileRef}
                 type="file"

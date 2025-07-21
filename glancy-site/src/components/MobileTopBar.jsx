@@ -18,7 +18,7 @@ function MobileTopBar({
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
   const { resolvedTheme } = useTheme()
-  const { lang } = useLanguage()
+  const { lang, t } = useLanguage()
   const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
 
   useEffect(() => {
@@ -66,10 +66,10 @@ function MobileTopBar({
           {open && (
             <div className="menu">
               <button type="button">
-                <span className="icon">🔗</span>Share
+                <span className="icon">🔗</span>{t.share}
               </button>
               <button type="button">
-                <span className="icon">🚩</span>Report
+                <span className="icon">🚩</span>{t.report}
               </button>
             </div>
           )}
