@@ -21,11 +21,11 @@
   top: 0;
   background: inherit;
   padding-bottom: 1rem;
-  cursor: pointer;
 }
 .brand-main {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .mobile-user-menu {
   display: none;
