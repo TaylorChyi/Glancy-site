@@ -41,6 +41,7 @@ function App() {
   const [showHistory, setShowHistory] = useState(false)
   const favorites = useFavoritesStore((s) => s.favorites)
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
+  const unfavoriteHistory = useHistoryStore((s) => s.unfavoriteHistory)
   const isMobile = useIsMobile()
 
   const handleToggleFavorites = () => {
@@ -51,6 +52,11 @@ function App() {
   const handleToggleHistory = () => {
     setShowHistory((v) => !v)
     setShowFavorites(false)
+  }
+
+  const handleUnfavorite = (term) => {
+    unfavoriteHistory(term, user)
+    toggleFavorite(term)
   }
 
   const handleSend = async (e) => {
@@ -169,7 +175,16 @@ function App() {
             favorites.length ? (
               <ul className="favorites-grid-display">
                 {favorites.map((w, i) => (
-                  <li key={i}>{w}</li>
+                  <li key={i} className="favorite-item">
+                    {w}
+                    <button
+                      type="button"
+                      className="unfavorite-btn"
+                      onClick={() => handleUnfavorite(w)}
+                    >
+                      ○
+                    </button>
+                  </li>
                 ))}
               </ul>
             ) : (

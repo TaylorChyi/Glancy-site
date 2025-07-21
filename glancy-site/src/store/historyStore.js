@@ -4,6 +4,8 @@ import {
   saveSearchRecord,
   clearSearchRecords,
   deleteSearchRecord,
+  favoriteSearchRecord,
+  unfavoriteSearchRecord,
   favoriteSearchRecord
 } from '../api/searchRecords.js'
 
@@ -74,11 +76,17 @@ export const useHistoryStore = create((set, get) => {
         return { history: updated, recordMap: map }
       })
     },
-    favoriteHistory: async (term, user) => {
-      const id = get().recordMap[term]
-      if (user && id) {
-        favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch(() => {})
+      favoriteHistory: async (term, user) => {
+        const id = get().recordMap[term]
+        if (user && id) {
+          favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch(() => {})
+        }
+      },
+      unfavoriteHistory: async (term, user) => {
+        const id = get().recordMap[term]
+        if (user && id) {
+          unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch(() => {})
+        }
       }
     }
-  }
-})
+  })

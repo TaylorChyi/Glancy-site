@@ -70,6 +70,13 @@ export default defineConfig({
 实际请求需在头部加入 `X-USER-TOKEN`。点击播放按钮访问
 `/api/words/audio?word=xxx` 播放语音。
 
+## Search Record Endpoints
+- `POST /api/search-records/user/{userId}` – add a new search record for the user
+- `GET /api/search-records/user/{userId}` – list search records of the user
+- `DELETE /api/search-records/user/{userId}` – clear all search records of the user
+- `DELETE /api/search-records/user/{userId}/{recordId}/favorite` – unfavorite a search record
+  以上接口均需在 `X-USER-TOKEN` 请求头中提供登录令牌
+
 ## 通知中心
 
 `/notifications` 页面通过 `GET /api/notifications` 获取通知列表，标记已读时调
