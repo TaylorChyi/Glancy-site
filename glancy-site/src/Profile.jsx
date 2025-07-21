@@ -79,6 +79,7 @@ function Profile({ onCancel }) {
           ) : (
             <Avatar width={100} height={100} style={{ borderRadius: '20px' }} />
           )}
+          <span className="avatar-hint">{t.avatarHint}</span>
           <input
             type="file"
             onChange={(e) => setAvatar(e.target.files[0])}
