@@ -4,7 +4,7 @@ import './DictionaryEntry.css'
 function DictionaryEntry({ entry }) {
   const { t } = useLanguage()
   if (!entry) return null
-  const { term, phonetic, language, definitions, example } = entry
+  const { phonetic, language, definitions, example } = entry
 
   const languageMap = {
     CHINESE: '中文',
@@ -15,10 +15,6 @@ function DictionaryEntry({ entry }) {
 
   return (
     <article className="dictionaryEntry">
-      <section className="termSection" aria-labelledby="term-title">
-        <h2 id="term-title" className="sectionTitle">【{t.termLabel}】</h2>
-        <p className="term">{term}</p>
-      </section>
       {phonetic && (
         <section className="phoneticSection" aria-labelledby="phon-title">
           <h2 id="phon-title" className="sectionTitle">【{t.phoneticLabel}】</h2>
