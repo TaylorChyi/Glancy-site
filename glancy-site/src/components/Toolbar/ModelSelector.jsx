@@ -2,7 +2,9 @@ import { useState } from 'react'
 import './Toolbar.css'
 
 function ModelSelector() {
-  const [model, setModel] = useState('model-a')
+  const [model, setModel] = useState(
+    () => localStorage.getItem('dictionaryModel') || 'model-a'
+  )
 
   return (
     <div className="toolbar-section">
