@@ -3,7 +3,7 @@ import {
   fetchSearchRecords,
   saveSearchRecord,
   clearSearchRecords,
-  deleteSearchRecord，
+  deleteSearchRecord,
   favoriteSearchRecord
 } from '../api/searchRecords.js'
 
@@ -16,7 +16,6 @@ export const useHistoryStore = create((set, get) => {
   return {
     history: initial,
     recordMap: initialMap,
-    recordMap: {},
     loadHistory: async (user) => {
       if (user) {
         try {
