@@ -1,167 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
-import { API_PATHS } from './config/api.js'
-import { apiRequest } from './api/client.js'
+import StatsPanel from './components/Portal/StatsPanel.jsx'
+import ConfigList from './components/Portal/ConfigList.jsx'
+import LogLevelSelector from './components/Portal/LogLevelSelector.jsx'
+import RecipientsList from './components/Portal/RecipientsList.jsx'
 
 function Portal() {
   const { t } = useLanguage()
-  const [stats, setStats] = useState({})
-  const [config, setConfig] = useState([])
-  const [configKey, setConfigKey] = useState('')
-  const [configValue, setConfigValue] = useState('')
-  const [logLevel, setLogLevel] = useState('info')
-  const [recipients, setRecipients] = useState([])
-  const [newRecipient, setNewRecipient] = useState('')
   const [error, setError] = useState('')
-
-  const loadStats = () => {
-    apiRequest(API_PATHS.stats)
-      .then((data) => setStats(data))
-      .catch(() => {})
-  }
-
-  const loadConfig = () => {
-    apiRequest(API_PATHS.config)
-      .then((data) => setConfig(Object.entries(data)))
-      .catch(() => {})
-  }
-
-  const loadLogLevel = () => {
-    apiRequest(API_PATHS.logLevel)
-      .then((data) => setLogLevel(data.level || 'info'))
-      .catch(() => {})
-  }
-
-  const loadRecipients = () => {
-    apiRequest(API_PATHS.alertsRecipients)
-      .then((data) => setRecipients(data))
-      .catch(() => {})
-  }
-
-  const addConfig = async (e) => {
-    e.preventDefault()
-    setError('')
-    try {
-      await apiRequest(API_PATHS.config, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: configKey, value: configValue })
-      })
-      setConfigKey('')
-      setConfigValue('')
-      loadConfig()
-    } catch (err) {
-      setError(err.message)
-    }
-  }
-
-  const updateLogLevel = async () => {
-    setError('')
-    try {
-      await apiRequest(API_PATHS.logLevel, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ level: logLevel })
-      })
-      loadLogLevel()
-    } catch (err) {
-      setError(err.message)
-    }
-  }
-
-  const addRecipient = async (e) => {
-    e.preventDefault()
-    setError('')
-    try {
-      await apiRequest(API_PATHS.alertsRecipients, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: newRecipient })
-      })
-      setNewRecipient('')
-      loadRecipients()
-    } catch (err) {
-      setError(err.message)
-    }
-  }
-
-  const deleteRecipient = async (email) => {
-    setError('')
-    try {
-      await apiRequest(`${API_PATHS.alertsRecipients}/${encodeURIComponent(email)}`, {
-        method: 'DELETE'
-      })
-      loadRecipients()
-    } catch (err) {
-      setError(err.message)
-    }
-  }
-
-  useEffect(() => {
-    loadStats()
-    loadConfig()
-    loadLogLevel()
-    loadRecipients()
-  }, [])
 
   return (
     <div className="App">
       <h2>{t.adminPortal}</h2>
       <p>{t.adminWelcome}</p>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <p>{t.totalUsers}: {stats.total}</p>
-      <p>{t.dailyActive}: {stats.daily}</p>
-      <h3>System Config</h3>
-      <ul>
-        {config.map(([k, v]) => (
-          <li key={k}>
-            {k}: {String(v)}
-          </li>
-        ))}
-      </ul>
-      <form onSubmit={addConfig}>
-        <input
-          placeholder="key"
-          value={configKey}
-          onChange={(e) => setConfigKey(e.target.value)}
-        />
-        <input
-          placeholder="value"
-          value={configValue}
-          onChange={(e) => setConfigValue(e.target.value)}
-        />
-        <button type="submit">{t.saveButton}</button>
-      </form>
-
-      <h3>Log Level</h3>
-      <select value={logLevel} onChange={(e) => setLogLevel(e.target.value)}>
-        <option value="debug">debug</option>
-        <option value="info">info</option>
-        <option value="warn">warn</option>
-        <option value="error">error</option>
-      </select>
-      <button onClick={updateLogLevel}>{t.saveButton}</button>
-
-      <h3>Email Recipients</h3>
-      <ul>
-        {recipients.map((r) => (
-          <li key={r}>
-            {r}
-            <button type="button" onClick={() => deleteRecipient(r)}>
-              {t.deleteButton}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <form onSubmit={addRecipient}>
-        <input
-          placeholder="email"
-          value={newRecipient}
-          onChange={(e) => setNewRecipient(e.target.value)}
-        />
-        <button type="submit">{t.saveButton}</button>
-      </form>
+      <StatsPanel onError={setError} />
+      <ConfigList onError={setError} />
+      <LogLevelSelector onError={setError} />
+      <RecipientsList onError={setError} />
     </div>
   )
 }
