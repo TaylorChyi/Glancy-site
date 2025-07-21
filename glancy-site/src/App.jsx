@@ -18,6 +18,7 @@ import Brand from './components/Brand.jsx'
 import SidebarFunctions from './components/Sidebar/SidebarFunctions.jsx'
 import SidebarUser from './components/Sidebar/SidebarUser.jsx'
 import MobileTopBar from './components/MobileTopBar.jsx'
+import DesktopTopBar from './components/DesktopTopBar.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
 import { useFavoritesStore } from './store/favoritesStore.js'
 
@@ -39,6 +40,7 @@ function App() {
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
   const [showFavorites, setShowFavorites] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
+  const [fromFavorites, setFromFavorites] = useState(false)
   const favorites = useFavoritesStore((s) => s.favorites)
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
   const unfavoriteHistory = useHistoryStore((s) => s.unfavoriteHistory)
@@ -48,16 +50,29 @@ function App() {
     // always show favorites when invoked
     setShowFavorites(true)
     setShowHistory(false)
+    setFromFavorites(false)
   }
 
   const handleToggleHistory = () => {
     setShowHistory((v) => !v)
     setShowFavorites(false)
+    setFromFavorites(false)
   }
 
   const handleUnfavorite = (term) => {
     unfavoriteHistory(term, user)
     toggleFavorite(term)
+  }
+
+  const handleSelectFavorite = async (term) => {
+    await handleSelectHistory(term)
+    setShowFavorites(false)
+    setFromFavorites(true)
+  }
+
+  const handleBackFromFavorite = () => {
+    setShowFavorites(true)
+    setFromFavorites(false)
   }
 
   const handleSend = async (e) => {
@@ -169,13 +184,19 @@ function App() {
         <SidebarUser />
       </aside>
       <div className="right">
-        {isMobile && (
+        {isMobile ? (
           <header className="topbar">
             <MobileTopBar
               onToggleFavorites={handleToggleFavorites}
               onToggleHistory={handleToggleHistory}
             />
           </header>
+        ) : (
+          <DesktopTopBar
+            term={entry?.term || ''}
+            showBack={!showFavorites && fromFavorites}
+            onBack={handleBackFromFavorite}
+          />
         )}
         <main className="display">
           {showFavorites ? (
@@ -183,7 +204,12 @@ function App() {
               <ul className="favorites-grid-display">
                 {favorites.map((w, i) => (
                   <li key={i} className="favorite-item">
-                    {w}
+                    <span
+                      className="favorite-term"
+                      onClick={() => handleSelectFavorite(w)}
+                    >
+                      {w}
+                    </span>
                     <button
                       type="button"
                       className="unfavorite-btn"
