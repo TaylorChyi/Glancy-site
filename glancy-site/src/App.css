@@ -138,3 +138,7 @@
     padding: 16px;
   }
 }
+
+.App h2 {
+  text-align: center;
+}
