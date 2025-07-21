@@ -100,7 +100,7 @@ function App() {
         token: user.token
       })
       setEntry(data)
-      addHistory(term, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
+      // selecting from history should not reorder records
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
