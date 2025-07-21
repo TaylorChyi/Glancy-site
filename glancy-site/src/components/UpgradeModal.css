@@ -36,8 +36,8 @@
 }
 
 .plan.selected {
-  border-color: var(--accent-color);
-  background: rgba(250, 204, 21, 0.2);
+  border-color: var(--sidebar-bg);
+  background: color-mix(in srgb, var(--sidebar-bg), transparent 80%);
 }
 
 .actions {
