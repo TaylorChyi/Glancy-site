@@ -10,3 +10,9 @@ export function extractMessage(text) {
   }
   return text
 }
+
+export function getModifierKey() {
+  const platform =
+    navigator.userAgentData?.platform || navigator.platform || ''
+  return /Mac|iPhone|iPod|iPad/i.test(platform) ? 'Command \u2318' : 'Ctrl \u2303'
+}
