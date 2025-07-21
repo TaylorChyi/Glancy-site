@@ -5,6 +5,7 @@ import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 import AuthModal from '../AuthModal.jsx'
+import HelpModal from '../HelpModal.jsx'
 import SettingsModal from '../SettingsModal.jsx'
 import ShortcutsModal from '../ShortcutsModal.jsx'
 import ProfileModal from '../ProfileModal.jsx'
@@ -14,6 +15,7 @@ import ProfileModal from '../ProfileModal.jsx'
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
@@ -66,7 +68,19 @@ function UserMenu({ size = 24, showName = false }) {
                 </li>
               </ul>
               <ul>
-                <li><span className="icon">❓</span>Help</li>
+                <li>
+                  <span className="icon">❓</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHelpOpen(true)
+                      setOpen(false)
+                    }}
+                    className="menu-btn"
+                  >
+                    Help
+                  </button>
+                </li>
                 <li>
                   <span className="icon">🔑</span>
                   <button
@@ -102,6 +116,7 @@ function UserMenu({ size = 24, showName = false }) {
           )}
         </div>
       )}
+      <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
       <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
       <ShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false) />
     </div>
