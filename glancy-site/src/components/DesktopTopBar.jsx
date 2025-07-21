@@ -54,8 +54,12 @@ function DesktopTopBar({
           </button>
           {open && (
             <div className="menu">
-              <button type="button">Share</button>
-              <button type="button">Report</button>
+              <button type="button">
+                <span className="icon">🔗</span>Share
+              </button>
+              <button type="button">
+                <span className="icon">🚩</span>Report
+              </button>
             </div>
           )}
         </div>
