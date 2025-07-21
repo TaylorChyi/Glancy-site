@@ -3,6 +3,7 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import { apiRequest } from './api/client.js'
 
 function Notifications() {
   const { t } = useLanguage()
@@ -11,8 +12,7 @@ function Notifications() {
   const [popupMsg, setPopupMsg] = useState('')
 
   const fetchData = () => {
-    fetch(API_PATHS.notifications)
-      .then((res) => res.json())
+    apiRequest(API_PATHS.notifications)
       .then((data) => setItems(data))
       .catch(() => {
         setPopupMsg('Failed to fetch notifications')
@@ -25,7 +25,7 @@ function Notifications() {
   }, [])
 
   const markRead = async (id) => {
-    await fetch(`${API_PATHS.notifications}/${id}`, { method: 'POST' })
+    await apiRequest(`${API_PATHS.notifications}/${id}`, { method: 'POST' })
     fetchData()
   }
 

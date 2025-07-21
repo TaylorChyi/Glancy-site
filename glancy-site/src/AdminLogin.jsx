@@ -4,7 +4,7 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
-import { extractMessage } from './utils.js'
+import { apiRequest } from './api/client.js'
 
 function AdminLogin() {
   const { t } = useLanguage()
@@ -18,16 +18,11 @@ function AdminLogin() {
     e.preventDefault()
     setPopupMsg('')
     try {
-      const resp = await fetch(API_PATHS.adminLogin, {
+      await apiRequest(API_PATHS.adminLogin, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
       })
-      if (!resp.ok) {
-        const text = await resp.text()
-        throw new Error(extractMessage(text) || t.loginButton + '失败')
-      }
-      await resp.json()
       setPopupMsg(t.loginButton + '成功')
       setPopupOpen(true)
       navigate('/portal')

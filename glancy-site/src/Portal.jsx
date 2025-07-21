@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
-import { extractMessage } from './utils.js'
+import { apiRequest } from './api/client.js'
 
 function Portal() {
   const { t } = useLanguage()
@@ -16,29 +16,25 @@ function Portal() {
   const [error, setError] = useState('')
 
   const loadStats = () => {
-    fetch(API_PATHS.stats)
-      .then((res) => res.json())
+    apiRequest(API_PATHS.stats)
       .then((data) => setStats(data))
       .catch(() => {})
   }
 
   const loadConfig = () => {
-    fetch(API_PATHS.config)
-      .then((res) => res.json())
+    apiRequest(API_PATHS.config)
       .then((data) => setConfig(Object.entries(data)))
       .catch(() => {})
   }
 
   const loadLogLevel = () => {
-    fetch(API_PATHS.logLevel)
-      .then((res) => res.json())
+    apiRequest(API_PATHS.logLevel)
       .then((data) => setLogLevel(data.level || 'info'))
       .catch(() => {})
   }
 
   const loadRecipients = () => {
-    fetch(API_PATHS.alertsRecipients)
-      .then((res) => res.json())
+    apiRequest(API_PATHS.alertsRecipients)
       .then((data) => setRecipients(data))
       .catch(() => {})
   }
@@ -47,16 +43,11 @@ function Portal() {
     e.preventDefault()
     setError('')
     try {
-      const resp = await fetch(API_PATHS.config, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key: configKey, value: configValue })
-    })
-      if (!resp.ok) {
-        const text = await resp.text()
-        setError(extractMessage(text) || 'Request failed')
-        return
-      }
+      await apiRequest(API_PATHS.config, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: configKey, value: configValue })
+      })
       setConfigKey('')
       setConfigValue('')
       loadConfig()
@@ -68,16 +59,11 @@ function Portal() {
   const updateLogLevel = async () => {
     setError('')
     try {
-      const resp = await fetch(API_PATHS.logLevel, {
+      await apiRequest(API_PATHS.logLevel, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ level: logLevel })
       })
-      if (!resp.ok) {
-        const text = await resp.text()
-        setError(extractMessage(text) || 'Request failed')
-        return
-      }
       loadLogLevel()
     } catch (err) {
       setError(err.message)
@@ -88,16 +74,11 @@ function Portal() {
     e.preventDefault()
     setError('')
     try {
-      const resp = await fetch(API_PATHS.alertsRecipients, {
+      await apiRequest(API_PATHS.alertsRecipients, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: newRecipient })
       })
-      if (!resp.ok) {
-        const text = await resp.text()
-        setError(extractMessage(text) || 'Request failed')
-        return
-      }
       setNewRecipient('')
       loadRecipients()
     } catch (err) {
@@ -108,14 +89,9 @@ function Portal() {
   const deleteRecipient = async (email) => {
     setError('')
     try {
-      const resp = await fetch(`${API_PATHS.alertsRecipients}/${encodeURIComponent(email)}`, {
+      await apiRequest(`${API_PATHS.alertsRecipients}/${encodeURIComponent(email)}`, {
         method: 'DELETE'
       })
-      if (!resp.ok) {
-        const text = await resp.text()
-        setError(extractMessage(text) || 'Request failed')
-        return
-      }
       loadRecipients()
     } catch (err) {
       setError(err.message)

@@ -3,6 +3,7 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import { apiRequest } from './api/client.js'
 
 function Profile() {
   const { t } = useLanguage()
@@ -12,8 +13,7 @@ function Profile() {
   const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
-    fetch(API_PATHS.profile)
-      .then((res) => res.json())
+    apiRequest(API_PATHS.profile)
       .then((data) => {
         setUsername(data.username)
         setAvatar(data.avatar)
@@ -28,17 +28,17 @@ function Profile() {
     if (avatar) {
       formData.append('avatar', avatar)
     }
-    const resp = await fetch(API_PATHS.profile, {
+    await apiRequest(API_PATHS.profile, {
       method: 'POST',
       body: formData
     })
-    setPopupMsg(resp.ok ? t.updateSuccess : t.submitFail)
+    setPopupMsg(t.updateSuccess)
     setPopupOpen(true)
   }
 
   const handleBind = async () => {
-    const resp = await fetch(API_PATHS.bindThirdParty)
-    setPopupMsg(resp.ok ? t.bindSuccess : t.submitFail)
+    await apiRequest(API_PATHS.bindThirdParty)
+    setPopupMsg(t.bindSuccess)
     setPopupOpen(true)
   }
 
