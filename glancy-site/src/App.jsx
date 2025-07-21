@@ -196,6 +196,10 @@ function App() {
             term={entry?.term || ''}
             showBack={!showFavorites && fromFavorites}
             onBack={handleBackFromFavorite}
+            favorited={favorites.includes(entry?.term)}
+            onToggleFavorite={() =>
+              entry && toggleFavorite(entry.term)
+            }
           />
         )}
         <main className="display">
@@ -230,12 +234,7 @@ function App() {
           ) : loading ? (
             '...'
           ) : entry ? (
-            <div className="result">
-              <DictionaryEntry entry={entry} />
-              <button className="favorite-toggle" onClick={() => toggleFavorite(entry.term)}>
-                {favorites.includes(entry.term) ? '★' : '☆'}
-              </button>
-            </div>
+            <DictionaryEntry entry={entry} />
           ) : (
             <div className="display-content">
               <div className="display-term">{placeholder}</div>

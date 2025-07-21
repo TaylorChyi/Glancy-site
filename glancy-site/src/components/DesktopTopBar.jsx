@@ -2,7 +2,13 @@ import { useState, useRef, useEffect } from 'react'
 import ModelSelector from './Toolbar/ModelSelector.jsx'
 import './DesktopTopBar.css'
 
-function DesktopTopBar({ term = '', showBack = false, onBack }) {
+function DesktopTopBar({
+  term = '',
+  showBack = false,
+  onBack,
+  favorited = false,
+  onToggleFavorite
+}) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
 
@@ -27,6 +33,13 @@ function DesktopTopBar({ term = '', showBack = false, onBack }) {
       )}
       <div className="term-text">{term}</div>
       <div className="topbar-right">
+        <button
+          type="button"
+          className="favorite-toggle"
+          onClick={onToggleFavorite}
+        >
+          {favorited ? '★' : '☆'}
+        </button>
         <ModelSelector />
         <div className="more-menu" ref={menuRef}>
           <button
