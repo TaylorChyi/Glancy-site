@@ -29,7 +29,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          script: find ${{ secrets.DEPLOY_PATH }} -mindepth 1 -not -name 'error.html' -exec rm -rf {} \;
+          script: rm -rf ${{ secrets.DEPLOY_PATH }}/*
       - name: 同步到服务器
         uses: appleboy/scp-action@v0.1.4
         with:
