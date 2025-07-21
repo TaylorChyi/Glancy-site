@@ -1,0 +1,45 @@
+.upgrade-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.upgrade-modal {
+  background: var(--app-bg);
+  color: var(--app-color);
+  padding: 20px;
+  border-radius: 8px;
+  width: 320px;
+  max-width: 90%;
+}
+
+.plans {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.plan {
+  padding: 0.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.plan.current {
+  border-color: var(--accent-color);
+}
+
+.plan.selected {
+  background: var(--sidebar-bg);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
