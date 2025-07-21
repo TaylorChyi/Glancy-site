@@ -5,12 +5,14 @@ import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 import AuthModal from '../AuthModal.jsx'
+import SettingsModal from '../SettingsModal.jsx'
 
 // size 控制触发按钮中头像的尺寸
 
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const clearUser = useUserStore((s) => s.clearUser)
@@ -50,7 +52,9 @@ function UserMenu({ size = 24, showName = false }) {
               </div>
               <ul>
                 <li><span className="icon">👤</span>Profile</li>
-                <li><span className="icon">⚙️</span>Settings</li>
+                <li onClick={() => setSettingsOpen(true)}>
+                  <span className="icon">⚙️</span>Settings
+                </li>
                 <li><span className="icon">⌨️</span>Shortcuts</li>
               </ul>
               <ul>
@@ -89,6 +93,7 @@ function UserMenu({ size = 24, showName = false }) {
           )}
         </div>
       )}
+      <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
   )
 }
