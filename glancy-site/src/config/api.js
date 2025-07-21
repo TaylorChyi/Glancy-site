@@ -12,7 +12,6 @@ export const API_PATHS = {
   profile: `${API_BASE}/users/profile`,
   preferences: `${API_BASE}/preferences`,
   contact: `${API_BASE}/contact`,
-  bindThirdParty: `${API_BASE}/bind/third-party`,
   faqs: `${API_BASE}/faqs`,
   searchRecords: `${API_BASE}/search-records`
 }
