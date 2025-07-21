@@ -4,6 +4,7 @@ import MessagePopup from './components/MessagePopup.jsx'
 import { useUserStore } from './store/userStore.js'
 import { useTheme } from './ThemeContext.jsx'
 import { translations } from './translations.js'
+import DictionaryEntry from './components/DictionaryEntry.jsx'
 import sendLight from './assets/send-button-light.svg'
 import sendDark from './assets/send-button-dark.svg'
 import voiceLight from './assets/voice-button-light.svg'
@@ -17,14 +18,15 @@ import SidebarUser from './components/Sidebar/SidebarUser.jsx'
 
 function App() {
   const [text, setText] = useState('')
-  const [display, setDisplay] = useState(['What are we querying next?'])
+  const [entry, setEntry] = useState(null)
+  const placeholder = 'What are we querying next?'
   const [loading, setLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
   const { theme, resolvedTheme, setTheme } = useTheme()
-  const { lang, t, setLang } = useLanguage()
+  const { lang, setLang } = useLanguage()
   const inputRef = useRef(null)
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
@@ -46,17 +48,7 @@ function App() {
         language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
         token: user.token
       })
-      const defs =
-        data.definition ||
-        (data.definitions && data.definitions.length > 0
-          ? data.definitions.join('; ')
-          : '')
-      const lines = [data.term]
-      if (data.phonetic) lines.push(`(${data.phonetic})`)
-      if (defs) lines.push(defs)
-      else lines.push(t.noDefinition)
-      if (data.example) lines.push(`"${data.example}"`)
-      setDisplay(lines)
+      setEntry(data)
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
@@ -115,16 +107,11 @@ function App() {
         <main className="display">
           {loading ? (
             '...'
+          ) : entry ? (
+            <DictionaryEntry entry={entry} />
           ) : (
             <div className="display-content">
-              {display.map((line, idx) => (
-                <div
-                  key={idx}
-                  className={idx === 0 ? 'display-term' : undefined}
-                >
-                  {line}
-                </div>
-              ))}
+              <div className="display-term">{placeholder}</div>
             </div>
           )}
         </main>

@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 20px;
   border-bottom: 1px solid #eee;
+  text-align: left; /* override container centering */
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 
@@ -14,15 +17,24 @@
 .termSection .sectionTitle {
   margin-top: 0;
 }
+.phoneticSection .sectionTitle {
+  margin: 8px 0 4px;
+}
+
+.termSection,
+.phoneticSection {
+  text-align: center;
+}
 
 .term {
-  font-size: 1.6em;
+  font-size: 1.8em;
   font-weight: bold;
   margin: 0;
 }
 
 .phonetic {
-  font-size: 0.9em;
+  font-size: 1em;
+  font-style: italic;
   color: #666;
   margin: 0;
 }
@@ -42,6 +54,7 @@
 
 .definitions li {
   margin-bottom: 0.6em;
+  font-size: 1em;
 }
 
 .example blockquote {
@@ -50,6 +63,7 @@
   border-left: 3px solid #ddd;
   font-style: italic;
   color: #555;
+  font-size: 1em;
 }
 
 .noDefinition {
