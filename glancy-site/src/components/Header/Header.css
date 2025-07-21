@@ -102,6 +102,12 @@
   }
 }
 
+/* ensure dropdown opens downward in mobile top bar */
+.topbar-btn .user-menu .menu {
+  top: calc(100% + 0.5rem);
+  bottom: auto;
+}
+
 .app-header {
   display: flex;
   justify-content: space-between;
