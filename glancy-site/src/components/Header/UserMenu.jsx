@@ -6,6 +6,7 @@ import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 import AuthModal from '../AuthModal.jsx'
 import ShortcutsModal from '../ShortcutsModal.jsx'
+import ProfileModal from '../ProfileModal.jsx'
 
 // size 控制触发按钮中头像的尺寸
 
@@ -13,6 +14,7 @@ function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const clearUser = useUserStore((s) => s.clearUser)
@@ -51,7 +53,7 @@ function UserMenu({ size = 24, showName = false }) {
                 <div className="username">{username}</div>
               </div>
               <ul>
-                <li><span className="icon">👤</span>Profile</li>
+                <li onClick={() => setProfileOpen(true)}><span className="icon">👤</span>Profile</li>
                 <li><span className="icon">⚙️</span>Settings</li>
                 <li onClick={() => setShortcutsOpen(true)}>
                   <span className="icon">⌨️</span>Shortcuts
@@ -75,6 +77,7 @@ function UserMenu({ size = 24, showName = false }) {
               </ul>
             </div>
           )}
+          <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
         </>
       ) : (
         <div className={showName ? 'with-name' : ''}>
