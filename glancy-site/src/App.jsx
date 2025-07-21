@@ -16,6 +16,7 @@ import './App.css'
 import Brand from './components/Brand.jsx'
 import SidebarFunctions from './components/Sidebar/SidebarFunctions.jsx'
 import SidebarUser from './components/Sidebar/SidebarUser.jsx'
+import { useFavoritesStore } from "./store/favoritesStore.js"
 
 function App() {
   const [text, setText] = useState('')
@@ -28,10 +29,13 @@ function App() {
   const user = useUserStore((s) => s.user)
   const loadHistory = useHistoryStore((s) => s.loadHistory)
   const { theme, resolvedTheme, setTheme } = useTheme()
-  const { lang, setLang } = useLanguage()
+  const { t, lang, setLang } = useLanguage()
   const inputRef = useRef(null)
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
   const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
+  const [showFavorites, setShowFavorites] = useState(false)
+  const favorites = useFavoritesStore((s) => s.favorites)
+  const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
 
   const handleSend = async (e) => {
     e.preventDefault()
@@ -105,16 +109,33 @@ function App() {
     <div className="container">
       <aside className="sidebar">
         <Brand />
-        <SidebarFunctions />
+        <SidebarFunctions onToggleFavorites={setShowFavorites} />
         <SidebarUser />
       </aside>
       <div className="right">
         <header className="topbar"></header>
         <main className="display">
-          {loading ? (
+          {showFavorites ? (
+            favorites.length ? (
+              <ul className="favorites-grid-display">
+                {favorites.map((w, i) => (
+                  <li key={i}>{w}</li>
+                ))}
+              </ul>
+            ) : (
+              <div className="display-content">
+                <div className="display-term">{t.noFavorites || 'No favorites'}</div>
+              </div>
+            )
+          ) : loading ? (
             '...'
           ) : entry ? (
-            <DictionaryEntry entry={entry} />
+            <div className="result">
+              <DictionaryEntry entry={entry} />
+              <button className="favorite-toggle" onClick={() => toggleFavorite(entry.term)}>
+                {favorites.includes(entry.term) ? '★' : '☆'}
+              </button>
+            </div>
           ) : (
             <div className="display-content">
               <div className="display-term">{placeholder}</div>
