@@ -31,13 +31,16 @@
   cursor: pointer;
 }
 
+
 .plan.current {
-  border-color: var(--accent-color);
+  /* highlight current plan using system black */
+  border-color: #000;
 }
 
 .plan.selected {
-  border-color: var(--sidebar-bg);
-  background: color-mix(in srgb, var(--sidebar-bg), transparent 80%);
+  /* highlight selected plan with transparent system black */
+  border-color: #000;
+  background: color-mix(in srgb, #000, transparent 80%);
 }
 
 .actions {
