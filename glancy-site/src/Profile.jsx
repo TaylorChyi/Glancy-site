@@ -6,11 +6,13 @@ import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
+import { useUserStore } from './store/userStore.js'
 
 function Profile({ onCancel }) {
   const { t } = useLanguage()
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
+  const currentUser = useUserStore((s) => s.user)
+  const [username, setUsername] = useState(currentUser?.username || '')
+  const [email, setEmail] = useState(currentUser?.email || '')
   const [age, setAge] = useState('')
   const [gender, setGender] = useState('')
   const [interests, setInterests] = useState('')
