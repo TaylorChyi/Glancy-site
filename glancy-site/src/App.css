@@ -172,6 +172,10 @@
   color: var(--app-color);
 }
 
+.favorite-term {
+  cursor: pointer;
+}
+
 .unfavorite-btn {
   background: none;
   border: 1px solid currentColor;
