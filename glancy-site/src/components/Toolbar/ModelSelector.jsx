@@ -1,25 +1,52 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './Toolbar.css'
 import { useLanguage } from '../../LanguageContext.jsx'
 
 function ModelSelector() {
+  const [open, setOpen] = useState(false)
   const [model, setModel] = useState(
     () => localStorage.getItem('dictionaryModel') || 'model-a'
   )
+  const menuRef = useRef(null)
   const { t } = useLanguage()
 
-  const handleChange = (e) => {
-    const value = e.target.value
+  useEffect(() => {
+    function handlePointerDown(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    if (open) {
+      document.addEventListener('pointerdown', handlePointerDown)
+    }
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [open])
+
+  const selectModel = (value) => {
     setModel(value)
     localStorage.setItem('dictionaryModel', value)
+    setOpen(false)
   }
 
   return (
-    <div className="toolbar-section">
-      <select value={model} onChange={handleChange}>
-        <option value="model-a">{t.modelA}</option>
-        <option value="model-b">{t.modelB}</option>
-      </select>
+    <div className="toolbar-section model-selector" ref={menuRef}>
+      <button
+        type="button"
+        className="model-btn"
+        onClick={() => setOpen(!open)}
+      >
+        {model === 'model-a' ? t.modelA : t.modelB} ▾
+      </button>
+      {open && (
+        <div className="model-menu">
+          <button type="button" onClick={() => selectModel('model-a')}>
+            {t.modelA}
+          </button>
+          <button type="button" onClick={() => selectModel('model-b')}>
+            {t.modelB}
+          </button>
+        </div>
+      )}
     </div>
   )
 }
