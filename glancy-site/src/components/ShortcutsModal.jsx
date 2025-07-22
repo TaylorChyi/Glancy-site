@@ -11,6 +11,7 @@ function ShortcutsModal({ open, onClose }) {
     { keys: `${mod} + Shift + F`, action: t.shortcutsFocusSearch },
     { keys: `${mod} + Shift + L`, action: t.shortcutsSwitchLanguage },
     { keys: `${mod} + Shift + M`, action: t.shortcutsToggleTheme },
+    { keys: `${mod} + Shift + B`, action: t.shortcutsToggleFavorite },
     { keys: `${mod} + Shift + K`, action: t.shortcutsOpenHelp },
   ]
 
