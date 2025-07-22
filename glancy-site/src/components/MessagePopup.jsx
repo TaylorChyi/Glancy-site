@@ -1,6 +1,16 @@
+import { useEffect } from 'react'
 import './MessagePopup.css'
 
 function MessagePopup({ open, message, onClose }) {
+  useEffect(() => {
+    if (!open) return undefined
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [open, onClose])
+
   if (!open) return null
   return (
     <div className="popup-overlay" onClick={onClose}>
