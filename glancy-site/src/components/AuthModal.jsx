@@ -3,10 +3,12 @@ import './AuthModal.css'
 import { useLanguage } from '../LanguageContext.jsx'
 import Login from '../Login.jsx'
 import Register from '../Register.jsx'
+import { useUserStore } from '../store/userStore.js'
 
 function AuthModal({ open, onClose }) {
   const { t } = useLanguage()
-  const [tab, setTab] = useState('register')
+  const currentUser = useUserStore((s) => s.user)
+  const [tab, setTab] = useState(currentUser ? 'login' : 'register')
   if (!open) return null
   return (
     <div className="auth-modal-overlay" onClick={onClose}>
