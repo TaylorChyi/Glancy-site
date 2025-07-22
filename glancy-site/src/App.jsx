@@ -154,6 +154,12 @@ function App() {
             setTheme(seq[theme] || 'light')
           }
           break
+        case 'b':
+          e.preventDefault()
+          if (entry && !showFavorites && !showHistory) {
+            toggleFavorite(entry.term)
+          }
+          break
         case 'k':
           e.preventDefault()
           document.dispatchEvent(new Event('open-shortcuts'))
