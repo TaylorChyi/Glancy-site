@@ -34,7 +34,7 @@
   color: var(--app-color);
   border-radius: 24px;
   font-size: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .auth-form {
@@ -53,7 +53,7 @@
   padding: 12px 16px;
   font-size: 16px;
   cursor: pointer;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 :root[data-theme='dark'] .auth-primary-btn {
@@ -159,7 +159,7 @@
   width: 100%;
   max-width: 360px;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .password-row .auth-input {
