@@ -75,7 +75,7 @@
   margin-bottom: 24px;
 }
 .auth-switch a {
-  color: #5d5fef;
+  color: var(--highlight-color);
   text-decoration: none;
 }
 .divider {
@@ -207,7 +207,7 @@
   margin-bottom: 4px;
 }
 .footer-links a {
-  color: #5d5fef;
+  color: var(--highlight-color);
   text-decoration: none;
   margin: 0 4px;
 }
