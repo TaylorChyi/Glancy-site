@@ -5,7 +5,7 @@ import { useLanguage } from '../../LanguageContext.jsx'
 import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
-import AuthModal from '../AuthModal.jsx'
+import { Link } from 'react-router-dom'
 import HelpModal from '../HelpModal.jsx'
 import SettingsModal from '../SettingsModal.jsx'
 import ShortcutsModal from '../ShortcutsModal.jsx'
@@ -16,7 +16,6 @@ import UpgradeModal from '../UpgradeModal.jsx'
 
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
@@ -133,16 +132,9 @@ function UserMenu({ size = 24, showName = false }) {
         <div className={showName ? 'with-name' : ''}>
           <Avatar width={size} height={size} />
           {showName && (
-            <>
-              <button
-                type="button"
-                onClick={() => setModalOpen(true)}
-                className="username login-btn"
-              >
-                {t.navRegister}/{t.navLogin}
-              </button>
-              <AuthModal open={modalOpen} onClose={() => setModalOpen(false)} />
-            </>
+            <Link to="/login" className="username login-btn">
+              {t.navRegister}/{t.navLogin}
+            </Link>
           )}
         </div>
       )}
