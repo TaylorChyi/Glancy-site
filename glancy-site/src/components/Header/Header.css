@@ -146,13 +146,20 @@
 }
 
 .login-btn {
-  background: none;
+  display: inline-block;
+  background: var(--primary-bg);
+  color: var(--primary-color);
   border: none;
-  padding: 0;
+  padding: 4px 12px;
   margin: 0;
-  color: inherit;
   font: inherit;
   cursor: pointer;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
 }
 
 .menu-btn {
