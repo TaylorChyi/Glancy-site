@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CodeButton from './components/CodeButton.jsx'
+import PhoneInput from './components/PhoneInput.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
@@ -60,12 +61,16 @@ function Login() {
     if (!formMethods.includes(method)) return null
     return (
       <form onSubmit={handleSubmit} className="auth-form">
-        <input
-          className="auth-input"
-          placeholder={placeholders[method]}
-          value={account}
-          onChange={(e) => setAccount(e.target.value)}
-        />
+        {method === 'phone' ? (
+          <PhoneInput value={account} onChange={setAccount} />
+        ) : (
+          <input
+            className="auth-input"
+            placeholder={placeholders[method]}
+            value={account}
+            onChange={(e) => setAccount(e.target.value)}
+          />
+        )}
         <div className="password-row">
           <input
             className="auth-input"
