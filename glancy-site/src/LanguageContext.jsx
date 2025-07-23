@@ -10,15 +10,18 @@ const LanguageContext = createContext({
 })
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState('zh')
-  const [t, setT] = useState(translations.zh)
+  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'zh')
+  const [t, setT] = useState(() => translations[localStorage.getItem('lang')] || translations.zh)
 
   useEffect(() => {
+    const stored = localStorage.getItem('lang')
+    if (stored) return
     apiRequest(API_PATHS.locale)
       .then((data) => {
         if (translations[data.lang]) {
           setLang(data.lang)
           setT(translations[data.lang])
+          localStorage.setItem('lang', data.lang)
         }
       })
       .catch(() => {})
@@ -33,6 +36,7 @@ export function LanguageProvider({ children }) {
     if (translations[l]) {
       setLang(l)
       setT(translations[l])
+      localStorage.setItem('lang', l)
     }
   }
 
