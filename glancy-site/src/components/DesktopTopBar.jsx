@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import ModelSelector from './Toolbar/ModelSelector.jsx'
 import './DesktopTopBar.css'
+import './Header/Header.css'
 import { useLanguage } from '../LanguageContext.jsx'
+import { useUserStore } from '../store/userStore.js'
+import { Link } from 'react-router-dom'
 
 function DesktopTopBar({
   term = '',
@@ -14,6 +17,7 @@ function DesktopTopBar({
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
   const { t } = useLanguage()
+  const user = useUserStore((s) => s.user)
 
   useEffect(() => {
     function handlePointerDown(e) {
@@ -51,26 +55,34 @@ function DesktopTopBar({
             {favorited ? '★' : '☆'}
           </button>
         )}
-        <ModelSelector />
-        <div className="more-menu" ref={menuRef}>
-          <button
-            type="button"
-            className="more-btn"
-            onClick={() => setOpen(!open)}
-          >
-            ⋮
-          </button>
-          {open && (
-            <div className="menu">
-              <button type="button">
-                <span className="icon">🔗</span>{t.share}
+        {user ? (
+          <>
+            <ModelSelector />
+            <div className="more-menu" ref={menuRef}>
+              <button
+                type="button"
+                className="more-btn"
+                onClick={() => setOpen(!open)}
+              >
+                ⋮
               </button>
-              <button type="button">
-                <span className="icon">🚩</span>{t.report}
-              </button>
+              {open && (
+                <div className="menu">
+                  <button type="button">
+                    <span className="icon">🔗</span>{t.share}
+                  </button>
+                  <button type="button">
+                    <span className="icon">🚩</span>{t.report}
+                  </button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </>
+        ) : (
+          <Link to="/login" className="login-btn">
+            {t.navRegister}/{t.navLogin}
+          </Link>
+        )}
       </div>
     </header>
   )
