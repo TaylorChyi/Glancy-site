@@ -1,9 +1,13 @@
 .auth-page {
-  max-width: 360px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
   padding: 40px 20px;
   font-family: system-ui, Arial, sans-serif;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .auth-logo {
   width: 48px;

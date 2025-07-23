@@ -87,7 +87,7 @@ function MobileTopBar({
             </div>
           </>
         ) : (
-          <Link to="/auth" className="login-btn">
+          <Link to="/login" className="login-btn">
             {t.navRegister}/{t.navLogin}
           </Link>
         )}

@@ -75,7 +75,7 @@ function App() {
   const handleSend = async (e) => {
     e.preventDefault()
     if (!user) {
-      navigate('/auth?tab=login')
+      navigate('/login')
       return
     }
     if (!text.trim()) return
@@ -104,7 +104,7 @@ function App() {
 
   const handleSelectHistory = async (term) => {
     if (!user) {
-      navigate('/auth?tab=login')
+      navigate('/login')
       return
     }
     // hide favorites or history display when showing a selected entry
