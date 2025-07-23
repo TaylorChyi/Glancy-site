@@ -4,6 +4,8 @@ import { useLanguage } from '../LanguageContext.jsx'
 import lightIcon from '../assets/glancy-light.svg'
 import darkIcon from '../assets/glancy-dark.svg'
 import ModelSelector from './Toolbar/ModelSelector.jsx'
+import { Link } from 'react-router-dom'
+import { useUserStore } from '../store/userStore.js'
 import './MobileTopBar.css'
 
 function MobileTopBar({
@@ -20,6 +22,7 @@ function MobileTopBar({
   const { resolvedTheme } = useTheme()
   const { lang, t } = useLanguage()
   const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
+  const user = useUserStore((s) => s.user)
 
   useEffect(() => {
     function handlePointerDown(e) {
@@ -60,26 +63,34 @@ function MobileTopBar({
             {favorited ? '★' : '☆'}
           </button>
         )}
-        <ModelSelector />
-        <div className="more-menu" ref={menuRef}>
-          <button
-            type="button"
-            className="more-btn"
-            onClick={() => setOpen(!open)}
-          >
-            ⋮
-          </button>
-          {open && (
-            <div className="menu">
-              <button type="button">
-                <span className="icon">🔗</span>{t.share}
+        {user ? (
+          <>
+            <ModelSelector />
+            <div className="more-menu" ref={menuRef}>
+              <button
+                type="button"
+                className="more-btn"
+                onClick={() => setOpen(!open)}
+              >
+                ⋮
               </button>
-              <button type="button">
-                <span className="icon">🚩</span>{t.report}
-              </button>
+              {open && (
+                <div className="menu">
+                  <button type="button">
+                    <span className="icon">🔗</span>{t.share}
+                  </button>
+                  <button type="button">
+                    <span className="icon">🚩</span>{t.report}
+                  </button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </>
+        ) : (
+          <Link to="/auth" className="login-btn">
+            {t.navRegister}/{t.navLogin}
+          </Link>
+        )}
       </div>
     </>
   )
