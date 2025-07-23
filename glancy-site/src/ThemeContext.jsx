@@ -9,15 +9,15 @@ const ThemeContext = createContext({
 })
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('system')
-  const [resolvedTheme, setResolvedTheme] = useState('light')
-
-  useEffect(() => {
-    const stored = localStorage.getItem('theme')
-    if (stored) {
-      setTheme(stored)
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'system')
+  const [resolvedTheme, setResolvedTheme] = useState(() => {
+    const stored = localStorage.getItem('theme') || 'system'
+    if (stored === 'system') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
-  }, [])
+    return stored
+  })
+
 
   useEffect(() => {
     localStorage.setItem('theme', theme)
