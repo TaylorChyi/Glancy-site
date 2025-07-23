@@ -11,12 +11,15 @@ body {
 }
 
 .sidebar {
+  position: relative;
   width: 260px;
   background-color: var(--sidebar-bg);
   color: var(--sidebar-color);
   display: flex;
   flex-direction: column;
   padding: 20px;
+  min-width: 15%;
+  max-width: 30%;
 }
 
 .sidebar h2 {
@@ -134,4 +137,20 @@ body {
 }
 .avatar-wrapper:hover .avatar {
   transform: scale(1.1);
+}
+
+.sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  cursor: ew-resize;
+  background-color: var(--border-color);
+}
+
+@media (max-width: 600px) {
+  .sidebar-resizer {
+    display: none;
+  }
 }

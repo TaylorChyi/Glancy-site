@@ -7,11 +7,34 @@ import UserInfoCard from './UserInfoCard.jsx'
 
 function Layout() {
   const [hover, setHover] = useState(false)
+  const [sidebarWidth, setSidebarWidth] = useState(260)
   const fileRef = useRef(null)
   const { t } = useLanguage()
+
+  const handleMouseDown = (e) => {
+    if (window.innerWidth <= 600) return
+    const startX = e.clientX
+    const startWidth = sidebarWidth
+    const onMove = (ev) => {
+      const dx = ev.clientX - startX
+      const min = window.innerWidth * 0.15
+      const max = window.innerWidth * 0.3
+      let width = startWidth + dx
+      if (width < min) width = min
+      if (width > max) width = max
+      setSidebarWidth(width)
+    }
+    const onUp = () => {
+      document.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseup', onUp)
+    }
+    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseup', onUp)
+  }
+
   return (
     <div className="app-container">
-      <aside className="sidebar">
+      <aside className="sidebar" style={{ width: sidebarWidth }}>
         <h2>ChatGPT 4o</h2>
         <button>New chat</button>
         <button>Search chats</button>
@@ -30,6 +53,7 @@ function Layout() {
         <button>Spring Security Lambda DSL</button>
         <button>GitHub Action 失败邮件</button>
         <button>斜视视野与成像</button>
+        <div className="sidebar-resizer" onMouseDown={handleMouseDown} />
       </aside>
       <main className="main">
         <div
