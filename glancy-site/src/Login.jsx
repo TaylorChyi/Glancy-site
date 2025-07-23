@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import CodeButton from './components/CodeButton.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
@@ -75,13 +76,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
           {method !== 'username' && (
-            <button
-              type="button"
-              className="code-btn"
-              onClick={handleSendCode}
-            >
-              Get code
-            </button>
+            <CodeButton onClick={handleSendCode} />
           )}
         </div>
         <button type="submit" className="auth-primary-btn">Continue</button>
