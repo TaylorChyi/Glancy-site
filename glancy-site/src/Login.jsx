@@ -1,17 +1,19 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './App.css'
-import { useLanguage } from './LanguageContext.jsx'
+import { useNavigate, Link } from 'react-router-dom'
+import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
 import { useUserStore } from './store/userStore.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
+import googleIcon from './assets/google.svg'
+import microsoftIcon from './assets/microsoft.svg'
+import appleIcon from './assets/apple.svg'
+import phoneIcon from './assets/phone.svg'
+import wechatIcon from './assets/wechat.svg'
 
 function Login() {
-  const { t } = useLanguage()
   const setUser = useUserStore((s) => s.setUser)
   const [account, setAccount] = useState('')
-  const [password, setPassword] = useState('')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
@@ -23,7 +25,7 @@ function Login() {
       const data = await apiRequest(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ account, password })
+        body: JSON.stringify({ account })
       })
       setUser(data)
       navigate(0)
@@ -34,32 +36,56 @@ function Login() {
   }
 
   return (
-    <div className="App">
+    <div className="auth-page">
+      <div className="auth-brand">Glancy</div>
+      <h1 className="auth-title">Welcome back</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="account">{t.account}</label>
-          <input
-            id="account"
-            value={account}
-            onChange={(e) => setAccount(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">{t.password}</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">{t.loginButton}</button>
-        <MessagePopup
-          open={popupOpen}
-          message={popupMsg}
-          onClose={() => setPopupOpen(false)}
+        <input
+          className="auth-input"
+          placeholder="Email address"
+          value={account}
+          onChange={(e) => setAccount(e.target.value)}
         />
+        <button type="submit" className="auth-primary-btn">
+          Continue
+        </button>
       </form>
+      <div className="auth-switch">
+        Don’t have an account? <Link to="/register">Sign up</Link>
+      </div>
+      <div className="divider">
+        <span>OR</span>
+      </div>
+      <div className="oauth-buttons">
+        <button type="button">
+          <img src={googleIcon} alt="Google" />
+          Continue with Google
+        </button>
+        <button type="button">
+          <img src={microsoftIcon} alt="Microsoft" />
+          Continue with Microsoft Account
+        </button>
+        <button type="button">
+          <img src={appleIcon} alt="Apple" />
+          Continue with Apple
+        </button>
+        <button type="button">
+          <img src={phoneIcon} alt="Phone" />
+          Continue with phone
+        </button>
+        <button type="button">
+          <img src={wechatIcon} alt="WeChat" />
+          Continue with WeChat
+        </button>
+      </div>
+      <div className="footer-links">
+        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+      </div>
+      <MessagePopup
+        open={popupOpen}
+        message={popupMsg}
+        onClose={() => setPopupOpen(false)}
+      />
     </div>
   )
 }
