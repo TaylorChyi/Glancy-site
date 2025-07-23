@@ -142,11 +142,12 @@ body {
 .sidebar-resizer {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 4px;
+  right: -4px;
+  width: 8px;
   height: 100%;
   cursor: ew-resize;
   background-color: var(--border-color);
+  z-index: 10;
 }
 
 @media (max-width: 600px) {
