@@ -9,6 +9,9 @@ import googleIcon from './assets/google.svg'
 import appleIcon from './assets/apple.svg'
 import phoneIcon from './assets/phone.svg'
 import wechatIcon from './assets/wechat.svg'
+import lightIcon from './assets/glancy-light.svg'
+import darkIcon from './assets/glancy-dark.svg'
+import { useTheme } from './ThemeContext.jsx'
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -16,6 +19,8 @@ function Register() {
   const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
   const setUser = useUserStore((s) => s.setUser)
+  const { resolvedTheme } = useTheme()
+  const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,6 +48,7 @@ function Register() {
 
   return (
     <div className="auth-page">
+      <img className="auth-logo" src={icon} alt="Glancy" />
       <div className="auth-brand">Glancy</div>
       <h1 className="auth-title">Create an account</h1>
       <form onSubmit={handleSubmit}>
