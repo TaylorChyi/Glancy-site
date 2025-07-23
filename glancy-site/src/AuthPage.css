@@ -27,13 +27,27 @@
 .auth-primary-btn {
   width: 100%;
   background: var(--primary-bg);
-  color: var(--primary-color);
+  color: #000;
   border: none;
   border-radius: 24px;
   padding: 12px 16px;
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 16px;
+}
+
+:root[data-theme='dark'] .auth-primary-btn {
+  color: #fff;
+}
+
+:root[data-theme='system'] .auth-primary-btn {
+  color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='system'] .auth-primary-btn {
+    color: #fff;
+  }
 }
 .auth-switch {
   color: #666;
