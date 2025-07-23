@@ -84,7 +84,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  justify-content: center;
+  justify-content: flex-start;
+  text-align: left;
   width: 100%;
   background: #fff;
   border: 1px solid #e0e0e0;
@@ -94,8 +95,8 @@
   cursor: pointer;
 }
 .oauth-buttons img {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 .footer-links {
   margin-top: 24px;
