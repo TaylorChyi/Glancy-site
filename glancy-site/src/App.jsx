@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useHistoryStore } from './store/historyStore.js'
-import AuthModal from './components/AuthModal.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useUserStore } from './store/userStore.js'
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from './ThemeContext.jsx'
 import { translations } from './translations.js'
 import DictionaryEntry from './components/DictionaryEntry.jsx'
@@ -28,7 +28,6 @@ function App() {
   const { t, lang, setLang } = useLanguage()
   const placeholder = t.searchPlaceholder
   const [loading, setLoading] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const user = useUserStore((s) => s.user)
@@ -46,6 +45,7 @@ function App() {
   const unfavoriteHistory = useHistoryStore((s) => s.unfavoriteHistory)
   const isMobile = useIsMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const navigate = useNavigate()
 
   const handleToggleFavorites = () => {
     // always show favorites when invoked
@@ -75,7 +75,7 @@ function App() {
   const handleSend = async (e) => {
     e.preventDefault()
     if (!user) {
-      setModalOpen(true)
+      navigate('/login')
       return
     }
     if (!text.trim()) return
@@ -104,7 +104,7 @@ function App() {
 
   const handleSelectHistory = async (term) => {
     if (!user) {
-      setModalOpen(true)
+      navigate('/login')
       return
     }
     // hide favorites or history display when showing a selected entry
@@ -288,7 +288,6 @@ function App() {
           </a>
         </div>
       </div>
-      <AuthModal open={modalOpen} onClose={() => setModalOpen(false)} />
       <MessagePopup
         open={popupOpen}
         message={popupMsg}
