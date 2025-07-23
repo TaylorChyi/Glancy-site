@@ -48,6 +48,7 @@ function Register() {
 
   return (
     <div className="auth-page">
+      <Link to="/" className="auth-close">×</Link>
       <img className="auth-logo" src={icon} alt="Glancy" />
       <div className="auth-brand">Glancy</div>
       <h1 className="auth-title">Create an account</h1>

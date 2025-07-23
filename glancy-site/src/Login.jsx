@@ -101,6 +101,7 @@ function Login() {
 
   return (
     <div className="auth-page">
+      <Link to="/" className="auth-close">×</Link>
       <img className="auth-logo" src={icon} alt="Glancy" />
       <div className="auth-brand">Glancy</div>
       <h1 className="auth-title">Welcome back</h1>
