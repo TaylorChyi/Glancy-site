@@ -83,6 +83,11 @@ function Register() {
       <div className="footer-links">
         <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
       </div>
+      <div className="icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+          京ICP备2025135702号-1
+        </a>
+      </div>
       <MessagePopup
         open={popupOpen}
         message={popupMsg}
