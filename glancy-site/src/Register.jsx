@@ -51,7 +51,7 @@ function Register() {
       <img className="auth-logo" src={icon} alt="Glancy" />
       <div className="auth-brand">Glancy</div>
       <h1 className="auth-title">Create an account</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="auth-form">
         <input
           className="auth-input"
           placeholder="Email address"
@@ -86,13 +86,15 @@ function Register() {
           Continue with WeChat
         </button>
       </div>
-      <div className="footer-links">
-        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
-      </div>
-      <div className="icp">
-        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
-          京ICP备2025135702号-1
-        </a>
+      <div className="auth-footer">
+        <div className="footer-links">
+          <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+        </div>
+        <div className="icp">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+            京ICP备2025135702号-1
+          </a>
+        </div>
       </div>
       <MessagePopup
         open={popupOpen}
