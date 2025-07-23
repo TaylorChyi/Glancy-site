@@ -36,6 +36,11 @@
   font-size: 16px;
   margin-bottom: 20px;
 }
+.auth-input:focus,
+.phone-number:focus {
+  outline: none;
+  border-color: var(--highlight-color);
+}
 
 .auth-form {
   display: flex;
