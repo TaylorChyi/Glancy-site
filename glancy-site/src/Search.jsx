@@ -26,6 +26,13 @@ function Search() {
     loadHistory(user)
   }, [user, loadHistory])
 
+  useEffect(() => {
+    if (!user) {
+      setWord('')
+      setResult(null)
+    }
+  }, [user])
+
   const searchTerm = async (term, updateHistory = true) => {
     setPopupMsg('')
     try {

@@ -170,11 +170,21 @@ function App() {
     }
     document.addEventListener('keydown', handleShortcut)
     return () => document.removeEventListener('keydown', handleShortcut)
-  }, [lang, setLang, theme, setTheme])
+  }, [lang, setLang, theme, setTheme, entry, showFavorites, showHistory, toggleFavorite])
 
   useEffect(() => {
     loadHistory(user)
   }, [user, loadHistory])
+
+  useEffect(() => {
+    if (!user) {
+      setEntry(null)
+      setText('')
+      setShowFavorites(false)
+      setShowHistory(false)
+      setFromFavorites(false)
+    }
+  }, [user])
 
   return (
     <div className="container">
