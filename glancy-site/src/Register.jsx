@@ -12,16 +12,13 @@ import appleIcon from './assets/apple.svg'
 import phoneIcon from './assets/phone.svg'
 import wechatIcon from './assets/wechat.svg'
 import emailIcon from './assets/email.svg'
-import userIcon from './assets/user.svg'
 import lightIcon from './assets/glancy-light.svg'
 import darkIcon from './assets/glancy-dark.svg'
 import { useTheme } from './ThemeContext.jsx'
 
 function Register() {
-  const [username, setUsername] = useState('')
   const [account, setAccount] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirm, setConfirm] = useState('')
+  const [code, setCode] = useState('')
   const [method, setMethod] = useState('phone')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
@@ -47,18 +44,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setPopupMsg('')
-    if (!username) {
-      setPopupMsg('Username required')
-      setPopupOpen(true)
-      return
-    }
     if (!validateAccount()) {
       setPopupMsg('Invalid account')
-      setPopupOpen(true)
-      return
-    }
-    if (password !== confirm) {
-      setPopupMsg('Passwords do not match')
       setPopupOpen(true)
       return
     }
@@ -67,15 +54,14 @@ function Register() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          username,
           [method]: account,
-          password
+          code
         })
       })
       const loginData = await apiRequest(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ account, password, method })
+        body: JSON.stringify({ account, method, password: code })
       })
       setUser(loginData)
       navigate('/')
@@ -96,39 +82,25 @@ function Register() {
     if (!formMethods.includes(method)) return null
     return (
       <form onSubmit={handleSubmit} className="auth-form">
-        <input
-          className="auth-input"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        {method === 'phone' ? (
+          <PhoneInput value={account} onChange={setAccount} />
+        ) : (
+          <input
+            className="auth-input"
+            placeholder={placeholders[method]}
+            value={account}
+            onChange={(e) => setAccount(e.target.value)}
+          />
+        )}
         <div className="password-row">
-          {method === 'phone' ? (
-            <PhoneInput value={account} onChange={setAccount} />
-          ) : (
-            <input
-              className="auth-input"
-              placeholder={placeholders[method]}
-              value={account}
-              onChange={(e) => setAccount(e.target.value)}
-            />
-          )}
+          <input
+            className="auth-input"
+            placeholder="Code"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
           <CodeButton onClick={handleSendCode} />
         </div>
-        <input
-          className="auth-input"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          className="auth-input"
-          type="password"
-          placeholder="Confirm password"
-          value={confirm}
-          onChange={(e) => setConfirm(e.target.value)}
-        />
         <button type="submit" className="auth-primary-btn">Continue</button>
       </form>
     )
@@ -136,7 +108,6 @@ function Register() {
 
   const methodOrder = ['phone', 'email', 'wechat', 'apple', 'google']
   const icons = {
-    username: userIcon,
     email: emailIcon,
     phone: phoneIcon,
     wechat: wechatIcon,
