@@ -57,7 +57,7 @@ function Register() {
         </button>
       </form>
       <div className="auth-switch">
-        Already have an account? <Link to="/login">Log in</Link>
+        Already have an account? <Link to="/auth?tab=login">Log in</Link>
       </div>
       <div className="divider">
         <span>OR</span>

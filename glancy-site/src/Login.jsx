@@ -50,7 +50,7 @@ function Login() {
         </button>
       </form>
       <div className="auth-switch">
-        Don’t have an account? <Link to="/register">Sign up</Link>
+        Don’t have an account? <Link to="/auth?tab=register">Sign up</Link>
       </div>
       <div className="divider">
         <span>OR</span>

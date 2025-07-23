@@ -6,6 +6,7 @@ import './Header.css'
 import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 import { Link } from 'react-router-dom'
+import { useIsMobile } from '../../utils.js'
 import HelpModal from '../HelpModal.jsx'
 import SettingsModal from '../SettingsModal.jsx'
 import ShortcutsModal from '../ShortcutsModal.jsx'
@@ -22,6 +23,7 @@ function UserMenu({ size = 24, showName = false }) {
   const [profileOpen, setProfileOpen] = useState(false)
   const [upgradeOpen, setUpgradeOpen] = useState(false)
   const menuRef = useRef(null)
+  const isMobile = useIsMobile()
   const user = useUserStore((s) => s.user)
   const clearUser = useUserStore((s) => s.clearUser)
   const clearHistory = useHistoryStore((s) => s.clearHistory)
@@ -132,7 +134,10 @@ function UserMenu({ size = 24, showName = false }) {
         <div className={showName ? 'with-name' : ''}>
           <Avatar width={size} height={size} />
           {showName && (
-            <Link to="/login" className="username login-btn">
+            <Link
+              to={isMobile ? '/auth' : '/login'}
+              className="username login-btn"
+            >
               {t.navRegister}/{t.navLogin}
             </Link>
           )}

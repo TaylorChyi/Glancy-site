@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
+import Auth from './Auth.jsx'
 import { LanguageProvider } from './LanguageContext.jsx'
 import { ThemeProvider } from './ThemeContext.jsx'
 
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="*" element={<App />} />
           </Routes>
         </BrowserRouter>
