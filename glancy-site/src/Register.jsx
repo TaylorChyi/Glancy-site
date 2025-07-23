@@ -9,12 +9,18 @@ import googleIcon from './assets/google.svg'
 import appleIcon from './assets/apple.svg'
 import phoneIcon from './assets/phone.svg'
 import wechatIcon from './assets/wechat.svg'
+import emailIcon from './assets/email.svg'
+import userIcon from './assets/user.svg'
 import lightIcon from './assets/glancy-light.svg'
 import darkIcon from './assets/glancy-dark.svg'
 import { useTheme } from './ThemeContext.jsx'
 
 function Register() {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [account, setAccount] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
+  const [method, setMethod] = useState('phone')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
@@ -22,28 +28,121 @@ function Register() {
   const { resolvedTheme } = useTheme()
   const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
 
+  const validateAccount = () => {
+    if (method === 'email') {
+      return /.+@.+\..+/.test(account)
+    }
+    if (method === 'phone') {
+      return /^\+?\d{6,15}$/.test(account)
+    }
+    return true
+  }
+
+  const handleSendCode = () => {
+    setPopupMsg('Code sent')
+    setPopupOpen(true)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setPopupMsg('')
+    if (!username) {
+      setPopupMsg('Username required')
+      setPopupOpen(true)
+      return
+    }
+    if (!validateAccount()) {
+      setPopupMsg('Invalid account')
+      setPopupOpen(true)
+      return
+    }
+    if (password !== confirm) {
+      setPopupMsg('Passwords do not match')
+      setPopupOpen(true)
+      return
+    }
     try {
       await apiRequest(API_PATHS.register, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({
+          username,
+          [method]: account,
+          password
+        })
       })
       const loginData = await apiRequest(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ account: email })
+        body: JSON.stringify({ account, password, method })
       })
       setUser(loginData)
-      setPopupMsg('Welcome ' + email)
-      setPopupOpen(true)
       navigate('/')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
     }
+  }
+
+  const placeholders = {
+    phone: 'Phone number',
+    email: 'Email address'
+  }
+
+  const formMethods = ['phone', 'email']
+
+  const renderForm = () => {
+    if (!formMethods.includes(method)) return null
+    return (
+      <form onSubmit={handleSubmit} className="auth-form">
+        <input
+          className="auth-input"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <div className="password-row">
+          <input
+            className="auth-input"
+            placeholder={placeholders[method]}
+            value={account}
+            onChange={(e) => setAccount(e.target.value)}
+          />
+          <button
+            type="button"
+            className="code-btn"
+            onClick={handleSendCode}
+          >
+            Get code
+          </button>
+        </div>
+        <input
+          className="auth-input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          className="auth-input"
+          type="password"
+          placeholder="Confirm password"
+          value={confirm}
+          onChange={(e) => setConfirm(e.target.value)}
+        />
+        <button type="submit" className="auth-primary-btn">Continue</button>
+      </form>
+    )
+  }
+
+  const methodOrder = ['phone', 'email', 'wechat', 'apple', 'google']
+  const icons = {
+    username: userIcon,
+    email: emailIcon,
+    phone: phoneIcon,
+    wechat: wechatIcon,
+    apple: appleIcon,
+    google: googleIcon
   }
 
   return (
@@ -52,40 +151,27 @@ function Register() {
       <img className="auth-logo" src={icon} alt="Glancy" />
       <div className="auth-brand">Glancy</div>
       <h1 className="auth-title">Create an account</h1>
-      <form onSubmit={handleSubmit} className="auth-form">
-        <input
-          className="auth-input"
-          placeholder="Email address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button type="submit" className="auth-primary-btn">
-          Continue
-        </button>
-      </form>
+      {renderForm()}
       <div className="auth-switch">
         Already have an account? <Link to="/login">Log in</Link>
       </div>
       <div className="divider">
         <span>OR</span>
       </div>
-      <div className="oauth-buttons">
-        <button type="button">
-          <img src={googleIcon} alt="Google" />
-          Continue with Google
-        </button>
-        <button type="button">
-          <img src={appleIcon} alt="Apple" />
-          Continue with Apple
-        </button>
-        <button type="button">
-          <img src={phoneIcon} alt="Phone" />
-          Continue with phone
-        </button>
-        <button type="button">
-          <img src={wechatIcon} alt="WeChat" />
-          Continue with WeChat
-        </button>
+      <div className="login-options">
+        {methodOrder
+          .filter((m) => m !== method)
+          .map((m) => (
+            <button
+              key={m}
+              type="button"
+              onClick={() =>
+                formMethods.includes(m) ? setMethod(m) : alert('Not implemented')
+              }
+            >
+              <img src={icons[m]} alt={m} />
+            </button>
+          ))}
       </div>
       <div className="auth-footer">
         <div className="footer-links">
