@@ -105,6 +105,20 @@
   height: 24px;
 }
 
+:root[data-theme='dark'] .oauth-buttons img {
+  filter: invert(1);
+}
+
+:root[data-theme='system'] .oauth-buttons img {
+  filter: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='system'] .oauth-buttons img {
+    filter: invert(1);
+  }
+}
+
 .login-options {
   display: flex;
   gap: 12px;
@@ -125,6 +139,20 @@
 .login-options img {
   width: 24px;
   height: 24px;
+}
+
+:root[data-theme='dark'] .login-options img {
+  filter: invert(1);
+}
+
+:root[data-theme='system'] .login-options img {
+  filter: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='system'] .login-options img {
+    filter: invert(1);
+  }
 }
 .footer-links {
   margin-top: 24px;
