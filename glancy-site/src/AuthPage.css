@@ -177,6 +177,11 @@
   cursor: pointer;
 }
 
+.code-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 :root[data-theme='dark'] .login-options img {
   filter: invert(1);
 }
