@@ -6,7 +6,6 @@ import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
 import { useUserStore } from './store/userStore.js'
 import googleIcon from './assets/google.svg'
-import microsoftIcon from './assets/microsoft.svg'
 import appleIcon from './assets/apple.svg'
 import phoneIcon from './assets/phone.svg'
 import wechatIcon from './assets/wechat.svg'
@@ -67,10 +66,6 @@ function Register() {
         <button type="button">
           <img src={googleIcon} alt="Google" />
           Continue with Google
-        </button>
-        <button type="button">
-          <img src={microsoftIcon} alt="Microsoft" />
-          Continue with Microsoft Account
         </button>
         <button type="button">
           <img src={appleIcon} alt="Apple" />
