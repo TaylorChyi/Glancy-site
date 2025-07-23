@@ -104,6 +104,28 @@
   width: 24px;
   height: 24px;
 }
+
+.login-options {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.login-options button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.login-options img {
+  width: 24px;
+  height: 24px;
+}
 .footer-links {
   margin-top: 24px;
   font-size: 12px;
