@@ -37,7 +37,7 @@ function Login() {
         body: JSON.stringify({ account, password, method })
       })
       setUser(data)
-      navigate(0)
+      navigate('/')
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
