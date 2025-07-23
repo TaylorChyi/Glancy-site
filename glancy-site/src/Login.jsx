@@ -53,8 +53,7 @@ function Login() {
   const formMethods = ['phone', 'email', 'username']
 
   const handleSendCode = () => {
-    setPopupMsg('Code sent')
-    setPopupOpen(true)
+    // do nothing for now
   }
 
   const renderForm = () => {

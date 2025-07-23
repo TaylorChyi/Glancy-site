@@ -40,8 +40,7 @@ function Register() {
   }
 
   const handleSendCode = () => {
-    setPopupMsg('Code sent')
-    setPopupOpen(true)
+    // do nothing for now
   }
 
   const handleSubmit = async (e) => {
