@@ -78,11 +78,7 @@ function DesktopTopBar({
               )}
             </div>
           </>
-        ) : (
-          <Link to="/login" className="login-btn">
-            {t.navRegister}/{t.navLogin}
-          </Link>
-        )}
+        ) : null}
       </div>
     </header>
   )
