@@ -1,19 +1,18 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './App.css'
-import { useLanguage } from './LanguageContext.jsx'
+import { useNavigate, Link } from 'react-router-dom'
+import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
 import { useUserStore } from './store/userStore.js'
+import googleIcon from './assets/google.svg'
+import microsoftIcon from './assets/microsoft.svg'
+import appleIcon from './assets/apple.svg'
+import phoneIcon from './assets/phone.svg'
+import wechatIcon from './assets/wechat.svg'
 
 function Register() {
-  const { t } = useLanguage()
-  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
@@ -22,24 +21,19 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setPopupMsg('')
-    if (password !== confirmPassword) {
-      setPopupMsg(t.submitFail)
-      setPopupOpen(true)
-      return
-    }
     try {
       await apiRequest(API_PATHS.register, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, phone, password })
+        body: JSON.stringify({ email })
       })
       const loginData = await apiRequest(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ account: email, password: email })
+        body: JSON.stringify({ account: email })
       })
       setUser(loginData)
-      setPopupMsg(t.loginButton + ' ' + email)
+      setPopupMsg('Welcome ' + email)
       setPopupOpen(true)
       navigate('/')
     } catch (err) {
@@ -49,58 +43,56 @@ function Register() {
   }
 
   return (
-    <div className="App">
+    <div className="auth-page">
+      <div className="auth-brand">Glancy</div>
+      <h1 className="auth-title">Create an account</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">{t.username}</label>
-          <input
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">{t.email}</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="phone">{t.phone}</label>
-          <input
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">{t.password}</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">{t.confirmPassword}</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">{t.registerButton}</button>
-        <MessagePopup
-          open={popupOpen}
-          message={popupMsg}
-          onClose={() => setPopupOpen(false)}
+        <input
+          className="auth-input"
+          placeholder="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
+        <button type="submit" className="auth-primary-btn">
+          Continue
+        </button>
       </form>
+      <div className="auth-switch">
+        Already have an account? <Link to="/login">Log in</Link>
+      </div>
+      <div className="divider">
+        <span>OR</span>
+      </div>
+      <div className="oauth-buttons">
+        <button type="button">
+          <img src={googleIcon} alt="Google" />
+          Continue with Google
+        </button>
+        <button type="button">
+          <img src={microsoftIcon} alt="Microsoft" />
+          Continue with Microsoft Account
+        </button>
+        <button type="button">
+          <img src={appleIcon} alt="Apple" />
+          Continue with Apple
+        </button>
+        <button type="button">
+          <img src={phoneIcon} alt="Phone" />
+          Continue with phone
+        </button>
+        <button type="button">
+          <img src={wechatIcon} alt="WeChat" />
+          Continue with WeChat
+        </button>
+      </div>
+      <div className="footer-links">
+        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+      </div>
+      <MessagePopup
+        open={popupOpen}
+        message={popupMsg}
+        onClose={() => setPopupOpen(false)}
+      />
     </div>
   )
 }
