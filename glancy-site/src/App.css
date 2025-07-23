@@ -9,7 +9,8 @@
   height: var(--vh);
   background: var(--sidebar-bg);
   color: var(--sidebar-color);
-  padding: 20px 20px 16px;
+  /* match chatbox bottom spacing */
+  padding: 20px 20px 28px;
   display: flex;
   flex-direction: column;
 }
