@@ -9,7 +9,7 @@
   height: var(--vh);
   background: var(--sidebar-bg);
   color: var(--sidebar-color);
-  padding: 20px;
+  padding: 20px 20px 16px;
   display: flex;
   flex-direction: column;
 }
