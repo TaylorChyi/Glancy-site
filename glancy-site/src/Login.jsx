@@ -51,23 +51,39 @@ function Login() {
 
   const formMethods = ['phone', 'email', 'username']
 
+  const handleSendCode = () => {
+    setPopupMsg('Code sent')
+    setPopupOpen(true)
+  }
+
   const renderForm = () => {
     if (!formMethods.includes(method)) return null
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="auth-form">
         <input
           className="auth-input"
           placeholder={placeholders[method]}
           value={account}
           onChange={(e) => setAccount(e.target.value)}
         />
-        <input
-          className="auth-input"
-          type="password"
-          placeholder={method === 'username' ? 'Password' : 'Password / code'}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="password-row">
+          <input
+            className="auth-input"
+            type="password"
+            placeholder={method === 'username' ? 'Password' : 'Password / code'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {method !== 'username' && (
+            <button
+              type="button"
+              className="code-btn"
+              onClick={handleSendCode}
+            >
+              Get code
+            </button>
+          )}
+        </div>
         <button type="submit" className="auth-primary-btn">Continue</button>
       </form>
     )
@@ -110,13 +126,15 @@ function Login() {
             </button>
           ))}
       </div>
-      <div className="footer-links">
-        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
-      </div>
-      <div className="icp">
-        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
-          京ICP备2025135702号-1
-        </a>
+      <div className="auth-footer">
+        <div className="footer-links">
+          <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+        </div>
+        <div className="icp">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+            京ICP备2025135702号-1
+          </a>
+        </div>
       </div>
       <MessagePopup
         open={popupOpen}
