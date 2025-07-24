@@ -1,12 +1,18 @@
 import { useLanguage } from '../../LanguageContext.jsx'
 import './Sidebar.css'
 
-function Favorites() {
+function Favorites({ onToggle }) {
   const { t } = useLanguage()
+
+  const handleClick = () => {
+    if (onToggle) onToggle((v) => !v)
+  }
+
   return (
-    <div className="sidebar-section">
-      <h3>{t.favorites || 'Favorites'}</h3>
-      <p>No favorites yet.</p>
+    <div className="sidebar-section favorites-list">
+      <h3 className="collection-button" onClick={handleClick}>
+        {t.favorites || 'Favorites'}
+      </h3>
     </div>
   )
 }

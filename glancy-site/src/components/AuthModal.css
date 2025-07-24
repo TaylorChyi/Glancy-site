@@ -22,26 +22,6 @@
   align-items: center;
 }
 
-.auth-tabs {
-  display: flex;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.auth-tabs button {
-  flex: 1;
-  background: none;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  color: inherit;
-  text-align: center;
-}
-
-.auth-tabs button.active {
-  border-color: var(--sidebar-color);
-}
 
 .auth-modal .App {
   width: 100%;

@@ -14,6 +14,7 @@
 每次向 `main` 分支或以 `feature-` 开头的分支推送代码时，`部署到云服务器` 工作流程都会自动执行。
 
 前端构建完成后只需将 `dist` 目录同步到服务器，通过 Nginx 托管即可。示例配置见 `nginx.conf.example`，后端服务独立运行在 `8080` 端口，通过 `/api` 前缀与前端通信。
+配置文件中还添加了 `error_page` 指令，用于将 4XX 与 5XX 错误统一重定向到 `/error.html`。部署脚本清理服务器目录时会保留该页面，并在每次部署时上传最新版的 `error.html`。
 
 开发环境下需要在 `vite.config.js` 中开启代理并设置相对路径：
 
@@ -45,7 +46,7 @@ export default defineConfig({
 
 ## 用户注册
 
-注册页提供用户名、邮箱、手机号和密码等输入项，提交到 `/api/users/register` 创建新账号。
+注册页采用与登录页一致的布局，可选择邮箱或手机号注册并发送验证码，包含两次密码输入，最终提交到 `/api/users/register` 创建新账号。
 
 ## 用户列表与删除
 
@@ -55,8 +56,7 @@ export default defineConfig({
 ## 个人资料编辑
 
 `/profile` 页面通过 `GET /api/users/profile` 载入信息，提交表单时向
-`POST /api/users/profile` 上传昵称和头像；同时可点击绑定按钮触发
-`/api/bind/third-party` 完成第三方账号绑定。
+`POST /api/users/profile` 上传昵称和头像。
 
 ## 偏好设置
 
@@ -68,6 +68,13 @@ export default defineConfig({
 `/search` 调用 `/api/words?userId=1&term=hello&language=ENGLISH` 获取单词释义，
 实际请求需在头部加入 `X-USER-TOKEN`。点击播放按钮访问
 `/api/words/audio?word=xxx` 播放语音。
+
+## Search Record Endpoints
+- `POST /api/search-records/user/{userId}` – add a new search record for the user
+- `GET /api/search-records/user/{userId}` – list search records of the user
+- `DELETE /api/search-records/user/{userId}` – clear all search records of the user
+- `DELETE /api/search-records/user/{userId}/{recordId}/favorite` – unfavorite a search record
+  以上接口均需在 `X-USER-TOKEN` 请求头中提供登录令牌
 
 ## 通知中心
 
@@ -82,10 +89,6 @@ export default defineConfig({
 
 `/contact` 页面会把填写的信息提交到 `POST /api/contact`。
 
-## 管理门户
-
-管理员可在 `/portal/login` 使用 `/api/admin/login` 登录，登录后在 `/portal`
-展示的统计数据来自 `GET /api/stats/users`。
 
 ## 服务状态
 

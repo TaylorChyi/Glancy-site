@@ -6,7 +6,7 @@ function ProfileModal({ open, onClose }) {
   return (
     <div className="profile-modal-overlay" onClick={onClose}>
       <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
-        <Profile />
+        <Profile onCancel={onClose} />
       </div>
     </div>
   )

@@ -1,19 +1,24 @@
 import './ShortcutsModal.css'
+import { getModifierKey } from '../utils.js'
+import { useLanguage } from '../LanguageContext.jsx'
 
 function ShortcutsModal({ open, onClose }) {
+  const { t } = useLanguage()
   if (!open) return null
 
+  const mod = getModifierKey()
   const shortcuts = [
-    { keys: 'Ctrl + /', action: 'Focus search input' },
-    { keys: 'Ctrl + L', action: 'Switch language' },
-    { keys: 'Ctrl + M', action: 'Toggle theme' },
-    { keys: 'Ctrl + K', action: 'Open shortcuts help' },
+    { keys: `${mod} + Shift + F`, action: t.shortcutsFocusSearch },
+    { keys: `${mod} + Shift + L`, action: t.shortcutsSwitchLanguage },
+    { keys: `${mod} + Shift + M`, action: t.shortcutsToggleTheme },
+    { keys: `${mod} + Shift + B`, action: t.shortcutsToggleFavorite },
+    { keys: `${mod} + Shift + K`, action: t.shortcutsOpenHelp },
   ]
 
   return (
     <div className="shortcuts-overlay" onClick={onClose}>
       <div className="shortcuts-modal" onClick={(e) => e.stopPropagation()}>
-        <h3>Keyboard Shortcuts</h3>
+        <h3>{t.shortcutsTitle}</h3>
         <ul>
           {shortcuts.map((s) => (
             <li key={s.keys}>
@@ -23,7 +28,7 @@ function ShortcutsModal({ open, onClose }) {
           ))}
         </ul>
         <button type="button" onClick={onClose} className="close-btn">
-          Close
+          {t.close}
         </button>
       </div>
     </div>

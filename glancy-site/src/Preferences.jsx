@@ -1,34 +1,63 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import './Preferences.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { useTheme } from './ThemeContext.jsx'
+import { useUserStore } from './store/userStore.js'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
+import { apiRequest } from './api/client.js'
 
 function Preferences() {
   const { t } = useLanguage()
   const { theme, setTheme } = useTheme()
-  const [language, setLanguage] = useState('en')
+  const user = useUserStore((s) => s.user)
+  const [sourceLang, setSourceLang] = useState(
+    localStorage.getItem('sourceLang') || 'auto'
+  )
+  const [targetLang, setTargetLang] = useState(
+    localStorage.getItem('targetLang') || 'ENGLISH'
+  )
+  const [defaultModel, setDefaultModel] = useState(
+    localStorage.getItem('dictionaryModel') || 'model-a'
+  )
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
-    fetch(API_PATHS.preferences)
-      .then((res) => res.json())
+    if (!user) return
+    apiRequest(`${API_PATHS.preferences}/user/${user.id}`)
       .then((data) => {
-        setLanguage(data.language || 'en')
+        const sl = data.systemLanguage || 'auto'
+        const tl = data.searchLanguage || 'ENGLISH'
+        const dm = data.dictionaryModel || 'model-a'
+        setSourceLang(sl)
+        setTargetLang(tl)
+        setDefaultModel(dm)
+        localStorage.setItem('sourceLang', sl)
+        localStorage.setItem('targetLang', tl)
+        localStorage.setItem('dictionaryModel', dm)
         setTheme(data.theme || 'system')
       })
       .catch(() => {})
-  }, [setTheme])
+  }, [setTheme, user])
 
   const handleSave = async (e) => {
     e.preventDefault()
-    await fetch(API_PATHS.preferences, {
+    if (!user) return
+    await apiRequest(`${API_PATHS.preferences}/user/${user.id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ language, theme })
+      body: JSON.stringify({
+        systemLanguage: sourceLang,
+        searchLanguage: targetLang,
+        dictionaryModel: defaultModel,
+        theme
+      })
     })
+    localStorage.setItem('sourceLang', sourceLang)
+    localStorage.setItem('targetLang', targetLang)
+    localStorage.setItem('dictionaryModel', defaultModel)
     setPopupMsg(t.saveSuccess)
     setPopupOpen(true)
   }
@@ -36,10 +65,37 @@ function Preferences() {
   return (
     <div className="App">
       <h2>{t.prefTitle}</h2>
-      <form onSubmit={handleSave}>
+      <form className="preferences-form" onSubmit={handleSave}>
         <div>
           <label>{t.prefLanguage}</label>
-          <input value={language} onChange={(e) => setLanguage(e.target.value)} />
+          <select
+            value={sourceLang}
+            onChange={(e) => setSourceLang(e.target.value)}
+          >
+            <option value="auto">{t.autoDetect}</option>
+            <option value="CHINESE">CHINESE</option>
+            <option value="ENGLISH">ENGLISH</option>
+          </select>
+        </div>
+        <div>
+          <label>{t.prefSearchLanguage}</label>
+          <select
+            value={targetLang}
+            onChange={(e) => setTargetLang(e.target.value)}
+          >
+            <option value="CHINESE">CHINESE</option>
+            <option value="ENGLISH">ENGLISH</option>
+          </select>
+        </div>
+        <div>
+          <label>{t.prefDictionaryModel}</label>
+          <select
+            value={defaultModel}
+            onChange={(e) => setDefaultModel(e.target.value)}
+          >
+            <option value="model-a">Model A</option>
+            <option value="model-b">Model B</option>
+          </select>
         </div>
         <div>
           <label>{t.prefTheme}</label>

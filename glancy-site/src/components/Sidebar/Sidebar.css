@@ -33,6 +33,25 @@
   color: inherit;
 }
 
+/* dropdown style inside sidebar */
+.sidebar-user .user-menu .menu {
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-user .user-menu li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme='dark'] .sidebar-user .user-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .sidebar-functions {
   flex: 1;
   overflow-y: auto;
@@ -40,7 +59,101 @@
   flex-direction: column;
 }
 
+.history-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.history-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  padding-left: 8px;
+  position: relative;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.history-list li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme='dark'] .history-list li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.history-term {
+}
+
+.history-action-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.history-action {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0 4px;
+}
+
+.history-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  background: var(--sidebar-bg);
+  color: var(--sidebar-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  z-index: 100;
+}
+
+.history-menu button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.history-menu button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.history-menu .delete-btn {
+  color: #e34343;
+}
+
 .sidebar-user .user-menu button.with-name:hover {
 background-color: rgba(255, 255, 255, 0.1);
 border-radius: 4px;
+}
+
+.favorites-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.collection-button {
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  padding-left: 8px;
+  border-radius: 4px;
+}
+
+.collection-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme='dark'] .collection-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }

@@ -1,0 +1,29 @@
+.payment-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.payment-modal {
+  background: var(--app-bg);
+  color: var(--app-color);
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.methods {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+}
+
+.close-btn {
+  width: 100%;
+}
