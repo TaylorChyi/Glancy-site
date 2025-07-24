@@ -1,3 +1,4 @@
+import Modal from './Modal.jsx'
 import './ShortcutsModal.css'
 import { getModifierKey } from '../utils.js'
 import { useLanguage } from '../LanguageContext.jsx'
@@ -16,22 +17,20 @@ function ShortcutsModal({ open, onClose }) {
   ]
 
   return (
-    <div className="shortcuts-overlay" onClick={onClose}>
-      <div className="shortcuts-modal" onClick={(e) => e.stopPropagation()}>
-        <h3>{t.shortcutsTitle}</h3>
-        <ul>
-          {shortcuts.map((s) => (
-            <li key={s.keys}>
-              <span className="keys">{s.keys}</span>
-              <span className="desc">{s.action}</span>
-            </li>
-          ))}
-        </ul>
-        <button type="button" onClick={onClose} className="close-btn">
-          {t.close}
-        </button>
-      </div>
-    </div>
+    <Modal onClose={onClose} className="shortcuts-modal">
+      <h3>{t.shortcutsTitle}</h3>
+      <ul>
+        {shortcuts.map((s) => (
+          <li key={s.keys}>
+            <span className="keys">{s.keys}</span>
+            <span className="desc">{s.action}</span>
+          </li>
+        ))}
+      </ul>
+      <button type="button" onClick={onClose} className="close-btn">
+        {t.close}
+      </button>
+    </Modal>
   )
 }
 

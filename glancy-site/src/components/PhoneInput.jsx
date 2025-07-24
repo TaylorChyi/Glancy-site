@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { API_PATHS } from '../config/api.js'
 import { createApiClient } from '../api/client.js'
+import { getLocale } from '../api/locale.js'
+import { useLocale } from '../LocaleContext.jsx'
 import '../AuthPage.css'
 
 const request = createApiClient({
@@ -27,15 +29,17 @@ function PhoneInput({ onChange, placeholder = 'Phone number' }) {
   const [number, setNumber] = useState('')
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
+  const { locale, setLocale } = useLocale()
 
   useEffect(() => {
     request(API_PATHS.locale)
       .then((data) => {
+        setLocale(data)
         const found = CODE_LIST.find((c) => c.country === data.country)
         if (found) setCode(found.code)
       })
       .catch(() => {})
-  }, [])
+  }, [locale, setLocale])
 
   useEffect(() => {
     const handler = (e) => {
