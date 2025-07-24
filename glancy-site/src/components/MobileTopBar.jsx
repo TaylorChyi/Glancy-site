@@ -3,6 +3,7 @@ import { useLanguage } from '../LanguageContext.jsx'
 import lightIcon from '../assets/glancy-web-light.svg'
 import darkIcon from '../assets/glancy-web-dark.svg'
 import TopBarActions from './TopBarActions.jsx'
+import './TopBarCommon.css'
 import './MobileTopBar.css'
 
 function MobileTopBar({

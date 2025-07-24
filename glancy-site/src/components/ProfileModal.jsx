@@ -1,14 +1,13 @@
-import './ProfileModal.css'
 import Profile from '../Profile.jsx'
+import Modal from './Modal.jsx'
+import './ProfileModal.css'
 
 function ProfileModal({ open, onClose }) {
   if (!open) return null
   return (
-    <div className="profile-modal-overlay" onClick={onClose}>
-      <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
-        <Profile onCancel={onClose} />
-      </div>
-    </div>
+    <Modal onClose={onClose} className="profile-modal">
+      <Profile onCancel={onClose} />
+    </Modal>
   )
 }
 

@@ -2,17 +2,11 @@ import { useRef, useState, useEffect } from 'react'
 import { useUser, useHistory } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
 import './Header.css'
-import ProTag from './ProTag.jsx'
 import Avatar from '../Avatar.jsx'
 import { Link } from 'react-router-dom'
-import HelpModal from '../HelpModal.jsx'
-import SettingsModal from '../SettingsModal.jsx'
-import ShortcutsModal from '../ShortcutsModal.jsx'
-import ProfileModal from '../ProfileModal.jsx'
-import UpgradeModal from '../UpgradeModal.jsx'
-import LogoutConfirmModal from '../LogoutConfirmModal.jsx'
-
-// size 控制触发按钮中头像的尺寸
+import UserMenuButton from './UserMenuButton.jsx'
+import UserMenuDropdown from './UserMenuDropdown.jsx'
+import UserMenuModals from './UserMenuModals.jsx'
 
 function UserMenu({ size = 24, showName = false }) {
   const [open, setOpen] = useState(false)
@@ -30,126 +24,58 @@ function UserMenu({ size = 24, showName = false }) {
   const isPro =
     user?.member || user?.isPro || (user?.plan && user.plan !== 'free')
 
-  useEffect(() => {
-    function handlePointerDown(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    if (open) {
-      document.addEventListener('pointerdown', handlePointerDown)
-    }
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [open])
-
-  useEffect(() => {
-    const handler = () => setShortcutsOpen(true)
-    document.addEventListener('open-shortcuts', handler)
-    return () => document.removeEventListener('open-shortcuts', handler)
-  }, [])
+  if (!user) {
+    return (
+      <div className={`header-section user-menu ${showName ? 'with-name' : ''}`}>
+        <Avatar width={size} height={size} />
+        {showName && (
+          <Link to="/login" className="username login-btn">
+            {t.navRegister}/{t.navLogin}
+          </Link>
+        )}
+      </div>
+    )
+  }
 
   return (
-    <div className="header-section user-menu" ref={menuRef}>
-      {user ? (
-        <>
-          <button onClick={() => setOpen(!open)} className={showName ? 'with-name' : ''}>
-            <Avatar width={size} height={size} />
-            {showName ? (
-              <div className="info">
-                <span className="username">{username}</span>
-                {isPro && <ProTag />}
-              </div>
-            ) : (
-              isPro && <ProTag />
-            )}
-          </button>
-          {open && (
-            <div className="menu">
-              <div className="menu-header">
-                <div className="avatar">
-                  <Avatar width={32} height={32} />
-                  {isPro && <ProTag small />}
-                </div>
-                <div className="username">{username}</div>
-              </div>
-              <ul>
-                {!isPro && (
-                  <li onClick={() => setUpgradeOpen(true)}>
-                    <span className="icon">💳</span>{t.upgrade}
-                  </li>
-                )}
-                <li onClick={() => setProfileOpen(true)}>
-                  <span className="icon">👤</span>{t.profile}
-                </li>
-                <li onClick={() => setSettingsOpen(true)}>
-                  <span className="icon">⚙️</span>{t.settings}
-                </li>
-                <li onClick={() => setShortcutsOpen(true)}>
-                  <span className="icon">⌨️</span>{t.shortcuts}
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <span className="icon">❓</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setHelpOpen(true)
-                      setOpen(false)
-                    }}
-                    className="menu-btn"
-                  >
-                    {t.help}
-                  </button>
-                </li>
-                <li>
-                  <span className="icon">🔑</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLogoutOpen(true)
-                      setOpen(false)
-                    }}
-                    className="menu-btn"
-                  >
-                    {t.logout}
-                  </button>
-                </li>
-              </ul>
-            </div>
-          )}
-          <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
-          {!isPro && (
-            <UpgradeModal
-              open={upgradeOpen}
-              onClose={() => setUpgradeOpen(false)}
+    <UserMenuModals
+      isPro={isPro}
+      user={user}
+      clearUser={clearUser}
+      clearHistory={clearHistory}
+    >
+      {({
+        openProfile,
+        openSettings,
+        openShortcuts,
+        openHelp,
+        openUpgrade,
+        openLogout
+      }) => (
+        <UserMenuButton
+          size={size}
+          showName={showName}
+          isPro={isPro}
+          username={username}
+        >
+          {({ open, setOpen }) => (
+            <UserMenuDropdown
+              open={open}
+              setOpen={setOpen}
+              t={t}
+              isPro={isPro}
+              username={username}
+              openProfile={openProfile}
+              openSettings={openSettings}
+              openShortcuts={openShortcuts}
+              openHelp={openHelp}
+              openUpgrade={openUpgrade}
+              openLogout={openLogout}
             />
           )}
-        </>
-      ) : (
-        <div className={showName ? 'with-name' : ''}>
-          <Avatar width={size} height={size} />
-          {showName && (
-            <Link to="/login" className="username login-btn">
-              {t.navRegister}/{t.navLogin}
-            </Link>
-          )}
-        </div>
+        </UserMenuButton>
       )}
-      <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
-      <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
-      <ShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
-      <LogoutConfirmModal
-        open={logoutOpen}
-        onConfirm={() => {
-          clearHistory()
-          clearUser()
-          setLogoutOpen(false)
-        }}
-        onCancel={() => setLogoutOpen(false)}
-        email={user?.email || ''}
-      />
-    </div>
+    </UserMenuModals>
   )
 }
 

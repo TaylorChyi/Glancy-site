@@ -15,13 +15,12 @@ export async function fetchWord({ userId, term, language, token }) {
     term,
     language
   })
-  return apiRequest(`${API_PATHS.words}?${params.toString()}`, {
-    headers: token ? { 'X-USER-TOKEN': token } : {}
-  })
+  return apiRequest(`${API_PATHS.words}?${params.toString()}`, { token })
 }
 
 export async function fetchWordAudio(word) {
-  const resp = await fetch(`${API_PATHS.words}/audio?word=${encodeURIComponent(word)}`)
-  if (!resp.ok) throw new Error('Failed to fetch')
+  const resp = await apiRequest(
+    `${API_PATHS.words}/audio?word=${encodeURIComponent(word)}`
+  )
   return resp.blob()
 }
