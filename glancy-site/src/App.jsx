@@ -14,9 +14,7 @@ import { fetchWord } from './api/words.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
 import { useIsMobile } from './utils.js'
-import Brand from './components/Brand.jsx'
-import SidebarFunctions from './components/Sidebar/SidebarFunctions.jsx'
-import SidebarUser from './components/Sidebar/SidebarUser.jsx'
+import Sidebar from './components/Sidebar'
 import MobileTopBar from './components/MobileTopBar.jsx'
 import DesktopTopBar from './components/DesktopTopBar.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
@@ -188,22 +186,13 @@ function App() {
 
   return (
     <div className="container">
-      {isMobile && sidebarOpen && (
-        <div
-          className="sidebar-overlay"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-      <aside
-        className={`sidebar${isMobile ? (sidebarOpen ? ' mobile-open' : '') : ''}`}
-      >
-        <Brand />
-        <SidebarFunctions
-          onToggleFavorites={handleToggleFavorites}
-          onSelectHistory={handleSelectHistory}
-        />
-        <SidebarUser />
-      </aside>
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onToggleFavorites={handleToggleFavorites}
+        onSelectHistory={handleSelectHistory}
+        isMobile={isMobile}
+      />
       <div className="right">
         {isMobile ? (
           <header className="topbar">
