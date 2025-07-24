@@ -3,7 +3,7 @@ import MessagePopup from './components/MessagePopup.jsx'
 import { useHistory, useUser, useFavorites } from './context/AppContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from './ThemeContext.jsx'
-import { translations } from './translations.js'
+import translations from './translations.js'
 import DictionaryEntry from './components/DictionaryEntry.jsx'
 import {
   SendButtonLightIcon,
