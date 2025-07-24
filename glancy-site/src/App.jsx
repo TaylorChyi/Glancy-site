@@ -12,10 +12,7 @@ import voiceDark from './assets/voice-button-dark.svg'
 import { useWordsApi } from './api/words.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
-import { useIsMobile } from './utils.js'
-import Sidebar from './components/Sidebar'
-import MobileTopBar from './components/MobileTopBar.jsx'
-import DesktopTopBar from './components/DesktopTopBar.jsx'
+import Layout from './components/Layout.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
 
 function App() {
@@ -36,8 +33,6 @@ function App() {
   const [showHistory, setShowHistory] = useState(false)
   const [fromFavorites, setFromFavorites] = useState(false)
   const { favorites, toggleFavorite } = useFavorites()
-  const isMobile = useIsMobile()
-  const [sidebarOpen, setSidebarOpen] = useState(false)
   const navigate = useNavigate()
   const { fetchWord } = useWordsApi()
 
@@ -179,38 +174,21 @@ function App() {
   }, [user])
 
   return (
-    <div className="container">
-      <Sidebar
-        open={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        onToggleFavorites={handleToggleFavorites}
-        onSelectHistory={handleSelectHistory}
-        isMobile={isMobile}
-      />
-      <div className="right">
-        {isMobile ? (
-          <header className="topbar">
-            <MobileTopBar
-              term={entry?.term || ''}
-              showBack={!showFavorites && fromFavorites}
-              onBack={handleBackFromFavorite}
-              favorited={favorites.includes(entry?.term)}
-              onToggleFavorite={() => entry && toggleFavorite(entry.term)}
-              canFavorite={!!entry && !showFavorites && !showHistory}
-              onOpenSidebar={() => setSidebarOpen(true)}
-            />
-          </header>
-        ) : (
-          <DesktopTopBar
-            term={entry?.term || ''}
-            showBack={!showFavorites && fromFavorites}
-            onBack={handleBackFromFavorite}
-            favorited={favorites.includes(entry?.term)}
-            onToggleFavorite={() => entry && toggleFavorite(entry.term)}
-            canFavorite={!!entry && !showFavorites && !showHistory}
-          />
-        )}
-        <main className="display">
+    <Layout
+      sidebarProps={{
+        onToggleFavorites: handleToggleFavorites,
+        onSelectHistory: handleSelectHistory
+      }}
+      topBarProps={{
+        term: entry?.term || '',
+        showBack: !showFavorites && fromFavorites,
+        onBack: handleBackFromFavorite,
+        favorited: favorites.includes(entry?.term),
+        onToggleFavorite: () => entry && toggleFavorite(entry.term),
+        canFavorite: !!entry && !showFavorites && !showHistory
+      }}
+    >
+      <div className="display">
           {showFavorites ? (
             favorites.length ? (
               <ul className="favorites-grid-display">
@@ -248,7 +226,7 @@ function App() {
               <div className="display-term">{placeholder}</div>
             </div>
           )}
-        </main>
+        </div>
         <form className="chatbox" onSubmit={handleSend}>
           <input
             ref={inputRef}
@@ -270,13 +248,12 @@ function App() {
             京ICP备2025135702号-1
           </a>
         </div>
-      </div>
       <MessagePopup
         open={popupOpen}
         message={popupMsg}
         onClose={() => setPopupOpen(false)}
       />
-    </div>
+    </Layout>
   )
 }
 
