@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useUser } from '../context/AppContext.jsx'
 import PaymentModal from './PaymentModal.jsx'
 import Modal from './Modal.jsx'
-import './UpgradeModal.css'
+import styles from './UpgradeModal.module.css'
 import { useLanguage } from '../LanguageContext.jsx'
 
 function UpgradeModal({ open, onClose }) {
@@ -36,21 +36,21 @@ function UpgradeModal({ open, onClose }) {
   }
 
   return (
-    <Modal onClose={onClose} className="upgrade-modal">
+    <Modal onClose={onClose} className={styles.upgradeModal}>
       <h3>{t.choosePlan}</h3>
-      <div className="plans">
+      <div className={styles.plans}>
         {plans.map((p) => (
           <div
             key={p.id}
-            className={`plan${p.id === currentPlan ? ' current' : ''}${
-              selected === p.id ? ' selected' : ''}`}
+            className={`${styles.plan}${p.id === currentPlan ? ` ${styles.current}` : ''}${
+              selected === p.id ? ` ${styles.selected}` : ''}`}
             onClick={() => setSelected(p.id)}
           >
             {p.label}
           </div>
         ))}
       </div>
-      <div className="actions">
+      <div className={styles.actions}>
         <button type="button" onClick={confirm}>{t.confirm}</button>
         <button type="button" onClick={onClose}>{t.cancelButton}</button>
       </div>

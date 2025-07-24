@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Avatar from '../Avatar.jsx'
 import ProTag from './ProTag.jsx'
+import styles from './Header.module.css'
 
 function UserMenuButton({ size, showName, isPro, username, children }) {
   const [open, setOpen] = useState(false)
@@ -19,12 +20,12 @@ function UserMenuButton({ size, showName, isPro, username, children }) {
   }, [open])
 
   return (
-    <div className="header-section user-menu" ref={menuRef}>
-      <button onClick={() => setOpen(!open)} className={showName ? 'with-name' : ''}>
+    <div className={`${styles.headerSection} ${styles.userMenu}`} ref={menuRef}>
+      <button onClick={() => setOpen(!open)} className={showName ? styles.withName : ''}>
         <Avatar width={size} height={size} />
         {showName ? (
-          <div className="info">
-            <span className="username">{username}</span>
+          <div className={styles.info}>
+            <span className={styles.username}>{username}</span>
             {isPro && <ProTag />}
           </div>
         ) : (

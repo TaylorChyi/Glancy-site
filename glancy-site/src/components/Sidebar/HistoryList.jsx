@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
-import './Sidebar.css'
+import styles from './Sidebar.module.css'
 
 function HistoryList({ onSelect }) {
   const { history, loadHistory, removeHistory, favoriteHistory } = useHistory()
@@ -30,17 +30,17 @@ function HistoryList({ onSelect }) {
   if (history.length === 0) return null
 
   return (
-    <div className="sidebar-section history-list" ref={listRef}>
+    <div className={`${styles.sidebarSection} ${styles.historyList}`} ref={listRef}>
       <ul>
         {history.map((h, i) => (
           <li key={i} onClick={() => onSelect && onSelect(h)}>
-            <span className="history-term">
+            <span className={styles.historyTerm}>
               {h}
             </span>
-            <div className="history-action-wrapper">
+            <div className={styles.historyActionWrapper}>
               <button
                 type="button"
-                className="history-action"
+                className={styles.historyAction}
                 onClick={(e) => {
                   e.stopPropagation()
                   setOpenIndex(openIndex === i ? null : i)
@@ -49,7 +49,7 @@ function HistoryList({ onSelect }) {
                 ⋮
               </button>
               {openIndex === i && (
-                <div className="history-menu">
+                <div className={styles.historyMenu}>
                   <button
                     type="button"
                     onClick={(e) => {
@@ -63,7 +63,7 @@ function HistoryList({ onSelect }) {
                   </button>
                   <button
                     type="button"
-                    className="delete-btn"
+                    className={styles.deleteBtn}
                     onClick={(e) => {
                       e.stopPropagation()
                       removeHistory(h, user)

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import ModelSelector from './Toolbar/ModelSelector.jsx'
 import { useLanguage } from '../LanguageContext.jsx'
 import { useUser } from '../context/AppContext.jsx'
+import styles from './TopBarCommon.module.css'
 
 function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = false }) {
   const [open, setOpen] = useState(false)
@@ -24,25 +25,25 @@ function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = fals
   if (!user) return null
 
   return (
-    <div className="topbar-right">
+    <div className={styles.topbarRight}>
       {canFavorite && (
-        <button type="button" className="favorite-toggle" onClick={onToggleFavorite}>
+        <button type="button" className={styles.favoriteToggle} onClick={onToggleFavorite}>
           {favorited ? '★' : '☆'}
         </button>
       )}
       <ModelSelector />
-      <div className="more-menu" ref={menuRef}>
-        <button type="button" className="more-btn" onClick={() => setOpen(!open)}>
+      <div className={styles.moreMenu} ref={menuRef}>
+        <button type="button" className={styles.moreBtn} onClick={() => setOpen(!open)}>
           ⋮
         </button>
         {open && (
-          <div className="menu">
+          <div className={styles.menu}>
             <button type="button">
-              <span className="icon">🔗</span>
+              <span className={styles.icon}>🔗</span>
               {t.share}
             </button>
             <button type="button">
-              <span className="icon">🚩</span>
+              <span className={styles.icon}>🚩</span>
               {t.report}
             </button>
           </div>

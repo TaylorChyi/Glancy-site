@@ -1,5 +1,6 @@
 import Avatar from '../Avatar.jsx'
 import ProTag from './ProTag.jsx'
+import styles from './Header.module.css'
 
 function UserMenuDropdown({
   open,
@@ -16,57 +17,57 @@ function UserMenuDropdown({
 }) {
   if (!open) return null
   return (
-    <div className="menu">
-      <div className="menu-header">
-        <div className="avatar">
+    <div className={styles.menu}>
+      <div className={styles.menuHeader}>
+        <div className={styles.avatar}>
           <Avatar width={32} height={32} />
           {isPro && <ProTag small />}
         </div>
-        <div className="username">{username}</div>
+        <div className={styles.username}>{username}</div>
       </div>
       <ul>
         {!isPro && (
           <li onClick={() => openUpgrade()}>
-            <span className="icon">💳</span>
+            <span className={styles.icon}>💳</span>
             {t.upgrade}
           </li>
         )}
         <li onClick={openProfile}>
-          <span className="icon">👤</span>
+          <span className={styles.icon}>👤</span>
           {t.profile}
         </li>
         <li onClick={openSettings}>
-          <span className="icon">⚙️</span>
+          <span className={styles.icon}>⚙️</span>
           {t.settings}
         </li>
         <li onClick={openShortcuts}>
-          <span className="icon">⌨️</span>
+          <span className={styles.icon}>⌨️</span>
           {t.shortcuts}
         </li>
       </ul>
       <ul>
         <li>
-          <span className="icon">❓</span>
+          <span className={styles.icon}>❓</span>
           <button
             type="button"
             onClick={() => {
               openHelp()
               setOpen(false)
             }}
-            className="menu-btn"
+            className={styles.menuBtn}
           >
             {t.help}
           </button>
         </li>
         <li>
-          <span className="icon">🔑</span>
+          <span className={styles.icon}>🔑</span>
           <button
             type="button"
             onClick={() => {
               openLogout()
               setOpen(false)
             }}
-            className="menu-btn"
+            className={styles.menuBtn}
           >
             {t.logout}
           </button>

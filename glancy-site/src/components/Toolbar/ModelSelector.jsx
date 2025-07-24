@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import './Toolbar.css'
+import styles from './Toolbar.module.css'
 import { useLanguage } from '../../LanguageContext.jsx'
 
 function ModelSelector() {
@@ -29,16 +29,16 @@ function ModelSelector() {
   }
 
   return (
-    <div className="toolbar-section model-selector" ref={menuRef}>
+    <div className={`${styles.toolbarSection} ${styles.modelSelector}`} ref={menuRef}>
       <button
         type="button"
-        className="model-btn"
+        className={styles.modelBtn}
         onClick={() => setOpen(!open)}
       >
         {model === 'model-a' ? t.modelA : t.modelB} ▾
       </button>
       {open && (
-        <div className="model-menu">
+        <div className={styles.modelMenu}>
           <button type="button" onClick={() => selectModel('model-a')}>
             {t.modelA}
           </button>
