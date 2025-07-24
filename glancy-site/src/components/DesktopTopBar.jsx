@@ -1,6 +1,7 @@
 import './DesktopTopBar.css'
 import './TopBarCommon.css'
 import './Header/Header.css'
+import styles from './DesktopTopBar.module.css'
 import TopBarActions from './TopBarActions.jsx'
 
 function DesktopTopBar({
@@ -16,12 +17,8 @@ function DesktopTopBar({
     <header className="desktop-topbar">
       <button
         type="button"
-        className="back-btn"
+        className={`back-btn ${showBack ? styles.visible : styles.hidden}`}
         onClick={onBack}
-        style={{
-          visibility: showBack ? 'visible' : 'hidden',
-          pointerEvents: showBack ? 'auto' : 'none'
-        }}
       >
         ←
       </button>

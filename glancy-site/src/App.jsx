@@ -12,6 +12,7 @@ import voiceDark from './assets/voice-button-dark.svg'
 import { useWordsApi } from './api/words.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
+import styles from './App.module.css'
 import Layout from './components/Layout.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
 
@@ -234,7 +235,7 @@ function App() {
             placeholder={t.inputPlaceholder}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            style={{ borderRadius: '20px' }}
+            className={styles.roundedInput}
           />
           <button type="submit">
             <img
