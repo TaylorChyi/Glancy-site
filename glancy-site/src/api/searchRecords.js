@@ -2,30 +2,28 @@ import { API_PATHS } from '../config/api.js'
 import { apiRequest } from './client.js'
 
 export const fetchSearchRecords = ({ userId, token }) =>
-  apiRequest(`${API_PATHS.searchRecords}/user/${userId}`, {
-    headers: { 'X-USER-TOKEN': token }
-  })
+  apiRequest(`${API_PATHS.searchRecords}/user/${userId}`, { token })
 
 export const saveSearchRecord = ({ userId, token, term, language }) =>
   apiRequest(`${API_PATHS.searchRecords}/user/${userId}`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'X-USER-TOKEN': token
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ term, language })
+    body: JSON.stringify({ term, language }),
+    token
   })
 
 export const clearSearchRecords = ({ userId, token }) =>
   apiRequest(`${API_PATHS.searchRecords}/user/${userId}`, {
     method: 'DELETE',
-    headers: { 'X-USER-TOKEN': token }
+    token
   })
 
 export const deleteSearchRecord = ({ userId, recordId, token }) =>
   apiRequest(`${API_PATHS.searchRecords}/user/${userId}/${recordId}`, {
     method: 'DELETE',
-    headers: { 'X-USER-TOKEN': token }
+    token
   })
 
 export const favoriteSearchRecord = ({ userId, token, recordId }) =>
@@ -33,7 +31,7 @@ export const favoriteSearchRecord = ({ userId, token, recordId }) =>
     `${API_PATHS.searchRecords}/user/${userId}/${recordId}/favorite`,
     {
       method: 'POST',
-      headers: { 'X-USER-TOKEN': token }
+      token
     }
   )
 
@@ -42,6 +40,6 @@ export const unfavoriteSearchRecord = ({ userId, token, recordId }) =>
     `${API_PATHS.searchRecords}/user/${userId}/${recordId}/favorite`,
     {
       method: 'DELETE',
-      headers: { 'X-USER-TOKEN': token }
+      token
     }
   )
