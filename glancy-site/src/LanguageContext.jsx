@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { translations } from './translations.js'
-import { API_PATHS } from './config/api.js'
-import { apiRequest } from './api/client.js'
+import { useLocale } from './LocaleContext.jsx'
 
 const LanguageContext = createContext({
   lang: 'zh',
@@ -13,19 +12,16 @@ export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'zh')
   const [t, setT] = useState(() => translations[localStorage.getItem('lang')] || translations.zh)
 
+  const { locale } = useLocale()
+
   useEffect(() => {
-    const stored = localStorage.getItem('lang')
-    if (stored) return
-    apiRequest(API_PATHS.locale)
-      .then((data) => {
-        if (translations[data.lang]) {
-          setLang(data.lang)
-          setT(translations[data.lang])
-          localStorage.setItem('lang', data.lang)
-        }
-      })
-      .catch(() => {})
-  }, [])
+    if (localStorage.getItem('lang') || !locale) return
+    if (translations[locale.lang]) {
+      setLang(locale.lang)
+      setT(translations[locale.lang])
+      localStorage.setItem('lang', locale.lang)
+    }
+  }, [locale])
 
   useEffect(() => {
     document.title = t.welcomeTitle
