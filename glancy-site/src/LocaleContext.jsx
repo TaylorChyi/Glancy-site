@@ -19,7 +19,9 @@ export function LocaleProvider({ children }) {
         setLocale(data)
         localStorage.setItem('locale', JSON.stringify(data))
       })
-      .catch(() => {})
+      .catch((err) => {
+        console.error(err)
+      })
   }, [locale])
 
   return (

@@ -40,8 +40,12 @@ function Preferences() {
         localStorage.setItem('dictionaryModel', dm)
         setTheme(data.theme || 'system')
       })
-      .catch(() => {})
-  }, [setTheme, user])
+      .catch((err) => {
+        console.error(err)
+        setPopupMsg(t.fail)
+        setPopupOpen(true)
+      })
+  }, [setTheme, t, user, api])
 
   const handleSave = async (e) => {
     e.preventDefault()

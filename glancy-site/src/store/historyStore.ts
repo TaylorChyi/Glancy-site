@@ -60,7 +60,9 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
               recordMap: { ...state.recordMap, [term]: record.id }
             }))
           })
-          .catch(() => {})
+          .catch((err) => {
+            console.error(err)
+          })
       }
       const unique = Array.from(new Set([term, ...get().history])).slice(0, 20)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(unique))
@@ -68,7 +70,9 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     },
     clearHistory: async (user?: User | null) => {
       if (user) {
-        clearSearchRecords({ userId: user.id, token: user.token }).catch(() => {})
+        clearSearchRecords({ userId: user.id, token: user.token }).catch((err) => {
+          console.error(err)
+        })
       }
       localStorage.removeItem(STORAGE_KEY)
       set({ history: [], recordMap: {} })
@@ -77,7 +81,9 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
       if (user) {
         const id = get().recordMap[term]
         if (id) {
-          deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch(() => {})
+          deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch((err) => {
+            console.error(err)
+          })
         }
       }
       const updated = get().history.filter((t) => t !== term)
@@ -91,13 +97,17 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     favoriteHistory: async (term: string, user?: User | null) => {
         const id = get().recordMap[term]
         if (user && id) {
-          favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch(() => {})
+          favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+            console.error(err)
+          })
         }
       },
     unfavoriteHistory: async (term: string, user?: User | null) => {
         const id = get().recordMap[term]
         if (user && id) {
-          unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch(() => {})
+          unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+            console.error(err)
+          })
         }
       }
     }
