@@ -19,7 +19,10 @@ export function createApiClient({ token, headers: defaultHeaders = {} } = {}) {
 
     const resp = await fetch(url, { ...options, headers: mergedHeaders })
     if (!resp.ok) {
-      const text = await resp.text().catch(() => '')
+      const text = await resp.text().catch((err) => {
+        console.error(err)
+        return ''
+      })
       throw new Error(extractMessage(text) || 'Request failed')
     }
     const contentType = resp.headers.get('content-type') || ''

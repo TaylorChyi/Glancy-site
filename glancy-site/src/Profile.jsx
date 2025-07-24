@@ -40,8 +40,12 @@ function Profile({ onCancel }) {
         setGoal(data.goal)
         setAvatar(data.avatar)
       })
-      .catch(() => {})
-  }, [])
+      .catch((err) => {
+        console.error(err)
+        setPopupMsg(t.fail)
+        setPopupOpen(true)
+      })
+  }, [api, t])
 
   const handleSave = async (e) => {
     e.preventDefault()
