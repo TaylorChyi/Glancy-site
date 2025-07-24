@@ -1,4 +1,5 @@
 @import './theme/colors.css';
+@import "./theme/variables.css";
 @import './theme/spacing.css';
 @import './theme/typography.css';
 @import './theme/layout.css';
@@ -149,9 +150,9 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border-radius: var(--radius-md);
+  border: var(--btn-border);
+  padding: var(--btn-padding);
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
