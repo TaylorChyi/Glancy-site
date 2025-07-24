@@ -15,8 +15,7 @@ import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
 import { useIsMobile } from './utils.js'
 import Sidebar from './components/Sidebar'
-import MobileTopBar from './components/MobileTopBar.jsx'
-import DesktopTopBar from './components/DesktopTopBar.jsx'
+import TopBar from './components/TopBar.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
 import { useFavoritesStore } from './store/favoritesStore.js'
 
@@ -194,28 +193,17 @@ function App() {
         isMobile={isMobile}
       />
       <div className="right">
-        {isMobile ? (
-          <header className="topbar">
-            <MobileTopBar
-              term={entry?.term || ''}
-              showBack={!showFavorites && fromFavorites}
-              onBack={handleBackFromFavorite}
-              favorited={favorites.includes(entry?.term)}
-              onToggleFavorite={() => entry && toggleFavorite(entry.term)}
-              canFavorite={!!entry && !showFavorites && !showHistory}
-              onOpenSidebar={() => setSidebarOpen(true)}
-            />
-          </header>
-        ) : (
-          <DesktopTopBar
+        <header className="topbar">
+          <TopBar
             term={entry?.term || ''}
             showBack={!showFavorites && fromFavorites}
             onBack={handleBackFromFavorite}
             favorited={favorites.includes(entry?.term)}
             onToggleFavorite={() => entry && toggleFavorite(entry.term)}
             canFavorite={!!entry && !showFavorites && !showHistory}
+            onOpenSidebar={() => setSidebarOpen(true)}
           />
-        )}
+        </header>
         <main className="display">
           {showFavorites ? (
             favorites.length ? (
