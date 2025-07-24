@@ -7,7 +7,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "dependencies": {
     "express": "^4.19.2",
@@ -26,7 +27,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
-    "vite": "^7.0.4",
+    "jest": "^30.0.5",
+    "vite": "^7.0.4"
     "typescript": "^5.4.5"
   }
 }
