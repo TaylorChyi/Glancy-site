@@ -69,6 +69,8 @@
 
 :root[data-theme='system'] {
   color-scheme: light dark;
+  --primary-bg: Canvas;
+  --primary-color: CanvasText;
 }
 
 @media (prefers-color-scheme: dark) {
