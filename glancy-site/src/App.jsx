@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import { useTheme } from './ThemeContext.jsx'
 import { translations } from './translations.js'
 import DictionaryEntry from './components/DictionaryEntry.jsx'
-import sendLight from './assets/send-button-light.svg'
-import sendDark from './assets/send-button-dark.svg'
-import voiceLight from './assets/voice-button-light.svg'
-import voiceDark from './assets/voice-button-dark.svg'
+import {
+  SendButtonLightIcon,
+  SendButtonDarkIcon,
+  VoiceButtonLightIcon,
+  VoiceButtonDarkIcon
+} from './components/Icon'
 import { useWordsApi } from './api/words.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
@@ -28,8 +30,10 @@ function App() {
   const { loadHistory, addHistory, unfavoriteHistory } = useHistory()
   const { theme, resolvedTheme, setTheme } = useTheme()
   const inputRef = useRef(null)
-  const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
-  const voiceIcon = resolvedTheme === 'dark' ? voiceDark : voiceLight
+  const SendIcon =
+    resolvedTheme === 'dark' ? SendButtonDarkIcon : SendButtonLightIcon
+  const VoiceIcon =
+    resolvedTheme === 'dark' ? VoiceButtonDarkIcon : VoiceButtonLightIcon
   const [showFavorites, setShowFavorites] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
   const [fromFavorites, setFromFavorites] = useState(false)
@@ -238,10 +242,11 @@ function App() {
             className={styles.roundedInput}
           />
           <button type="submit">
-            <img
-              src={text.trim() === '' ? voiceIcon : sendIcon}
-              alt={text.trim() === '' ? 'voice' : 'send'}
-            />
+            {text.trim() === '' ? (
+              <VoiceIcon alt="voice" />
+            ) : (
+              <SendIcon alt="send" />
+            )}
           </button>
         </form>
         <div className="icp">
