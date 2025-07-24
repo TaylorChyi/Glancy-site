@@ -1,13 +1,18 @@
 import { create } from 'zustand'
 
+interface FavoritesState {
+  favorites: string[]
+  toggleFavorite: (term: string) => void
+}
+
 const STORAGE_KEY = 'favorites'
 
-export const useFavoritesStore = create((set, get) => {
+export const useFavoritesStore = create<FavoritesState>((set, get) => {
   const stored = localStorage.getItem(STORAGE_KEY)
-  const initial = stored ? JSON.parse(stored) : []
+  const initial: string[] = stored ? JSON.parse(stored) : []
   return {
     favorites: initial,
-    toggleFavorite: (term) => {
+    toggleFavorite: (term: string) => {
       const list = get().favorites
       const updated = list.includes(term)
         ? list.filter((t) => t !== term)
