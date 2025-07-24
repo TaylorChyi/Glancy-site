@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import './Modal.css'
+import styles from './Modal.module.css'
 
 function Modal({ onClose, className = '', children }) {
   useEffect(() => {
@@ -11,7 +11,7 @@ function Modal({ onClose, className = '', children }) {
   }, [onClose])
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className={styles.overlay} onClick={onClose}>
       <div className={className} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>

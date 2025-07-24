@@ -1,20 +1,20 @@
-.logout-modal {
+.logoutModal {
   background: var(--app-bg);
   color: var(--app-color);
   padding: 20px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   width: 320px;
   max-width: 90%;
   text-align: center;
 }
 
-.logout-modal h3 {
+.logoutModal h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
 
-.logout-modal .message {
+.logoutModal .message {
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
@@ -25,21 +25,21 @@
   gap: 0.5rem;
 }
 
-.logout-btn {
+.logoutBtn {
   background: var(--highlight-color);
   color: var(--primary-bg);
   border: none;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 0.5rem 1rem;
   cursor: pointer;
   width: 100%;
 }
 
-.cancel-btn {
+.cancelBtn {
   background: none;
   border: 1px solid var(--border-color);
   color: var(--app-color);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 0.5rem 1rem;
   cursor: pointer;
   width: 100%;

@@ -1,5 +1,5 @@
 import Modal from './Modal.jsx'
-import './LogoutConfirmModal.css'
+import styles from './LogoutConfirmModal.module.css'
 import { useLanguage } from '../LanguageContext.jsx'
 
 function LogoutConfirmModal({ open, onConfirm, onCancel, email }) {
@@ -7,14 +7,14 @@ function LogoutConfirmModal({ open, onConfirm, onCancel, email }) {
   if (!open) return null
   const message = t.logoutConfirmMessage.replace('{email}', email)
   return (
-    <Modal onClose={onCancel} className="logout-modal">
+    <Modal onClose={onCancel} className={styles.logoutModal}>
       <h3>{t.logoutConfirmTitle}</h3>
-      <p className="message">{message}</p>
-      <div className="actions">
-        <button type="button" className="logout-btn" onClick={onConfirm}>
+      <p className={styles.message}>{message}</p>
+      <div className={styles.actions}>
+        <button type="button" className={styles.logoutBtn} onClick={onConfirm}>
           {t.logout}
         </button>
-        <button type="button" className="cancel-btn" onClick={onCancel}>
+        <button type="button" className={styles.cancelBtn} onClick={onCancel}>
           {t.cancelButton}
         </button>
       </div>
