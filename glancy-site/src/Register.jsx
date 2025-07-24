@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
-import { apiRequest } from './api/client.js'
+import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
 import googleIcon from './assets/google.svg'
 import appleIcon from './assets/apple.svg'
@@ -26,6 +26,7 @@ function Register() {
   const { setUser } = useUser()
   const { resolvedTheme } = useTheme()
   const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
+  const api = useApi()
 
   const validateAccount = () => {
     if (method === 'email') {
@@ -50,7 +51,7 @@ function Register() {
       return
     }
     try {
-      await apiRequest(API_PATHS.register, {
+      await api(API_PATHS.register, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -58,7 +59,7 @@ function Register() {
           code
         })
       })
-      const loginData = await apiRequest(API_PATHS.login, {
+      const loginData = await api(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account, method, password: code })

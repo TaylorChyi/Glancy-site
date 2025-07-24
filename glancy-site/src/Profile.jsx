@@ -5,12 +5,13 @@ import Avatar from './components/Avatar.jsx'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
-import { apiRequest } from './api/client.js'
+import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
 
 function Profile({ onCancel }) {
   const { t } = useLanguage()
   const { user: currentUser } = useUser()
+  const api = useApi()
   const [username, setUsername] = useState(currentUser?.username || '')
   const [email, setEmail] = useState(currentUser?.email || '')
   const [phone, setPhone] = useState(currentUser?.phone || '')
@@ -28,7 +29,7 @@ function Profile({ onCancel }) {
   })
 
   useEffect(() => {
-    apiRequest(API_PATHS.profile)
+    api(API_PATHS.profile)
       .then((data) => {
         setUsername(data.username)
         setEmail(data.email)
@@ -55,7 +56,7 @@ function Profile({ onCancel }) {
     if (avatar) {
       formData.append('avatar', avatar)
     }
-    await apiRequest(API_PATHS.profile, {
+    await api(API_PATHS.profile, {
       method: 'POST',
       body: formData
     })

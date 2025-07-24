@@ -10,6 +10,7 @@ This document tracks current cleanup efforts and future improvements.
 ## Completed Tasks
 1. Added missing entries in `API_PATHS` so all endpoints are centralized.
 2. Updated components to reference these constants instead of literal strings.
+3. Introduced `useApi` hook providing authenticated requests.
 
 ## Future Work
 - Introduce a small API client or React hook to wrap `fetch` calls. This allows

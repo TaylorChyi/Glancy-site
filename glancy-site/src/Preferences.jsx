@@ -6,12 +6,13 @@ import { useTheme } from './ThemeContext.jsx'
 import { useUser } from './context/AppContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
-import { apiRequest } from './api/client.js'
+import { useApi } from './hooks/useApi.js'
 
 function Preferences() {
   const { t } = useLanguage()
   const { theme, setTheme } = useTheme()
   const { user } = useUser()
+  const api = useApi()
   const [sourceLang, setSourceLang] = useState(
     localStorage.getItem('sourceLang') || 'auto'
   )
@@ -26,7 +27,7 @@ function Preferences() {
 
   useEffect(() => {
     if (!user) return
-    apiRequest(`${API_PATHS.preferences}/user/${user.id}`)
+    api(`${API_PATHS.preferences}/user/${user.id}`)
       .then((data) => {
         const sl = data.systemLanguage || 'auto'
         const tl = data.searchLanguage || 'ENGLISH'
@@ -45,7 +46,7 @@ function Preferences() {
   const handleSave = async (e) => {
     e.preventDefault()
     if (!user) return
-    await apiRequest(`${API_PATHS.preferences}/user/${user.id}`, {
+    await api(`${API_PATHS.preferences}/user/${user.id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

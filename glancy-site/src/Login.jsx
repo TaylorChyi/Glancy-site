@@ -6,7 +6,7 @@ import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
 import { useUser } from './context/AppContext.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
-import { apiRequest } from './api/client.js'
+import { useApi } from './hooks/useApi.js'
 import googleIcon from './assets/google.svg'
 import appleIcon from './assets/apple.svg'
 import phoneIcon from './assets/phone.svg'
@@ -19,6 +19,7 @@ import { useTheme } from './ThemeContext.jsx'
 
 function Login() {
   const { setUser } = useUser()
+  const api = useApi()
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const [method, setMethod] = useState('phone')
@@ -32,7 +33,7 @@ function Login() {
     e.preventDefault()
     setPopupMsg('')
     try {
-      const data = await apiRequest(API_PATHS.login, {
+      const data = await api(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account, password, method })

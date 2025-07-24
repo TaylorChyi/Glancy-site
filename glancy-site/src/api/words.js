@@ -1,5 +1,6 @@
 import { API_PATHS } from '../config/api.js'
 import { apiRequest } from './client.js'
+import { useApi } from '../hooks/useApi.js'
 
 /**
  * Query a word definition
@@ -9,18 +10,25 @@ import { apiRequest } from './client.js'
  * @param {string} opts.language CHINESE or ENGLISH
  * @param {string} [opts.token] user token for auth header
  */
-export async function fetchWord({ userId, term, language, token }) {
-  const params = new URLSearchParams({
-    userId,
-    term,
-    language
-  })
-  return apiRequest(`${API_PATHS.words}?${params.toString()}`, { token })
+export function createWordsApi(request = apiRequest) {
+  const fetchWord = async ({ userId, term, language, token }) => {
+    const params = new URLSearchParams({ userId, term, language })
+    return request(`${API_PATHS.words}?${params.toString()}`, { token })
+  }
+
+  const fetchWordAudio = async (word) => {
+    const resp = await request(
+      `${API_PATHS.words}/audio?word=${encodeURIComponent(word)}`
+    )
+    return resp.blob()
+  }
+
+  return { fetchWord, fetchWordAudio }
 }
 
-export async function fetchWordAudio(word) {
-  const resp = await apiRequest(
-    `${API_PATHS.words}/audio?word=${encodeURIComponent(word)}`
-  )
-  return resp.blob()
+export const { fetchWord, fetchWordAudio } = createWordsApi()
+
+export function useWordsApi() {
+  const api = useApi()
+  return createWordsApi(api)
 }

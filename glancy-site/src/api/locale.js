@@ -1,4 +1,15 @@
 import { API_PATHS } from '../config/api.js'
 import { apiRequest } from './client.js'
+import { useApi } from '../hooks/useApi.js'
 
-export const getLocale = () => apiRequest(API_PATHS.locale)
+export function createLocaleApi(request = apiRequest) {
+  const getLocale = () => request(API_PATHS.locale)
+  return { getLocale }
+}
+
+export const { getLocale } = createLocaleApi()
+
+export function useLocaleApi() {
+  const api = useApi()
+  return createLocaleApi(api)
+}

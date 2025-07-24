@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
-import { apiRequest } from './api/client.js'
+import { useApi } from './hooks/useApi.js'
 
 function Faq() {
   const { t } = useLanguage()
   const [items, setItems] = useState([])
+  const api = useApi()
 
   useEffect(() => {
-    apiRequest(API_PATHS.faqs)
+    api(API_PATHS.faqs)
       .then((data) => setItems(data))
       .catch(() => {})
-  }, [])
+  }, [api])
 
   return (
     <div className="App">

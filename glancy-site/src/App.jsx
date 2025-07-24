@@ -9,7 +9,7 @@ import sendLight from './assets/send-button-light.svg'
 import sendDark from './assets/send-button-dark.svg'
 import voiceLight from './assets/voice-button-light.svg'
 import voiceDark from './assets/voice-button-dark.svg'
-import { fetchWord } from './api/words.js'
+import { useWordsApi } from './api/words.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
 import { useIsMobile } from './utils.js'
@@ -39,6 +39,7 @@ function App() {
   const isMobile = useIsMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const navigate = useNavigate()
+  const { fetchWord } = useWordsApi()
 
   const handleToggleFavorites = () => {
     // always show favorites when invoked
@@ -82,8 +83,7 @@ function App() {
       const data = await fetchWord({
         userId: user.id,
         term: input,
-        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
-        token: user.token
+        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH'
       })
       setEntry(data)
       addHistory(input, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
@@ -108,8 +108,7 @@ function App() {
       const data = await fetchWord({
         userId: user.id,
         term,
-        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
-        token: user.token
+        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH'
       })
       setEntry(data)
       // selecting from history should not reorder records
