@@ -36,8 +36,8 @@
 }
 
 .logout-btn {
-  background: #121212;
-  color: #fff;
+  background: var(--highlight-color);
+  color: var(--primary-bg);
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
