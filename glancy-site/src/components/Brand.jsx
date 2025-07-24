@@ -1,7 +1,7 @@
 import { useLanguage } from '../LanguageContext.jsx'
 import { useTheme } from '../ThemeContext.jsx'
-import lightIcon from '../assets/glancy-light.svg'
-import darkIcon from '../assets/glancy-dark.svg'
+import lightIcon from '../assets/glancy-web-light.svg'
+import darkIcon from '../assets/glancy-web-dark.svg'
 import UserMenu from './Header/UserMenu.jsx'
 
 function Brand() {
