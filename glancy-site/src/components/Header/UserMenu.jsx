@@ -1,4 +1,3 @@
-import { useRef, useState, useEffect } from 'react'
 import { useUser, useHistory } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
 import './Header.css'
@@ -9,14 +8,6 @@ import UserMenuDropdown from './UserMenuDropdown.jsx'
 import UserMenuModals from './UserMenuModals.jsx'
 
 function UserMenu({ size = 24, showName = false }) {
-  const [open, setOpen] = useState(false)
-  const [helpOpen, setHelpOpen] = useState(false)
-  const [settingsOpen, setSettingsOpen] = useState(false)
-  const [shortcutsOpen, setShortcutsOpen] = useState(false)
-  const [profileOpen, setProfileOpen] = useState(false)
-  const [upgradeOpen, setUpgradeOpen] = useState(false)
-  const [logoutOpen, setLogoutOpen] = useState(false)
-  const menuRef = useRef(null)
   const { user, clearUser } = useUser()
   const { clearHistory } = useHistory()
   const { t } = useLanguage()
