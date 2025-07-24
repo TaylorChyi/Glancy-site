@@ -11,6 +11,7 @@ import SettingsModal from '../SettingsModal.jsx'
 import ShortcutsModal from '../ShortcutsModal.jsx'
 import ProfileModal from '../ProfileModal.jsx'
 import UpgradeModal from '../UpgradeModal.jsx'
+import LogoutConfirmModal from '../LogoutConfirmModal.jsx'
 
 // size 控制触发按钮中头像的尺寸
 
@@ -21,6 +22,7 @@ function UserMenu({ size = 24, showName = false }) {
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
   const [upgradeOpen, setUpgradeOpen] = useState(false)
+  const [logoutOpen, setLogoutOpen] = useState(false)
   const menuRef = useRef(null)
   const user = useUserStore((s) => s.user)
   const clearUser = useUserStore((s) => s.clearUser)
@@ -107,9 +109,7 @@ function UserMenu({ size = 24, showName = false }) {
                   <button
                     type="button"
                     onClick={() => {
-                      // keep search history on the server when logging out
-                      clearHistory()
-                      clearUser()
+                      setLogoutOpen(true)
                       setOpen(false)
                     }}
                     className="menu-btn"
@@ -141,6 +141,16 @@ function UserMenu({ size = 24, showName = false }) {
       <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
       <SettingsModal open={settingsOpen} onClose={() => setSettingsOpen(false)} />
       <ShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
+      <LogoutConfirmModal
+        open={logoutOpen}
+        onConfirm={() => {
+          clearHistory()
+          clearUser()
+          setLogoutOpen(false)
+        }}
+        onCancel={() => setLogoutOpen(false)}
+        email={user?.email || ''}
+      />
     </div>
   )
 }
