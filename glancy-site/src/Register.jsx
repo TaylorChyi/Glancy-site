@@ -12,8 +12,8 @@ import appleIcon from './assets/apple.svg'
 import phoneIcon from './assets/phone.svg'
 import wechatIcon from './assets/wechat.svg'
 import emailIcon from './assets/email.svg'
-import lightIcon from './assets/glancy-light.svg'
-import darkIcon from './assets/glancy-dark.svg'
+import lightIcon from './assets/glancy-web-light.svg'
+import darkIcon from './assets/glancy-web-dark.svg'
 import { useTheme } from './ThemeContext.jsx'
 
 function Register() {
