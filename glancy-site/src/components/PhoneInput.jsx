@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { API_PATHS } from '../config/api.js'
 import { createApiClient } from '../api/client.js'
-import { getLocale } from '../api/locale.js'
 import { useLocale } from '../LocaleContext.jsx'
 import '../AuthPage.css'
 
