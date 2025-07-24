@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import geoip from 'geoip-lite'
+import { COUNTRY_LANGUAGE_MAP } from './src/config/countryLanguageMap.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -20,17 +21,7 @@ app.get('/api/locale', (req, res) => {
     '127.0.0.1'
   const geo = geoip.lookup(ip)
   const country = geo?.country || 'US'
-  const map = {
-    CN: 'zh',
-    US: 'en',
-    GB: 'en',
-    DE: 'de',
-    FR: 'fr',
-    RU: 'ru',
-    JP: 'ja',
-    ES: 'es'
-  }
-  const lang = map[country] || 'en'
+  const lang = COUNTRY_LANGUAGE_MAP[country] || 'en'
   res.json({ country, lang })
 })
 
