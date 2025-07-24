@@ -7,13 +7,15 @@ import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
-import googleIcon from './assets/google.svg'
-import appleIcon from './assets/apple.svg'
-import phoneIcon from './assets/phone.svg'
-import wechatIcon from './assets/wechat.svg'
-import emailIcon from './assets/email.svg'
-import lightIcon from './assets/glancy-web-light.svg'
-import darkIcon from './assets/glancy-web-dark.svg'
+import {
+  GoogleIcon,
+  AppleIcon,
+  PhoneIcon,
+  WechatIcon,
+  EmailIcon,
+  GlancyWebLightIcon,
+  GlancyWebDarkIcon
+} from './components/Icon'
 import { useTheme } from './ThemeContext.jsx'
 
 function Register() {
@@ -25,7 +27,7 @@ function Register() {
   const navigate = useNavigate()
   const { setUser } = useUser()
   const { resolvedTheme } = useTheme()
-  const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
+  const BrandIcon = resolvedTheme === 'dark' ? GlancyWebDarkIcon : GlancyWebLightIcon
   const api = useApi()
 
   const validateAccount = () => {
@@ -109,17 +111,17 @@ function Register() {
 
   const methodOrder = ['phone', 'email', 'wechat', 'apple', 'google']
   const icons = {
-    email: emailIcon,
-    phone: phoneIcon,
-    wechat: wechatIcon,
-    apple: appleIcon,
-    google: googleIcon
+    email: EmailIcon,
+    phone: PhoneIcon,
+    wechat: WechatIcon,
+    apple: AppleIcon,
+    google: GoogleIcon
   }
 
   return (
     <div className="auth-page">
       <Link to="/" className="auth-close">×</Link>
-      <img className="auth-logo" src={icon} alt="Glancy" />
+      <BrandIcon className="auth-logo" />
       <div className="auth-brand">Glancy</div>
       <h1 className="auth-title">Create an account</h1>
       {renderForm()}
@@ -140,7 +142,10 @@ function Register() {
                 formMethods.includes(m) ? setMethod(m) : alert('Not implemented')
               }
             >
-              <img src={icons[m]} alt={m} />
+              {(() => {
+                const Icon = icons[m]
+                return <Icon alt={m} />
+              })()}
             </button>
           ))}
       </div>
