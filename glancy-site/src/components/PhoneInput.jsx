@@ -1,7 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { API_PATHS } from '../config/api.js'
-import { apiRequest } from '../api/client.js'
+import { createApiClient } from '../api/client.js'
 import '../AuthPage.css'
+
+const request = createApiClient({
+  headers: {
+    'Accept-Language': navigator.language || 'en-US'
+  }
+})
 
 const CODE_LIST = [
   { country: 'CN', code: '+86' },
@@ -23,7 +29,7 @@ function PhoneInput({ onChange, placeholder = 'Phone number' }) {
   const ref = useRef(null)
 
   useEffect(() => {
-    apiRequest(API_PATHS.locale)
+    request(API_PATHS.locale)
       .then((data) => {
         const found = CODE_LIST.find((c) => c.country === data.country)
         if (found) setCode(found.code)
