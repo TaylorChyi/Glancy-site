@@ -5,6 +5,7 @@ import darkIcon from '../assets/glancy-web-dark.svg'
 import TopBarActions from './TopBarActions.jsx'
 import './TopBarCommon.css'
 import './MobileTopBar.css'
+import styles from './MobileTopBar.module.css'
 
 function MobileTopBar({
   term = '',
@@ -26,12 +27,8 @@ function MobileTopBar({
       </button>
       <button
         type="button"
-        className="back-btn"
+        className={`back-btn ${showBack ? styles.visible : styles.hidden}`}
         onClick={onBack}
-        style={{
-          visibility: showBack ? 'visible' : 'hidden',
-          pointerEvents: showBack ? 'auto' : 'none'
-        }}
       >
         ←
       </button>
