@@ -1,17 +1,12 @@
 import { useEffect, useState, useRef } from 'react'
-import { useHistoryStore } from '../../store/historyStore.js'
-import { useFavoritesStore } from '../../store/favoritesStore.js'
-import { useUserStore } from '../../store/userStore.js'
+import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
 import './Sidebar.css'
 
 function HistoryList({ onSelect }) {
-  const history = useHistoryStore((s) => s.history)
-  const loadHistory = useHistoryStore((s) => s.loadHistory)
-  const removeHistory = useHistoryStore((s) => s.removeHistory)
-  const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
-  const favoriteHistory = useHistoryStore((s) => s.favoriteHistory)
-  const user = useUserStore((s) => s.user)
+  const { history, loadHistory, removeHistory, favoriteHistory } = useHistory()
+  const { toggleFavorite } = useFavorites()
+  const { user } = useUser()
   const [openIndex, setOpenIndex] = useState(null)
   const listRef = useRef(null)
   const { t } = useLanguage()

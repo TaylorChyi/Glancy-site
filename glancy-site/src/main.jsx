@@ -7,7 +7,7 @@ import Login from './Login.jsx'
 import Register from './Register.jsx'
 import { LanguageProvider } from './LanguageContext.jsx'
 import { ThemeProvider } from './ThemeContext.jsx'
-import { LocaleProvider } from './LocaleContext.jsx'
+import { AppProvider } from './context/AppContext.jsx'
 
 function updateVh() {
   document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
@@ -18,7 +18,7 @@ window.addEventListener('resize', updateVh)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <LocaleProvider>
+    <AppProvider>
       <LanguageProvider>
         <ThemeProvider>
           <BrowserRouter>
@@ -30,7 +30,7 @@ createRoot(document.getElementById('root')).render(
           </BrowserRouter>
         </ThemeProvider>
       </LanguageProvider>
-    </LocaleProvider>
+    </AppProvider>
   </StrictMode>,
 )
 

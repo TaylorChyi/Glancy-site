@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { useHistoryStore } from './store/historyStore.js'
 import MessagePopup from './components/MessagePopup.jsx'
-import { useUserStore } from './store/userStore.js'
+import { useHistory, useUser, useFavorites } from './context/AppContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from './ThemeContext.jsx'
 import { translations } from './translations.js'
@@ -18,7 +17,6 @@ import Sidebar from './components/Sidebar'
 import MobileTopBar from './components/MobileTopBar.jsx'
 import DesktopTopBar from './components/DesktopTopBar.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
-import { useFavoritesStore } from './store/favoritesStore.js'
 
 function App() {
   const [text, setText] = useState('')
@@ -28,9 +26,8 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
-  const user = useUserStore((s) => s.user)
-  const loadHistory = useHistoryStore((s) => s.loadHistory)
-  const addHistory = useHistoryStore((s) => s.addHistory)
+  const { user } = useUser()
+  const { loadHistory, addHistory, unfavoriteHistory } = useHistory()
   const { theme, resolvedTheme, setTheme } = useTheme()
   const inputRef = useRef(null)
   const sendIcon = resolvedTheme === 'dark' ? sendDark : sendLight
@@ -38,9 +35,7 @@ function App() {
   const [showFavorites, setShowFavorites] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
   const [fromFavorites, setFromFavorites] = useState(false)
-  const favorites = useFavoritesStore((s) => s.favorites)
-  const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
-  const unfavoriteHistory = useHistoryStore((s) => s.unfavoriteHistory)
+  const { favorites, toggleFavorite } = useFavorites()
   const isMobile = useIsMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const navigate = useNavigate()

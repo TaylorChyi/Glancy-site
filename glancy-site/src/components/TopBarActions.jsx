@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
 import ModelSelector from './Toolbar/ModelSelector.jsx'
 import { useLanguage } from '../LanguageContext.jsx'
-import { useUserStore } from '../store/userStore.js'
+import { useUser } from '../context/AppContext.jsx'
 
 function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = false }) {
   const [open, setOpen] = useState(false)
   const menuRef = useRef(null)
   const { t } = useLanguage()
-  const user = useUserStore((s) => s.user)
+  const { user } = useUser()
 
   useEffect(() => {
     function handlePointerDown(e) {

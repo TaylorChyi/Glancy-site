@@ -6,7 +6,7 @@ import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
-import { useUserStore } from './store/userStore.js'
+import { useUser } from './context/AppContext.jsx'
 import googleIcon from './assets/google.svg'
 import appleIcon from './assets/apple.svg'
 import phoneIcon from './assets/phone.svg'
@@ -23,7 +23,7 @@ function Register() {
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
-  const setUser = useUserStore((s) => s.setUser)
+  const { setUser } = useUser()
   const { resolvedTheme } = useTheme()
   const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
 
