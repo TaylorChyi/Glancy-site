@@ -2,7 +2,7 @@ import Brand from '../Brand.jsx'
 import SidebarFunctions from './SidebarFunctions.jsx'
 import SidebarUser from './SidebarUser.jsx'
 import { useIsMobile } from '../../utils.js'
-import './Sidebar.css'
+import styles from './Sidebar.module.css'
 
 function Sidebar({
   isMobile: mobileProp,
@@ -16,9 +16,11 @@ function Sidebar({
   return (
     <>
       {isMobile && open && (
-        <div className="sidebar-overlay" onClick={onClose} />
+        <div className={styles['sidebar-overlay']} onClick={onClose} />
       )}
-      <aside className={`sidebar${isMobile ? (open ? ' mobile-open' : '') : ''}`}>
+      <aside
+        className={`${styles.sidebar}${isMobile ? (open ? ` ${styles['mobile-open']}` : '') : ''}`}
+      >
         <Brand />
         <SidebarFunctions
           onToggleFavorites={onToggleFavorites}

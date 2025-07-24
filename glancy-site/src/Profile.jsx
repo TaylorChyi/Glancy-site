@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import './App.css'
-import './Profile.css'
+import appStyles from './App.module.css'
+import styles from './Profile.module.css'
 import Avatar from './components/Avatar.jsx'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
@@ -66,25 +66,25 @@ function Profile({ onCancel }) {
 
 
   return (
-    <div className="App">
+    <div className={appStyles.App}>
       <h2>{t.profileTitle}</h2>
-      <form onSubmit={handleSave} className="profile-card">
-        <div className="avatar-area">
+      <form onSubmit={handleSave} className={styles['profile-card']}>
+        <div className={styles['avatar-area']}>
           {avatar && typeof avatar === 'string' ? (
             <img src={avatar} alt="avatar" />
           ) : (
             <Avatar width={100} height={100} style={{ borderRadius: '20px' }} />
           )}
-          <span className="avatar-hint">{t.avatarHint}</span>
+          <span className={styles['avatar-hint']}>{t.avatarHint}</span>
           <input
             type="file"
             onChange={(e) => setAvatar(e.target.files[0])}
             style={{ position: 'absolute', inset: 0, opacity: 0 }}
           />
         </div>
-        <div className="editable-item">
+        <div className={styles['editable-item']}>
           <input
-            className="username-input"
+            className={styles['username-input']}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder={t.usernamePlaceholder}
@@ -93,16 +93,16 @@ function Profile({ onCancel }) {
           {!editable.username && (
             <button
               type="button"
-              className="edit-btn"
+              className={styles['edit-btn']}
               onClick={() => setEditable({ ...editable, username: true })}
             >
               {t.editButton}
             </button>
           )}
         </div>
-        <div className="editable-item">
+        <div className={styles['editable-item']}>
           <input
-            className="email-input"
+            className={styles['email-input']}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t.emailPlaceholder}
@@ -111,16 +111,16 @@ function Profile({ onCancel }) {
           {!editable.email && (
             <button
               type="button"
-              className="edit-btn"
+              className={styles['edit-btn']}
               onClick={() => setEditable({ ...editable, email: true })}
             >
               {t.editButton}
             </button>
           )}
         </div>
-        <div className="editable-item">
+        <div className={styles['editable-item']}>
           <input
-            className="phone-input"
+            className={styles['phone-input']}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder={t.phonePlaceholder}
@@ -129,64 +129,64 @@ function Profile({ onCancel }) {
           {!editable.phone && (
             <button
               type="button"
-              className="edit-btn"
+              className={styles['edit-btn']}
               onClick={() => setEditable({ ...editable, phone: true })}
             >
               {t.editButton}
             </button>
           )}
         </div>
-        <div className="basic">
-          <div className="item">
+        <div className={styles.basic}>
+          <div className={styles.item}>
             <span>🎂 {t.ageLabel}</span>
             <input
               value={age}
               onChange={(e) => setAge(e.target.value)}
               placeholder={t.agePlaceholder}
             />
-            <span className="tooltip">
-              ?<span className="tooltip-text">{t.ageHelp}</span>
+            <span className={styles.tooltip}>
+              ?<span className={styles['tooltip-text']}>{t.ageHelp}</span>
             </span>
           </div>
-          <div className="item">
+          <div className={styles.item}>
             <span>👤 {t.genderLabel}</span>
             <input
               value={gender}
               onChange={(e) => setGender(e.target.value)}
               placeholder={t.genderPlaceholder}
             />
-            <span className="tooltip">
-              ?<span className="tooltip-text">{t.genderHelp}</span>
+            <span className={styles.tooltip}>
+              ?<span className={styles['tooltip-text']}>{t.genderHelp}</span>
             </span>
           </div>
-          <div className="item">
+          <div className={styles.item}>
             <span>⭐ {t.interestsLabel}</span>
             <input
               value={interests}
               onChange={(e) => setInterests(e.target.value)}
               placeholder={t.interestsPlaceholder}
             />
-            <span className="tooltip">
-              ?<span className="tooltip-text">{t.interestsHelp}</span>
+            <span className={styles.tooltip}>
+              ?<span className={styles['tooltip-text']}>{t.interestsHelp}</span>
             </span>
           </div>
-          <div className="item">
+          <div className={styles.item}>
             <span>🎯 {t.goalLabel}</span>
             <input
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
               placeholder={t.goalPlaceholder}
             />
-            <span className="tooltip">
-              ?<span className="tooltip-text">{t.goalHelp}</span>
+            <span className={styles.tooltip}>
+              ?<span className={styles['tooltip-text']}>{t.goalHelp}</span>
             </span>
           </div>
         </div>
-        <div className="actions">
-          <button type="submit" className="save-btn">
+        <div className={styles.actions}>
+          <button type="submit" className={styles['save-btn']}>
             {t.saveButton}
           </button>
-          <button type="button" className="cancel-btn" onClick={onCancel}>
+          <button type="button" className={styles['cancel-btn']} onClick={onCancel}>
             {t.cancelButton || '取消'}
           </button>
         </div>

@@ -1,6 +1,5 @@
-import './DesktopTopBar.css'
-import './TopBarCommon.css'
-import './Header/Header.css'
+import styles from './DesktopTopBar.module.css'
+import commonStyles from './TopBarCommon.module.css'
 import TopBarActions from './TopBarActions.jsx'
 
 function DesktopTopBar({
@@ -13,10 +12,10 @@ function DesktopTopBar({
 }) {
 
   return (
-    <header className="desktop-topbar">
+    <header className={styles['desktop-topbar']}>
       <button
         type="button"
-        className="back-btn"
+        className={commonStyles['back-btn']}
         onClick={onBack}
         style={{
           visibility: showBack ? 'visible' : 'hidden',
@@ -25,7 +24,7 @@ function DesktopTopBar({
       >
         ←
       </button>
-      <div className="term-text">{term}</div>
+      <div className={commonStyles['term-text']}>{term}</div>
       <TopBarActions
         favorited={favorited}
         onToggleFavorite={onToggleFavorite}

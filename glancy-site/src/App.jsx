@@ -11,7 +11,7 @@ import voiceLight from './assets/voice-button-light.svg'
 import voiceDark from './assets/voice-button-dark.svg'
 import { useWordsApi } from './api/words.js'
 import { useLanguage } from './LanguageContext.jsx'
-import './App.css'
+import styles from './App.module.css'
 import Layout from './components/Layout.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
 
@@ -188,21 +188,21 @@ function App() {
         canFavorite: !!entry && !showFavorites && !showHistory
       }}
     >
-      <div className="display">
+      <div className={styles.display}>
           {showFavorites ? (
             favorites.length ? (
-              <ul className="favorites-grid-display">
+              <ul className={styles['favorites-grid-display']}>
                 {favorites.map((w, i) => (
-                  <li key={i} className="favorite-item">
+                  <li key={i} className={styles['favorite-item']}>
                     <span
-                      className="favorite-term"
+                      className={styles['favorite-term']}
                       onClick={() => handleSelectFavorite(w)}
                     >
                       {w}
                     </span>
                     <button
                       type="button"
-                      className="unfavorite-btn"
+                      className={styles['unfavorite-btn']}
                       onClick={() => handleUnfavorite(w)}
                     >
                       ○
@@ -211,8 +211,8 @@ function App() {
                 ))}
               </ul>
             ) : (
-              <div className="display-content">
-                <div className="display-term">{t.noFavorites || 'No favorites'}</div>
+              <div className={styles['display-content']}>
+                <div className={styles['display-term']}>{t.noFavorites || 'No favorites'}</div>
               </div>
             )
           ) : showHistory ? (
@@ -222,12 +222,12 @@ function App() {
           ) : entry ? (
             <DictionaryEntry entry={entry} />
           ) : (
-            <div className="display-content">
-              <div className="display-term">{placeholder}</div>
+            <div className={styles['display-content']}>
+              <div className={styles['display-term']}>{placeholder}</div>
             </div>
           )}
         </div>
-        <form className="chatbox" onSubmit={handleSend}>
+        <form className={styles.chatbox} onSubmit={handleSend}>
           <input
             ref={inputRef}
             type="text"
@@ -243,7 +243,7 @@ function App() {
             />
           </button>
         </form>
-        <div className="icp">
+        <div className={styles.icp}>
           <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
             京ICP备2025135702号-1
           </a>

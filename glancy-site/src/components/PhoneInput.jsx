@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLocale } from '../LocaleContext.jsx'
-import '../AuthPage.css'
+import styles from '../AuthPage.module.css'
 
 const CODE_LIST = [
   { country: 'CN', code: '+86' },
@@ -48,10 +48,10 @@ function PhoneInput({ onChange, placeholder = 'Phone number' }) {
   }
 
   return (
-    <div className="phone-input" ref={ref}>
-      <div className="phone-code" onClick={() => setOpen((o) => !o)}>{code}</div>
+    <div className={styles['phone-input']} ref={ref}>
+      <div className={styles['phone-code']} onClick={() => setOpen((o) => !o)}>{code}</div>
       {open && (
-        <div className="code-options">
+        <div className={styles['code-options']}>
           {CODE_LIST.map((c) => (
             <div key={c.code} onClick={() => select(c.code)}>
               {c.code}
@@ -60,7 +60,7 @@ function PhoneInput({ onChange, placeholder = 'Phone number' }) {
         </div>
       )}
       <input
-        className="phone-number"
+        className={styles['phone-number']}
         value={number}
         onChange={handleNumber}
         placeholder={placeholder}

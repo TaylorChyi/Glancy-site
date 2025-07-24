@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+import styles from './App.module.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import { useApi } from './hooks/useApi.js'
@@ -16,7 +16,7 @@ function Faq() {
   }, [api])
 
   return (
-    <div className="App">
+    <div className={styles.App}>
       <h2>{t.faqTitle}</h2>
       <ul>
         {items.map((f) => (

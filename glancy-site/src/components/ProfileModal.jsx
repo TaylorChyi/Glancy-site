@@ -1,11 +1,11 @@
 import Profile from '../Profile.jsx'
 import Modal from './Modal.jsx'
-import './ProfileModal.css'
+import styles from './ProfileModal.module.css'
 
 function ProfileModal({ open, onClose }) {
   if (!open) return null
   return (
-    <Modal onClose={onClose} className="profile-modal">
+    <Modal onClose={onClose} className={styles['profile-modal']}>
       <Profile onCancel={onClose} />
     </Modal>
   )

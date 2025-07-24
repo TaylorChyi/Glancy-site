@@ -1,18 +1,18 @@
 import Modal from './Modal.jsx'
-import './PaymentModal.css'
+import styles from './PaymentModal.module.css'
 import { useLanguage } from '../LanguageContext.jsx'
 
 function PaymentModal({ open, onClose }) {
   const { t } = useLanguage()
   if (!open) return null
   return (
-    <Modal onClose={onClose} className="payment-modal">
+    <Modal onClose={onClose} className={styles['payment-modal']}>
       <h3>{t.paymentTitle}</h3>
-      <div className="methods">
+      <div className={styles.methods}>
         <button type="button">{t.alipay}</button>
         <button type="button">{t.wechat}</button>
       </div>
-      <button type="button" onClick={onClose} className="close-btn">
+      <button type="button" onClick={onClose} className={styles['close-btn']}>
         {t.close}
       </button>
     </Modal>

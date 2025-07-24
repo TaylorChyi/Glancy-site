@@ -1,6 +1,6 @@
 import { useUser, useHistory } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
-import './Header.css'
+import styles from './Header.module.css'
 import Avatar from '../Avatar.jsx'
 import { Link } from 'react-router-dom'
 import UserMenuButton from './UserMenuButton.jsx'
@@ -17,10 +17,14 @@ function UserMenu({ size = 24, showName = false }) {
 
   if (!user) {
     return (
-      <div className={`header-section user-menu ${showName ? 'with-name' : ''}`}>
+      <div
+        className={`${styles['header-section']} ${styles['user-menu']} ${
+          showName ? styles['with-name'] : ''
+        }`}
+      >
         <Avatar width={size} height={size} />
         {showName && (
-          <Link to="/login" className="username login-btn">
+          <Link to="/login" className={`${styles.username} ${styles['login-btn']}`}>
             {t.navRegister}/{t.navLogin}
           </Link>
         )}
