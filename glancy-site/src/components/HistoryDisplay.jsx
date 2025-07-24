@@ -1,8 +1,8 @@
-import { useHistoryStore } from '../store/historyStore.js'
+import { useHistory } from '../context/AppContext.jsx'
 import './HistoryDisplay.css'
 
 function HistoryDisplay() {
-  const history = useHistoryStore((s) => s.history)
+  const { history } = useHistory()
   if (!history.length) {
     return (
       <div className="display-content">

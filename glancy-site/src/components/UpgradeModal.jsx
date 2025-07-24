@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useUserStore } from '../store/userStore.js'
+import { useUser } from '../context/AppContext.jsx'
 import PaymentModal from './PaymentModal.jsx'
 import './UpgradeModal.css'
 import { useLanguage } from '../LanguageContext.jsx'
 
 function UpgradeModal({ open, onClose }) {
-  const user = useUserStore((s) => s.user)
+  const { user } = useUser()
   const currentPlan = user?.plan || 'free'
   const [selected, setSelected] = useState(currentPlan)
   const [payOpen, setPayOpen] = useState(false)

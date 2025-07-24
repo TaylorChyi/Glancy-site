@@ -3,7 +3,7 @@ import './App.css'
 import './Preferences.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { useTheme } from './ThemeContext.jsx'
-import { useUserStore } from './store/userStore.js'
+import { useUser } from './context/AppContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
@@ -11,7 +11,7 @@ import { apiRequest } from './api/client.js'
 function Preferences() {
   const { t } = useLanguage()
   const { theme, setTheme } = useTheme()
-  const user = useUserStore((s) => s.user)
+  const { user } = useUser()
   const [sourceLang, setSourceLang] = useState(
     localStorage.getItem('sourceLang') || 'auto'
   )

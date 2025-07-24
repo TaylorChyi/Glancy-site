@@ -1,10 +1,10 @@
 import Favorites from './Favorites.jsx'
 import HistoryList from './HistoryList.jsx'
-import { useUserStore } from '../../store/userStore.js'
+import { useUser } from '../../context/AppContext.jsx'
 import './Sidebar.css'
 
 function SidebarFunctions({ onToggleFavorites, onSelectHistory }) {
-  const user = useUserStore((s) => s.user)
+  const { user } = useUser()
   return (
     <div className="sidebar-functions">
       {user && <Favorites onToggle={onToggleFavorites} />}

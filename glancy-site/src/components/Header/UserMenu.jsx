@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import { useUserStore } from '../../store/userStore.js'
-import { useHistoryStore } from '../../store/historyStore.js'
+import { useUser, useHistory } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
 import './Header.css'
 import ProTag from './ProTag.jsx'
@@ -24,9 +23,8 @@ function UserMenu({ size = 24, showName = false }) {
   const [upgradeOpen, setUpgradeOpen] = useState(false)
   const [logoutOpen, setLogoutOpen] = useState(false)
   const menuRef = useRef(null)
-  const user = useUserStore((s) => s.user)
-  const clearUser = useUserStore((s) => s.clearUser)
-  const clearHistory = useHistoryStore((s) => s.clearHistory)
+  const { user, clearUser } = useUser()
+  const { clearHistory } = useHistory()
   const { t } = useLanguage()
   const username = user?.username || ''
   const isPro =

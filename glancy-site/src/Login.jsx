@@ -4,7 +4,7 @@ import PhoneInput from './components/PhoneInput.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
-import { useUserStore } from './store/userStore.js'
+import { useUser } from './context/AppContext.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
 import { apiRequest } from './api/client.js'
 import googleIcon from './assets/google.svg'
@@ -18,7 +18,7 @@ import darkIcon from './assets/glancy-web-dark.svg'
 import { useTheme } from './ThemeContext.jsx'
 
 function Login() {
-  const setUser = useUserStore((s) => s.setUser)
+  const { setUser } = useUser()
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const [method, setMethod] = useState('phone')
