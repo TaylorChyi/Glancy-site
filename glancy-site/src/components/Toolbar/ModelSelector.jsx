@@ -1,26 +1,14 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import './Toolbar.css'
 import { useLanguage } from '../../LanguageContext.jsx'
+import useOutsideToggle from '../../hooks/useOutsideToggle.js'
 
 function ModelSelector() {
-  const [open, setOpen] = useState(false)
+  const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
   const [model, setModel] = useState(
     () => localStorage.getItem('dictionaryModel') || 'model-a'
   )
-  const menuRef = useRef(null)
   const { t } = useLanguage()
-
-  useEffect(() => {
-    function handlePointerDown(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    if (open) {
-      document.addEventListener('pointerdown', handlePointerDown)
-    }
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [open])
 
   const selectModel = (value) => {
     setModel(value)
