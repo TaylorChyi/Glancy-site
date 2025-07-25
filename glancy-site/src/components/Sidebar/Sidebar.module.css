@@ -47,16 +47,9 @@
   background: var(--sidebar-bg);
   color: var(--sidebar-color);
   border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
 
-.sidebar-user .user-menu li:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-:root[data-theme='dark'] .sidebar-user .user-menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 
 .sidebar-functions {
   flex: 1;
@@ -82,14 +75,19 @@
 }
 
 .history-list li:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgb(0 0 0 / 5%);
+}
+
+.sidebar-user .user-menu li:hover {
+  background-color: rgb(0 0 0 / 5%);
 }
 
 :root[data-theme='dark'] .history-list li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(255 255 255 / 10%);
 }
 
-.history-term {
+:root[data-theme='dark'] .sidebar-user .user-menu li:hover {
+  background-color: rgb(255 255 255 / 10%);
 }
 
 .history-action-wrapper {
@@ -128,7 +126,7 @@
 }
 
 .history-menu button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
 }
 
 .history-menu .delete-btn {
@@ -136,7 +134,7 @@
 }
 
 .sidebar-user .user-menu button.with-name:hover {
-background-color: rgba(255, 255, 255, 0.1);
+background-color: rgb(255 255 255 / 10%);
 border-radius: 4px;
 }
 
@@ -157,9 +155,9 @@ border-radius: 4px;
 }
 
 .collection-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgb(0 0 0 / 5%);
 }
 
 :root[data-theme='dark'] .collection-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(255 255 255 / 10%);
 }

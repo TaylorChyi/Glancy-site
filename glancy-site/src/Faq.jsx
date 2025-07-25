@@ -23,7 +23,7 @@ function Faq() {
   }, [api, t])
 
   return (
-    <div className="App">
+    <div className="app">
       <h2>{t.faqTitle}</h2>
       <ul>
         {items.map((f) => (

@@ -68,7 +68,7 @@ function Preferences() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <h2>{t.prefTitle}</h2>
       <form className={styles['preferences-form']} onSubmit={handleSave}>
         <div>

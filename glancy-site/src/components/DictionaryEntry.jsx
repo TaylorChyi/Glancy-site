@@ -11,16 +11,16 @@ function DictionaryEntry({ entry }) {
   if (!isNew) {
     const { phonetic, definitions, example } = entry
     return (
-      <article className={styles.dictionaryEntry}>
+      <article className={styles['dictionary-entry']}>
         {phonetic && (
-          <section className={styles.phoneticSection} aria-labelledby="phon-title">
-            <h2 id="phon-title" className={styles.sectionTitle}>【{t.phoneticLabel}】</h2>
+          <section className={styles['phonetic-section']} aria-labelledby="phon-title">
+            <h2 id="phon-title" className={styles['section-title']}>【{t.phoneticLabel}】</h2>
             <p className={styles.phonetic}>{phonetic}</p>
           </section>
         )}
         {definitions && definitions.length > 0 ? (
           <section className={styles.definitions} aria-labelledby="def-title">
-            <h2 id="def-title" className={styles.sectionTitle}>【{t.definitionsLabel}】</h2>
+            <h2 id="def-title" className={styles['section-title']}>【{t.definitionsLabel}】</h2>
             <ol>
               {definitions.map((d, i) => (
                 <li key={i}>{d}</li>
@@ -28,11 +28,11 @@ function DictionaryEntry({ entry }) {
             </ol>
           </section>
         ) : (
-          <p className={styles.noDefinition}>{t.noDefinition}</p>
+          <p className={styles['no-definition']}>{t.noDefinition}</p>
         )}
         {example && (
           <section className={styles.example} aria-labelledby="ex-title">
-            <h2 id="ex-title" className={styles.sectionTitle}>【{t.exampleLabel}】</h2>
+            <h2 id="ex-title" className={styles['section-title']}>【{t.exampleLabel}】</h2>
             <blockquote>{example}</blockquote>
           </section>
         )}
@@ -59,17 +59,17 @@ function DictionaryEntry({ entry }) {
   const defs = groups.flatMap((g) => g.释义 || [])
 
   return (
-    <article className={styles.dictionaryEntry}>
-      {term && <h2 className={styles.sectionTitle}>{term}</h2>}
+    <article className={styles['dictionary-entry']}>
+      {term && <h2 className={styles['section-title']}>{term}</h2>}
       {phoneticText && (
-        <section className={styles.phoneticSection} aria-labelledby="phon-title">
-          <h2 id="phon-title" className={styles.sectionTitle}>【{t.phoneticLabel}】</h2>
+        <section className={styles['phonetic-section']} aria-labelledby="phon-title">
+          <h2 id="phon-title" className={styles['section-title']}>【{t.phoneticLabel}】</h2>
           <p className={styles.phonetic}>{phoneticText}</p>
         </section>
       )}
       {variants.length > 0 && (
         <section className={styles.variants} aria-labelledby="var-title">
-          <h2 id="var-title" className="sectionTitle">【{varLabel}】</h2>
+          <h2 id="var-title" className={styles['section-title']}>【{varLabel}】</h2>
           <ul>
             {variants.map((v, i) => (
               <li key={i}>
@@ -81,7 +81,7 @@ function DictionaryEntry({ entry }) {
       )}
       {defs.length > 0 ? (
         <section className={styles.definitions} aria-labelledby="def-title">
-          <h2 id="def-title" className={styles.sectionTitle}>【{t.definitionsLabel}】</h2>
+          <h2 id="def-title" className={styles['section-title']}>【{t.definitionsLabel}】</h2>
           <ol>
             {defs.map((d, i) => (
               <li key={i}>
@@ -121,11 +121,11 @@ function DictionaryEntry({ entry }) {
           </ol>
         </section>
       ) : (
-        <p className={styles.noDefinition}>{t.noDefinition}</p>
+        <p className={styles['no-definition']}>{t.noDefinition}</p>
       )}
       {phrases.length > 0 && (
         <section className={styles.phrases} aria-labelledby="phr-title">
-          <h2 id="phr-title" className={styles.sectionTitle}>【{phrLabel}】</h2>
+          <h2 id="phr-title" className={styles['section-title']}>【{phrLabel}】</h2>
           <ul>
             {phrases.map((p, i) => (
               <li key={i}>{p}</li>

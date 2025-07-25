@@ -48,9 +48,9 @@
 }
 
 .model-selector .model-menu button:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgb(0 0 0 / 5%);
 }
 
 :root[data-theme='dark'] .model-selector .model-menu button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
 }

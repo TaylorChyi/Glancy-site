@@ -10,7 +10,7 @@
   height: 100%;
 }
 
-.mainTop {
+.main-top {
   height: 60px;
   position: sticky;
   top: 0;
@@ -19,12 +19,12 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.mainMiddle {
+.main-middle {
   flex: 1;
   overflow-y: auto;
 }
 
-.mainBottom {
+.main-bottom {
   margin-top: auto;
   position: sticky;
   bottom: 0;
@@ -32,7 +32,7 @@
   border-top: 1px solid var(--border-color);
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .container {
     grid-template-columns: 1fr;
   }

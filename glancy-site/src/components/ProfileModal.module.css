@@ -6,6 +6,7 @@
   max-width: 400px;
   width: 90%;
   max-height: 90vh;
+
   /* allow tooltip overflow outside the card */
   overflow: visible;
 }

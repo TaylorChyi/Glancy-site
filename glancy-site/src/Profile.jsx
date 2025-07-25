@@ -70,7 +70,7 @@ function Profile({ onCancel }) {
 
 
   return (
-    <div className="App">
+    <div className="app">
       <h2>{t.profileTitle}</h2>
       <form onSubmit={handleSave} className={styles['profile-card']}>
         <div className={styles['avatar-area']}>

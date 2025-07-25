@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .sidebar-brand {
   display: flex;
   align-items: center;
@@ -18,19 +19,23 @@
   padding: 0 20px;
   border-bottom: 1px solid var(--border-color);
 }
+
 .brand-main {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
+
 .mobile-user-menu {
   display: none;
 }
+
 .sidebar-brand img {
   width: 32px;
   height: 32px;
   margin-right: 8px;
 }
+
 .sidebar-brand span {
   font-size: 1.25rem;
 }
@@ -87,7 +92,7 @@
   padding: 12px 20px;
   outline: none;
   font-size: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 15%);
 }
 
 .chatbox button {
@@ -117,7 +122,8 @@
   color: inherit;
   text-decoration: none;
 }
-@media (max-width: 600px) {
+
+@media (width <= 600px) {
   .sidebar {
     position: fixed;
     left: 0;
@@ -128,9 +134,11 @@
     z-index: 1000;
     width: 240px;
   }
+
   .sidebar.mobile-open {
     transform: translateX(0);
   }
+
   .mobile-user-menu {
     display: none;
   }
@@ -139,13 +147,14 @@
 .sidebar-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(0 0 0 / 30%);
   z-index: 999;
 }
 
-.App h2 {
+.app h2 {
   text-align: center;
 }
+
 .favorites-grid-display {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -181,7 +190,7 @@
 
 .unfavorite-btn {
   background: none;
-  border: 1px solid currentColor;
+  border: 1px solid currentcolor;
   border-radius: 50%;
   width: 20px;
   height: 20px;

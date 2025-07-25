@@ -19,7 +19,7 @@ function MessagePopup({ open, message, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className={styles.closeBtn}
+          className={styles['close-btn']}
         >
           Close
         </button>

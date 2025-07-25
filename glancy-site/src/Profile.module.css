@@ -37,7 +37,7 @@
   right: 0;
   bottom: 0;
   height: 30%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0 0 0 / 50%);
   color: #fff;
   display: flex;
   align-items: center;
@@ -144,7 +144,7 @@
 
 .tooltip .tooltip-text {
   visibility: hidden;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgb(0 0 0 / 75%);
   color: #fff;
   text-align: center;
   padding: 4px 8px;
