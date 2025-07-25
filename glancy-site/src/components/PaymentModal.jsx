@@ -1,12 +1,11 @@
-import Modal from './Modal.jsx'
+import BaseModal from './BaseModal.jsx'
 import './PaymentModal.css'
 import { useLanguage } from '../LanguageContext.jsx'
 
 function PaymentModal({ open, onClose }) {
   const { t } = useLanguage()
-  if (!open) return null
   return (
-    <Modal onClose={onClose} className="payment-modal">
+    <BaseModal open={open} onClose={onClose} className="payment-modal">
       <h3>{t.paymentTitle}</h3>
       <div className="methods">
         <button type="button">{t.alipay}</button>
@@ -15,7 +14,7 @@ function PaymentModal({ open, onClose }) {
       <button type="button" onClick={onClose} className="close-btn">
         {t.close}
       </button>
-    </Modal>
+    </BaseModal>
   )
 }
 
