@@ -7,6 +7,7 @@ import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
+import { Button } from './components/index.js'
 import {
   GoogleIcon,
   AppleIcon,
@@ -104,7 +105,7 @@ function Register() {
           />
           <CodeButton onClick={handleSendCode} />
         </div>
-        <button type="submit" className="auth-primary-btn">Continue</button>
+        <Button type="submit" className="auth-primary-btn">Continue</Button>
       </form>
     )
   }
@@ -135,7 +136,7 @@ function Register() {
         {methodOrder
           .filter((m) => m !== method)
           .map((m) => (
-            <button
+            <Button
               key={m}
               type="button"
               onClick={() =>
@@ -146,7 +147,7 @@ function Register() {
                 const Icon = icons[m]
                 return <Icon alt={m} />
               })()}
-            </button>
+            </Button>
           ))}
       </div>
       <div className="auth-footer">
