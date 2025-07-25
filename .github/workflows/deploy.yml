@@ -20,6 +20,11 @@ jobs:
       - name: 安装依赖
         run: npm ci
         working-directory: glancy-site
+      - name: 代码检查
+        run: |
+          npm run lint
+          npm run lint:css
+        working-directory: glancy-site
       - name: 构建项目
         run: npm run build
         working-directory: glancy-site
