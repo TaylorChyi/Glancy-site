@@ -13,7 +13,7 @@ function Faq() {
   const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
-    api(API_PATHS.faqs)
+    api.request(API_PATHS.faqs)
       .then((data) => setItems(data))
       .catch((err) => {
         console.error(err)

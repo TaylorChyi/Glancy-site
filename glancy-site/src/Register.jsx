@@ -54,7 +54,7 @@ function Register() {
       return
     }
     try {
-      await api(API_PATHS.register, {
+      await api.request(API_PATHS.register, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -62,7 +62,7 @@ function Register() {
           code
         })
       })
-      const loginData = await api(API_PATHS.login, {
+      const loginData = await api.request(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account, method, password: code })

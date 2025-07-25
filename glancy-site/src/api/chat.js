@@ -16,6 +16,5 @@ export function createChatApi(request = apiRequest) {
 export const { sendChatMessage } = createChatApi()
 
 export function useChatApi() {
-  const api = useApi()
-  return createChatApi(api)
+  return useApi().chat
 }

@@ -10,6 +10,5 @@ export function createLocaleApi(request = apiRequest) {
 export const { getLocale } = createLocaleApi()
 
 export function useLocaleApi() {
-  const api = useApi()
-  return createLocaleApi(api)
+  return useApi().locale
 }

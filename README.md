@@ -104,6 +104,23 @@ export default defineConfig({
 
 首页会调用 `/api/users/count` 显示当前注册人数，并提供刷新按钮重新获取。
 
+## API 使用方式
+
+`ApiProvider` 会在应用初始化时创建统一的请求实例，组件中通过 `useApi` 获取：
+
+```jsx
+import { ApiProvider } from './context/ApiContext.jsx'
+import { useApi } from './hooks/useApi.js'
+
+function App() {
+  const api = useApi()
+  // example
+  useEffect(() => {
+    api.request(API_PATHS.ping)
+  }, [api])
+}
+```
+
 ## 消息弹窗组件
 
 当接口请求失败或返回结果异常时，页面会弹出临时消息提示，并可点击关闭。适用场景包括：

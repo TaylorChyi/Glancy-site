@@ -29,6 +29,5 @@ export function createWordsApi(request = apiRequest) {
 export const { fetchWord, fetchWordAudio } = createWordsApi()
 
 export function useWordsApi() {
-  const api = useApi()
-  return createWordsApi(api)
+  return useApi().words
 }

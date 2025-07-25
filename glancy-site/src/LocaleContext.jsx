@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import api from './api/index.js'
+import { useApi } from './hooks/useApi.js'
 
 const LocaleContext = createContext({
   locale: null,
@@ -11,10 +11,11 @@ export function LocaleProvider({ children }) {
     const stored = localStorage.getItem('locale')
     return stored ? JSON.parse(stored) : null
   })
+  const api = useApi()
 
   useEffect(() => {
     if (locale) return
-    api.getLocale()
+    api.locale.getLocale()
       .then((data) => {
         setLocale(data)
         localStorage.setItem('locale', JSON.stringify(data))
@@ -22,7 +23,7 @@ export function LocaleProvider({ children }) {
       .catch((err) => {
         console.error(err)
       })
-  }, [locale])
+  }, [locale, api])
 
   return (
     <LocaleContext.Provider value={{ locale, setLocale }}>

@@ -4,13 +4,16 @@ import { createWordsApi } from './words.js'
 import { createLocaleApi } from './locale.js'
 import { createSearchRecordsApi } from './searchRecords.js'
 
-const request = createApiClient()
-
-const api = {
-  ...createChatApi(request),
-  ...createWordsApi(request),
-  ...createLocaleApi(request),
-  ...createSearchRecordsApi(request)
+export function createApi(config) {
+  const request = createApiClient(config)
+  return {
+    request,
+    chat: createChatApi(request),
+    words: createWordsApi(request),
+    locale: createLocaleApi(request),
+    searchRecords: createSearchRecordsApi(request)
+  }
 }
 
+const api = createApi()
 export default api
