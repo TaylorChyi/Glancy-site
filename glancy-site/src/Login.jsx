@@ -106,7 +106,7 @@ function Login() {
   return (
     <div className={styles['auth-page']}>
       <Link to="/" className={styles['auth-close']}>×</Link>
-      <img className={styles['auth-logo']} src={BrandIcon} alt="Glancy" />
+      <BrandIcon className={styles['auth-logo']} />
       <div className={styles['auth-brand']}>Glancy</div>
       <h1 className={styles['auth-title']}>Welcome back</h1>
       {renderForm()}

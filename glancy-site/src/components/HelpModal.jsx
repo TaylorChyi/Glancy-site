@@ -1,13 +1,12 @@
 import Faq from '../Faq.jsx'
-import Modal from './Modal.jsx'
+import BaseModal from './BaseModal.jsx'
 import './HelpModal.css'
 
 function HelpModal({ open, onClose }) {
-  if (!open) return null
   return (
-    <Modal onClose={onClose} className="help-modal">
+    <BaseModal open={open} onClose={onClose} className="help-modal">
       <Faq />
-    </Modal>
+    </BaseModal>
   )
 }
 
