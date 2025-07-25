@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import api from '../api/index.js'
+import { safeJSONParse } from '../utils.js'
 
 import type { User } from './userStore.ts'
 
@@ -18,7 +19,7 @@ const STORAGE_KEY = 'searchHistory'
 
 export const useHistoryStore = create<HistoryState>((set, get) => {
   const stored = localStorage.getItem(STORAGE_KEY)
-  const initial: string[] = stored ? JSON.parse(stored) : []
+  const initial: string[] = stored ? safeJSONParse(stored, []) : []
   const initialMap: Record<string, string> = {}
   return {
     history: initial,

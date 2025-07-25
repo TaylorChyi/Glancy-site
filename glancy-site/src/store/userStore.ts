@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { safeJSONParse } from '../utils.js'
 
 export interface User {
   id: string
@@ -15,7 +16,7 @@ interface UserState {
 const STORAGE_KEY = 'user'
 export const useUserStore = create<UserState>((set) => {
   const stored = localStorage.getItem(STORAGE_KEY)
-  const initialUser: User | null = stored ? JSON.parse(stored) : null
+  const initialUser: User | null = stored ? safeJSONParse(stored, null) : null
   return {
     user: initialUser,
     setUser: (user: User) => {
