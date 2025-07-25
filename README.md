@@ -30,6 +30,12 @@ export default defineConfig({
 })
 ```
 
+## 开发脚本
+
+- `npm run lint`：执行 ESLint 检查 JavaScript 代码。
+- `npm run lint:css`：使用 Stylelint 扫描 `src/**/*.css`。
+- `npm run build`：构建生产环境文件。
+
 ## 常见问题
 
 ### HTTP 503 错误
