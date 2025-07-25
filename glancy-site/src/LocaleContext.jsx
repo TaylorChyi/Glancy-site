@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { getLocale } from './api/locale.js'
+import api from './api/index.js'
 
 const LocaleContext = createContext({
   locale: null,
@@ -14,7 +14,7 @@ export function LocaleProvider({ children }) {
 
   useEffect(() => {
     if (locale) return
-    getLocale()
+    api.getLocale()
       .then((data) => {
         setLocale(data)
         localStorage.setItem('locale', JSON.stringify(data))

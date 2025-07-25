@@ -11,7 +11,7 @@ import {
   VoiceButtonLightIcon,
   VoiceButtonDarkIcon
 } from './components/Icon'
-import { useWordsApi } from './api/words.js'
+import api from './api/index.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
 import styles from './App.module.css'
@@ -39,7 +39,7 @@ function App() {
   const [fromFavorites, setFromFavorites] = useState(false)
   const { favorites, toggleFavorite } = useFavorites()
   const navigate = useNavigate()
-  const { fetchWord } = useWordsApi()
+  const { fetchWord } = api
 
   const handleToggleFavorites = () => {
     // always show favorites when invoked
@@ -83,7 +83,8 @@ function App() {
       const data = await fetchWord({
         userId: user.id,
         term: input,
-        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH'
+        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        token: user.token
       })
       setEntry(data)
       addHistory(input, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
@@ -108,7 +109,8 @@ function App() {
       const data = await fetchWord({
         userId: user.id,
         term,
-        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH'
+        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        token: user.token
       })
       setEntry(data)
       // selecting from history should not reorder records
