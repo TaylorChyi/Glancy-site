@@ -1,12 +1,5 @@
 import { create } from 'zustand'
-import {
-  fetchSearchRecords,
-  saveSearchRecord,
-  clearSearchRecords,
-  deleteSearchRecord,
-  favoriteSearchRecord,
-  unfavoriteSearchRecord,
-} from '../api/searchRecords.js'
+import api from '../api/index.js'
 
 import type { User } from './userStore.ts'
 
@@ -33,7 +26,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     loadHistory: async (user?: User | null) => {
       if (user) {
         try {
-          const records = await fetchSearchRecords({
+          const records = await api.fetchSearchRecords({
             userId: user.id,
             token: user.token
           })
@@ -54,7 +47,12 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     },
     addHistory: async (term: string, user?: User | null, language?: string) => {
       if (user) {
-        saveSearchRecord({ userId: user.id, token: user.token, term, language })
+        api.saveSearchRecord({
+          userId: user.id,
+          token: user.token,
+          term,
+          language
+        })
           .then((record) => {
             set((state) => ({
               recordMap: { ...state.recordMap, [term]: record.id }
@@ -70,7 +68,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     },
     clearHistory: async (user?: User | null) => {
       if (user) {
-        clearSearchRecords({ userId: user.id, token: user.token }).catch((err) => {
+        api.clearSearchRecords({ userId: user.id, token: user.token }).catch((err) => {
           console.error(err)
         })
       }
@@ -81,7 +79,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
       if (user) {
         const id = get().recordMap[term]
         if (id) {
-          deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch((err) => {
+          api.deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch((err) => {
             console.error(err)
           })
         }
@@ -97,7 +95,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     favoriteHistory: async (term: string, user?: User | null) => {
         const id = get().recordMap[term]
         if (user && id) {
-          favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+          api.favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
             console.error(err)
           })
         }
@@ -105,7 +103,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     unfavoriteHistory: async (term: string, user?: User | null) => {
         const id = get().recordMap[term]
         if (user && id) {
-          unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+          api.unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
             console.error(err)
           })
         }
