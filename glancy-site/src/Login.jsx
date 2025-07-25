@@ -2,8 +2,8 @@ import { useState } from 'react'
 import CodeButton from './components/CodeButton.jsx'
 import PhoneInput from './components/PhoneInput.jsx'
 import { useNavigate, Link } from 'react-router-dom'
+import styles from './AuthPage.module.css'
 import { Button } from './components/index.js'
-import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
 import { useUser } from './context/AppContext.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
@@ -65,20 +65,20 @@ function Login() {
   const renderForm = () => {
     if (!formMethods.includes(method)) return null
     return (
-      <form onSubmit={handleSubmit} className="auth-form">
+      <form onSubmit={handleSubmit} className={styles['auth-form']}>
         {method === 'phone' ? (
           <PhoneInput value={account} onChange={setAccount} />
         ) : (
           <input
-            className="auth-input"
+            className={styles['auth-input']}
             placeholder={placeholders[method]}
             value={account}
             onChange={(e) => setAccount(e.target.value)}
           />
         )}
-        <div className="password-row">
+        <div className={styles['password-row']}>
           <input
-            className="auth-input"
+            className={styles['auth-input']}
             type="password"
             placeholder={method === 'username' ? 'Password' : 'Password / code'}
             value={password}
@@ -88,7 +88,7 @@ function Login() {
             <CodeButton onClick={handleSendCode} />
           )}
         </div>
-        <Button type="submit" className="auth-primary-btn">Continue</Button>
+        <button type="submit" className={styles['auth-primary-btn']}>Continue</button>
       </form>
     )
   }
@@ -104,19 +104,19 @@ function Login() {
   }
 
   return (
-    <div className="auth-page">
-      <Link to="/" className="auth-close">×</Link>
-      <BrandIcon className="auth-logo" />
-      <div className="auth-brand">Glancy</div>
-      <h1 className="auth-title">Welcome back</h1>
+    <div className={styles['auth-page']}>
+      <Link to="/" className={styles['auth-close']}>×</Link>
+      <img className={styles['auth-logo']} src={icon} alt="Glancy" />
+      <div className={styles['auth-brand']}>Glancy</div>
+      <h1 className={styles['auth-title']}>Welcome back</h1>
       {renderForm()}
-      <div className="auth-switch">
+      <div className={styles['auth-switch']}>
         Don’t have an account? <Link to="/register">Sign up</Link>
       </div>
-      <div className="divider">
+      <div className={styles.divider}>
         <span>OR</span>
       </div>
-      <div className="login-options">
+      <div className={styles['login-options']}>
         {methodOrder
           .filter((m) => m !== method)
           .map((m) => (
@@ -131,11 +131,11 @@ function Login() {
             </Button>
           ))}
       </div>
-      <div className="auth-footer">
-        <div className="footer-links">
+      <div className={styles['auth-footer']}>
+        <div className={styles['footer-links']}>
           <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
         </div>
-        <div className="icp">
+        <div className={styles.icp}>
           <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
             京ICP备2025135702号-1
           </a>
