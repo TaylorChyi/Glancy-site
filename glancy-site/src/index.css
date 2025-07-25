@@ -1,17 +1,17 @@
-@import './theme/colors.css';
-@import "./theme/variables.css";
-@import './theme/spacing.css';
-@import './theme/typography.css';
+@import url('./theme/colors.css');
+@import url("./theme/variables.css");
+@import url('./theme/spacing.css');
+@import url('./theme/typography.css');
 
 :root {
   font-family: var(--font-family-base);
   line-height: 1.5;
   font-weight: 400;
-
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   --vh: 100vh;
   --highlight-color: var(--hl-dark);
 }
@@ -32,9 +32,10 @@
   color-scheme: dark;
   color: var(--sys-text-dark);
   background-color: var(--sys-bg-dark);
+
   --highlight-color: var(--hl-dark);
   --app-bg: #2c2c2c;
-  --app-color: rgba(255, 255, 255, 0.87);
+  --app-color: rgb(255 255 255 / 87%);
   --chat-window-bg: #333;
   --chat-bubble-bg: #444;
   --chat-bubble-user-bg: #2a5be2;
@@ -54,16 +55,17 @@
   color-scheme: light;
   color: var(--sys-text-light);
   background-color: var(--sys-bg-light);
+
   --highlight-color: var(--hl-light);
   --app-bg: #f5f5f5;
   --app-color: #333;
   --chat-window-bg: #fafafa;
   --chat-bubble-bg: #e0e0e0;
   --chat-bubble-user-bg: #d4e5ff;
-  --body-bg: #ffffff;
+  --body-bg: #fff;
   --sidebar-bg: #f5f5f5;
   --sidebar-color: #333;
-  --input-bg: #ffffff;
+  --input-bg: #fff;
   --accent-color: #facc15;
   --border-color: var(--sys-border-light);
   --text-muted: var(--sys-muted);
@@ -74,6 +76,7 @@
 
 :root[data-theme='system'] {
   color-scheme: light dark;
+
   --primary-bg: Canvas;
   --primary-color: CanvasText;
 }
@@ -82,9 +85,10 @@
   :root[data-theme='system'] {
     color: var(--sys-text-dark);
     background-color: var(--sys-bg-dark);
+
     --highlight-color: var(--hl-dark);
     --app-bg: #2c2c2c;
-    --app-color: rgba(255, 255, 255, 0.87);
+    --app-color: rgb(255 255 255 / 87%);
     --chat-window-bg: #333;
     --chat-bubble-bg: #444;
     --chat-bubble-user-bg: #2a5be2;
@@ -103,16 +107,17 @@
   :root[data-theme='system'] {
     color: var(--sys-text-light);
     background-color: var(--sys-bg-light);
+
     --highlight-color: var(--hl-light);
     --app-bg: #f5f5f5;
     --app-color: #333;
     --chat-window-bg: #fafafa;
     --chat-bubble-bg: #e0e0e0;
     --chat-bubble-user-bg: #d4e5ff;
-    --body-bg: #ffffff;
+    --body-bg: #fff;
     --sidebar-bg: #f5f5f5;
     --sidebar-color: #333;
-    --input-bg: #ffffff;
+    --input-bg: #fff;
     --accent-color: #facc15;
     --border-color: var(--sys-border-light);
     --text-muted: var(--sys-muted);
@@ -125,6 +130,7 @@ a {
   color: var(--highlight-color);
   text-decoration: inherit;
 }
+
 a:hover {
   color: var(--highlight-color);
 }

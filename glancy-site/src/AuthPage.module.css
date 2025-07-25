@@ -9,22 +9,26 @@
   align-items: center;
   position: relative;
 }
+
 .auth-logo {
   width: 48px;
   height: 48px;
   margin: 0 auto 8px;
 }
+
 .auth-brand {
   font-weight: 600;
   font-size: 24px;
   color: var(--app-color);
   margin-bottom: 8px;
 }
+
 .auth-title {
   font-size: 24px;
   color: var(--app-color);
   margin-bottom: 32px;
 }
+
 .auth-input {
   width: 100%;
   max-width: 360px;
@@ -38,6 +42,7 @@
   font-size: 16px;
   margin-bottom: 20px;
 }
+
 .auth-input:focus {
   outline: none;
   border-color: var(--highlight-color);
@@ -50,6 +55,7 @@
   width: 100%;
   max-width: 360px;
 }
+
 .auth-primary-btn {
   width: 100%;
   background: var(--primary-bg);
@@ -75,20 +81,24 @@
     color: var(--primary-color);
   }
 }
+
 .auth-switch {
   color: var(--text-muted);
   font-size: 14px;
   margin-bottom: 24px;
 }
+
 .auth-switch a {
   color: var(--highlight-color);
   text-decoration: none;
 }
+
 .divider {
   display: flex;
   align-items: center;
   margin: 24px 0;
 }
+
 .divider::before,
 .divider::after {
   content: '';
@@ -96,11 +106,13 @@
   height: 1px;
   background: var(--border-color);
 }
+
 .divider span {
   margin: 0 8px;
   color: var(--text-muted);
   font-size: 12px;
 }
+
 .oauth-buttons button {
   display: flex;
   align-items: center;
@@ -115,7 +127,13 @@
   margin-bottom: 12px;
   cursor: pointer;
 }
+
 .oauth-buttons img {
+  width: 24px;
+  height: 24px;
+}
+
+.login-options img {
   width: 24px;
   height: 24px;
 }
@@ -155,10 +173,6 @@
   cursor: pointer;
 }
 
-.login-options img {
-  width: 24px;
-  height: 24px;
-}
 
 .password-row {
   display: flex;
@@ -202,6 +216,7 @@
     filter: invert(1);
   }
 }
+
 .auth-footer {
   margin-top: auto;
   text-align: center;
@@ -212,6 +227,7 @@
   color: var(--text-muted);
   margin-bottom: 4px;
 }
+
 .footer-links a {
   color: var(--highlight-color);
   text-decoration: none;

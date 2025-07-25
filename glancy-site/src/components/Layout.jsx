@@ -18,7 +18,7 @@ function Layout({ children, sidebarProps = {}, topBarProps = {}, bottomContent =
         isMobile={isMobile}
       />
       <div className={styles.main}>
-        <div className={styles.mainTop}>
+        <div className={styles['main-top']}>
           {isMobile ? (
             <MobileTopBar
               {...topBarProps}
@@ -28,8 +28,8 @@ function Layout({ children, sidebarProps = {}, topBarProps = {}, bottomContent =
             <DesktopTopBar {...topBarProps} />
           )}
         </div>
-        <div className={styles.mainMiddle}>{children}</div>
-        <div className={styles.mainBottom}>{bottomContent}</div>
+        <div className={styles['main-middle']}>{children}</div>
+        <div className={styles['main-bottom']}>{bottomContent}</div>
       </div>
     </div>
   )

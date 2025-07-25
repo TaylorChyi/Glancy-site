@@ -1,4 +1,4 @@
-.dictionaryEntry {
+.dictionary-entry {
   width: auto;
   margin: 0 2cm;
   padding: 20px 0;
@@ -9,12 +9,13 @@
 }
 
 
-.sectionTitle {
+.section-title {
   margin: 16px 0 4px;
   font-size: 1em;
   font-weight: bold;
 }
-.phoneticSection .sectionTitle {
+
+.phonetic-section .section-title {
   margin: 8px 0 4px;
 }
 
@@ -52,7 +53,7 @@
   font-size: 1em;
 }
 
-.noDefinition {
+.no-definition {
   color: #999;
   margin: 12px 0;
 }

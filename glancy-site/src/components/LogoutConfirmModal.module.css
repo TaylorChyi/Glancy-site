@@ -1,4 +1,4 @@
-.logoutModal {
+.logout-modal {
   background: var(--app-bg);
   color: var(--app-color);
   padding: 20px;
@@ -8,13 +8,13 @@
   text-align: center;
 }
 
-.logoutModal h3 {
+.logout-modal h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
 
-.logoutModal .message {
+.logout-modal .message {
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
@@ -25,7 +25,7 @@
   gap: 0.5rem;
 }
 
-.logoutBtn {
+.logout-btn {
   background: var(--highlight-color);
   color: var(--primary-bg);
   border: none;
@@ -35,7 +35,7 @@
   width: 100%;
 }
 
-.cancelBtn {
+.cancel-btn {
   background: none;
   border: 1px solid var(--border-color);
   color: var(--app-color);

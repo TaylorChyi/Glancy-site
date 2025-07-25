@@ -2,9 +2,11 @@
   display: inline-block;
   margin-right: 1rem;
 }
+
 .user-menu {
   position: relative;
 }
+
 .user-menu button {
   background: none;
   border: none;
@@ -13,15 +15,18 @@
   padding: 0;
   border-radius: 0;
 }
+
 .user-menu button.with-name,
 .user-menu .with-name {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
+
 .user-menu .username {
   margin-left: 0.5rem;
 }
+
 .user-menu .pro-tag {
   position: absolute;
   bottom: -6px;
@@ -30,6 +35,7 @@
   width: 24px;
   height: auto;
 }
+
 .user-menu .info {
   display: flex;
   flex-direction: column;
@@ -37,14 +43,17 @@
   line-height: 1;
   gap: 0.25rem;
 }
+
 .user-menu .info .username {
   margin-left: 0;
 }
+
 .user-menu .info .pro-tag {
   position: static;
   transform: none;
   margin-top: 0;
 }
+
 .user-menu .menu {
   position: absolute;
   right: 0;
@@ -57,11 +66,13 @@
   width: 180px;
   z-index: 1000;
 }
+
 .user-menu .menu-header {
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
 }
+
 .user-menu .avatar {
   width: 32px;
   height: 32px;
@@ -73,6 +84,7 @@
   margin-right: 0.5rem;
   position: relative;
 }
+
 .user-menu .pro-tag-small {
   position: absolute;
   bottom: -4px;
@@ -80,37 +92,44 @@
   width: 20px;
   height: auto;
 }
+
 .user-menu .email {
   color: gray;
   font-size: 0.8rem;
 }
+
 .user-menu ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .user-menu li {
   display: flex;
   align-items: center;
   padding: 0.25rem 0;
   cursor: pointer;
 }
+
 .user-menu li .icon {
   margin-right: 0.5rem;
 }
+
 .user-menu li .arrow {
   margin-left: auto;
 }
+
 .user-menu li + li {
   margin-top: 0.25rem;
 }
+
 .user-menu ul + ul {
   margin-top: 0.5rem;
   border-top: 1px solid #ccc;
   padding-top: 0.5rem;
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .mobile-user-menu .user-menu .menu {
     top: calc(100% + 0.5rem);
     bottom: auto;

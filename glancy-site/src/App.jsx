@@ -206,7 +206,7 @@ function App() {
                 placeholder={t.inputPlaceholder}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className={styles.roundedInput}
+                className={styles['rounded-input']}
               />
               <button type="submit">
                 {text.trim() === '' ? (
