@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './ErrorBoundary.css'
+import styles from './ErrorBoundary.module.css'
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class ErrorBoundary extends Component {
     const { fallback, children } = this.props
     if (hasError) {
       return (
-        <div className="error-boundary">
+        <div className={styles['error-boundary']}>
           {fallback || 'Something went wrong.'}
         </div>
       )

@@ -1,5 +1,5 @@
 import { useLanguage } from '../../LanguageContext.jsx'
-import './Sidebar.css'
+import styles from './Sidebar.module.css'
 
 function Favorites({ onToggle }) {
   const { t } = useLanguage()
@@ -9,8 +9,8 @@ function Favorites({ onToggle }) {
   }
 
   return (
-    <div className="sidebar-section favorites-list">
-      <h3 className="collection-button" onClick={handleClick}>
+    <div className={`${styles['sidebar-section']} ${styles['favorites-list']}`}>
+      <h3 className={styles['collection-button']} onClick={handleClick}>
         {t.favorites || 'Favorites'}
       </h3>
     </div>

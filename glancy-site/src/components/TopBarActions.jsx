@@ -2,6 +2,7 @@ import ModelSelector from './Toolbar'
 import { useLanguage } from '../LanguageContext.jsx'
 import { useUser } from '../context/AppContext.jsx'
 import useOutsideToggle from '../hooks/useOutsideToggle.js'
+import common from './TopBarCommon.module.css'
 
 function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = false }) {
   const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
@@ -11,25 +12,25 @@ function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = fals
   if (!user) return null
 
   return (
-    <div className="topbar-right">
+    <div className={common['topbar-right']}>
       {canFavorite && (
-        <button type="button" className="favorite-toggle" onClick={onToggleFavorite}>
+        <button type="button" className={common['favorite-toggle']} onClick={onToggleFavorite}>
           {favorited ? '★' : '☆'}
         </button>
       )}
       <ModelSelector />
-      <div className="more-menu" ref={menuRef}>
-        <button type="button" className="more-btn" onClick={() => setOpen(!open)}>
+      <div className={common['more-menu']} ref={menuRef}>
+        <button type="button" className={common['more-btn']} onClick={() => setOpen(!open)}>
           ⋮
         </button>
         {open && (
-          <div className="menu">
+          <div className={common.menu}>
             <button type="button">
-              <span className="icon">🔗</span>
+              <span className={common.icon}>🔗</span>
               {t.share}
             </button>
             <button type="button">
-              <span className="icon">🚩</span>
+              <span className={common.icon}>🚩</span>
               {t.report}
             </button>
           </div>

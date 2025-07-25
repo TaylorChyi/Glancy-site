@@ -1,5 +1,5 @@
 import { useLanguage } from '../LanguageContext.jsx'
-import './DictionaryEntry.css'
+import styles from './DictionaryEntry.module.css'
 
 function DictionaryEntry({ entry }) {
   const { t } = useLanguage()
@@ -11,16 +11,16 @@ function DictionaryEntry({ entry }) {
   if (!isNew) {
     const { phonetic, definitions, example } = entry
     return (
-      <article className="dictionaryEntry">
+      <article className={styles.dictionaryEntry}>
         {phonetic && (
-          <section className="phoneticSection" aria-labelledby="phon-title">
-            <h2 id="phon-title" className="sectionTitle">【{t.phoneticLabel}】</h2>
-            <p className="phonetic">{phonetic}</p>
+          <section className={styles.phoneticSection} aria-labelledby="phon-title">
+            <h2 id="phon-title" className={styles.sectionTitle}>【{t.phoneticLabel}】</h2>
+            <p className={styles.phonetic}>{phonetic}</p>
           </section>
         )}
         {definitions && definitions.length > 0 ? (
-          <section className="definitions" aria-labelledby="def-title">
-            <h2 id="def-title" className="sectionTitle">【{t.definitionsLabel}】</h2>
+          <section className={styles.definitions} aria-labelledby="def-title">
+            <h2 id="def-title" className={styles.sectionTitle}>【{t.definitionsLabel}】</h2>
             <ol>
               {definitions.map((d, i) => (
                 <li key={i}>{d}</li>
@@ -28,11 +28,11 @@ function DictionaryEntry({ entry }) {
             </ol>
           </section>
         ) : (
-          <p className="noDefinition">{t.noDefinition}</p>
+          <p className={styles.noDefinition}>{t.noDefinition}</p>
         )}
         {example && (
-          <section className="example" aria-labelledby="ex-title">
-            <h2 id="ex-title" className="sectionTitle">【{t.exampleLabel}】</h2>
+          <section className={styles.example} aria-labelledby="ex-title">
+            <h2 id="ex-title" className={styles.sectionTitle}>【{t.exampleLabel}】</h2>
             <blockquote>{example}</blockquote>
           </section>
         )}
@@ -59,16 +59,16 @@ function DictionaryEntry({ entry }) {
   const defs = groups.flatMap((g) => g.释义 || [])
 
   return (
-    <article className="dictionaryEntry">
-      {term && <h2 className="sectionTitle">{term}</h2>}
+    <article className={styles.dictionaryEntry}>
+      {term && <h2 className={styles.sectionTitle}>{term}</h2>}
       {phoneticText && (
-        <section className="phoneticSection" aria-labelledby="phon-title">
-          <h2 id="phon-title" className="sectionTitle">【{t.phoneticLabel}】</h2>
-          <p className="phonetic">{phoneticText}</p>
+        <section className={styles.phoneticSection} aria-labelledby="phon-title">
+          <h2 id="phon-title" className={styles.sectionTitle}>【{t.phoneticLabel}】</h2>
+          <p className={styles.phonetic}>{phoneticText}</p>
         </section>
       )}
       {variants.length > 0 && (
-        <section className="variants" aria-labelledby="var-title">
+        <section className={styles.variants} aria-labelledby="var-title">
           <h2 id="var-title" className="sectionTitle">【{varLabel}】</h2>
           <ul>
             {variants.map((v, i) => (
@@ -80,15 +80,15 @@ function DictionaryEntry({ entry }) {
         </section>
       )}
       {defs.length > 0 ? (
-        <section className="definitions" aria-labelledby="def-title">
-          <h2 id="def-title" className="sectionTitle">【{t.definitionsLabel}】</h2>
+        <section className={styles.definitions} aria-labelledby="def-title">
+          <h2 id="def-title" className={styles.sectionTitle}>【{t.definitionsLabel}】</h2>
           <ol>
             {defs.map((d, i) => (
               <li key={i}>
                 <div>{d.定义}</div>
-                {d.类别 && <div className="pos">{d.类别}</div>}
+                {d.类别 && <div className={styles.pos}>{d.类别}</div>}
                 {d.关系词 && (
-                  <div className="relations">
+                  <div className={styles.relations}>
                     {d.关系词.同义词?.length > 0 && (
                       <div>
                         {synLabel}: {d.关系词.同义词.join(', ')}
@@ -107,7 +107,7 @@ function DictionaryEntry({ entry }) {
                   </div>
                 )}
                 {d.例句?.length > 0 && (
-                  <ul className="examples">
+                  <ul className={styles.examples}>
                     {d.例句.map((ex, j) => (
                       <li key={j}>
                         <blockquote>{ex.源语言}</blockquote>
@@ -121,11 +121,11 @@ function DictionaryEntry({ entry }) {
           </ol>
         </section>
       ) : (
-        <p className="noDefinition">{t.noDefinition}</p>
+        <p className={styles.noDefinition}>{t.noDefinition}</p>
       )}
       {phrases.length > 0 && (
-        <section className="phrases" aria-labelledby="phr-title">
-          <h2 id="phr-title" className="sectionTitle">【{phrLabel}】</h2>
+        <section className={styles.phrases} aria-labelledby="phr-title">
+          <h2 id="phr-title" className={styles.sectionTitle}>【{phrLabel}】</h2>
           <ul>
             {phrases.map((p, i) => (
               <li key={i}>{p}</li>

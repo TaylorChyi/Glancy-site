@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Toolbar.css'
+import styles from './Toolbar.module.css'
 import { useLanguage } from '../../LanguageContext.jsx'
 import useOutsideToggle from '../../hooks/useOutsideToggle.js'
 
@@ -17,16 +17,16 @@ function ModelSelector() {
   }
 
   return (
-    <div className="toolbar-section model-selector" ref={menuRef}>
+    <div className={`${styles['toolbar-section']} ${styles['model-selector']}`} ref={menuRef}>
       <button
         type="button"
-        className="model-btn"
+        className={styles['model-btn']}
         onClick={() => setOpen(!open)}
       >
         {model === 'model-a' ? t.modelA : t.modelB} ▾
       </button>
       {open && (
-        <div className="model-menu">
+        <div className={styles['model-menu']}>
           <button type="button" onClick={() => selectModel('model-a')}>
             {t.modelA}
           </button>
