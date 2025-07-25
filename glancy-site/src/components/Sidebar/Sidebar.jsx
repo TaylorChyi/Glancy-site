@@ -2,7 +2,6 @@ import Brand from '../Brand.jsx'
 import SidebarFunctions from './SidebarFunctions.jsx'
 import SidebarUser from './SidebarUser.jsx'
 import { useIsMobile } from '../../utils.js'
-import './Sidebar.css'
 
 function Sidebar({
   isMobile: mobileProp,

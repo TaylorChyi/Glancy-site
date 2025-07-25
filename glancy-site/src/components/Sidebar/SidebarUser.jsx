@@ -1,9 +1,9 @@
 import { UserMenu } from '../Header'
-import './Sidebar.css'
+import styles from './Sidebar.module.css'
 
 function SidebarUser() {
   return (
-    <div className="sidebar-user">
+    <div className={styles['sidebar-user']}>
       <UserMenu size={32} showName />
     </div>
   )

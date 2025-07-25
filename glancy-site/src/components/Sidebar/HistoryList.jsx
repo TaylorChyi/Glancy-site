@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
 import ListItem from '../ListItem/ListItem.jsx'
-import './Sidebar.css'
+import styles from './Sidebar.module.css'
 import useOutsideToggle from '../../hooks/useOutsideToggle.js'
 
 function HistoryList({ onSelect }) {
@@ -26,7 +26,7 @@ function HistoryList({ onSelect }) {
   if (history.length === 0) return null
 
   return (
-    <div className="sidebar-section history-list" ref={listRef}>
+    <div className={`${styles['sidebar-section']} ${styles['history-list']}`} ref={listRef}>
       <ul>
         {history.map((h, i) => (
           <ListItem
@@ -34,10 +34,10 @@ function HistoryList({ onSelect }) {
             text={h}
             onClick={() => onSelect && onSelect(h)}
             actions={(
-              <div className="history-action-wrapper">
+              <div className={styles['history-action-wrapper']}>
                 <button
                   type="button"
-                  className="history-action"
+                  className={styles['history-action']}
                   onClick={(e) => {
                     e.stopPropagation()
                     setOpenIndex(openIndex === i ? null : i)
@@ -46,7 +46,7 @@ function HistoryList({ onSelect }) {
                   ⋮
                 </button>
                 {openIndex === i && (
-                  <div className="history-menu">
+                  <div className={styles['history-menu']}>
                     <button
                       type="button"
                       onClick={(e) => {
@@ -60,7 +60,7 @@ function HistoryList({ onSelect }) {
                     </button>
                     <button
                       type="button"
-                      className="delete-btn"
+                      className={styles['delete-btn']}
                       onClick={(e) => {
                         e.stopPropagation()
                         removeHistory(h, user)

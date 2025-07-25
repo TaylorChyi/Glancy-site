@@ -1,5 +1,5 @@
 import { useHistory } from '../context/AppContext.jsx'
-import './HistoryDisplay.css'
+import styles from './HistoryDisplay.module.css'
 
 function HistoryDisplay() {
   const { history } = useHistory()
@@ -11,7 +11,7 @@ function HistoryDisplay() {
     )
   }
   return (
-    <ul className="history-grid-display">
+    <ul className={styles['history-grid-display']}>
       {history.map((h, i) => (
         <li key={i}>{h}</li>
       ))}

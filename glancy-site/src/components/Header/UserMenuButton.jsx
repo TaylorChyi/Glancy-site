@@ -1,17 +1,18 @@
 import useOutsideToggle from '../../hooks/useOutsideToggle.js'
 import Avatar from '../Avatar.jsx'
 import ProTag from './ProTag.jsx'
+import styles from './Header.module.css'
 
 function UserMenuButton({ size, showName, isPro, username, children }) {
   const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
 
   return (
-    <div className="header-section user-menu" ref={menuRef}>
-      <button onClick={() => setOpen(!open)} className={showName ? 'with-name' : ''}>
+    <div className={`${styles['header-section']} ${styles['user-menu']}`} ref={menuRef}>
+      <button onClick={() => setOpen(!open)} className={showName ? styles['with-name'] : ''}>
         <Avatar width={size} height={size} />
         {showName ? (
-          <div className="info">
-            <span className="username">{username}</span>
+          <div className={styles.info}>
+            <span className={styles.username}>{username}</span>
             {isPro && <ProTag />}
           </div>
         ) : (

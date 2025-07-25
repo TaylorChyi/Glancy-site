@@ -1,5 +1,5 @@
 import BaseModal from './BaseModal.jsx'
-import './ShortcutsModal.css'
+import styles from './ShortcutsModal.module.css'
 import { getModifierKey } from '../utils.js'
 import { useLanguage } from '../LanguageContext.jsx'
 
@@ -15,17 +15,17 @@ function ShortcutsModal({ open, onClose }) {
   ]
 
   return (
-    <BaseModal open={open} onClose={onClose} className="shortcuts-modal">
+    <BaseModal open={open} onClose={onClose} className={styles['shortcuts-modal']}>
       <h3>{t.shortcutsTitle}</h3>
       <ul>
         {shortcuts.map((s) => (
           <li key={s.keys}>
-            <span className="keys">{s.keys}</span>
-            <span className="desc">{s.action}</span>
+            <span className={styles.keys}>{s.keys}</span>
+            <span className={styles.desc}>{s.action}</span>
           </li>
         ))}
       </ul>
-      <button type="button" onClick={onClose} className="close-btn">
+      <button type="button" onClick={onClose} className={styles['close-btn']}>
         {t.close}
       </button>
     </BaseModal>
