@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
+import ListItem from '../ListItem/ListItem.jsx'
 import './Sidebar.css'
 import useOutsideToggle from '../../hooks/useOutsideToggle.js'
 
@@ -28,53 +29,51 @@ function HistoryList({ onSelect }) {
     <div className="sidebar-section history-list" ref={listRef}>
       <ul>
         {history.map((h, i) => (
-          <li key={i} onClick={() => onSelect && onSelect(h)}>
-            <span className="history-term">
-              {h}
-            </span>
-            <div className="history-action-wrapper">
-              <button
-                type="button"
-                className="history-action"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  const isOpen = openIndex === i
-                  setOpenIndex(isOpen ? null : i)
-                  setOpen(!isOpen)
-                }}
-              >
-                ⋮
-              </button>
-              {openIndex === i && (
-                <div className="history-menu">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      favoriteHistory(h, user)
-                      toggleFavorite(h)
-                      setOpenIndex(null)
-                      setOpen(false)
-                    }}
-                  >
-                    ★ {t.favoriteAction}
-                  </button>
-                  <button
-                    type="button"
-                    className="delete-btn"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      removeHistory(h, user)
-                      setOpenIndex(null)
-                      setOpen(false)
-                    }}
-                  >
-                    🗑 {t.deleteAction}
-                  </button>
-                </div>
-              )}
-            </div>
-          </li>
+          <ListItem
+            key={i}
+            text={h}
+            onClick={() => onSelect && onSelect(h)}
+            actions={(
+              <div className="history-action-wrapper">
+                <button
+                  type="button"
+                  className="history-action"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setOpenIndex(openIndex === i ? null : i)
+                  }}
+                >
+                  ⋮
+                </button>
+                {openIndex === i && (
+                  <div className="history-menu">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        favoriteHistory(h, user)
+                        toggleFavorite(h)
+                        setOpenIndex(null)
+                      }}
+                    >
+                      ★ {t.favoriteAction}
+                    </button>
+                    <button
+                      type="button"
+                      className="delete-btn"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        removeHistory(h, user)
+                        setOpenIndex(null)
+                      }}
+                    >
+                      🗑 {t.deleteAction}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          />
         ))}
       </ul>
     </div>
