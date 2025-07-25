@@ -1,13 +1,10 @@
 import { useState } from 'react'
-import CodeButton from './components/CodeButton.jsx'
-import PhoneInput from './components/PhoneInput.jsx'
+import { AuthForm, Button } from './components/index.js'
 import { useNavigate, Link } from 'react-router-dom'
 import styles from './AuthPage.module.css'
 import { API_PATHS } from './config/api.js'
-import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
-import { Button } from './components/index.js'
 import {
   GoogleIcon,
   AppleIcon,
@@ -20,23 +17,19 @@ import {
 import { useTheme } from './ThemeContext.jsx'
 
 function Register() {
-  const [account, setAccount] = useState('')
-  const [code, setCode] = useState('')
   const [method, setMethod] = useState('phone')
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
   const { setUser } = useUser()
   const { resolvedTheme } = useTheme()
   const BrandIcon = resolvedTheme === 'dark' ? GlancyWebDarkIcon : GlancyWebLightIcon
   const api = useApi()
 
-  const validateAccount = () => {
+  const validateAccount = (value) => {
     if (method === 'email') {
-      return /.+@.+\..+/.test(account)
+      return /.+@.+\..+/.test(value)
     }
     if (method === 'phone') {
-      return /^\+?\d{6,15}$/.test(account)
+      return /^\+?\d{6,15}$/.test(value)
     }
     return true
   }
@@ -45,34 +38,22 @@ function Register() {
     // do nothing for now
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setPopupMsg('')
-    if (!validateAccount()) {
-      setPopupMsg('Invalid account')
-      setPopupOpen(true)
-      return
-    }
-    try {
-      await api(API_PATHS.register, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          [method]: account,
-          code
-        })
+  const handleRegister = async ({ account, secret }) => {
+    await api(API_PATHS.register, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        [method]: account,
+        code: secret
       })
-      const loginData = await api(API_PATHS.login, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ account, method, password: code })
-      })
-      setUser(loginData)
-      navigate('/')
-    } catch (err) {
-      setPopupMsg(err.message)
-      setPopupOpen(true)
-    }
+    })
+    const loginData = await api(API_PATHS.login, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ account, method, password: secret })
+    })
+    setUser(loginData)
+    navigate('/')
   }
 
   const placeholders = {
@@ -81,34 +62,6 @@ function Register() {
   }
 
   const formMethods = ['phone', 'email']
-
-  const renderForm = () => {
-    if (!formMethods.includes(method)) return null
-    return (
-      <form onSubmit={handleSubmit} className={styles['auth-form']}>
-        {method === 'phone' ? (
-          <PhoneInput value={account} onChange={setAccount} />
-        ) : (
-          <input
-            className={styles['auth-input']}
-            placeholder={placeholders[method]}
-            value={account}
-            onChange={(e) => setAccount(e.target.value)}
-          />
-        )}
-        <div className={styles['password-row']}>
-          <input
-            className={styles['auth-input']}
-            placeholder="Code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <CodeButton onClick={handleSendCode} />
-        </div>
-        <Button type="submit" className={styles['auth-primary-btn']}>Continue</Button>
-      </form>
-    )
-  }
 
   const methodOrder = ['phone', 'email', 'wechat', 'apple', 'google']
   const icons = {
@@ -125,7 +78,18 @@ function Register() {
       <BrandIcon className={styles['auth-logo']} />
       <div className={styles['auth-brand']}>Glancy</div>
       <h1 className={styles['auth-title']}>Create an account</h1>
-      {renderForm()}
+      {formMethods.includes(method) && (
+        <AuthForm
+          method={method}
+          placeholders={placeholders}
+          secretType="text"
+          secretPlaceholder="Code"
+          showCodeButton={() => true}
+          onSendCode={handleSendCode}
+          onSubmit={handleRegister}
+          validateAccount={validateAccount}
+        />
+      )}
       <div className={styles['auth-switch']}>
         Already have an account? <Link to="/login">Log in</Link>
       </div>
@@ -160,11 +124,6 @@ function Register() {
           </a>
         </div>
       </div>
-      <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
-      />
     </div>
   )
 }

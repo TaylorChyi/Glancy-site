@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import CodeButton from './components/CodeButton.jsx'
-import PhoneInput from './components/PhoneInput.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import styles from './AuthPage.module.css'
-import { Button } from './components/index.js'
+import { Button, AuthForm } from './components/index.js'
 import { API_PATHS } from './config/api.js'
 import { useUser } from './context/AppContext.jsx'
-import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
 import {
   GoogleIcon,
@@ -23,32 +20,11 @@ import { useTheme } from './ThemeContext.jsx'
 function Login() {
   const { setUser } = useUser()
   const api = useApi()
-  const [account, setAccount] = useState('')
-  const [password, setPassword] = useState('')
   const [method, setMethod] = useState('phone')
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
   const { resolvedTheme } = useTheme()
   const BrandIcon =
     resolvedTheme === 'dark' ? GlancyWebDarkIcon : GlancyWebLightIcon
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setPopupMsg('')
-    try {
-      const data = await api(API_PATHS.login, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ account, password, method })
-      })
-      setUser(data)
-      navigate('/')
-    } catch (err) {
-      setPopupMsg(err.message)
-      setPopupOpen(true)
-    }
-  }
 
   const placeholders = {
     phone: 'Phone number',
@@ -62,35 +38,14 @@ function Login() {
     // do nothing for now
   }
 
-  const renderForm = () => {
-    if (!formMethods.includes(method)) return null
-    return (
-      <form onSubmit={handleSubmit} className={styles['auth-form']}>
-        {method === 'phone' ? (
-          <PhoneInput value={account} onChange={setAccount} />
-        ) : (
-          <input
-            className={styles['auth-input']}
-            placeholder={placeholders[method]}
-            value={account}
-            onChange={(e) => setAccount(e.target.value)}
-          />
-        )}
-        <div className={styles['password-row']}>
-          <input
-            className={styles['auth-input']}
-            type="password"
-            placeholder={method === 'username' ? 'Password' : 'Password / code'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {method !== 'username' && (
-            <CodeButton onClick={handleSendCode} />
-          )}
-        </div>
-        <button type="submit" className={styles['auth-primary-btn']}>Continue</button>
-      </form>
-    )
+  const handleLogin = async ({ account, secret }) => {
+    const data = await api(API_PATHS.login, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ account, password: secret, method })
+    })
+    setUser(data)
+    navigate('/')
   }
 
   const methodOrder = ['username', 'email', 'phone', 'wechat', 'apple', 'google']
@@ -109,7 +64,19 @@ function Login() {
       <BrandIcon className={styles['auth-logo']} />
       <div className={styles['auth-brand']}>Glancy</div>
       <h1 className={styles['auth-title']}>Welcome back</h1>
-      {renderForm()}
+      {formMethods.includes(method) && (
+        <AuthForm
+          method={method}
+          placeholders={placeholders}
+          secretType="password"
+          secretPlaceholder={(m) =>
+            m === 'username' ? 'Password' : 'Password / code'
+          }
+          showCodeButton={(m) => m !== 'username'}
+          onSendCode={handleSendCode}
+          onSubmit={handleLogin}
+        />
+      )}
       <div className={styles['auth-switch']}>
         Don’t have an account? <Link to="/register">Sign up</Link>
       </div>
@@ -141,11 +108,6 @@ function Login() {
           </a>
         </div>
       </div>
-      <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
-      />
     </div>
   )
 }
