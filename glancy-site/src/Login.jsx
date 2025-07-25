@@ -26,8 +26,8 @@ function Login() {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const [method, setMethod] = useState('phone')
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
+  const [showNotice, setShowNotice] = useState(false)
+  const [noticeMsg, setNoticeMsg] = useState('')
   const navigate = useNavigate()
   const { resolvedTheme } = useTheme()
   const BrandIcon =
@@ -35,7 +35,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setPopupMsg('')
+    setNoticeMsg('')
     try {
       const data = await api(API_PATHS.login, {
         method: 'POST',
@@ -45,8 +45,8 @@ function Login() {
       setUser(data)
       navigate('/')
     } catch (err) {
-      setPopupMsg(err.message)
-      setPopupOpen(true)
+      setNoticeMsg(err.message)
+      setShowNotice(true)
     }
   }
 
@@ -123,9 +123,14 @@ function Login() {
             <Button
               key={m}
               type="button"
-              onClick={() =>
-                formMethods.includes(m) ? setMethod(m) : alert('Not implemented')
-              }
+              onClick={() => {
+                if (formMethods.includes(m)) {
+                  setMethod(m)
+                } else {
+                  setNoticeMsg('Not implemented yet')
+                  setShowNotice(true)
+                }
+              }}
             >
               <img src={icons[m]} alt={m} />
             </Button>
@@ -142,9 +147,9 @@ function Login() {
         </div>
       </div>
       <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
+        open={showNotice}
+        message={noticeMsg}
+        onClose={() => setShowNotice(false)}
       />
     </div>
   )
