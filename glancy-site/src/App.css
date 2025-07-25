@@ -1,16 +1,9 @@
-.container {
-  display: flex;
-  height: var(--vh);
-  overflow: hidden;
-}
-
 .sidebar {
   width: 240px;
   height: var(--vh);
   background: var(--sidebar-bg);
   color: var(--sidebar-color);
-  /* match chatbox bottom spacing */
-  padding: 20px 20px 28px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -20,8 +13,10 @@
   justify-content: space-between;
   position: sticky;
   top: 0;
+  height: 60px;
   background: inherit;
-  padding-bottom: 1rem;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border-color);
 }
 .brand-main {
   display: flex;
@@ -40,21 +35,6 @@
   font-size: 1.25rem;
 }
 
-.right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.topbar {
-  height: 60px;
-  display: none;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 20px;
-  gap: 8px;
-}
 
 .avatar img {
   width: 32px;
@@ -93,8 +73,11 @@
 .chatbox {
   display: flex;
   align-items: center;
-  padding: 16px 32px;
+  height: 60px;
+  padding: 0 20px;
   gap: 16px;
+  border-top: 1px solid var(--border-color);
+  background: var(--app-bg);
 }
 
 .chatbox input {
@@ -135,9 +118,6 @@
   text-decoration: none;
 }
 @media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-  }
   .sidebar {
     position: fixed;
     left: 0;
@@ -153,13 +133,6 @@
   }
   .mobile-user-menu {
     display: none;
-  }
-  .topbar {
-    display: flex;
-    padding: 10px;
-  }
-  .chatbox {
-    padding: 16px;
   }
 }
 

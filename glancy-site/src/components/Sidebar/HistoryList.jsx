@@ -10,7 +10,7 @@ function HistoryList({ onSelect }) {
   const { toggleFavorite } = useFavorites()
   const { user } = useUser()
   const [openIndex, setOpenIndex] = useState(null)
-  const { ref: listRef, open, setOpen } = useOutsideToggle(false)
+  const { ref: listRef, open } = useOutsideToggle(false)
   const { t } = useLanguage()
 
   useEffect(() => {

@@ -1,0 +1,39 @@
+.container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: var(--vh);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mainTop {
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mainMiddle {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.mainBottom {
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  background: var(--app-bg);
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

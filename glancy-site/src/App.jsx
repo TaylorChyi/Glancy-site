@@ -182,21 +182,48 @@ function App() {
   }, [user])
 
   return (
-    <Layout
-      sidebarProps={{
-        onToggleFavorites: handleToggleFavorites,
-        onSelectHistory: handleSelectHistory
-      }}
-      topBarProps={{
-        term: entry?.term || '',
-        showBack: !showFavorites && fromFavorites,
-        onBack: handleBackFromFavorite,
-        favorited: favorites.includes(entry?.term),
-        onToggleFavorite: () => entry && toggleFavorite(entry.term),
-        canFavorite: !!entry && !showFavorites && !showHistory
-      }}
-    >
-      <div className="display">
+    <>
+      <Layout
+        sidebarProps={{
+          onToggleFavorites: handleToggleFavorites,
+          onSelectHistory: handleSelectHistory
+        }}
+        topBarProps={{
+          term: entry?.term || '',
+          showBack: !showFavorites && fromFavorites,
+          onBack: handleBackFromFavorite,
+          favorited: favorites.includes(entry?.term),
+          onToggleFavorite: () => entry && toggleFavorite(entry.term),
+          canFavorite: !!entry && !showFavorites && !showHistory
+        }}
+        bottomContent={(
+          <>
+            <form className="chatbox" onSubmit={handleSend}>
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder={t.inputPlaceholder}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className={styles.roundedInput}
+              />
+              <button type="submit">
+                {text.trim() === '' ? (
+                  <VoiceIcon alt="voice" />
+                ) : (
+                  <SendIcon alt="send" />
+                )}
+              </button>
+            </form>
+            <div className="icp">
+              <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+                京ICP备2025135702号-1
+              </a>
+            </div>
+          </>
+        )}
+      >
+        <div className="display">
           {showFavorites ? (
             favorites.length ? (
               <ul className="favorites-grid-display">
@@ -239,34 +266,13 @@ function App() {
             </div>
           )}
         </div>
-        <form className="chatbox" onSubmit={handleSend}>
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder={t.inputPlaceholder}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            className={styles.roundedInput}
-          />
-          <button type="submit">
-            {text.trim() === '' ? (
-              <VoiceIcon alt="voice" />
-            ) : (
-              <SendIcon alt="send" />
-            )}
-          </button>
-        </form>
-        <div className="icp">
-          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
-            京ICP备2025135702号-1
-          </a>
-        </div>
+      </Layout>
       <MessagePopup
         open={popupOpen}
         message={popupMsg}
         onClose={() => setPopupOpen(false)}
       />
-    </Layout>
+    </>
   )
 }
 
