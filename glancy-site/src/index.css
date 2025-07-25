@@ -2,7 +2,6 @@
 @import "./theme/variables.css";
 @import './theme/spacing.css';
 @import './theme/typography.css';
-@import './theme/layout.css';
 
 :root {
   font-family: var(--font-family-base);

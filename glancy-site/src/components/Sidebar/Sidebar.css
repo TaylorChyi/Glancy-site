@@ -17,6 +17,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  height: 60px;
+  padding: 0 20px;
+  position: sticky;
+  bottom: 0;
+  background: inherit;
+  border-top: 1px solid var(--border-color);
 }
 
 /* adapt header components used inside sidebar */

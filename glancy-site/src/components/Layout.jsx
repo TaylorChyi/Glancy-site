@@ -3,31 +3,33 @@ import Sidebar from './Sidebar'
 import DesktopTopBar from './DesktopTopBar.jsx'
 import MobileTopBar from './MobileTopBar.jsx'
 import { useIsMobile } from '../utils.js'
+import styles from './Layout.module.css'
 
-function Layout({ children, sidebarProps = {}, topBarProps = {} }) {
+function Layout({ children, sidebarProps = {}, topBarProps = {}, bottomContent = null }) {
   const isMobile = useIsMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="grid-main">
+    <div className={styles.container}>
       <Sidebar
         {...sidebarProps}
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         isMobile={isMobile}
       />
-      <div className="layout-main flex-column">
-        {isMobile ? (
-          <header className="topbar">
+      <div className={styles.main}>
+        <div className={styles.mainTop}>
+          {isMobile ? (
             <MobileTopBar
               {...topBarProps}
               onOpenSidebar={() => setSidebarOpen(true)}
             />
-          </header>
-        ) : (
-          <DesktopTopBar {...topBarProps} />
-        )}
-        <main className="layout-content flex-column">{children}</main>
+          ) : (
+            <DesktopTopBar {...topBarProps} />
+          )}
+        </div>
+        <div className={styles.mainMiddle}>{children}</div>
+        <div className={styles.mainBottom}>{bottomContent}</div>
       </div>
     </div>
   )
