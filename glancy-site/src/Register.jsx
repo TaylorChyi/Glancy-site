@@ -23,8 +23,8 @@ function Register() {
   const [account, setAccount] = useState('')
   const [code, setCode] = useState('')
   const [method, setMethod] = useState('phone')
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
+  const [showNotice, setShowNotice] = useState(false)
+  const [noticeMsg, setNoticeMsg] = useState('')
   const navigate = useNavigate()
   const { setUser } = useUser()
   const { resolvedTheme } = useTheme()
@@ -47,10 +47,10 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setPopupMsg('')
+    setNoticeMsg('')
     if (!validateAccount()) {
-      setPopupMsg('Invalid account')
-      setPopupOpen(true)
+      setNoticeMsg('Invalid account')
+      setShowNotice(true)
       return
     }
     try {
@@ -70,8 +70,8 @@ function Register() {
       setUser(loginData)
       navigate('/')
     } catch (err) {
-      setPopupMsg(err.message)
-      setPopupOpen(true)
+      setNoticeMsg(err.message)
+      setShowNotice(true)
     }
   }
 
@@ -139,9 +139,14 @@ function Register() {
             <Button
               key={m}
               type="button"
-              onClick={() =>
-                formMethods.includes(m) ? setMethod(m) : alert('Not implemented')
-              }
+              onClick={() => {
+                if (formMethods.includes(m)) {
+                  setMethod(m)
+                } else {
+                  setNoticeMsg('Not implemented yet')
+                  setShowNotice(true)
+                }
+              }}
             >
               {(() => {
                 const Icon = icons[m]
@@ -161,9 +166,9 @@ function Register() {
         </div>
       </div>
       <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
+        open={showNotice}
+        message={noticeMsg}
+        onClose={() => setShowNotice(false)}
       />
     </div>
   )
