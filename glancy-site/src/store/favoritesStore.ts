@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { safeJSONParse } from '../utils.js'
 
 interface FavoritesState {
   favorites: string[]
@@ -9,7 +10,7 @@ const STORAGE_KEY = 'favorites'
 
 export const useFavoritesStore = create<FavoritesState>((set, get) => {
   const stored = localStorage.getItem(STORAGE_KEY)
-  const initial: string[] = stored ? JSON.parse(stored) : []
+  const initial: string[] = stored ? safeJSONParse(stored, []) : []
   return {
     favorites: initial,
     toggleFavorite: (term: string) => {

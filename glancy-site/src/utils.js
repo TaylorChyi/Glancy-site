@@ -13,6 +13,14 @@ export function extractMessage(text) {
   return text
 }
 
+export function safeJSONParse(str, defaultValue = null) {
+  try {
+    return JSON.parse(str)
+  } catch {
+    return defaultValue
+  }
+}
+
 export function getModifierKey() {
   const platform =
     navigator.userAgentData?.platform || navigator.platform || ''
