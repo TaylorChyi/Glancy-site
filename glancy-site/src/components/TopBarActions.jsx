@@ -1,25 +1,12 @@
-import { useState, useRef, useEffect } from 'react'
 import ModelSelector from './Toolbar'
 import { useLanguage } from '../LanguageContext.jsx'
 import { useUser } from '../context/AppContext.jsx'
+import useOutsideToggle from '../hooks/useOutsideToggle.js'
 
 function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = false }) {
-  const [open, setOpen] = useState(false)
-  const menuRef = useRef(null)
+  const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
   const { t } = useLanguage()
   const { user } = useUser()
-
-  useEffect(() => {
-    function handlePointerDown(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    if (open) {
-      document.addEventListener('pointerdown', handlePointerDown)
-    }
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [open])
 
   if (!user) return null
 

@@ -1,22 +1,9 @@
-import { useState, useRef, useEffect } from 'react'
+import useOutsideToggle from '../../hooks/useOutsideToggle.js'
 import Avatar from '../Avatar.jsx'
 import ProTag from './ProTag.jsx'
 
 function UserMenuButton({ size, showName, isPro, username, children }) {
-  const [open, setOpen] = useState(false)
-  const menuRef = useRef(null)
-
-  useEffect(() => {
-    function handlePointerDown(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    if (open) {
-      document.addEventListener('pointerdown', handlePointerDown)
-    }
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [open])
+  const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
 
   return (
     <div className="header-section user-menu" ref={menuRef}>

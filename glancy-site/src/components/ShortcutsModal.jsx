@@ -1,12 +1,10 @@
-import Modal from './Modal.jsx'
+import BaseModal from './BaseModal.jsx'
 import './ShortcutsModal.css'
 import { getModifierKey } from '../utils.js'
 import { useLanguage } from '../LanguageContext.jsx'
 
 function ShortcutsModal({ open, onClose }) {
   const { t } = useLanguage()
-  if (!open) return null
-
   const mod = getModifierKey()
   const shortcuts = [
     { keys: `${mod} + Shift + F`, action: t.shortcutsFocusSearch },
@@ -17,7 +15,7 @@ function ShortcutsModal({ open, onClose }) {
   ]
 
   return (
-    <Modal onClose={onClose} className="shortcuts-modal">
+    <BaseModal open={open} onClose={onClose} className="shortcuts-modal">
       <h3>{t.shortcutsTitle}</h3>
       <ul>
         {shortcuts.map((s) => (
@@ -30,7 +28,7 @@ function ShortcutsModal({ open, onClose }) {
       <button type="button" onClick={onClose} className="close-btn">
         {t.close}
       </button>
-    </Modal>
+    </BaseModal>
   )
 }
 

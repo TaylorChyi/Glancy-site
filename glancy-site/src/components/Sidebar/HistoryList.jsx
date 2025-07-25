@@ -1,28 +1,23 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
 import ListItem from '../ListItem/ListItem.jsx'
 import './Sidebar.css'
+import useOutsideToggle from '../../hooks/useOutsideToggle.js'
 
 function HistoryList({ onSelect }) {
   const { history, loadHistory, removeHistory, favoriteHistory } = useHistory()
   const { toggleFavorite } = useFavorites()
   const { user } = useUser()
   const [openIndex, setOpenIndex] = useState(null)
-  const listRef = useRef(null)
+  const { ref: listRef, open, setOpen } = useOutsideToggle(false)
   const { t } = useLanguage()
 
   useEffect(() => {
-    function handlePointerDown(e) {
-      if (listRef.current && !listRef.current.contains(e.target)) {
-        setOpenIndex(null)
-      }
+    if (!open) {
+      setOpenIndex(null)
     }
-    if (openIndex !== null) {
-      document.addEventListener('pointerdown', handlePointerDown)
-    }
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [openIndex])
+  }, [open])
 
   useEffect(() => {
     loadHistory(user)
