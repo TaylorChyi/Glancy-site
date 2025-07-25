@@ -1,4 +1,4 @@
-import { StrictMode, Suspense, lazy } from 'react'
+import { StrictMode, Suspense, lazy, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/ErrorBoundary.jsx'
@@ -12,15 +12,26 @@ import { LanguageProvider } from './LanguageContext.jsx'
 import { ThemeProvider } from './ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'
 
-function updateVh() {
-  document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
+// eslint-disable-next-line react-refresh/only-export-components
+function ViewportHeightUpdater() {
+  useEffect(() => {
+    const updateVh = () => {
+      document.documentElement.style.setProperty(
+        '--vh',
+        `${window.innerHeight}px`
+      )
+    }
+    updateVh()
+    window.addEventListener('resize', updateVh)
+    return () => window.removeEventListener('resize', updateVh)
+  }, [])
+  return null
 }
 
-updateVh()
-window.addEventListener('resize', updateVh)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ViewportHeightUpdater />
     <AppProvider>
       <LanguageProvider>
         <ThemeProvider>
