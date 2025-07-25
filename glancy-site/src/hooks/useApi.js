@@ -1,16 +1,5 @@
-import { useMemo } from 'react'
-import { useUser } from '../context/AppContext.jsx'
-import { apiRequest } from '../api/client.js'
+import { useApiContext } from '../context/ApiContext.jsx'
 
 export function useApi() {
-  const { user } = useUser()
-  const token = user?.token
-
-  return useMemo(() => {
-    return (url, options = {}) => {
-      const { token: optToken, ...rest } = options
-      const finalToken = optToken ?? token
-      return apiRequest(url, { ...rest, token: finalToken })
-    }
-  }, [token])
+  return useApiContext()
 }

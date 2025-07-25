@@ -11,6 +11,7 @@ const Register = lazy(() => import('./Register.jsx'))
 import { LanguageProvider } from './LanguageContext.jsx'
 import { ThemeProvider } from './ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'
+import { ApiProvider } from './context/ApiContext.jsx'
 
 function updateVh() {
   document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
@@ -22,9 +23,10 @@ window.addEventListener('resize', updateVh)
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AppProvider>
-      <LanguageProvider>
-        <ThemeProvider>
-          <BrowserRouter>
+      <ApiProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <BrowserRouter>
             <ErrorBoundary>
               <Suspense fallback={<Loader />}>
                 <Routes>
@@ -34,9 +36,10 @@ createRoot(document.getElementById('root')).render(
                 </Routes>
               </Suspense>
             </ErrorBoundary>
-          </BrowserRouter>
-        </ThemeProvider>
-      </LanguageProvider>
+            </BrowserRouter>
+          </ThemeProvider>
+        </LanguageProvider>
+      </ApiProvider>
     </AppProvider>
   </StrictMode>,
 )

@@ -27,7 +27,7 @@ function Preferences() {
 
   useEffect(() => {
     if (!user) return
-    api(`${API_PATHS.preferences}/user/${user.id}`)
+    api.request(`${API_PATHS.preferences}/user/${user.id}`)
       .then((data) => {
         const sl = data.systemLanguage || 'auto'
         const tl = data.searchLanguage || 'ENGLISH'
@@ -50,7 +50,7 @@ function Preferences() {
   const handleSave = async (e) => {
     e.preventDefault()
     if (!user) return
-    await api(`${API_PATHS.preferences}/user/${user.id}`, {
+    await api.request(`${API_PATHS.preferences}/user/${user.id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -66,6 +66,5 @@ export const {
 } = createSearchRecordsApi()
 
 export function useSearchRecordsApi() {
-  const api = useApi()
-  return createSearchRecordsApi(api)
+  return useApi().searchRecords
 }

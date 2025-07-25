@@ -37,7 +37,7 @@ function Login() {
     e.preventDefault()
     setPopupMsg('')
     try {
-      const data = await api(API_PATHS.login, {
+      const data = await api.request(API_PATHS.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ account, password, method })

@@ -11,7 +11,7 @@ import {
   VoiceButtonLightIcon,
   VoiceButtonDarkIcon
 } from './components/Icon'
-import api from './api/index.js'
+import { useApi } from './hooks/useApi.js'
 import { useLanguage } from './LanguageContext.jsx'
 import './App.css'
 import styles from './App.module.css'
@@ -40,7 +40,8 @@ function App() {
   const [fromFavorites, setFromFavorites] = useState(false)
   const { favorites, toggleFavorite } = useFavorites()
   const navigate = useNavigate()
-  const { fetchWord } = api
+  const api = useApi()
+  const { fetchWord } = api.words
 
   const handleToggleFavorites = () => {
     // always show favorites when invoked

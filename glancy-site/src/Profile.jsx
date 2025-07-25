@@ -29,7 +29,7 @@ function Profile({ onCancel }) {
   })
 
   useEffect(() => {
-    api(API_PATHS.profile)
+    api.request(API_PATHS.profile)
       .then((data) => {
         setUsername(data.username)
         setEmail(data.email)
@@ -60,7 +60,7 @@ function Profile({ onCancel }) {
     if (avatar) {
       formData.append('avatar', avatar)
     }
-    await api(API_PATHS.profile, {
+    await api.request(API_PATHS.profile, {
       method: 'POST',
       body: formData
     })
