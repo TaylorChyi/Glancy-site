@@ -1,6 +1,7 @@
 import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ErrorBoundary from './components/ErrorBoundary.jsx'
 import './index.css'
 import Loader from './components/Loader.jsx'
 
@@ -24,13 +25,15 @@ createRoot(document.getElementById('root')).render(
       <LanguageProvider>
         <ThemeProvider>
           <BrowserRouter>
-            <Suspense fallback={<Loader />}>
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="*" element={<App />} />
-              </Routes>
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<Loader />}>
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="*" element={<App />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </BrowserRouter>
         </ThemeProvider>
       </LanguageProvider>
