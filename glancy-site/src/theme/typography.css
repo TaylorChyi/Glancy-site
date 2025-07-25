@@ -1,14 +1,21 @@
 :root {
   --font-family-base: system-ui, Avenir, Helvetica, Arial, sans-serif;
   --text-xs: 0.75rem;
+  --text-xs-2: 0.8rem;
   --text-sm: 0.875rem;
+  --text-sm-plus: 0.9rem;
   --text-base: 1rem;
+  --text-base-plus: 1.1rem;
   --text-lg: 1.125rem;
+  --text-lg-plus: 1.2rem;
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-display: 3.2rem;
   --font-light: 300;
   --font-normal: 400;
   --font-medium: 500;
+  --font-semibold: 600;
   --font-bold: 700;
 }
 
@@ -17,12 +24,19 @@ body {
 }
 
 .text-xs { font-size: var(--text-xs); }
+.text-xs-2 { font-size: var(--text-xs-2); }
 .text-sm { font-size: var(--text-sm); }
+.text-sm-plus { font-size: var(--text-sm-plus); }
 .text-base { font-size: var(--text-base); }
+.text-base-plus { font-size: var(--text-base-plus); }
 .text-lg { font-size: var(--text-lg); }
+.text-lg-plus { font-size: var(--text-lg-plus); }
 .text-xl { font-size: var(--text-xl); }
 .text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-display { font-size: var(--text-display); }
 .font-light { font-weight: var(--font-light); }
 .font-normal { font-weight: var(--font-normal); }
 .font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
 .font-bold { font-weight: var(--font-bold); }
