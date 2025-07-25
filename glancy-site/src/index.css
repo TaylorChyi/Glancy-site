@@ -149,27 +149,4 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: var(--radius-md);
-  border: var(--btn-border);
-  padding: var(--btn-padding);
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: transparent;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: var(--highlight-color);
-}
-button:focus,
-button:focus-visible {
-  outline: none;
-}
-
-
-:root[data-theme='light'] button {
-  background-color: transparent;
-}
 

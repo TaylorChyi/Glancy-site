@@ -2,6 +2,7 @@ import { useState } from 'react'
 import CodeButton from './components/CodeButton.jsx'
 import PhoneInput from './components/PhoneInput.jsx'
 import { useNavigate, Link } from 'react-router-dom'
+import { Button } from './components/index.js'
 import './AuthPage.css'
 import { API_PATHS } from './config/api.js'
 import { useUser } from './context/AppContext.jsx'
@@ -84,7 +85,7 @@ function Login() {
             <CodeButton onClick={handleSendCode} />
           )}
         </div>
-        <button type="submit" className="auth-primary-btn">Continue</button>
+        <Button type="submit" className="auth-primary-btn">Continue</Button>
       </form>
     )
   }
@@ -116,7 +117,7 @@ function Login() {
         {methodOrder
           .filter((m) => m !== method)
           .map((m) => (
-            <button
+            <Button
               key={m}
               type="button"
               onClick={() =>
@@ -124,7 +125,7 @@ function Login() {
               }
             >
               <img src={icons[m]} alt={m} />
-            </button>
+            </Button>
           ))}
       </div>
       <div className="auth-footer">
