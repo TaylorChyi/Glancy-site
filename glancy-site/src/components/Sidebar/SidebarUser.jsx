@@ -1,4 +1,4 @@
-import UserMenu from '../Header/UserMenu.jsx'
+import { UserMenu } from '../Header'
 import './Sidebar.css'
 
 function SidebarUser() {

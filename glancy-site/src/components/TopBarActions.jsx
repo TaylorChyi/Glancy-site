@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import ModelSelector from './Toolbar/ModelSelector.jsx'
+import ModelSelector from './Toolbar'
 import { useLanguage } from '../LanguageContext.jsx'
 import { useUser } from '../context/AppContext.jsx'
 
