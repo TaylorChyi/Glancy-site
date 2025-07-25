@@ -3,18 +3,21 @@ import CodeButton from './components/CodeButton.jsx'
 import PhoneInput from './components/PhoneInput.jsx'
 import { useNavigate, Link } from 'react-router-dom'
 import styles from './AuthPage.module.css'
+import { Button } from './components/index.js'
 import { API_PATHS } from './config/api.js'
 import { useUser } from './context/AppContext.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
-import googleIcon from './assets/google.svg'
-import appleIcon from './assets/apple.svg'
-import phoneIcon from './assets/phone.svg'
-import wechatIcon from './assets/wechat.svg'
-import userIcon from './assets/user.svg'
-import emailIcon from './assets/email.svg'
-import lightIcon from './assets/glancy-web-light.svg'
-import darkIcon from './assets/glancy-web-dark.svg'
+import {
+  GoogleIcon,
+  AppleIcon,
+  PhoneIcon,
+  WechatIcon,
+  UserIcon,
+  EmailIcon,
+  GlancyWebLightIcon,
+  GlancyWebDarkIcon
+} from './components/Icon'
 import { useTheme } from './ThemeContext.jsx'
 
 function Login() {
@@ -27,7 +30,8 @@ function Login() {
   const [popupMsg, setPopupMsg] = useState('')
   const navigate = useNavigate()
   const { resolvedTheme } = useTheme()
-  const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
+  const BrandIcon =
+    resolvedTheme === 'dark' ? GlancyWebDarkIcon : GlancyWebLightIcon
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -91,12 +95,12 @@ function Login() {
 
   const methodOrder = ['username', 'email', 'phone', 'wechat', 'apple', 'google']
   const icons = {
-    username: userIcon,
-    email: emailIcon,
-    phone: phoneIcon,
-    wechat: wechatIcon,
-    apple: appleIcon,
-    google: googleIcon
+    username: UserIcon,
+    email: EmailIcon,
+    phone: PhoneIcon,
+    wechat: WechatIcon,
+    apple: AppleIcon,
+    google: GoogleIcon
   }
 
   return (
@@ -116,7 +120,7 @@ function Login() {
         {methodOrder
           .filter((m) => m !== method)
           .map((m) => (
-            <button
+            <Button
               key={m}
               type="button"
               onClick={() =>
@@ -124,7 +128,7 @@ function Login() {
               }
             >
               <img src={icons[m]} alt={m} />
-            </button>
+            </Button>
           ))}
       </div>
       <div className={styles['auth-footer']}>
