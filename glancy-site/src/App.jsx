@@ -17,6 +17,7 @@ import './App.css'
 import styles from './App.module.css'
 import Layout from './components/Layout.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
+import ListItem from './components/ListItem/ListItem.jsx'
 
 function App() {
   const [text, setText] = useState('')
@@ -198,21 +199,25 @@ function App() {
             favorites.length ? (
               <ul className="favorites-grid-display">
                 {favorites.map((w, i) => (
-                  <li key={i} className="favorite-item">
-                    <span
-                      className="favorite-term"
-                      onClick={() => handleSelectFavorite(w)}
-                    >
-                      {w}
-                    </span>
-                    <button
-                      type="button"
-                      className="unfavorite-btn"
-                      onClick={() => handleUnfavorite(w)}
-                    >
-                      ○
-                    </button>
-                  </li>
+                  <ListItem
+                    key={i}
+                    className="favorite-item"
+                    text={w}
+                    textClassName="favorite-term"
+                    onClick={() => handleSelectFavorite(w)}
+                    actions={(
+                      <button
+                        type="button"
+                        className="unfavorite-btn"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleUnfavorite(w)
+                        }}
+                      >
+                        ○
+                      </button>
+                    )}
+                  />
                 ))}
               </ul>
             ) : (
