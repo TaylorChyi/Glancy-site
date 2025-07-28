@@ -42,3 +42,7 @@ export function useIsMobile(maxWidth = 600) {
 
   return isMobile
 }
+
+export function detectWordLanguage(text) {
+  return /[\u4e00-\u9fff]/.test(text) ? 'CHINESE' : 'ENGLISH'
+}
