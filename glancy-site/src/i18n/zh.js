@@ -90,7 +90,7 @@ export default {
     changeAvatar: '更换头像',
     guest: '游客',
     upgrade: '升级',
-    profile: '个人资料',
+    profile: '自定义 Glancy',
     settings: '设置',
     shortcuts: '快捷键',
     help: '帮助',
