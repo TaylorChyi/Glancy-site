@@ -21,31 +21,35 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
   const stored = localStorage.getItem(STORAGE_KEY)
   const initial: string[] = stored ? safeJSONParse(stored, []) : []
   const initialMap: Record<string, string> = {}
+  async function refreshHistory(user: User) {
+    try {
+      const records = await api.fetchSearchRecords({
+        userId: user.id,
+        token: user.token
+      })
+      const terms = records.map((r) => r.term)
+      const map: Record<string, string> = {}
+      records.forEach((r) => {
+        if (r.id) map[r.term] = r.id
+      })
+      const existing = get().history
+      const combined = Array.from(new Set([...terms, ...existing]))
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(combined))
+      set((state) => ({
+        history: combined,
+        recordMap: { ...state.recordMap, ...map }
+      }))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return {
     history: initial,
     recordMap: initialMap,
     loadHistory: async (user?: User | null) => {
       if (user) {
-        try {
-          const records = await api.fetchSearchRecords({
-            userId: user.id,
-            token: user.token
-          })
-          const terms = records.map((r) => r.term)
-          const map = {}
-          records.forEach((r) => {
-            if (r.id) map[r.term] = r.id
-          })
-          const existing = get().history
-          const combined = Array.from(new Set([...terms, ...existing]))
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(combined))
-          set((state) => ({
-            history: combined,
-            recordMap: { ...state.recordMap, ...map }
-          }))
-        } catch {
-          // fallback to local storage
-        }
+        refreshHistory(user)
       } else {
         const stored = localStorage.getItem(STORAGE_KEY)
         set({ history: stored ? JSON.parse(stored) : [], recordMap: {} })
@@ -53,20 +57,21 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     },
     addHistory: async (term: string, user?: User | null, language?: string) => {
       if (user) {
-        api.saveSearchRecord({
-          userId: user.id,
-          token: user.token,
-          term,
-          language
-        })
-          .then((record) => {
-            set((state) => ({
-              recordMap: { ...state.recordMap, [term]: record.id }
-            }))
+        try {
+          const record = await api.saveSearchRecord({
+            userId: user.id,
+            token: user.token,
+            term,
+            language
           })
-          .catch((err) => {
-            console.error(err)
-          })
+          set((state) => ({
+            recordMap: { ...state.recordMap, [term]: record.id }
+          }))
+          // refresh history from server to ensure sync
+          refreshHistory(user)
+        } catch (err) {
+          console.error(err)
+        }
       }
       const unique = Array.from(new Set([term, ...get().history])).slice(0, 20)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(unique))
