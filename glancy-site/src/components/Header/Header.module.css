@@ -80,15 +80,6 @@
   display: flex;
   align-items: center;
 }
-.user-menu .menu-footer .avatar {
-  width: 24px;
-  height: 24px;
-  margin-right: 0.5rem;
-}
-.user-menu .menu-footer .username {
-  margin-left: 0.5rem;
-  font-weight: 500;
-}
 
 .user-menu .avatar {
   width: 32px;
@@ -100,6 +91,17 @@
   justify-content: center;
   margin-right: 0.5rem;
   position: relative;
+}
+
+.user-menu .menu-footer .avatar {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+}
+
+.user-menu .menu-footer .username {
+  margin-left: 0.5rem;
+  font-weight: 500;
 }
 
 .user-menu .pro-tag-small {
@@ -128,6 +130,10 @@
   cursor: pointer;
 }
 
+.user-menu li + li {
+  margin-top: 0.25rem;
+}
+
 .user-menu li:hover {
   background-color: rgb(0 0 0 / 5%);
 }
@@ -142,10 +148,6 @@
 
 .user-menu li .arrow {
   margin-left: auto;
-}
-
-.user-menu li + li {
-  margin-top: 0.25rem;
 }
 
 .user-menu ul + ul {
