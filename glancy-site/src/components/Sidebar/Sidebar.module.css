@@ -29,11 +29,11 @@
 .sidebar-user :global(.header-section) {
   display: block;
   margin-right: 0;
-  width: 100%;
+  width: var(--user-menu-width);
 }
 
-.sidebar-user :global(.user-menu) button.with-name {
-  width: 100%;
+.sidebar-user .user-menu button.with-name {
+  width: var(--user-menu-width);
   justify-content: flex-start;
   padding: 8px 0;
   color: inherit;
@@ -47,7 +47,7 @@
 
 .sidebar-user :global(.user-menu .menu) {
   inset: auto 0 calc(100% + 0.5rem);
-  width: 100%;
+  width: var(--user-menu-width);
   background: var(--sidebar-bg);
   color: var(--sidebar-color);
   border: 1px solid var(--border-color);
