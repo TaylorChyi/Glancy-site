@@ -36,8 +36,13 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
           records.forEach((r) => {
             if (r.id) map[r.term] = r.id
           })
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(terms))
-          set({ history: terms, recordMap: map })
+          const existing = get().history
+          const combined = Array.from(new Set([...terms, ...existing]))
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(combined))
+          set((state) => ({
+            history: combined,
+            recordMap: { ...state.recordMap, ...map }
+          }))
         } catch {
           // fallback to local storage
         }
