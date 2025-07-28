@@ -85,6 +85,7 @@ function App() {
     try {
       const detectedLang = detectWordLanguage(input)
       const data = await fetchWord({
+        userId: user.id,
         term: input,
         language: detectedLang,
         token: user.token
@@ -111,6 +112,7 @@ function App() {
     try {
       const detectedLang = detectWordLanguage(term)
       const data = await fetchWord({
+        userId: user.id,
         term,
         language: detectedLang,
         token: user.token
