@@ -8,6 +8,7 @@ function UserMenuDropdown({
   t,
   isPro,
   username,
+  email,
   openProfile,
   openSettings,
   openShortcuts,
@@ -21,19 +22,18 @@ function UserMenuDropdown({
       <div className={styles['menu-header']}>
         <div className={styles.avatar}>
           <Avatar width={32} height={32} />
-          {isPro && <ProTag small />}
         </div>
-        <div className={styles.username}>{username}</div>
+        <div className={styles.email}>{email}</div>
       </div>
       <ul>
         {!isPro && (
           <li onClick={() => openUpgrade()}>
-            <span className={styles.icon}>💳</span>
+            <span className={styles.icon}>🛡️</span>
             {t.upgrade}
           </li>
         )}
         <li onClick={openProfile}>
-          <span className={styles.icon}>👤</span>
+          <span className={styles.icon}>🎚️</span>
           {t.profile}
         </li>
         <li onClick={openSettings}>
@@ -41,7 +41,7 @@ function UserMenuDropdown({
           {t.settings}
         </li>
         <li onClick={openShortcuts}>
-          <span className={styles.icon}>⌨️</span>
+          <span className={styles.icon}>⌘</span>
           {t.shortcuts}
         </li>
       </ul>
@@ -57,10 +57,11 @@ function UserMenuDropdown({
             className={styles['menu-btn']}
           >
             {t.help}
+            <span className={styles.arrow}>›</span>
           </button>
         </li>
         <li>
-          <span className={styles.icon}>🔑</span>
+          <span className={styles.icon}>🚪</span>
           <button
             type="button"
             onClick={() => {
@@ -73,6 +74,13 @@ function UserMenuDropdown({
           </button>
         </li>
       </ul>
+      <div className={styles['menu-footer']}>
+        <div className={styles.avatar}>
+          <Avatar width={24} height={24} />
+          {isPro && <ProTag small />}
+        </div>
+        <div className={styles.username}>{username}</div>
+      </div>
     </div>
   )
 }

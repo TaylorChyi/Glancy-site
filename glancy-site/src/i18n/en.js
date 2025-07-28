@@ -90,7 +90,7 @@ export default {
     changeAvatar: 'Change Avatar',
     guest: 'Guest',
     upgrade: 'Upgrade',
-    profile: 'Profile',
+    profile: 'Customize Glancy',
     settings: 'Settings',
     shortcuts: 'Shortcuts',
     help: 'Help',

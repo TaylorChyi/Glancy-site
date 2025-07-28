@@ -12,6 +12,7 @@ function UserMenu({ size = 24, showName = false }) {
   const { clearHistory } = useHistory()
   const { t } = useLanguage()
   const username = user?.username || ''
+  const email = user?.email || ''
   const isPro =
     user?.member || user?.isPro || (user?.plan && user.plan !== 'free')
 
@@ -58,6 +59,7 @@ function UserMenu({ size = 24, showName = false }) {
               t={t}
               isPro={isPro}
               username={username}
+              email={email}
               openProfile={openProfile}
               openSettings={openSettings}
               openShortcuts={openShortcuts}
