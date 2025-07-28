@@ -1,5 +1,4 @@
 import Avatar from '../Avatar.jsx'
-import ProTag from './ProTag.jsx'
 import styles from './Header.module.css'
 
 function UserMenuDropdown({
@@ -7,7 +6,6 @@ function UserMenuDropdown({
   setOpen,
   t,
   isPro,
-  username,
   email,
   openProfile,
   openSettings,
@@ -74,13 +72,6 @@ function UserMenuDropdown({
           </button>
         </li>
       </ul>
-      <div className={styles['menu-footer']}>
-        <div className={styles.avatar}>
-          <Avatar width={24} height={24} />
-          {isPro && <ProTag small />}
-        </div>
-        <div className={styles.username}>{username}</div>
-      </div>
     </div>
   )
 }

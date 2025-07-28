@@ -73,13 +73,6 @@
   margin-bottom: 0.5rem;
 }
 
-.user-menu .menu-footer {
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid #ccc;
-  display: flex;
-  align-items: center;
-}
 
 .user-menu .avatar {
   width: 32px;
@@ -93,16 +86,6 @@
   position: relative;
 }
 
-.user-menu .menu-footer .avatar {
-  width: 24px;
-  height: 24px;
-  margin-right: 0.5rem;
-}
-
-.user-menu .menu-footer .username {
-  margin-left: 0.5rem;
-  font-weight: 500;
-}
 
 .user-menu .pro-tag-small {
   position: absolute;
