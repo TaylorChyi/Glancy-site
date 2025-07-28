@@ -20,7 +20,7 @@ function MobileTopBar({
   const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
 
   return (
-    <>
+    <header className={styles['mobile-topbar']}>
       <button className={styles['topbar-btn']} onClick={onOpenSidebar}>
         <img src={icon} alt="brand" width={24} height={24} />
       </button>
@@ -37,7 +37,7 @@ function MobileTopBar({
         onToggleFavorite={onToggleFavorite}
         canFavorite={canFavorite}
       />
-    </>
+    </header>
   )
 }
 
