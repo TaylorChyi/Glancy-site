@@ -83,13 +83,12 @@ function App() {
     setLoading(true)
     try {
       const data = await fetchWord({
-        userId: user.id,
         term: input,
         language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
         token: user.token
       })
       setEntry(data)
-      addHistory(input, user, lang === 'zh' ? 'CHINESE' : 'ENGLISH')
+      addHistory(input)
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
@@ -109,7 +108,6 @@ function App() {
     setLoading(true)
     try {
       const data = await fetchWord({
-        userId: user.id,
         term,
         language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
         token: user.token
