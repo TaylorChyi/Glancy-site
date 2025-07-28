@@ -13,6 +13,7 @@ import {
 } from './components/Icon'
 import { useApi } from './hooks/useApi.js'
 import { useLanguage } from './LanguageContext.jsx'
+import { detectWordLanguage } from './utils.js'
 import './App.css'
 import styles from './App.module.css'
 import Layout from './components/Layout.jsx'
@@ -82,13 +83,14 @@ function App() {
     setText('')
     setLoading(true)
     try {
+      const detectedLang = detectWordLanguage(input)
       const data = await fetchWord({
         term: input,
-        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        language: detectedLang,
         token: user.token
       })
       setEntry(data)
-      addHistory(input)
+      addHistory(input, user, detectedLang)
     } catch (err) {
       setPopupMsg(err.message)
       setPopupOpen(true)
@@ -107,9 +109,10 @@ function App() {
     setShowHistory(false)
     setLoading(true)
     try {
+      const detectedLang = detectWordLanguage(term)
       const data = await fetchWord({
         term,
-        language: lang === 'zh' ? 'CHINESE' : 'ENGLISH',
+        language: detectedLang,
         token: user.token
       })
       setEntry(data)
