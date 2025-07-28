@@ -26,7 +26,7 @@
 }
 
 /* adapt header components used inside sidebar */
-.sidebar-user .header-section {
+.sidebar-user :global(.header-section) {
   display: block;
   margin-right: 0;
   width: var(--user-menu-width);
@@ -40,11 +40,12 @@
 }
 
 /* dropdown style inside sidebar */
-.sidebar-user .user-menu {
+.sidebar-user :global(.user-menu) {
   position: relative;
+  width: 100%;
 }
 
-.sidebar-user .user-menu .menu {
+.sidebar-user :global(.user-menu .menu) {
   inset: auto 0 calc(100% + 0.5rem);
   width: var(--user-menu-width);
   background: var(--sidebar-bg);
