@@ -40,10 +40,15 @@
 }
 
 /* dropdown style inside sidebar */
+.sidebar-user .user-menu {
+  position: relative;
+}
 .sidebar-user .user-menu .menu {
   left: 0;
   right: 0;
   width: 100%;
+  bottom: calc(100% + 0.5rem);
+  top: auto;
   background: var(--sidebar-bg);
   color: var(--sidebar-color);
   border: 1px solid var(--border-color);
