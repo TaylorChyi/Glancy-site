@@ -63,7 +63,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0.5rem;
-  width: 180px;
+  width: var(--user-menu-width);
   z-index: 1000;
 }
 
