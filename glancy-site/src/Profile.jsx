@@ -28,6 +28,23 @@ function Profile({ onCancel }) {
     phone: false
   })
 
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file || !currentUser) return
+    try {
+      const data = await api.users.uploadAvatar({
+        userId: currentUser.id,
+        file,
+        token: currentUser.token
+      })
+      setAvatar(data.avatar)
+    } catch (err) {
+      console.error(err)
+      setPopupMsg(t.fail)
+      setPopupOpen(true)
+    }
+  }
+
   useEffect(() => {
     api.request(API_PATHS.profile)
       .then((data) => {
@@ -82,7 +99,7 @@ function Profile({ onCancel }) {
           <span className={styles['avatar-hint']}>{t.avatarHint}</span>
           <input
             type="file"
-            onChange={(e) => setAvatar(e.target.files[0])}
+            onChange={handleAvatarChange}
             style={{ position: 'absolute', inset: 0, opacity: 0 }}
           />
         </div>
