@@ -23,7 +23,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
   const initialMap: Record<string, string> = {}
   async function refreshHistory(user: User) {
     try {
-      const records = await api.fetchSearchRecords({
+      const records = await api.searchRecords.fetchSearchRecords({
         userId: user.id,
         token: user.token
       })
@@ -58,7 +58,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     addHistory: async (term: string, user?: User | null, language?: string) => {
       if (user) {
         try {
-          const record = await api.saveSearchRecord({
+          const record = await api.searchRecords.saveSearchRecord({
             userId: user.id,
             token: user.token,
             term,
@@ -79,7 +79,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     },
     clearHistory: async (user?: User | null) => {
       if (user) {
-        api.clearSearchRecords({ userId: user.id, token: user.token }).catch((err) => {
+        api.searchRecords.clearSearchRecords({ userId: user.id, token: user.token }).catch((err) => {
           console.error(err)
         })
       }
@@ -90,7 +90,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
       if (user) {
         const id = get().recordMap[term]
         if (id) {
-          api.deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch((err) => {
+          api.searchRecords.deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch((err) => {
             console.error(err)
           })
         }
@@ -106,7 +106,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     favoriteHistory: async (term: string, user?: User | null) => {
         const id = get().recordMap[term]
         if (user && id) {
-          api.favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+          api.searchRecords.favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
             console.error(err)
           })
         }
@@ -114,7 +114,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     unfavoriteHistory: async (term: string, user?: User | null) => {
         const id = get().recordMap[term]
         if (user && id) {
-          api.unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+          api.searchRecords.unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
             console.error(err)
           })
         }
