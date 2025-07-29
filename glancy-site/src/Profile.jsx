@@ -6,6 +6,7 @@ import { useLanguage } from './LanguageContext.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
+import { cacheBust } from './utils.js'
 
 function Profile({ onCancel }) {
   const { t } = useLanguage()
@@ -38,8 +39,9 @@ function Profile({ onCancel }) {
         file,
         token: currentUser.token
       })
-      setAvatar(data.avatar)
-      setUser({ ...currentUser, avatar: data.avatar })
+      const url = cacheBust(data.avatar)
+      setAvatar(url)
+      setUser({ ...currentUser, avatar: url })
     } catch (err) {
       console.error(err)
       setPopupMsg(t.fail)
@@ -58,7 +60,10 @@ function Profile({ onCancel }) {
         setGender(data.gender)
         setInterests(data.interest)
         setGoal(data.goal)
-        if (data.avatar) setAvatar(data.avatar)
+        if (data.avatar) {
+          const url = cacheBust(data.avatar)
+          setAvatar(url)
+        }
       })
       .catch((err) => {
         console.error(err)
