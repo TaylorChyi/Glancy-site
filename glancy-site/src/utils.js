@@ -47,10 +47,20 @@ export function detectWordLanguage(text) {
   return /[\u4e00-\u9fff]/.test(text) ? 'CHINESE' : 'ENGLISH'
 }
 
+const PRESIGNED_QUERY_KEYS = ['Signature', 'OSSAccessKeyId']
+
 export function isPresignedUrl(url) {
-  if (!url || !url.includes('?')) return false
-  const query = url.split('?')[1]
-  return /(?:^|&)Signature=/.test(query) || /(?:^|&)OSSAccessKeyId=/.test(query)
+  if (!url) return false
+  try {
+    const base =
+      typeof window !== 'undefined' ? window.location.origin : 'http://localhost'
+    const params = new URL(url, base).searchParams
+    return PRESIGNED_QUERY_KEYS.some((key) => params.has(key))
+  } catch {
+    return PRESIGNED_QUERY_KEYS.some((key) =>
+      new RegExp(`[?&]${key}=`).test(url)
+    )
+  }
 }
 
 export function cacheBust(url) {
