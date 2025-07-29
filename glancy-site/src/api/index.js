@@ -4,6 +4,7 @@ import { createWordsApi } from './words.js'
 import { createLocaleApi } from './locale.js'
 import { createSearchRecordsApi } from './searchRecords.js'
 import { createUsersApi } from './users.js'
+import { createProfilesApi } from './profiles.js'
 
 export function createApi(config) {
   const request = createApiClient(config)
@@ -13,7 +14,8 @@ export function createApi(config) {
     words: createWordsApi(request),
     locale: createLocaleApi(request),
     searchRecords: createSearchRecordsApi(request),
-    users: createUsersApi(request)
+    users: createUsersApi(request),
+    profiles: createProfilesApi(request)
   }
 }
 
