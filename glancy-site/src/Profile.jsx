@@ -9,7 +9,7 @@ import { useUser } from './context/AppContext.jsx'
 
 function Profile({ onCancel }) {
   const { t } = useLanguage()
-  const { user: currentUser } = useUser()
+  const { user: currentUser, setUser } = useUser()
   const api = useApi()
   const [username, setUsername] = useState(currentUser?.username || '')
   const [email, setEmail] = useState(currentUser?.email || '')
@@ -30,6 +30,8 @@ function Profile({ onCancel }) {
   const handleAvatarChange = async (e) => {
     const file = e.target.files?.[0]
     if (!file || !currentUser) return
+    const preview = URL.createObjectURL(file)
+    setAvatar(preview)
     try {
       const data = await api.users.uploadAvatar({
         userId: currentUser.id,
@@ -37,10 +39,13 @@ function Profile({ onCancel }) {
         token: currentUser.token
       })
       setAvatar(data.avatar)
+      setUser({ ...currentUser, avatar: data.avatar })
     } catch (err) {
       console.error(err)
       setPopupMsg(t.fail)
       setPopupOpen(true)
+    } finally {
+      URL.revokeObjectURL(preview)
     }
   }
 
