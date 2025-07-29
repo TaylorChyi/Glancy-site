@@ -47,9 +47,16 @@ export function detectWordLanguage(text) {
   return /[\u4e00-\u9fff]/.test(text) ? 'CHINESE' : 'ENGLISH'
 }
 
+export function isPresignedUrl(url) {
+  if (!url || !url.includes('?')) return false
+  const query = url.split('?')[1]
+  return /(?:^|&)Signature=/.test(query) || /(?:^|&)OSSAccessKeyId=/.test(query)
+}
+
 export function cacheBust(url) {
   if (!url) return url
   if (url.includes('_v=')) return url
+  if (isPresignedUrl(url)) return url
   const sep = url.includes('?') ? '&' : '?'
   return `${url}${sep}_v=${Date.now()}`
 }
