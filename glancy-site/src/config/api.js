@@ -9,7 +9,7 @@ export const API_PATHS = {
   ping: `${API_BASE}/ping`,
   locale: `${API_BASE}/locale`,
   notifications: `${API_BASE}/notifications`,
-  profile: `${API_BASE}/users/profile`,
+  profiles: `${API_BASE}/profiles`,
   preferences: `${API_BASE}/preferences`,
   contact: `${API_BASE}/contact`,
   faqs: `${API_BASE}/faqs`,

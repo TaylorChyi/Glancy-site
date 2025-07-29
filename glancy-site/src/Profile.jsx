@@ -3,7 +3,6 @@ import './App.css'
 import styles from './Profile.module.css'
 import Avatar from './components/Avatar.jsx'
 import { useLanguage } from './LanguageContext.jsx'
-import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
@@ -46,40 +45,36 @@ function Profile({ onCancel }) {
   }
 
   useEffect(() => {
-    api.request(API_PATHS.profile)
+    if (!currentUser) return
+    api.profiles
+      .fetchProfile({ userId: currentUser.id, token: currentUser.token })
       .then((data) => {
-        setUsername(data.username)
-        setEmail(data.email)
-        setPhone(data.phone)
         setAge(data.age)
         setGender(data.gender)
-        setInterests(data.interests)
+        setInterests(data.interest)
         setGoal(data.goal)
-        setAvatar(data.avatar)
+        if (data.avatar) setAvatar(data.avatar)
       })
       .catch((err) => {
         console.error(err)
         setPopupMsg(t.fail)
         setPopupOpen(true)
       })
-  }, [api, t])
+  }, [api, t, currentUser])
 
   const handleSave = async (e) => {
     e.preventDefault()
-    const formData = new FormData()
-    formData.append('username', username)
-    formData.append('email', email)
-    formData.append('phone', phone)
-    formData.append('age', age)
-    formData.append('gender', gender)
-    formData.append('interests', interests)
-    formData.append('goal', goal)
-    if (avatar) {
-      formData.append('avatar', avatar)
-    }
-    await api.request(API_PATHS.profile, {
-      method: 'POST',
-      body: formData
+    if (!currentUser) return
+    await api.profiles.saveProfile({
+      userId: currentUser.id,
+      token: currentUser.token,
+      profile: {
+        age,
+        gender,
+        job: '',
+        interest: interests,
+        goal
+      }
     })
     setPopupMsg(t.updateSuccess)
     setPopupOpen(true)

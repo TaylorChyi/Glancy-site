@@ -61,8 +61,8 @@ export default defineConfig({
 
 ## 个人资料编辑
 
-`/profile` 页面通过 `GET /api/users/profile` 载入信息，提交表单时向
-`POST /api/users/profile` 上传昵称和头像。
+`/profile` 页面通过 `GET /api/profiles/user/{userId}` 载入信息，提交表单时向
+`POST /api/profiles/user/{userId}` 保存资料。
 
 ## 偏好设置
 
