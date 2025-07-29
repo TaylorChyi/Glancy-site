@@ -1,5 +1,7 @@
 import { useTheme } from '../ThemeContext.jsx'
 import { useUser } from '../context/AppContext.jsx'
+import { useMemo } from 'react'
+import { cacheBust } from '../utils.js'
 import avatarLight from '../assets/default-user-avatar-light.svg'
 import avatarDark from '../assets/default-user-avatar-dark.svg'
 
@@ -9,7 +11,13 @@ function Avatar({ src, alt = 'User Avatar', ...props }) {
   const { user } = useUser()
   const defaultSrc = resolvedTheme === 'dark' ? avatarDark : avatarLight
   const finalSrc = src || user?.avatar || defaultSrc
-  return <img src={finalSrc} alt={alt} {...props} />
+  const displaySrc = useMemo(() => cacheBust(finalSrc), [finalSrc])
+  const style = {
+    borderRadius: '50%',
+    objectFit: 'cover',
+    boxShadow: '0 0 4px rgb(0 0 0 / 15%)'
+  }
+  return <img src={displaySrc} alt={alt} style={style} {...props} />
 }
 
 export default Avatar
