@@ -4,6 +4,7 @@ import { safeJSONParse } from '../utils.js'
 export interface User {
   id: string
   token: string
+  avatar?: string
   [key: string]: unknown
 }
 
