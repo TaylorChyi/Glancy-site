@@ -47,6 +47,10 @@ export function detectWordLanguage(text) {
   return /[\u4e00-\u9fff]/.test(text) ? 'CHINESE' : 'ENGLISH'
 }
 
+export function clientNameFromModel(model) {
+  return model ? model.toLowerCase().replace(/_.*/, '') : ''
+}
+
 const PRESIGNED_QUERY_KEYS = ['Signature', 'OSSAccessKeyId']
 
 export function isPresignedUrl(url) {

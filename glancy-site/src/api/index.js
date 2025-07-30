@@ -5,6 +5,7 @@ import { createLocaleApi } from './locale.js'
 import { createSearchRecordsApi } from './searchRecords.js'
 import { createUsersApi } from './users.js'
 import { createProfilesApi } from './profiles.js'
+import { createLlmApi } from './llm.js'
 
 export function createApi(config) {
   const request = createApiClient(config)
@@ -15,7 +16,8 @@ export function createApi(config) {
     locale: createLocaleApi(request),
     searchRecords: createSearchRecordsApi(request),
     users: createUsersApi(request),
-    profiles: createProfilesApi(request)
+    profiles: createProfilesApi(request),
+    llm: createLlmApi(request)
   }
 }
 

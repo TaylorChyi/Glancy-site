@@ -13,12 +13,13 @@ import {
 } from './components/Icon'
 import { useApi } from './hooks/useApi.js'
 import { useLanguage } from './LanguageContext.jsx'
-import { detectWordLanguage } from './utils.js'
+import { detectWordLanguage, clientNameFromModel } from './utils.js'
 import './App.css'
 import styles from './App.module.css'
 import Layout from './components/Layout.jsx'
 import HistoryDisplay from './components/HistoryDisplay.jsx'
 import ListItem from './components/ListItem/ListItem.jsx'
+import { useModelStore } from './store/modelStore.ts'
 
 function App() {
   const [text, setText] = useState('')
@@ -43,6 +44,7 @@ function App() {
   const navigate = useNavigate()
   const api = useApi()
   const { fetchWord } = api.words
+  const { model } = useModelStore()
 
   const handleToggleFavorites = () => {
     // always show favorites when invoked
@@ -88,6 +90,7 @@ function App() {
         userId: user.id,
         term: input,
         language: detectedLang,
+        model: clientNameFromModel(model),
         token: user.token
       })
       setEntry(data)
@@ -115,6 +118,7 @@ function App() {
         userId: user.id,
         term,
         language: detectedLang,
+        model: clientNameFromModel(model),
         token: user.token
       })
       setEntry(data)

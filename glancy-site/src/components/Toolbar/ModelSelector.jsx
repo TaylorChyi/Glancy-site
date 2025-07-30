@@ -1,18 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './Toolbar.module.css'
 import { useLanguage } from '../../LanguageContext.jsx'
 import useOutsideToggle from '../../hooks/useOutsideToggle.js'
+import { useModelStore } from '../../store/modelStore.ts'
+import { useApi } from '../../hooks/useApi.js'
 
 function ModelSelector() {
   const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
-  const [model, setModel] = useState(
-    () => localStorage.getItem('dictionaryModel') || 'model-a'
-  )
+  const { model, setModel } = useModelStore()
+  const [models, setModels] = useState([])
   const { t } = useLanguage()
+  const api = useApi()
+
+  useEffect(() => {
+    api.llm
+      .fetchModels()
+      .then((list) => setModels(list))
+      .catch((err) => console.error(err))
+  }, [api])
 
   const selectModel = (value) => {
     setModel(value)
-    localStorage.setItem('dictionaryModel', value)
     setOpen(false)
   }
 
@@ -23,16 +31,15 @@ function ModelSelector() {
         className={styles['model-btn']}
         onClick={() => setOpen(!open)}
       >
-        {model === 'model-a' ? t.modelA : t.modelB} ▾
+        {t[model] || model} ▾
       </button>
       {open && (
         <div className={styles['model-menu']}>
-          <button type="button" onClick={() => selectModel('model-a')}>
-            {t.modelA}
-          </button>
-          <button type="button" onClick={() => selectModel('model-b')}>
-            {t.modelB}
-          </button>
+          {models.map((m) => (
+            <button key={m} type="button" onClick={() => selectModel(m)}>
+              {t[m] || m}
+            </button>
+          ))}
         </div>
       )}
     </div>
