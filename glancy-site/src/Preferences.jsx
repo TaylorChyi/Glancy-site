@@ -7,23 +7,31 @@ import { useUser } from './context/AppContext.jsx'
 import { API_PATHS } from './config/api.js'
 import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
+import { useModelStore } from './store/modelStore.ts'
 
 function Preferences() {
   const { t } = useLanguage()
   const { theme, setTheme } = useTheme()
   const { user } = useUser()
   const api = useApi()
+  const { model, setModel } = useModelStore()
+  const [models, setModels] = useState([])
   const [sourceLang, setSourceLang] = useState(
     localStorage.getItem('sourceLang') || 'auto'
   )
   const [targetLang, setTargetLang] = useState(
     localStorage.getItem('targetLang') || 'ENGLISH'
   )
-  const [defaultModel, setDefaultModel] = useState(
-    localStorage.getItem('dictionaryModel') || 'model-a'
-  )
+  const [defaultModel, setDefaultModel] = useState(model)
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
+
+  useEffect(() => {
+    api.llm
+      .fetchModels()
+      .then((list) => setModels(list))
+      .catch((err) => console.error(err))
+  }, [api])
 
   useEffect(() => {
     if (!user) return
@@ -31,13 +39,13 @@ function Preferences() {
       .then((data) => {
         const sl = data.systemLanguage || 'auto'
         const tl = data.searchLanguage || 'ENGLISH'
-        const dm = data.dictionaryModel || 'model-a'
+        const dm = data.dictionaryModel || model
         setSourceLang(sl)
         setTargetLang(tl)
         setDefaultModel(dm)
+        setModel(dm)
         localStorage.setItem('sourceLang', sl)
         localStorage.setItem('targetLang', tl)
-        localStorage.setItem('dictionaryModel', dm)
         setTheme(data.theme || 'system')
       })
       .catch((err) => {
@@ -45,7 +53,7 @@ function Preferences() {
         setPopupMsg(t.fail)
         setPopupOpen(true)
       })
-  }, [setTheme, t, user, api])
+  }, [setTheme, t, user, api, model, setModel])
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -62,7 +70,7 @@ function Preferences() {
     })
     localStorage.setItem('sourceLang', sourceLang)
     localStorage.setItem('targetLang', targetLang)
-    localStorage.setItem('dictionaryModel', defaultModel)
+    setModel(defaultModel)
     setPopupMsg(t.saveSuccess)
     setPopupOpen(true)
   }
@@ -98,8 +106,11 @@ function Preferences() {
             value={defaultModel}
             onChange={(e) => setDefaultModel(e.target.value)}
           >
-            <option value="model-a">Model A</option>
-            <option value="model-b">Model B</option>
+            {models.map((m) => (
+              <option key={m} value={m}>
+                {t[m] || m}
+              </option>
+            ))}
           </select>
         </div>
         <div>

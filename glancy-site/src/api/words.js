@@ -11,8 +11,9 @@ import { useApi } from '../hooks/useApi.js'
  * @param {string} [opts.token] user token for auth header
  */
 export function createWordsApi(request = apiRequest) {
-  const fetchWord = async ({ userId, term, language, token }) => {
+  const fetchWord = async ({ userId, term, language, model, token }) => {
     const params = new URLSearchParams({ userId, term, language })
+    if (model) params.append('model', model)
     return request(`${API_PATHS.words}?${params.toString()}`, { token })
   }
 
