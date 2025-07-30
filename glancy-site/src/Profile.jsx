@@ -4,6 +4,8 @@ import styles from './Profile.module.css'
 import Avatar from './components/Avatar.jsx'
 import { useLanguage } from './LanguageContext.jsx'
 import MessagePopup from './components/MessagePopup.jsx'
+import AgeStepper from './components/AgeStepper/AgeStepper.jsx'
+import GenderSelect from './components/GenderSelect/GenderSelect.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
 import { cacheBust } from './utils.js'
@@ -165,22 +167,14 @@ function Profile({ onCancel }) {
         <div className={styles.basic}>
           <div className={styles.item}>
             <span>🎂 {t.ageLabel}</span>
-            <input
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              placeholder={t.agePlaceholder}
-            />
+            <AgeStepper value={age} onChange={setAge} />
             <span className={styles.tooltip}>
               ?<span className={styles['tooltip-text']}>{t.ageHelp}</span>
             </span>
           </div>
           <div className={styles.item}>
             <span>👤 {t.genderLabel}</span>
-            <input
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              placeholder={t.genderPlaceholder}
-            />
+            <GenderSelect value={gender} onChange={setGender} />
             <span className={styles.tooltip}>
               ?<span className={styles['tooltip-text']}>{t.genderHelp}</span>
             </span>
