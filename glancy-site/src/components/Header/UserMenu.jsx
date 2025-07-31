@@ -19,14 +19,14 @@ function UserMenu({ size = 24, showName = false }) {
   if (!user) {
     return (
       <div
-        className={`${styles['header-section']} ${styles['user-menu']} ${showName ? styles['with-name'] : ''}`}
+        className={`${styles['header-section']} ${styles['login-actions']} ${showName ? styles['with-name'] : ''}`}
       >
-        <Avatar width={size} height={size} />
-        {showName && (
-          <Link to="/login" className={`${styles.username} ${styles['login-btn']}`}>\
-            {t.navRegister}/{t.navLogin}
-          </Link>
-        )}
+        <Link to="/login" className={styles['login-btn']}>
+          {t.navLogin}
+        </Link>
+        <Link to="/register" className={styles['login-btn']}>
+          {t.navRegister}
+        </Link>
       </div>
     )
   }
