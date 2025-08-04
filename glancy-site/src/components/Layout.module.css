@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
 }
 
 @media (width <= 600px) {
