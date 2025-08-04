@@ -15,8 +15,17 @@ function HistoryList({ onSelect }) {
   const { toggleFavorite } = useFavorites()
   const { user } = useUser()
   const [openIndex, setOpenIndex] = useState(null)
-  const { ref: listRef, open } = useOutsideToggle(false)
+  const {
+    ref: listRef,
+    open,
+    setOpen
+  } = useOutsideToggle(false)
   const { t } = useLanguage()
+
+  const closeMenu = () => {
+    setOpen(false)
+    setOpenIndex(null)
+  }
 
   useEffect(() => {
     if (!open) {
@@ -45,7 +54,11 @@ function HistoryList({ onSelect }) {
                   className={styles['history-action']}
                   onClick={(e) => {
                     e.stopPropagation()
-                    setOpenIndex(openIndex === i ? null : i)
+                    setOpenIndex(prev => {
+                      const nextIndex = prev === i ? null : i
+                      setOpen(nextIndex !== null)
+                      return nextIndex
+                    })
                   }}
                 >
                   <EllipsisVerticalIcon width={16} height={16} />
@@ -59,7 +72,7 @@ function HistoryList({ onSelect }) {
                         e.stopPropagation()
                         favoriteHistory(h, user)
                         toggleFavorite(h)
-                        setOpenIndex(null)
+                        closeMenu()
                       }}
                     >
                       <StarSolidIcon width={16} height={16} className={styles.icon} />
@@ -71,7 +84,7 @@ function HistoryList({ onSelect }) {
                       onClick={(e) => {
                         e.stopPropagation()
                         removeHistory(h, user)
-                        setOpenIndex(null)
+                        closeMenu()
                       }}
                     >
                       <TrashIcon width={16} height={16} className={styles.icon} />
