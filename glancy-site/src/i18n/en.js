@@ -119,5 +119,7 @@ export default {
     favoriteAction: 'Favorite',
     deleteAction: 'Delete',
     searchPlaceholder: 'What are we querying next?',
-    inputPlaceholder: 'Word, Phrase or Sentence'
+    inputPlaceholder: 'Word, Phrase or Sentence',
+    notFoundTitle: 'Page Not Found',
+    notFoundMessage: "We couldn't find the page you're looking for."
 }

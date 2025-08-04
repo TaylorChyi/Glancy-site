@@ -119,5 +119,7 @@ export default {
     favoriteAction: '收藏',
     deleteAction: '删除',
     searchPlaceholder: '接下来查询什么？',
-    inputPlaceholder: '单词、短语或句子'
+    inputPlaceholder: '单词、短语或句子',
+    notFoundTitle: '页面不存在',
+    notFoundMessage: '无法找到您访问的页面。'
 }
