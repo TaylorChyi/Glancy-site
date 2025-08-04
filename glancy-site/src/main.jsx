@@ -13,6 +13,7 @@ import { LanguageProvider } from './LanguageContext.jsx'
 import { ThemeProvider } from './ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'
 import { ApiProvider } from './context/ApiContext.jsx'
+import { LocaleProvider } from './LocaleContext.jsx'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function ViewportHeightUpdater() {
@@ -36,22 +37,24 @@ createRoot(document.getElementById('root')).render(
     <ViewportHeightUpdater />
     <AppProvider>
       <ApiProvider>
-        <LanguageProvider>
-          <ThemeProvider>
-            <BrowserRouter>
-            <ErrorBoundary>
-              <Suspense fallback={<Loader />}>
-                <Routes>
-                  <Route path="/" element={<App />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </ErrorBoundary>
-            </BrowserRouter>
-          </ThemeProvider>
-        </LanguageProvider>
+        <LocaleProvider>
+          <LanguageProvider>
+            <ThemeProvider>
+              <BrowserRouter>
+                <ErrorBoundary>
+                  <Suspense fallback={<Loader />}>
+                    <Routes>
+                      <Route path="/" element={<App />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </Suspense>
+                </ErrorBoundary>
+              </BrowserRouter>
+            </ThemeProvider>
+          </LanguageProvider>
+        </LocaleProvider>
       </ApiProvider>
     </AppProvider>
   </StrictMode>,
