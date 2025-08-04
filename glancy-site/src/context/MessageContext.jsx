@@ -5,8 +5,8 @@ import { createMessageService } from '../services/MessageService.js'
 
 const MessageContext = createContext(createMessageService())
 
-export function MessageProvider({ service, children }) {
-  const storeRef = useRef(service || createMessageService())
+export function MessageProvider({ service, bus, children }) {
+  const storeRef = useRef(service || createMessageService({ bus }))
   const store = storeRef.current
   const message = useSyncExternalStore(
     store.subscribe,

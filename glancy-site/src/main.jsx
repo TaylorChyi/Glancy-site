@@ -14,6 +14,7 @@ import { ThemeProvider } from './ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'
 import { ApiProvider } from './context/ApiContext.jsx'
 import { MessageProvider } from './context/MessageContext.jsx'
+import { createEventBus } from './services/EventBus.js'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function ViewportHeightUpdater() {
@@ -31,6 +32,7 @@ function ViewportHeightUpdater() {
   return null
 }
 
+const eventBus = createEventBus()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -39,7 +41,7 @@ createRoot(document.getElementById('root')).render(
         <ApiProvider>
           <LanguageProvider>
             <ThemeProvider>
-              <MessageProvider>
+              <MessageProvider bus={eventBus}>
                 <BrowserRouter>
                 <ErrorBoundary>
                   <Suspense fallback={<Loader />}> 
