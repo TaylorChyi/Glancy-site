@@ -5,7 +5,7 @@ import ErrorBoundary from './components/ErrorBoundary.jsx'
 import './index.css'
 import Loader from './components/Loader.jsx'
 
-const App = lazy(() => import('./App.jsx'))
+import App from './App.jsx'
 const Login = lazy(() => import('./Login.jsx'))
 const Register = lazy(() => import('./Register.jsx'))
 const NotFound = lazy(() => import('./NotFound.jsx'))
