@@ -63,7 +63,6 @@ function UserMenuDropdown({
             className={styles['menu-btn']}
           >
             {t.help}
-            <span className={styles.arrow}>›</span>
           </button>
         </li>
         <li>
