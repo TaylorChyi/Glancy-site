@@ -67,7 +67,7 @@ class ThemeService {
 
 export function createThemeService({
   storage = window.localStorage,
-  matchMedia = window.matchMedia,
+  matchMedia = window.matchMedia.bind(window),
   document = window.document,
   icons,
 } = {}) {
