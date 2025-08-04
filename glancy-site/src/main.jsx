@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/ErrorBoundary.jsx'
 import './index.css'
 import Loader from './components/Loader.jsx'
+import AuthWatcher from './AuthWatcher.jsx'
 
 const App = lazy(() => import('./App.jsx'))
 const Login = lazy(() => import('./Login.jsx'))
@@ -38,15 +39,16 @@ createRoot(document.getElementById('root')).render(
         <LanguageProvider>
           <ThemeProvider>
             <BrowserRouter>
-            <ErrorBoundary>
-              <Suspense fallback={<Loader />}>
-                <Routes>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="*" element={<App />} />
-                </Routes>
-              </Suspense>
-            </ErrorBoundary>
+              <AuthWatcher />
+              <ErrorBoundary>
+                <Suspense fallback={<Loader />}>
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="*" element={<App />} />
+                  </Routes>
+                </Suspense>
+              </ErrorBoundary>
             </BrowserRouter>
           </ThemeProvider>
         </LanguageProvider>
