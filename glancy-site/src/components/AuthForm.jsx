@@ -5,6 +5,7 @@ import PhoneInput from './PhoneInput.jsx'
 import { Button } from './index.js'
 import styles from '../AuthPage.module.css'
 import MessagePopup from './MessagePopup.jsx'
+import Icp from './Icp.jsx'
 import {
   GoogleIcon,
   AppleIcon,
@@ -143,11 +144,7 @@ function AuthForm({
         <div className={styles['footer-links']}>
           <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
         </div>
-        <div className={styles.icp}>
-          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
-            京ICP备2025135702号-1
-          </a>
-        </div>
+        <Icp />
       </div>
       <MessagePopup
         open={showNotice}
