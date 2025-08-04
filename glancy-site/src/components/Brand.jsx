@@ -2,10 +2,12 @@ import { useLanguage } from '../LanguageContext.jsx'
 import { useTheme } from '../ThemeContext.jsx'
 import { GlancyWebLightIcon, GlancyWebDarkIcon } from './Icon'
 import { UserMenu } from './Header'
+import { useColors } from '../hooks/useColors'
 
 function Brand() {
   const { lang } = useLanguage()
   const { resolvedTheme } = useTheme()
+  const colors = useColors()
   const BrandIcon = resolvedTheme === 'dark' ? GlancyWebDarkIcon : GlancyWebLightIcon
   const text = lang === 'zh' ? '格律词典' : 'Glancy'
 
@@ -17,7 +19,7 @@ function Brand() {
     <div className="sidebar-brand">
       <div className="brand-main" onClick={handleClick}>
         <BrandIcon alt="Glancy" />
-        <span>{text}</span>
+        <span style={{ color: colors.brand }}>{text}</span>
       </div>
       <div className="mobile-user-menu">
         <UserMenu size={28} />
