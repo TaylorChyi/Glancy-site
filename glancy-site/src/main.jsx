@@ -16,6 +16,7 @@ import { ApiProvider } from './context/ApiContext.jsx'
 import { MessageProvider } from './context/MessageContext.jsx'
 import { createEventBus } from './services/EventBus.js'
 import { setupTheme } from './theme/initTheme.js'
+import logger from './services/Logger.js'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function ViewportHeightUpdater() {
@@ -36,33 +37,39 @@ function ViewportHeightUpdater() {
 setupTheme()
 const eventBus = createEventBus()
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <ViewportHeightUpdater />
+const rootElement = document.getElementById('root')
+if (!rootElement) {
+  logger.error('Root element not found')
+} else {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <ViewportHeightUpdater />
       <AppProvider>
         <ApiProvider>
           <LanguageProvider>
             <ThemeProvider>
               <MessageProvider bus={eventBus}>
                 <BrowserRouter>
-                <ErrorBoundary>
-                  <Suspense fallback={<Loader />}> 
-                    <Routes>
-                      <Route path="/" element={<App />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/register" element={<Register />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </Suspense>
-                </ErrorBoundary>
+                  <ErrorBoundary>
+                    <Suspense fallback={<Loader />}>
+                      <Routes>
+                        <Route path="/" element={<App />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </Suspense>
+                  </ErrorBoundary>
                 </BrowserRouter>
               </MessageProvider>
             </ThemeProvider>
           </LanguageProvider>
         </ApiProvider>
       </AppProvider>
-  </StrictMode>,
-)
+    </StrictMode>,
+  )
+  logger.info('Application rendered')
+}
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
