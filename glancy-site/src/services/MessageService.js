@@ -1,33 +1,26 @@
+import { createEventBus } from './EventBus.js'
+
 class MessageService {
-  constructor() {
+  constructor(bus = createEventBus()) {
     this.current = ''
-    this.listeners = new Set()
+    this.bus = bus
   }
 
   getSnapshot = () => this.current
 
-  subscribe = (callback) => {
-    this.listeners.add(callback)
-    return () => this.listeners.delete(callback)
-  }
+  subscribe = (callback) => this.bus.on('message', () => callback())
 
   show = (msg) => {
     this.current = msg
-    this._emit()
+    this.bus.emit('message', this.current)
   }
 
   clear = () => {
     this.current = ''
-    this._emit()
-  }
-
-  _emit = () => {
-    for (const cb of this.listeners) {
-      cb()
-    }
+    this.bus.emit('message', this.current)
   }
 }
 
-export function createMessageService() {
-  return new MessageService()
+export function createMessageService({ bus } = {}) {
+  return new MessageService(bus)
 }
