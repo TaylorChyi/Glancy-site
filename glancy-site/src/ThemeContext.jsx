@@ -1,48 +1,26 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useRef } from 'react'
+import { useSyncExternalStore } from 'react'
 import lightIcon from './assets/glancy-web-light.svg'
 import darkIcon from './assets/glancy-web-dark.svg'
+import { createThemeService } from './services/ThemeService.js'
 
-const ThemeContext = createContext({
-  theme: 'system',
-  resolvedTheme: 'light',
-  setTheme: () => {}
-})
+const ThemeContext = createContext(
+  createThemeService({ icons: { light: lightIcon, dark: darkIcon } })
+)
 
-export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'system')
-  const [resolvedTheme, setResolvedTheme] = useState(() => {
-    const stored = localStorage.getItem('theme') || 'system'
-    if (stored === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    return stored
-  })
-
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme)
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
-    const apply = () => {
-      let current = theme
-      if (theme === 'system') {
-        current = media.matches ? 'dark' : 'light'
-      }
-      setResolvedTheme(current)
-      document.documentElement.dataset.theme = current
-      const link = document.getElementById('favicon')
-      if (link) {
-        link.href = current === 'dark' ? darkIcon : lightIcon
-      }
-    }
-    apply()
-    if (theme === 'system') {
-      media.addEventListener('change', apply)
-      return () => media.removeEventListener('change', apply)
-    }
-  }, [theme])
+export function ThemeProvider({ service, children }) {
+  const storeRef = useRef(
+    service || createThemeService({ icons: { light: lightIcon, dark: darkIcon } })
+  )
+  const store = storeRef.current
+  const { theme, resolvedTheme } = useSyncExternalStore(
+    store.subscribe,
+    store.getSnapshot,
+    store.getSnapshot
+  )
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme: store.setTheme }}>
       {children}
     </ThemeContext.Provider>
   )
@@ -50,3 +28,4 @@ export function ThemeProvider({ children }) {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => useContext(ThemeContext)
+
