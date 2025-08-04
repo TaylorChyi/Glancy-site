@@ -17,6 +17,20 @@ import glancyLight from '../../assets/glancy-light.svg'
 import proTagDark from '../../assets/pro-tag-dark.svg'
 import proTagLight from '../../assets/pro-tag-light.svg'
 import wechat from '../../assets/wechat.svg'
+import cake from '../../assets/cake.svg'
+import link from '../../assets/link.svg'
+import flag from '../../assets/flag.svg'
+import ellipsisVertical from '../../assets/ellipsis-vertical.svg'
+import shieldCheck from '../../assets/shield-check.svg'
+import adjustmentsHorizontal from '../../assets/adjustments-horizontal.svg'
+import cog6Tooth from '../../assets/cog-6-tooth.svg'
+import commandLine from '../../assets/command-line.svg'
+import questionMarkCircle from '../../assets/question-mark-circle.svg'
+import arrowRightOnRectangle from '../../assets/arrow-right-on-rectangle.svg'
+import trash from '../../assets/trash.svg'
+import starSolid from '../../assets/star-solid.svg'
+import starOutline from '../../assets/star-outline.svg'
+import target from '../../assets/target.svg'
 
 function createIcon(src, alt) {
   return function Icon(props) {
@@ -42,6 +56,20 @@ export const GlancyLightIcon = createIcon(glancyLight, 'glancy-light')
 export const ProTagDarkIcon = createIcon(proTagDark, 'pro-tag-dark')
 export const ProTagLightIcon = createIcon(proTagLight, 'pro-tag-light')
 export const WechatIcon = createIcon(wechat, 'wechat')
+export const CakeIcon = createIcon(cake, 'cake')
+export const LinkIcon = createIcon(link, 'link')
+export const FlagIcon = createIcon(flag, 'flag')
+export const EllipsisVerticalIcon = createIcon(ellipsisVertical, 'ellipsis-vertical')
+export const ShieldCheckIcon = createIcon(shieldCheck, 'shield-check')
+export const AdjustmentsHorizontalIcon = createIcon(adjustmentsHorizontal, 'adjustments-horizontal')
+export const Cog6ToothIcon = createIcon(cog6Tooth, 'cog-6-tooth')
+export const CommandLineIcon = createIcon(commandLine, 'command-line')
+export const QuestionMarkCircleIcon = createIcon(questionMarkCircle, 'question-mark-circle')
+export const ArrowRightOnRectangleIcon = createIcon(arrowRightOnRectangle, 'arrow-right-on-rectangle')
+export const TrashIcon = createIcon(trash, 'trash')
+export const StarSolidIcon = createIcon(starSolid, 'star-solid')
+export const StarIcon = createIcon(starOutline, 'star-outline')
+export const TargetIcon = createIcon(target, 'target')
 
 export default {
   AppleIcon,
@@ -61,5 +89,19 @@ export default {
   GlancyLightIcon,
   ProTagDarkIcon,
   ProTagLightIcon,
-  WechatIcon
+  WechatIcon,
+  CakeIcon,
+  LinkIcon,
+  FlagIcon,
+  EllipsisVerticalIcon,
+  ShieldCheckIcon,
+  AdjustmentsHorizontalIcon,
+  Cog6ToothIcon,
+  CommandLineIcon,
+  QuestionMarkCircleIcon,
+  ArrowRightOnRectangleIcon,
+  TrashIcon,
+  StarSolidIcon,
+  StarIcon,
+  TargetIcon
 }
