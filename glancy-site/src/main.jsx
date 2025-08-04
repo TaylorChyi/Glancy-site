@@ -15,6 +15,7 @@ import { AppProvider } from './context/AppContext.jsx'
 import { ApiProvider } from './context/ApiContext.jsx'
 import { MessageProvider } from './context/MessageContext.jsx'
 import { createEventBus } from './services/EventBus.js'
+import { setupTheme } from './theme/initTheme.js'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function ViewportHeightUpdater() {
@@ -32,6 +33,7 @@ function ViewportHeightUpdater() {
   return null
 }
 
+setupTheme()
 const eventBus = createEventBus()
 
 createRoot(document.getElementById('root')).render(
