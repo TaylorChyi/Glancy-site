@@ -37,9 +37,15 @@ export function createApiClient({ token, headers: defaultHeaders = {} } = {}) {
       throw new Error(extractMessage(text) || 'Request failed')
     }
 
+    if (resp.status === 204 || resp.headers.get('content-length') === '0') {
+      logger.debug('apiRequest success', { url })
+      return null
+    }
+
     const contentType = resp.headers.get('content-type') || ''
     if (contentType.includes('application/json')) {
-      const data = await resp.json()
+      const text = await resp.text()
+      const data = text ? JSON.parse(text) : null
       logger.debug('apiRequest success', { url })
       return data
     }

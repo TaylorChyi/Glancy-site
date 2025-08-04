@@ -32,9 +32,10 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
         userId: user.id,
         token: user.token
       })
-      const terms = records.map((r) => r.term)
+      const normalized = Array.isArray(records) ? records : []
+      const terms = normalized.map((r) => r.term)
       const map: Record<string, string> = {}
-      records.forEach((r) => {
+      normalized.forEach((r) => {
         if (r.id) map[r.term] = r.id
       })
       const existing = get().history
@@ -69,9 +70,11 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
             term,
             language
           })
-          set((state) => ({
-            recordMap: { ...state.recordMap, [term]: record.id }
-          }))
+          if (record && record.id) {
+            set((state) => ({
+              recordMap: { ...state.recordMap, [term]: record.id }
+            }))
+          }
           // refresh history from server to ensure sync
           refreshHistory(user)
         } catch (err) {
