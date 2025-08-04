@@ -18,7 +18,7 @@
   align-items: center;
   gap: 0.5rem;
   height: var(--bar-height);
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
   position: sticky;
   bottom: 0;
   background: inherit;
@@ -63,8 +63,7 @@
 
 .history-list {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: visible;
+  overflow: visible auto;
 }
 
 .history-list li {
