@@ -32,6 +32,7 @@ function App() {
     const messageService = useMessageService()
   const { user } = useUser()
   const { loadHistory, addHistory, unfavoriteHistory } = useHistory()
+  const loadHistoryRef = useRef(loadHistory)
   const { theme, resolvedTheme, setTheme } = useTheme()
   const inputRef = useRef(null)
   const SendIcon =
@@ -175,8 +176,12 @@ function App() {
   }, [lang, setLang, theme, setTheme, entry, showFavorites, showHistory, toggleFavorite])
 
   useEffect(() => {
-    loadHistory(user)
-  }, [user, loadHistory])
+    loadHistoryRef.current = loadHistory
+  }, [loadHistory])
+
+  useEffect(() => {
+    loadHistoryRef.current(user)
+  }, [user])
 
   useEffect(() => {
     if (!user) {
