@@ -5,7 +5,7 @@ export default function useOutsideToggle(initialOpen = false) {
   const ref = useRef(null)
 
   useEffect(() => {
-    function handlePointerDown(e) {
+    function handleStart(e) {
       if (ref.current && !ref.current.contains(e.target)) {
         setOpen(false)
       }
@@ -18,12 +18,14 @@ export default function useOutsideToggle(initialOpen = false) {
     }
 
     if (open) {
-      document.addEventListener('pointerdown', handlePointerDown)
+      document.addEventListener('mousedown', handleStart)
+      document.addEventListener('touchstart', handleStart)
       document.addEventListener('keydown', handleKeyDown)
     }
 
     return () => {
-      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('mousedown', handleStart)
+      document.removeEventListener('touchstart', handleStart)
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [open])
