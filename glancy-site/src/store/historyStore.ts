@@ -4,6 +4,10 @@ import { safeJSONParse } from '../utils.js'
 
 import type { User } from './userStore.ts'
 
+function isAuthenticated(user?: User | null): user is User {
+  return Boolean(user && user.id && user.token)
+}
+
 interface HistoryState {
   history: string[]
   recordMap: Record<string, string>
@@ -22,6 +26,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
   const initial: string[] = stored ? safeJSONParse(stored, []) : []
   const initialMap: Record<string, string> = {}
   async function refreshHistory(user: User) {
+    if (!isAuthenticated(user)) return
     try {
       const records = await api.searchRecords.fetchSearchRecords({
         userId: user.id,
@@ -48,15 +53,15 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     history: initial,
     recordMap: initialMap,
     loadHistory: async (user?: User | null) => {
-      if (user) {
-        refreshHistory(user)
+      if (isAuthenticated(user)) {
+        await refreshHistory(user)
       } else {
         const stored = localStorage.getItem(STORAGE_KEY)
         set({ history: stored ? JSON.parse(stored) : [], recordMap: {} })
       }
     },
     addHistory: async (term: string, user?: User | null, language?: string) => {
-      if (user) {
+      if (isAuthenticated(user)) {
         try {
           const record = await api.searchRecords.saveSearchRecord({
             userId: user.id,
@@ -78,22 +83,24 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
       set({ history: unique })
     },
     clearHistory: async (user?: User | null) => {
-      if (user) {
-        api.searchRecords.clearSearchRecords({ userId: user.id, token: user.token }).catch((err) => {
-          console.error(err)
-        })
+      if (isAuthenticated(user)) {
+        api.searchRecords
+          .clearSearchRecords({ userId: user.id, token: user.token })
+          .catch((err) => {
+            console.error(err)
+          })
       }
       localStorage.removeItem(STORAGE_KEY)
       set({ history: [], recordMap: {} })
     },
     removeHistory: async (term: string, user?: User | null) => {
-      if (user) {
-        const id = get().recordMap[term]
-        if (id) {
-          api.searchRecords.deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch((err) => {
+      const id = get().recordMap[term]
+      if (isAuthenticated(user) && id) {
+        api.searchRecords
+          .deleteSearchRecord({ userId: user.id, recordId: id, token: user.token })
+          .catch((err) => {
             console.error(err)
           })
-        }
       }
       const updated = get().history.filter((t) => t !== term)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updated))
@@ -104,20 +111,24 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
       })
     },
     favoriteHistory: async (term: string, user?: User | null) => {
-        const id = get().recordMap[term]
-        if (user && id) {
-          api.searchRecords.favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+      const id = get().recordMap[term]
+      if (isAuthenticated(user) && id) {
+        api.searchRecords
+          .favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id })
+          .catch((err) => {
             console.error(err)
           })
-        }
-      },
+      }
+    },
     unfavoriteHistory: async (term: string, user?: User | null) => {
-        const id = get().recordMap[term]
-        if (user && id) {
-          api.searchRecords.unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
+      const id = get().recordMap[term]
+      if (isAuthenticated(user) && id) {
+        api.searchRecords
+          .unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id })
+          .catch((err) => {
             console.error(err)
           })
-        }
       }
     }
-  })
+  }
+})
