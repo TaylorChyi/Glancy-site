@@ -38,7 +38,7 @@
   bottom: 0;
   height: 30%;
   background: rgb(0 0 0 / 50%);
-  color: #fff;
+  color: var(--overlay-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,7 +150,7 @@
 .tooltip .tooltip-text {
   visibility: hidden;
   background: rgb(0 0 0 / 75%);
-  color: #fff;
+  color: var(--overlay-text);
   text-align: center;
   padding: 4px 8px;
   border-radius: 4px;
