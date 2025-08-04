@@ -1,18 +1,27 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
 export default function useOutsideToggle(initialOpen = false) {
   const [open, setOpen] = useState(initialOpen)
   const ref = useRef(null)
 
+  const logSetOpen = useCallback((next) => {
+    console.log('useOutsideToggle:setOpen', next)
+    setOpen(next)
+  }, [])
+
   useEffect(() => {
+    console.log('useOutsideToggle: open changed', open)
+
     function handleStart(e) {
       if (ref.current && !ref.current.contains(e.target)) {
+        console.log('useOutsideToggle: outside interaction', e.target)
         setOpen(false)
       }
     }
 
     function handleKeyDown(e) {
       if (e.key === 'Escape') {
+        console.log('useOutsideToggle: escape pressed')
         setOpen(false)
       }
     }
@@ -30,5 +39,5 @@ export default function useOutsideToggle(initialOpen = false) {
     }
   }, [open])
 
-  return { open, setOpen, ref }
+  return { open, setOpen: logSetOpen, ref }
 }
