@@ -9,6 +9,7 @@ import GenderSelect from './components/GenderSelect/GenderSelect.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
 import { cacheBust } from './utils.js'
+import { CakeIcon, UserIcon, StarIcon, TargetIcon } from './components/Icon'
 
 function Profile({ onCancel }) {
   const { t } = useLanguage()
@@ -166,21 +167,24 @@ function Profile({ onCancel }) {
         </div>
         <div className={styles.basic}>
           <div className={styles.item}>
-            <span>🎂 {t.ageLabel}</span>
+            <CakeIcon className={styles.icon} width={20} height={20} />
+            <span>{t.ageLabel}</span>
             <AgeStepper value={age} onChange={setAge} />
             <span className={styles.tooltip}>
               ?<span className={styles['tooltip-text']}>{t.ageHelp}</span>
             </span>
           </div>
           <div className={styles.item}>
-            <span>👤 {t.genderLabel}</span>
+            <UserIcon className={styles.icon} width={20} height={20} />
+            <span>{t.genderLabel}</span>
             <GenderSelect value={gender} onChange={setGender} />
             <span className={styles.tooltip}>
               ?<span className={styles['tooltip-text']}>{t.genderHelp}</span>
             </span>
           </div>
           <div className={styles.item}>
-            <span>⭐ {t.interestsLabel}</span>
+            <StarIcon className={styles.icon} width={20} height={20} />
+            <span>{t.interestsLabel}</span>
             <input
               value={interests}
               onChange={(e) => setInterests(e.target.value)}
@@ -191,7 +195,8 @@ function Profile({ onCancel }) {
             </span>
           </div>
           <div className={styles.item}>
-            <span>🎯 {t.goalLabel}</span>
+            <TargetIcon className={styles.icon} width={20} height={20} />
+            <span>{t.goalLabel}</span>
             <input
               value={goal}
               onChange={(e) => setGoal(e.target.value)}

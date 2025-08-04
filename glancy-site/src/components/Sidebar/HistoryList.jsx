@@ -4,6 +4,11 @@ import { useLanguage } from '../../LanguageContext.jsx'
 import ListItem from '../ListItem/ListItem.jsx'
 import styles from './Sidebar.module.css'
 import useOutsideToggle from '../../hooks/useOutsideToggle.js'
+import {
+  EllipsisVerticalIcon,
+  StarSolidIcon,
+  TrashIcon
+} from '../Icon'
 
 function HistoryList({ onSelect }) {
   const { history, loadHistory, removeHistory, favoriteHistory } = useHistory()
@@ -43,7 +48,7 @@ function HistoryList({ onSelect }) {
                     setOpenIndex(openIndex === i ? null : i)
                   }}
                 >
-                  ⋮
+                  <EllipsisVerticalIcon width={16} height={16} />
                 </button>
                 {openIndex === i && (
                   <div className={styles['history-menu']}>
@@ -56,7 +61,7 @@ function HistoryList({ onSelect }) {
                         setOpenIndex(null)
                       }}
                     >
-                      ★ {t.favoriteAction}
+                      <StarSolidIcon width={16} height={16} className={styles.icon} /> {t.favoriteAction}
                     </button>
                     <button
                       type="button"
@@ -67,7 +72,7 @@ function HistoryList({ onSelect }) {
                         setOpenIndex(null)
                       }}
                     >
-                      🗑 {t.deleteAction}
+                      <TrashIcon width={16} height={16} className={styles.icon} /> {t.deleteAction}
                     </button>
                   </div>
                 )}

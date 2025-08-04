@@ -82,6 +82,11 @@
   gap: 6px;
 }
 
+.basic .item .icon {
+  width: 20px;
+  height: 20px;
+}
+
 .actions {
   display: flex;
   justify-content: center;

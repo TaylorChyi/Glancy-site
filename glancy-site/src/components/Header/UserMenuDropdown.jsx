@@ -1,5 +1,13 @@
 import Avatar from '../Avatar.jsx'
 import styles from './Header.module.css'
+import {
+  ShieldCheckIcon,
+  AdjustmentsHorizontalIcon,
+  Cog6ToothIcon,
+  CommandLineIcon,
+  QuestionMarkCircleIcon,
+  ArrowRightOnRectangleIcon
+} from '../Icon'
 
 function UserMenuDropdown({
   open,
@@ -26,26 +34,26 @@ function UserMenuDropdown({
       <ul>
         {!isPro && (
           <li onClick={() => openUpgrade()}>
-            <span className={styles.icon}>🛡️</span>
+            <ShieldCheckIcon className={styles.icon} width={20} height={20} />
             {t.upgrade}
           </li>
         )}
         <li onClick={openProfile}>
-          <span className={styles.icon}>🎚️</span>
+          <AdjustmentsHorizontalIcon className={styles.icon} width={20} height={20} />
           {t.profile}
         </li>
         <li onClick={openSettings}>
-          <span className={styles.icon}>⚙️</span>
+          <Cog6ToothIcon className={styles.icon} width={20} height={20} />
           {t.settings}
         </li>
         <li onClick={openShortcuts}>
-          <span className={styles.icon}>⌘</span>
+          <CommandLineIcon className={styles.icon} width={20} height={20} />
           {t.shortcuts}
         </li>
       </ul>
       <ul>
         <li>
-          <span className={styles.icon}>❓</span>
+          <QuestionMarkCircleIcon className={styles.icon} width={20} height={20} />
           <button
             type="button"
             onClick={() => {
@@ -59,7 +67,7 @@ function UserMenuDropdown({
           </button>
         </li>
         <li>
-          <span className={styles.icon}>🚪</span>
+          <ArrowRightOnRectangleIcon className={styles.icon} width={20} height={20} />
           <button
             type="button"
             onClick={() => {
