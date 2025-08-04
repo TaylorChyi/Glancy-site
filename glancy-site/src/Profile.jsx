@@ -3,11 +3,11 @@ import './App.css'
 import styles from './Profile.module.css'
 import Avatar from './components/Avatar.jsx'
 import { useLanguage } from './LanguageContext.jsx'
-import MessagePopup from './components/MessagePopup.jsx'
 import AgeStepper from './components/AgeStepper/AgeStepper.jsx'
 import GenderSelect from './components/GenderSelect/GenderSelect.jsx'
 import { useApi } from './hooks/useApi.js'
 import { useUser } from './context/AppContext.jsx'
+import { useMessageService } from './context/MessageContext.jsx'
 import { cacheBust } from './utils.js'
 import { CakeIcon, UserIcon, StarIcon, TargetIcon } from './components/Icon'
 
@@ -23,8 +23,7 @@ function Profile({ onCancel }) {
   const [interests, setInterests] = useState('')
   const [goal, setGoal] = useState('')
   const [avatar, setAvatar] = useState('')
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
+  const messageService = useMessageService()
   const [editable, setEditable] = useState({
     username: false,
     email: false,
@@ -47,8 +46,7 @@ function Profile({ onCancel }) {
       setUser({ ...currentUser, avatar: url })
     } catch (err) {
       console.error(err)
-      setPopupMsg(t.fail)
-      setPopupOpen(true)
+      messageService.show(t.fail)
     } finally {
       URL.revokeObjectURL(preview)
     }
@@ -70,10 +68,9 @@ function Profile({ onCancel }) {
       })
       .catch((err) => {
         console.error(err)
-        setPopupMsg(t.fail)
-        setPopupOpen(true)
+        messageService.show(t.fail)
       })
-  }, [api, t, currentUser])
+  }, [api, t, currentUser, messageService])
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -89,8 +86,7 @@ function Profile({ onCancel }) {
         goal
       }
     })
-    setPopupMsg(t.updateSuccess)
-    setPopupOpen(true)
+    messageService.show(t.updateSuccess)
   }
 
 
@@ -215,14 +211,9 @@ function Profile({ onCancel }) {
             {t.cancelButton || '取消'}
           </button>
         </div>
-      </form>
-      <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
-      />
-    </div>
-  )
-}
+        </form>
+      </div>
+    )
+  }
 
-export default Profile
+  export default Profile

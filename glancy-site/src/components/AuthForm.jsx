@@ -4,7 +4,6 @@ import CodeButton from './CodeButton.jsx'
 import PhoneInput from './PhoneInput.jsx'
 import { Button } from './index.js'
 import styles from '../AuthPage.module.css'
-import MessagePopup from './MessagePopup.jsx'
 import Icp from './Icp.jsx'
 import {
   GoogleIcon,
@@ -17,6 +16,7 @@ import {
   GlancyWebDarkIcon
 } from './Icon'
 import { useTheme } from '../ThemeContext.jsx'
+import { useMessageService } from '../context/MessageContext.jsx'
 
 const defaultIcons = {
   username: UserIcon,
@@ -43,8 +43,7 @@ function AuthForm({
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
   const [method, setMethod] = useState(formMethods[0])
-  const [showNotice, setShowNotice] = useState(false)
-  const [noticeMsg, setNoticeMsg] = useState('')
+  const messageService = useMessageService()
   const { resolvedTheme } = useTheme()
   const BrandIcon =
     resolvedTheme === 'dark' ? GlancyWebDarkIcon : GlancyWebLightIcon
@@ -53,17 +52,14 @@ function AuthForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setNoticeMsg('')
     if (!validateAccount(account, method)) {
-      setNoticeMsg('Invalid account')
-      setShowNotice(true)
+      messageService.show('Invalid account')
       return
     }
     try {
       await onSubmit({ account, password, method })
     } catch (err) {
-      setNoticeMsg(err.message)
-      setShowNotice(true)
+      messageService.show(err.message)
     }
   }
 
@@ -123,36 +119,30 @@ function AuthForm({
           .map((m) => {
             const Icon = icons[m]
             return (
-              <Button
-                key={m}
-                type="button"
-                onClick={() => {
-                  if (formMethods.includes(m)) {
-                    setMethod(m)
-                  } else {
-                    setNoticeMsg('Not implemented yet')
-                    setShowNotice(true)
-                  }
-                }}
-              >
-                <Icon alt={m} />
-              </Button>
-            )
-          })}
-      </div>
-      <div className={styles['auth-footer']}>
-        <div className={styles['footer-links']}>
-          <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+                <Button
+                  key={m}
+                  type="button"
+                  onClick={() => {
+                    if (formMethods.includes(m)) {
+                      setMethod(m)
+                    } else {
+                      messageService.show('Not implemented yet')
+                    }
+                  }}
+                >
+                  <Icon alt={m} />
+                </Button>
+              )
+            })}
         </div>
-        <Icp />
+        <div className={styles['auth-footer']}>
+          <div className={styles['footer-links']}>
+            <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+          </div>
+          <Icp />
+        </div>
       </div>
-      <MessagePopup
-        open={showNotice}
-        message={noticeMsg}
-        onClose={() => setShowNotice(false)}
-      />
-    </div>
-  )
-}
+    )
+  }
 
-export default AuthForm
+  export default AuthForm

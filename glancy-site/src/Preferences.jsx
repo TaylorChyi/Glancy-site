@@ -5,8 +5,8 @@ import { useLanguage } from './LanguageContext.jsx'
 import { useTheme } from './ThemeContext.jsx'
 import { useUser } from './context/AppContext.jsx'
 import { API_PATHS } from './config/api.js'
-import MessagePopup from './components/MessagePopup.jsx'
 import { useApi } from './hooks/useApi.js'
+import { useMessageService } from './context/MessageContext.jsx'
 import { useModelStore } from './store/modelStore.ts'
 
 function Preferences() {
@@ -23,8 +23,7 @@ function Preferences() {
     localStorage.getItem('targetLang') || 'ENGLISH'
   )
   const [defaultModel, setDefaultModel] = useState(model)
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
+    const messageService = useMessageService()
 
   useEffect(() => {
     api.llm
@@ -48,12 +47,11 @@ function Preferences() {
         localStorage.setItem('targetLang', tl)
         setTheme(data.theme || 'system')
       })
-      .catch((err) => {
-        console.error(err)
-        setPopupMsg(t.fail)
-        setPopupOpen(true)
-      })
-  }, [setTheme, t, user, api, model, setModel])
+        .catch((err) => {
+          console.error(err)
+          messageService.show(t.fail)
+        })
+  }, [setTheme, t, user, api, model, setModel, messageService])
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -71,8 +69,7 @@ function Preferences() {
     localStorage.setItem('sourceLang', sourceLang)
     localStorage.setItem('targetLang', targetLang)
     setModel(defaultModel)
-    setPopupMsg(t.saveSuccess)
-    setPopupOpen(true)
+      messageService.show(t.saveSuccess)
   }
 
   return (
@@ -123,11 +120,6 @@ function Preferences() {
         </div>
         <button type="submit">{t.saveButton}</button>
       </form>
-      <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
-      />
     </div>
   )
 }
