@@ -8,6 +8,7 @@ import Loader from './components/Loader.jsx'
 const App = lazy(() => import('./App.jsx'))
 const Login = lazy(() => import('./Login.jsx'))
 const Register = lazy(() => import('./Register.jsx'))
+const NotFound = lazy(() => import('./NotFound.jsx'))
 import { LanguageProvider } from './LanguageContext.jsx'
 import { ThemeProvider } from './ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'
@@ -41,9 +42,10 @@ createRoot(document.getElementById('root')).render(
             <ErrorBoundary>
               <Suspense fallback={<Loader />}>
                 <Routes>
+                  <Route path="/" element={<App />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
-                  <Route path="*" element={<App />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
             </ErrorBoundary>
