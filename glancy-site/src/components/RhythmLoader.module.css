@@ -15,7 +15,7 @@
 }
 
 .dot {
-  animation: dotPulse 1.2s ease-in-out infinite;
+  animation: dot-pulse 1.2s ease-in-out infinite;
 }
 
 .dot:nth-of-type(1) {
@@ -32,7 +32,7 @@
 
 .bar {
   transform-origin: center bottom;
-  animation: barPulse 1.2s ease-in-out infinite;
+  animation: bar-pulse 1.2s ease-in-out infinite;
 }
 
 .bar:nth-of-type(4) {
@@ -47,22 +47,24 @@
   animation-delay: 0.4s;
 }
 
-@keyframes dotPulse {
+@keyframes dot-pulse {
   0%, 80%, 100% {
     opacity: 0.3;
     transform: translateY(0);
   }
+
   40% {
     opacity: 1;
     transform: translateY(-6px);
   }
 }
 
-@keyframes barPulse {
+@keyframes bar-pulse {
   0%, 80%, 100% {
     opacity: 0.3;
     transform: scaleY(0.4);
   }
+
   40% {
     opacity: 1;
     transform: scaleY(1);
