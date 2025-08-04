@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTheme } from './ThemeContext.jsx'
 import translations from './translations.js'
 import DictionaryEntry from './components/DictionaryEntry.jsx'
+import RhythmLoader from './components/RhythmLoader.jsx'
 import {
   SendButtonLightIcon,
   SendButtonDarkIcon,
@@ -259,7 +260,9 @@ function App() {
           ) : showHistory ? (
             <HistoryDisplay />
           ) : loading ? (
-            '...'
+            <div className="display-content">
+              <RhythmLoader />
+            </div>
           ) : entry ? (
             <DictionaryEntry entry={entry} />
           ) : (
