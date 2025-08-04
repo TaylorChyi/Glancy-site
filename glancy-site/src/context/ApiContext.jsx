@@ -5,9 +5,9 @@ import { createApi } from '../api/index.js'
 const ApiContext = createContext(createApi())
 
 export function ApiProvider({ children }) {
-  const { user } = useUser()
+  const { user, clearUser } = useUser()
   const token = user?.token
-  const api = useMemo(() => createApi({ token }), [token])
+  const api = useMemo(() => createApi({ token, onUnauthorized: clearUser }), [token, clearUser])
   return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>
 }
 

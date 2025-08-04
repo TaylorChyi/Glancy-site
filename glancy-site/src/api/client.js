@@ -6,9 +6,10 @@ import { extractMessage } from '../utils.js'
  * @param {Object} [config]
  * @param {string} [config.token] global auth token
  * @param {Object} [config.headers] additional default headers
+ * @param {Function} [config.onUnauthorized] callback when response is 401
  * @returns {Function} request function
  */
-export function createApiClient({ token, headers: defaultHeaders = {} } = {}) {
+export function createApiClient({ token, headers: defaultHeaders = {}, onUnauthorized } = {}) {
   return async function apiRequest(
     url,
     { token: reqToken, headers = {}, ...options } = {}
@@ -19,6 +20,7 @@ export function createApiClient({ token, headers: defaultHeaders = {} } = {}) {
 
     const resp = await fetch(url, { ...options, headers: mergedHeaders })
     if (!resp.ok) {
+      if (resp.status === 401) onUnauthorized?.()
       const text = await resp.text().catch((err) => {
         console.error(err)
         return ''
