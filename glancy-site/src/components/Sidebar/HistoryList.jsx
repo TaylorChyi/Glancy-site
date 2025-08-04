@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
 import { useLanguage } from '../../LanguageContext.jsx'
 import ListItem from '../ListItem/ListItem.jsx'
@@ -12,6 +12,7 @@ import {
 
 function HistoryList({ onSelect }) {
   const { history, loadHistory, removeHistory, favoriteHistory } = useHistory()
+  const loadHistoryRef = useRef(loadHistory)
   const { toggleFavorite } = useFavorites()
   const { user } = useUser()
   const [openIndex, setOpenIndex] = useState(null)
@@ -25,8 +26,12 @@ function HistoryList({ onSelect }) {
   }, [open])
 
   useEffect(() => {
-    loadHistory(user)
-  }, [user, loadHistory])
+    loadHistoryRef.current = loadHistory
+  }, [loadHistory])
+
+  useEffect(() => {
+    loadHistoryRef.current(user)
+  }, [user])
 
   if (history.length === 0) return null
 
