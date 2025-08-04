@@ -54,6 +54,7 @@ function HistoryList({ onSelect }) {
                   <div className={styles['history-menu']}>
                     <button
                       type="button"
+                      title={t.favoriteAction}
                       onClick={(e) => {
                         e.stopPropagation()
                         favoriteHistory(h, user)
@@ -61,10 +62,11 @@ function HistoryList({ onSelect }) {
                         setOpenIndex(null)
                       }}
                     >
-                      <StarSolidIcon width={16} height={16} className={styles.icon} /> {t.favoriteAction}
+                      <StarSolidIcon width={16} height={16} className={styles.icon} />
                     </button>
                     <button
                       type="button"
+                      title={t.deleteAction}
                       className={styles['delete-btn']}
                       onClick={(e) => {
                         e.stopPropagation()
@@ -72,7 +74,7 @@ function HistoryList({ onSelect }) {
                         setOpenIndex(null)
                       }}
                     >
-                      <TrashIcon width={16} height={16} className={styles.icon} /> {t.deleteAction}
+                      <TrashIcon width={16} height={16} className={styles.icon} />
                     </button>
                   </div>
                 )}
