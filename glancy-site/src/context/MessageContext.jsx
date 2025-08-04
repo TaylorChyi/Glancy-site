@@ -1,13 +1,18 @@
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, useContext, useRef } from 'react'
 import { useSyncExternalStore } from 'react'
 import MessagePopup from '../components/MessagePopup.jsx'
 import { createMessageService } from '../services/MessageService.js'
 
 const MessageContext = createContext(createMessageService())
 
-export function MessageProvider({ service = createMessageService(), children }) {
-  const store = useMemo(() => service, [service])
-  const message = useSyncExternalStore(store.subscribe, store.getSnapshot)
+export function MessageProvider({ service, children }) {
+  const storeRef = useRef(service || createMessageService())
+  const store = storeRef.current
+  const message = useSyncExternalStore(
+    store.subscribe,
+    store.getSnapshot,
+    store.getSnapshot
+  )
   const handleClose = () => store.clear()
 
   return (
