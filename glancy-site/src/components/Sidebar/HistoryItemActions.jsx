@@ -4,22 +4,17 @@ import { EllipsisVerticalIcon, StarSolidIcon, TrashIcon } from '../Icon'
 import styles from './Sidebar.module.css'
 
 function HistoryItemActions({ term, onFavorite, onDelete, t }) {
-  const { open, setOpen, ref } = useOutsideToggle(false)
+  const { open, toggle, setOpen, ref } = useOutsideToggle(false)
 
   const toggleMenu = useCallback((e) => {
     e.preventDefault()
     e.stopPropagation()
-    setOpen(prev => {
-      const next = !prev
-      console.log('HistoryItemActions: toggle menu', { term, next })
-      return next
-    })
-  }, [setOpen, term])
+    toggle()
+  }, [toggle])
 
   const handleFavorite = useCallback((e) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log('HistoryItemActions: favorite', term)
     onFavorite(term)
     setOpen(false)
   }, [onFavorite, term, setOpen])
@@ -27,7 +22,6 @@ function HistoryItemActions({ term, onFavorite, onDelete, t }) {
   const handleDelete = useCallback((e) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log('HistoryItemActions: delete', term)
     onDelete(term)
     setOpen(false)
   }, [onDelete, term, setOpen])

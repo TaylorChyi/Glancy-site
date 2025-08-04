@@ -4,40 +4,37 @@ export default function useOutsideToggle(initialOpen = false) {
   const [open, setOpen] = useState(initialOpen)
   const ref = useRef(null)
 
-  const logSetOpen = useCallback((next) => {
-    console.log('useOutsideToggle:setOpen', next)
-    setOpen(next)
+  const updateOpen = useCallback((next) => {
+    setOpen(prev => (typeof next === 'function' ? next(prev) : next))
   }, [])
 
-  useEffect(() => {
-    console.log('useOutsideToggle: open changed', open)
+  const toggle = useCallback(() => {
+    updateOpen(prev => !prev)
+  }, [updateOpen])
 
-    function handleStart(e) {
+  useEffect(() => {
+    function handlePointerDown(e) {
       if (ref.current && !ref.current.contains(e.target)) {
-        console.log('useOutsideToggle: outside interaction', e.target)
-        setOpen(false)
+        updateOpen(false)
       }
     }
 
     function handleKeyDown(e) {
       if (e.key === 'Escape') {
-        console.log('useOutsideToggle: escape pressed')
-        setOpen(false)
+        updateOpen(false)
       }
     }
 
     if (open) {
-      document.addEventListener('mousedown', handleStart)
-      document.addEventListener('touchstart', handleStart)
+      document.addEventListener('pointerdown', handlePointerDown)
       document.addEventListener('keydown', handleKeyDown)
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleStart)
-      document.removeEventListener('touchstart', handleStart)
+      document.removeEventListener('pointerdown', handlePointerDown)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [open])
+  }, [open, updateOpen])
 
-  return { open, setOpen: logSetOpen, ref }
+  return { open, setOpen: updateOpen, toggle, ref }
 }
