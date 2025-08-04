@@ -1,11 +1,26 @@
 import express from 'express'
 import path from 'path'
+import fs from 'fs'
+import { spawnSync } from 'child_process'
 import { fileURLToPath } from 'url'
 import geoip from 'geoip-lite'
 import { COUNTRY_LANGUAGE_MAP } from './src/config/countryLanguageMap.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+function ensureDist() {
+  const distPath = path.join(__dirname, 'dist')
+  if (!fs.existsSync(distPath)) {
+    const result = spawnSync('npm', ['run', 'build'], { stdio: 'inherit' })
+    if (result.status !== 0) {
+      console.error('构建失败')
+      process.exit(result.status ?? 1)
+    }
+  }
+}
+
+ensureDist()
 
 const app = express()
 const port = process.env.PORT || 3000
