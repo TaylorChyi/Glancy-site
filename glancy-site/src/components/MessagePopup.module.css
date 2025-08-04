@@ -15,9 +15,10 @@
 .popup {
   background: var(--app-bg);
   color: var(--app-color);
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 300px;
+  padding: var(--space-4);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+  max-width: 320px;
   width: 90%;
   text-align: center;
 }

@@ -3,24 +3,22 @@ import './App.css'
 import { useLanguage } from './LanguageContext.jsx'
 import { API_PATHS } from './config/api.js'
 import { useApi } from './hooks/useApi.js'
-import MessagePopup from './components/MessagePopup.jsx'
+import { useMessageService } from './context/MessageContext.jsx'
 
 function Faq() {
   const { t } = useLanguage()
   const [items, setItems] = useState([])
   const api = useApi()
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
+    const messageService = useMessageService()
 
   useEffect(() => {
     api.request(API_PATHS.faqs)
       .then((data) => setItems(data))
-      .catch((err) => {
-        console.error(err)
-        setPopupMsg(t.fail)
-        setPopupOpen(true)
-      })
-  }, [api, t])
+        .catch((err) => {
+          console.error(err)
+          messageService.show(t.fail)
+        })
+  }, [api, t, messageService])
 
   return (
     <div className="app">
@@ -33,11 +31,6 @@ function Faq() {
           </li>
         ))}
       </ul>
-      <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
-      />
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import MessagePopup from './components/MessagePopup.jsx'
 import { useHistory, useUser, useFavorites } from './context/AppContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from './ThemeContext.jsx'
+import { useMessageService } from './context/MessageContext.jsx'
 import translations from './translations.js'
 import DictionaryEntry from './components/DictionaryEntry.jsx'
 import RhythmLoader from './components/RhythmLoader.jsx'
@@ -29,8 +29,7 @@ function App() {
   const { t, lang, setLang } = useLanguage()
   const placeholder = t.searchPlaceholder
   const [loading, setLoading] = useState(false)
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [popupMsg, setPopupMsg] = useState('')
+    const messageService = useMessageService()
   const { user } = useUser()
   const { loadHistory, addHistory, unfavoriteHistory } = useHistory()
   const { theme, resolvedTheme, setTheme } = useTheme()
@@ -98,8 +97,7 @@ function App() {
       setEntry(data)
       addHistory(input, user, detectedLang)
     } catch (err) {
-      setPopupMsg(err.message)
-      setPopupOpen(true)
+        messageService.show(err.message)
     } finally {
       setLoading(false)
     }
@@ -126,8 +124,7 @@ function App() {
       setEntry(data)
       // selecting from history should not reorder records
     } catch (err) {
-      setPopupMsg(err.message)
-      setPopupOpen(true)
+        messageService.show(err.message)
     } finally {
       setLoading(false)
     }
@@ -273,11 +270,6 @@ function App() {
         </div>
       </Layout>
       <Icp />
-      <MessagePopup
-        open={popupOpen}
-        message={popupMsg}
-        onClose={() => setPopupOpen(false)}
-      />
     </>
   )
 }

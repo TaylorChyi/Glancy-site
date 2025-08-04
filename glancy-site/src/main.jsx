@@ -13,6 +13,7 @@ import { LanguageProvider } from './LanguageContext.jsx'
 import { ThemeProvider } from './ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'
 import { ApiProvider } from './context/ApiContext.jsx'
+import { MessageProvider } from './context/MessageContext.jsx'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function ViewportHeightUpdater() {
@@ -34,26 +35,28 @@ function ViewportHeightUpdater() {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ViewportHeightUpdater />
-    <AppProvider>
-      <ApiProvider>
-        <LanguageProvider>
-          <ThemeProvider>
-            <BrowserRouter>
-            <ErrorBoundary>
-              <Suspense fallback={<Loader />}>
-                <Routes>
-                  <Route path="/" element={<App />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </ErrorBoundary>
-            </BrowserRouter>
-          </ThemeProvider>
-        </LanguageProvider>
-      </ApiProvider>
-    </AppProvider>
+      <AppProvider>
+        <ApiProvider>
+          <LanguageProvider>
+            <ThemeProvider>
+              <MessageProvider>
+                <BrowserRouter>
+                <ErrorBoundary>
+                  <Suspense fallback={<Loader />}> 
+                    <Routes>
+                      <Route path="/" element={<App />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </Suspense>
+                </ErrorBoundary>
+                </BrowserRouter>
+              </MessageProvider>
+            </ThemeProvider>
+          </LanguageProvider>
+        </ApiProvider>
+      </AppProvider>
   </StrictMode>,
 )
 
