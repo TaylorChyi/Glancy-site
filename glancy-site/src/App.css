@@ -17,7 +17,7 @@
   height: var(--bar-height);
   background: inherit;
   padding: 0 20px;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--space-3);
 }
 
 .brand-main {
