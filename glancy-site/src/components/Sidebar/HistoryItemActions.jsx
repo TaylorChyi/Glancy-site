@@ -7,18 +7,27 @@ function HistoryItemActions({ term, onFavorite, onDelete, t }) {
   const { open, setOpen, ref } = useOutsideToggle(false)
 
   const toggleMenu = useCallback((e) => {
+    e.preventDefault()
     e.stopPropagation()
-    setOpen(o => !o)
-  }, [setOpen])
+    setOpen(prev => {
+      const next = !prev
+      console.log('HistoryItemActions: toggle menu', { term, next })
+      return next
+    })
+  }, [setOpen, term])
 
   const handleFavorite = useCallback((e) => {
+    e.preventDefault()
     e.stopPropagation()
+    console.log('HistoryItemActions: favorite', term)
     onFavorite(term)
     setOpen(false)
   }, [onFavorite, term, setOpen])
 
   const handleDelete = useCallback((e) => {
+    e.preventDefault()
     e.stopPropagation()
+    console.log('HistoryItemActions: delete', term)
     onDelete(term)
     setOpen(false)
   }, [onDelete, term, setOpen])
