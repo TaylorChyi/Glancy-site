@@ -18,11 +18,11 @@
   align-items: center;
   gap: 0.5rem;
   height: var(--bar-height);
-  padding: 0 20px;
+  padding: 0 20px 0 20px;
   position: sticky;
   bottom: 0;
   background: inherit;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid transparent;
 }
 
 /* adapt header components used inside sidebar */

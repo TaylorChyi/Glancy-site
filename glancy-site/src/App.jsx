@@ -205,30 +205,23 @@ function App() {
           canFavorite: !!entry && !showFavorites && !showHistory
         }}
         bottomContent={(
-          <>
-            <form className="chatbox" onSubmit={handleSend}>
-              <input
-                ref={inputRef}
-                type="text"
-                placeholder={t.inputPlaceholder}
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                className={styles['rounded-input']}
-              />
-              <button type="submit">
-                {text.trim() === '' ? (
-                  <VoiceIcon alt="voice" />
-                ) : (
-                  <SendIcon alt="send" />
-                )}
-              </button>
-            </form>
-            <div className="icp">
-              <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
-                京ICP备2025135702号-1
-              </a>
-            </div>
-          </>
+          <form className="chatbox" onSubmit={handleSend}>
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder={t.inputPlaceholder}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className={styles['rounded-input']}
+            />
+            <button type="submit">
+              {text.trim() === '' ? (
+                <VoiceIcon alt="voice" />
+              ) : (
+                <SendIcon alt="send" />
+              )}
+            </button>
+          </form>
         )}
       >
         <div className="display">
@@ -275,6 +268,11 @@ function App() {
           )}
         </div>
       </Layout>
+      <div className="icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+          京ICP备2025135702号-1
+        </a>
+      </div>
       <MessagePopup
         open={popupOpen}
         message={popupMsg}

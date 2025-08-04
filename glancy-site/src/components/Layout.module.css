@@ -32,7 +32,11 @@
   bottom: 0;
   background: var(--app-bg);
   border-top: 1px solid var(--border-color);
-  padding: 0;
+  height: var(--bar-height);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px 0 20px;
 }
 
 @media (width <= 600px) {
