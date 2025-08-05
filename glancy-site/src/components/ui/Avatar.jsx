@@ -1,6 +1,6 @@
 import { useUser } from '@/context/AppContext.jsx'
 import { useMemo } from 'react'
-import { cacheBust } from '@/utils/index.js'
+import { cacheBust } from '@/utils/url.js'
 import ThemeIcon from '@/components/ui/Icon'
 import styles from './Avatar.module.css'
 

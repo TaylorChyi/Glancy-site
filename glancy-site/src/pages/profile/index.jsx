@@ -9,7 +9,7 @@ import GenderSelect from '@/components/form/GenderSelect/GenderSelect.jsx'
 import EditableField from '@/components/form/EditableField/EditableField.jsx'
 import { useApi } from '@/hooks/useApi.js'
 import { useUser } from '@/context/AppContext.jsx'
-import { cacheBust } from '@/utils/index.js'
+import { cacheBust } from '@/utils/url.js'
 import ThemeIcon from '@/components/ui/Icon'
 
 function Profile({ onCancel }) {
@@ -175,7 +175,7 @@ function Profile({ onCancel }) {
             {t.saveButton}
           </button>
           <button type="button" className={styles['cancel-btn']} onClick={onCancel}>
-            {t.cancelButton || '取消'}
+            {t.cancelButton}
           </button>
         </div>
       </form>

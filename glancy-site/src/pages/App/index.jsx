@@ -234,7 +234,7 @@ function App() {
               </ul>
             ) : (
               <div className="display-content">
-                <div className="display-term">{t.noFavorites || 'No favorites'}</div>
+                <div className="display-term">{t.noFavorites}</div>
               </div>
             )
           ) : showHistory ? (
