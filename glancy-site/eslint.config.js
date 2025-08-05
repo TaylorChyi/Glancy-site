@@ -33,7 +33,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['**/__tests__/**/*.js'],
+    files: ['**/__tests__/**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       globals: {
         ...globals.node,
