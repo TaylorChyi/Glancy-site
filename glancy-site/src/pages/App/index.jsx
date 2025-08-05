@@ -6,9 +6,8 @@ import { useTheme } from '@/context/ThemeContext.jsx'
 import translations from '@/i18n/index.js'
 import DictionaryEntry from '@/components/ui/DictionaryEntry.jsx'
 import ThemeIcon from '@/components/ui/Icon'
-import { useApi } from '@/hooks/useApi.js'
 import { useLanguage } from '@/context/LanguageContext.jsx'
-import { detectWordLanguage, clientNameFromModel } from '@/utils/index.js'
+import { useFetchWord } from '@/hooks/useFetchWord.js'
 import './App.css'
 import styles from './App.module.css'
 import Layout from '@/components/Layout'
@@ -34,8 +33,7 @@ function App() {
   const [fromFavorites, setFromFavorites] = useState(false)
   const { favorites, toggleFavorite } = useFavorites()
   const navigate = useNavigate()
-  const api = useApi()
-  const { fetchWord } = api.words
+  const { fetchWordWithHandling } = useFetchWord()
   const { model } = useModelStore()
 
   const handleToggleFavorites = () => {
@@ -76,23 +74,19 @@ function App() {
     const input = text.trim()
     setText('')
     setLoading(true)
-    try {
-      const detectedLang = detectWordLanguage(input)
-      const data = await fetchWord({
-        userId: user.id,
-        term: input,
-        language: detectedLang,
-        model: clientNameFromModel(model),
-        token: user.token
-      })
-      setEntry(data)
-      addHistory(input, user, detectedLang)
-    } catch (err) {
-      setPopupMsg(err.message)
+    const { data, error, language } = await fetchWordWithHandling({
+      user,
+      term: input,
+      model
+    })
+    if (error) {
+      setPopupMsg(error.message)
       setPopupOpen(true)
-    } finally {
-      setLoading(false)
+    } else {
+      setEntry(data)
+      addHistory(input, user, language)
     }
+    setLoading(false)
   }
 
   const handleSelectHistory = async (term) => {
@@ -104,23 +98,19 @@ function App() {
     setShowFavorites(false)
     setShowHistory(false)
     setLoading(true)
-    try {
-      const detectedLang = detectWordLanguage(term)
-      const data = await fetchWord({
-        userId: user.id,
-        term,
-        language: detectedLang,
-        model: clientNameFromModel(model),
-        token: user.token
-      })
+    const { data, error } = await fetchWordWithHandling({
+      user,
+      term,
+      model
+    })
+    if (error) {
+      setPopupMsg(error.message)
+      setPopupOpen(true)
+    } else {
       setEntry(data)
       // selecting from history should not reorder records
-    } catch (err) {
-      setPopupMsg(err.message)
-      setPopupOpen(true)
-    } finally {
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   useEffect(() => {
