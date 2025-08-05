@@ -1,5 +1,5 @@
-import { createLocaleApi } from '../locale.js'
-import { API_PATHS } from '../../config/api.js'
+import { createLocaleApi } from '@/api/locale.js'
+import { API_PATHS } from '@/config/api.js'
 import { jest } from '@jest/globals'
 
 test('getLocale fetches locale endpoint', async () => {

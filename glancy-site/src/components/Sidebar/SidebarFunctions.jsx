@@ -1,6 +1,6 @@
 import Favorites from './Favorites.jsx'
 import HistoryList from './HistoryList.jsx'
-import { useUser } from '../../context/AppContext.jsx'
+import { useUser } from '@/context/AppContext.jsx'
 import styles from './Sidebar.module.css'
 
 function SidebarFunctions({ onToggleFavorites, onSelectHistory }) {

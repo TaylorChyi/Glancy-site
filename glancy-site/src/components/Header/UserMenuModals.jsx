@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import HelpModal from '../modals/HelpModal.jsx'
-import SettingsModal from '../modals/SettingsModal.jsx'
-import ShortcutsModal from '../modals/ShortcutsModal.jsx'
-import ProfileModal from '../modals/ProfileModal.jsx'
-import UpgradeModal from '../modals/UpgradeModal.jsx'
-import LogoutConfirmModal from '../modals/LogoutConfirmModal.jsx'
+import HelpModal from '@/components/modals/HelpModal.jsx'
+import SettingsModal from '@/components/modals/SettingsModal.jsx'
+import ShortcutsModal from '@/components/modals/ShortcutsModal.jsx'
+import ProfileModal from '@/components/modals/ProfileModal.jsx'
+import UpgradeModal from '@/components/modals/UpgradeModal.jsx'
+import LogoutConfirmModal from '@/components/modals/LogoutConfirmModal.jsx'
 
 function UserMenuModals({ isPro, user, clearUser, clearHistory, children }) {
   const [helpOpen, setHelpOpen] = useState(false)

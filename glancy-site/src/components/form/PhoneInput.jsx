@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useLocale } from '../../context/LocaleContext.jsx'
+import { useLocale } from '@/context/LocaleContext.jsx'
 import styles from './PhoneInput.module.css'
 
 const CODE_LIST = [

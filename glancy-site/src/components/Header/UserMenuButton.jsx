@@ -1,5 +1,5 @@
-import useOutsideToggle from '../../hooks/useOutsideToggle.js'
-import Avatar from '../ui/Avatar.jsx'
+import useOutsideToggle from '@/hooks/useOutsideToggle.js'
+import Avatar from '@/components/ui/Avatar.jsx'
 import ProTag from './ProTag.jsx'
 import styles from './Header.module.css'
 

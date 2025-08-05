@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
-import { useUserStore } from '../store/userStore.ts'
-import { useHistoryStore } from '../store/historyStore.ts'
-import { useFavoritesStore } from '../store/favoritesStore.ts'
+import { useUserStore } from '@/store/userStore.ts'
+import { useHistoryStore } from '@/store/historyStore.ts'
+import { useFavoritesStore } from '@/store/favoritesStore.ts'
 
 const UserContext = createContext(null)
 const HistoryContext = createContext(null)

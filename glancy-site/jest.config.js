@@ -1,6 +1,7 @@
 export default {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
     '^(\\.{1,2}/.*)\\.js$': '$1',
     '^.+\\.css$': 'identity-obj-proxy',
     '^.+\\.(svg)$': '<rootDir>/test/__mocks__/fileMock.js'

@@ -1,5 +1,5 @@
-import { createChatApi } from '../chat.js'
-import { API_PATHS } from '../../config/api.js'
+import { createChatApi } from '@/api/chat.js'
+import { API_PATHS } from '@/config/api.js'
 import { jest } from '@jest/globals'
 
 test('sendChatMessage posts to chat endpoint', async () => {

@@ -1,5 +1,5 @@
-import { createWordsApi } from '../words.js'
-import { API_PATHS } from '../../config/api.js'
+import { createWordsApi } from '@/api/words.js'
+import { API_PATHS } from '@/config/api.js'
 import { jest } from '@jest/globals'
 
 test('fetchWord builds query string', async () => {

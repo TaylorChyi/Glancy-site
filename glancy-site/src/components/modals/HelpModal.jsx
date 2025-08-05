@@ -1,4 +1,4 @@
-import Faq from '../../pages/faq'
+import Faq from '@/pages/faq'
 import BaseModal from './BaseModal.jsx'
 import styles from './HelpModal.module.css'
 

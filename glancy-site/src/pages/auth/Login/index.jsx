@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { AuthForm } from '../../../components'
-import { API_PATHS } from '../../../config/api.js'
-import { useUser } from '../../../context/AppContext.jsx'
-import { useApi } from '../../../hooks/useApi.js'
+import { AuthForm } from '@/components'
+import { API_PATHS } from '@/config/api.js'
+import { useUser } from '@/context/AppContext.jsx'
+import { useApi } from '@/hooks/useApi.js'
 
 function Login() {
   const { setUser } = useUser()

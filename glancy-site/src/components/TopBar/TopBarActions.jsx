@@ -1,7 +1,7 @@
-import ModelSelector from '../Toolbar'
-import { useLanguage } from '../../context/LanguageContext.jsx'
-import { useUser } from '../../context/AppContext.jsx'
-import useOutsideToggle from '../../hooks/useOutsideToggle.js'
+import ModelSelector from '@/components/Toolbar'
+import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useUser } from '@/context/AppContext.jsx'
+import useOutsideToggle from '@/hooks/useOutsideToggle.js'
 import common from './TopBarCommon.module.css'
 import {
   EllipsisVerticalIcon,
@@ -9,7 +9,7 @@ import {
   StarSolidIcon,
   LinkIcon,
   FlagIcon
-} from '../ui/Icon'
+} from '@/components/ui/Icon'
 
 function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = false }) {
   const { open, setOpen, ref: menuRef } = useOutsideToggle(false)

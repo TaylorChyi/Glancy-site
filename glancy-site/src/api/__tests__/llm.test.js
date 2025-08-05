@@ -1,5 +1,5 @@
-import { createLlmApi } from '../llm.js'
-import { API_PATHS } from '../../config/api.js'
+import { createLlmApi } from '@/api/llm.js'
+import { API_PATHS } from '@/config/api.js'
 import { jest } from '@jest/globals'
 
 test('fetchModels hits llm models endpoint', async () => {

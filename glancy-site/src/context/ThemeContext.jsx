@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import lightIcon from '../assets/glancy-web-light.svg'
-import darkIcon from '../assets/glancy-web-dark.svg'
+import lightIcon from '@/assets/glancy-web-light.svg'
+import darkIcon from '@/assets/glancy-web-dark.svg'
 
 const ThemeContext = createContext({
   theme: 'system',

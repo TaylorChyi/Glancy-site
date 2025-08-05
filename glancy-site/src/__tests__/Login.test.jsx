@@ -2,19 +2,19 @@
 import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { jest } from '@jest/globals'
-import { API_PATHS } from '../config/api.js'
+import { API_PATHS } from '@/config/api.js'
 
 const mockSetUser = jest.fn()
 const mockRequest = jest.fn().mockResolvedValue({ id: '1', token: 't' })
 const mockNavigate = jest.fn()
 
-jest.unstable_mockModule('../context/AppContext.jsx', () => ({
+jest.unstable_mockModule('@/context/AppContext.jsx', () => ({
   useUser: () => ({ setUser: mockSetUser })
 }))
-jest.unstable_mockModule('../hooks/useApi.js', () => ({
+jest.unstable_mockModule('@/hooks/useApi.js', () => ({
   useApi: () => ({ request: mockRequest })
 }))
-jest.unstable_mockModule('../context/ThemeContext.jsx', () => ({
+jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 jest.unstable_mockModule('react-router-dom', async () => {
@@ -24,7 +24,7 @@ jest.unstable_mockModule('react-router-dom', async () => {
 
 const router = await import('react-router-dom')
 const { MemoryRouter } = router
-const { default: Login } = await import('../pages/auth/Login')
+const { default: Login } = await import('@/pages/auth/Login')
 
 test('logs in and navigates home', async () => {
   render(
