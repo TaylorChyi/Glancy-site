@@ -1,4 +1,4 @@
-import { EllipsisVerticalIcon, StarSolidIcon, TrashIcon } from '@/components/ui/Icon'
+import ThemeIcon from '@/components/ui/Icon'
 import useOutsideToggle from '@/hooks/useOutsideToggle.js'
 import styles from './ItemMenu.module.css'
 
@@ -15,7 +15,7 @@ function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
           setOpen(!open)
         }}
       >
-        <EllipsisVerticalIcon width={16} height={16} />
+        <ThemeIcon name="ellipsis-vertical" width={16} height={16} />
       </button>
       {open && (
         <div className={styles.menu}>
@@ -27,7 +27,13 @@ function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
               setOpen(false)
             }}
           >
-            <StarSolidIcon width={16} height={16} className={styles.icon} /> {favoriteLabel}
+            <ThemeIcon
+              name="star-solid"
+              width={16}
+              height={16}
+              className={styles.icon}
+            />{' '}
+            {favoriteLabel}
           </button>
           <button
             type="button"
@@ -38,7 +44,13 @@ function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
               setOpen(false)
             }}
           >
-            <TrashIcon width={16} height={16} className={styles.icon} /> {deleteLabel}
+            <ThemeIcon
+              name="trash"
+              width={16}
+              height={16}
+              className={styles.icon}
+            />{' '}
+            {deleteLabel}
           </button>
         </div>
       )}

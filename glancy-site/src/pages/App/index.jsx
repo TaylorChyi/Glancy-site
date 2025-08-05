@@ -15,6 +15,7 @@ import Layout from '@/components/Layout'
 import HistoryDisplay from '@/components/ui/HistoryDisplay.jsx'
 import ListItem from '@/components/ui/ListItem/ListItem.jsx'
 import { useModelStore } from '@/store/modelStore.ts'
+import ICP from '@/components/ui/ICP.jsx'
 
 function App() {
   const [text, setText] = useState('')
@@ -259,11 +260,7 @@ function App() {
           )}
         </div>
       </Layout>
-      <div className="icp">
-        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
-          京ICP备2025135702号-1
-        </a>
-      </div>
+      <ICP />
       <MessagePopup
         open={popupOpen}
         message={popupMsg}
