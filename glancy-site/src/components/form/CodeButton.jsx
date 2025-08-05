@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import styles from './AuthForm.module.css'
 
 // button with 60s countdown after click
 
@@ -21,7 +22,7 @@ function CodeButton({ onClick }) {
   return (
     <button
       type="button"
-      className="code-btn"
+      className={styles['code-btn']}
       disabled={count > 0}
       onClick={handleClick}
     >
