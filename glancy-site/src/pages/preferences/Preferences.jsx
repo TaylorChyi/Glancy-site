@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
-import './App.css'
+import '../../App.css'
 import styles from './Preferences.module.css'
-import { useLanguage } from './LanguageContext.jsx'
-import { useTheme } from './ThemeContext.jsx'
-import { useUser } from './context/AppContext.jsx'
-import { API_PATHS } from './config/api.js'
-import MessagePopup from './components/MessagePopup.jsx'
-import { useApi } from './hooks/useApi.js'
-import { useModelStore } from './store/modelStore.ts'
+import { useLanguage } from '../../LanguageContext.jsx'
+import { useTheme } from '../../ThemeContext.jsx'
+import { useUser } from '../../context/AppContext.jsx'
+import { API_PATHS } from '../../config/api.js'
+import MessagePopup from '../../components/ui/MessagePopup.jsx'
+import { useApi } from '../../hooks/useApi.js'
+import { useModelStore } from '../../store/modelStore.ts'
 
 function Preferences() {
   const { t } = useLanguage()

@@ -1,4 +1,4 @@
-import { useLanguage } from '../LanguageContext.jsx'
+import { useLanguage } from '../../LanguageContext.jsx'
 import styles from './DictionaryEntry.module.css'
 
 function DictionaryEntry({ entry }) {

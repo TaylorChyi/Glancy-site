@@ -1,24 +1,24 @@
 import { useState, useEffect, useRef } from 'react'
-import MessagePopup from './components/MessagePopup.jsx'
+import MessagePopup from './components/ui/MessagePopup.jsx'
 import { useHistory, useUser, useFavorites } from './context/AppContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from './ThemeContext.jsx'
 import translations from './translations.js'
-import DictionaryEntry from './components/DictionaryEntry.jsx'
+import DictionaryEntry from './components/ui/DictionaryEntry.jsx'
 import {
   SendButtonLightIcon,
   SendButtonDarkIcon,
   VoiceButtonLightIcon,
   VoiceButtonDarkIcon
-} from './components/Icon'
+} from './components/ui/Icon'
 import { useApi } from './hooks/useApi.js'
 import { useLanguage } from './LanguageContext.jsx'
 import { detectWordLanguage, clientNameFromModel } from './utils.js'
 import './App.css'
 import styles from './App.module.css'
 import Layout from './components/Layout.jsx'
-import HistoryDisplay from './components/HistoryDisplay.jsx'
-import ListItem from './components/ListItem/ListItem.jsx'
+import HistoryDisplay from './components/ui/HistoryDisplay.jsx'
+import ListItem from './components/ui/ListItem/ListItem.jsx'
 import { useModelStore } from './store/modelStore.ts'
 
 function App() {

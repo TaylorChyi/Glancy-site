@@ -9,7 +9,7 @@ import {
   StarSolidIcon,
   LinkIcon,
   FlagIcon
-} from './Icon'
+} from './ui/Icon'
 
 function TopBarActions({ favorited = false, onToggleFavorite, canFavorite = false }) {
   const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
