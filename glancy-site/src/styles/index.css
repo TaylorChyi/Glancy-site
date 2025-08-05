@@ -14,6 +14,7 @@
 
   --vh: 100vh;
   --highlight-color: var(--hl-dark);
+  --shadow-color: rgb(0 0 0 / 15%);
 }
 
 @supports (height: 100dvh) {
@@ -47,6 +48,7 @@
   --border-color: var(--sys-border-dark);
   --text-muted: var(--sys-muted);
   --brand-color: var(--brand-color);
+  --shadow-color: rgb(0 0 0 / 40%);
   --primary-bg: #f2f2f2;
   --primary-color: #121212;
 }
@@ -70,6 +72,7 @@
   --border-color: var(--sys-border-light);
   --text-muted: var(--sys-muted);
   --brand-color: var(--brand-color);
+  --shadow-color: rgb(0 0 0 / 15%);
   --primary-bg: #121212;
   --primary-color: #f2f2f2;
 }
@@ -79,6 +82,7 @@
 
   --primary-bg: Canvas;
   --primary-color: CanvasText;
+  --shadow-color: rgb(0 0 0 / 15%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -100,6 +104,7 @@
     --border-color: var(--sys-border-dark);
     --text-muted: var(--sys-muted);
     --brand-color: var(--brand-color);
+    --shadow-color: rgb(0 0 0 / 40%);
   }
 }
 
@@ -122,6 +127,7 @@
     --border-color: var(--sys-border-light);
     --text-muted: var(--sys-muted);
     --brand-color: var(--brand-color);
+    --shadow-color: rgb(0 0 0 / 15%);
   }
 }
 

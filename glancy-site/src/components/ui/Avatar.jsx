@@ -2,6 +2,7 @@ import { useUser } from '@/context/AppContext.jsx'
 import { useMemo } from 'react'
 import { cacheBust } from '@/utils/index.js'
 import ThemeIcon from '@/components/ui/Icon'
+import styles from './Avatar.module.css'
 
 // 基于当前主题切换默认头像
 function Avatar({ src, alt = 'User Avatar', ...props }) {
@@ -11,15 +12,24 @@ function Avatar({ src, alt = 'User Avatar', ...props }) {
     () => (finalSrc ? cacheBust(finalSrc) : null),
     [finalSrc]
   )
-  const style = {
-    borderRadius: '50%',
-    objectFit: 'cover',
-    boxShadow: '0 0 4px rgb(0 0 0 / 15%)'
-  }
   if (finalSrc) {
-    return <img src={displaySrc} alt={alt} style={style} {...props} />
+    return (
+      <img
+        src={displaySrc}
+        alt={alt}
+        className={styles.avatar}
+        {...props}
+      />
+    )
   }
-  return <ThemeIcon name="default-user-avatar" alt={alt} style={style} {...props} />
+  return (
+    <ThemeIcon
+      name="default-user-avatar"
+      alt={alt}
+      className={styles.avatar}
+      {...props}
+    />
+  )
 }
 
 export default Avatar
