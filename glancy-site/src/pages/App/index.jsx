@@ -3,7 +3,6 @@ import MessagePopup from '@/components/ui/MessagePopup.jsx'
 import { useHistory, useUser, useFavorites } from '@/context/AppContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@/context/ThemeContext.jsx'
-import translations from '@/i18n/index.js'
 import DictionaryEntry from '@/components/ui/DictionaryEntry.jsx'
 import ThemeIcon from '@/components/ui/Icon'
 import { useLanguage } from '@/context/LanguageContext.jsx'
@@ -12,9 +11,10 @@ import './App.css'
 import styles from './App.module.css'
 import Layout from '@/components/Layout'
 import HistoryDisplay from '@/components/ui/HistoryDisplay.jsx'
-import ListItem from '@/components/ui/ListItem/ListItem.jsx'
 import { useModelStore } from '@/store/modelStore.ts'
 import ICP from '@/components/ui/ICP.jsx'
+import FavoritesView from './FavoritesView.jsx'
+import { useAppShortcuts } from '@/hooks/useAppShortcuts.js'
 
 function App() {
   const [text, setText] = useState('')
@@ -35,6 +35,18 @@ function App() {
   const navigate = useNavigate()
   const { fetchWordWithHandling } = useFetchWord()
   const { model } = useModelStore()
+
+  const { toggleFavoriteEntry } = useAppShortcuts({
+    inputRef,
+    lang,
+    setLang,
+    theme,
+    setTheme,
+    entry,
+    showFavorites,
+    showHistory,
+    toggleFavorite
+  })
 
   const handleToggleFavorites = () => {
     // always show favorites when invoked
@@ -114,50 +126,6 @@ function App() {
   }
 
   useEffect(() => {
-    function handleShortcut(e) {
-      const platform =
-        navigator.userAgentData?.platform || navigator.platform || ''
-      const mod = /Mac|iPhone|iPod|iPad/i.test(platform) ? e.metaKey : e.ctrlKey
-      if (!mod || !e.shiftKey) return
-      switch (e.key.toLowerCase()) {
-        case 'f':
-          e.preventDefault()
-          inputRef.current?.focus()
-          break
-        case 'l':
-          e.preventDefault()
-          {
-            const langs = Object.keys(translations)
-            const next = langs[(langs.indexOf(lang) + 1) % langs.length]
-            setLang(next)
-          }
-          break
-        case 'm':
-          e.preventDefault()
-          {
-            const seq = { dark: 'light', light: 'system', system: 'dark' }
-            setTheme(seq[theme] || 'light')
-          }
-          break
-        case 'b':
-          e.preventDefault()
-          if (entry && !showFavorites && !showHistory) {
-            toggleFavorite(entry.term)
-          }
-          break
-        case 'k':
-          e.preventDefault()
-          document.dispatchEvent(new Event('open-shortcuts'))
-          break
-        default:
-          break
-      }
-    }
-    document.addEventListener('keydown', handleShortcut)
-    return () => document.removeEventListener('keydown', handleShortcut)
-  }, [lang, setLang, theme, setTheme, entry, showFavorites, showHistory, toggleFavorite])
-
-  useEffect(() => {
     loadHistory(user)
   }, [user, loadHistory])
 
@@ -183,7 +151,7 @@ function App() {
           showBack: !showFavorites && fromFavorites,
           onBack: handleBackFromFavorite,
           favorited: favorites.includes(entry?.term),
-          onToggleFavorite: () => entry && toggleFavorite(entry.term),
+          onToggleFavorite: toggleFavoriteEntry,
           canFavorite: !!entry && !showFavorites && !showHistory
         }}
         bottomContent={(
@@ -208,35 +176,12 @@ function App() {
       >
         <div className="display">
           {showFavorites ? (
-            favorites.length ? (
-              <ul className="favorites-grid-display">
-                {favorites.map((w, i) => (
-                  <ListItem
-                    key={i}
-                    className="favorite-item"
-                    text={w}
-                    textClassName="favorite-term"
-                    onClick={() => handleSelectFavorite(w)}
-                    actions={(
-                      <button
-                        type="button"
-                        className="unfavorite-btn"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleUnfavorite(w)
-                        }}
-                      >
-                        ○
-                      </button>
-                    )}
-                  />
-                ))}
-              </ul>
-            ) : (
-              <div className="display-content">
-                <div className="display-term">{t.noFavorites}</div>
-              </div>
-            )
+            <FavoritesView
+              favorites={favorites}
+              onSelect={handleSelectFavorite}
+              onUnfavorite={handleUnfavorite}
+              emptyMessage={t.noFavorites}
+            />
           ) : showHistory ? (
             <HistoryDisplay />
           ) : loading ? (
