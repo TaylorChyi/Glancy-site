@@ -39,7 +39,7 @@ jest.unstable_mockModule('../store/modelStore.ts', () => ({
   useModelStore: () => ({ model: 'M1', setModel: mockSetModel })
 }))
 
-const { default: Preferences } = await import('../Preferences.jsx')
+const { default: Preferences } = await import('../pages/Preferences/index.jsx')
 
 beforeEach(() => {
   localStorage.clear()
