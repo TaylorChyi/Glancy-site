@@ -5,12 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@/context/ThemeContext.jsx'
 import translations from '@/i18n/index.js'
 import DictionaryEntry from '@/components/ui/DictionaryEntry.jsx'
-import {
-  SendButtonLightIcon,
-  SendButtonDarkIcon,
-  VoiceButtonLightIcon,
-  VoiceButtonDarkIcon
-} from '@/components/ui/Icon'
+import ThemeIcon from '@/components/ui/Icon'
 import { useApi } from '@/hooks/useApi.js'
 import { useLanguage } from '@/context/LanguageContext.jsx'
 import { detectWordLanguage, clientNameFromModel } from '@/utils/index.js'
@@ -31,12 +26,8 @@ function App() {
   const [popupMsg, setPopupMsg] = useState('')
   const { user } = useUser()
   const { loadHistory, addHistory, unfavoriteHistory } = useHistory()
-  const { theme, resolvedTheme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   const inputRef = useRef(null)
-  const SendIcon =
-    resolvedTheme === 'dark' ? SendButtonDarkIcon : SendButtonLightIcon
-  const VoiceIcon =
-    resolvedTheme === 'dark' ? VoiceButtonDarkIcon : VoiceButtonLightIcon
   const [showFavorites, setShowFavorites] = useState(false)
   const [showHistory, setShowHistory] = useState(false)
   const [fromFavorites, setFromFavorites] = useState(false)
@@ -216,9 +207,9 @@ function App() {
             />
             <button type="submit">
               {text.trim() === '' ? (
-                <VoiceIcon alt="voice" />
+                <ThemeIcon name="voice-button" alt="voice" />
               ) : (
-                <SendIcon alt="send" />
+                <ThemeIcon name="send-button" alt="send" />
               )}
             </button>
           </form>

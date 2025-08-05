@@ -5,25 +5,15 @@ import PhoneInput from './PhoneInput.jsx'
 import Button from '@/components/ui/Button/Button.jsx'
 import styles from '@/pages/auth/AuthPage.module.css'
 import MessagePopup from '@/components/ui/MessagePopup.jsx'
-import {
-  GoogleIcon,
-  AppleIcon,
-  PhoneIcon,
-  WechatIcon,
-  UserIcon,
-  EmailIcon,
-  GlancyWebLightIcon,
-  GlancyWebDarkIcon
-} from '@/components/ui/Icon'
-import { useTheme } from '@/context/ThemeContext.jsx'
+import ThemeIcon from '@/components/ui/Icon'
 
 const defaultIcons = {
-  username: UserIcon,
-  email: EmailIcon,
-  phone: PhoneIcon,
-  wechat: WechatIcon,
-  apple: AppleIcon,
-  google: GoogleIcon
+  username: 'user',
+  email: 'email',
+  phone: 'phone',
+  wechat: 'wechat',
+  apple: 'apple',
+  google: 'google'
 }
 
 function AuthForm({
@@ -44,10 +34,6 @@ function AuthForm({
   const [method, setMethod] = useState(formMethods[0])
   const [showNotice, setShowNotice] = useState(false)
   const [noticeMsg, setNoticeMsg] = useState('')
-  const { resolvedTheme } = useTheme()
-  const BrandIcon =
-    resolvedTheme === 'dark' ? GlancyWebDarkIcon : GlancyWebLightIcon
-
   const handleSendCode = () => {}
 
   const handleSubmit = async (e) => {
@@ -106,7 +92,7 @@ function AuthForm({
       <Link to="/" className={styles['auth-close']}>
         ×
       </Link>
-      <BrandIcon className={styles['auth-logo']} />
+      <ThemeIcon name="glancy-web" className={styles['auth-logo']} />
       <div className={styles['auth-brand']}>Glancy</div>
       <h1 className={styles['auth-title']}>{title}</h1>
       {renderForm()}
@@ -120,7 +106,7 @@ function AuthForm({
         {methodOrder
           .filter((m) => m !== method)
           .map((m) => {
-            const Icon = icons[m]
+            const iconName = icons[m]
             return (
               <Button
                 key={m}
@@ -134,7 +120,7 @@ function AuthForm({
                   }
                 }}
               >
-                <Icon alt={m} />
+                <ThemeIcon name={iconName} alt={m} />
               </Button>
             )
           })}
