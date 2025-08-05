@@ -18,7 +18,13 @@ export function createApiClient({ token, headers: defaultHeaders = {}, onUnautho
     const authToken = reqToken ?? token
     if (authToken) mergedHeaders['X-USER-TOKEN'] = authToken
 
-    const resp = await fetch(url, { ...options, headers: mergedHeaders })
+    let resp
+    try {
+      resp = await fetch(url, { ...options, headers: mergedHeaders })
+    } catch (err) {
+      console.error(err)
+      throw new Error('Network error')
+    }
     if (!resp.ok) {
       if (resp.status === 401) onUnauthorized?.()
       const text = await resp.text().catch((err) => {

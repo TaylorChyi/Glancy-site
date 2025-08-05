@@ -29,4 +29,13 @@ describe('apiRequest error handling', () => {
     const apiRequest = createApiClient()
     await expect(apiRequest('/api')).rejects.toThrow('Server error')
   })
+
+  test('throws unified message on network failure', async () => {
+    const error = new Error('network down')
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    global.fetch = jest.fn().mockRejectedValue(error)
+    const apiRequest = createApiClient()
+    await expect(apiRequest('/api')).rejects.toThrow('Network error')
+    expect(spy).toHaveBeenCalledWith(error)
+  })
 })
