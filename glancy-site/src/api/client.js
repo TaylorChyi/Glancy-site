@@ -1,4 +1,4 @@
-import { extractMessage } from '../utils.js'
+import { extractMessage } from '../utils/index.js'
 
 /**
  * Create a new API client instance with optional default headers and token.

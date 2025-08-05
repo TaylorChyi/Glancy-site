@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import translations from './translations.js'
+import translations from '../i18n/index.js'
 import { useLocale } from './LocaleContext.jsx'
 
 const LanguageContext = createContext({

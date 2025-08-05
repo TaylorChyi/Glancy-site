@@ -1,5 +1,5 @@
-import zh from './i18n/zh.js'
-import en from './i18n/en.js'
+import zh from './zh.js'
+import en from './en.js'
 
 const translations = { zh, en }
 

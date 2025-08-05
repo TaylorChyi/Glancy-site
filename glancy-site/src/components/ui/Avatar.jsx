@@ -1,7 +1,7 @@
-import { useTheme } from '../../ThemeContext.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
 import { useUser } from '../../context/AppContext.jsx'
 import { useMemo } from 'react'
-import { cacheBust } from '../../utils.js'
+import { cacheBust } from '../../utils/index.js'
 import avatarLight from '../../assets/default-user-avatar-light.svg'
 import avatarDark from '../../assets/default-user-avatar-dark.svg'
 

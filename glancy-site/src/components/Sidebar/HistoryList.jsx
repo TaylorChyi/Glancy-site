@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
-import { useLanguage } from '../../LanguageContext.jsx'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 import ListItem from '../ui/ListItem/ListItem.jsx'
 import styles from './Sidebar.module.css'
 import useOutsideToggle from '../../hooks/useOutsideToggle.js'

@@ -2,15 +2,15 @@ import { StrictMode, Suspense, lazy, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/ui/ErrorBoundary.jsx'
-import './index.css'
+import './styles/index.css'
 import Loader from './components/ui/Loader.jsx'
-import AuthWatcher from './AuthWatcher.jsx'
+import AuthWatcher from './components/AuthWatcher.jsx'
 
-const App = lazy(() => import('./App.jsx'))
+const App = lazy(() => import('./pages/App.jsx'))
 const Login = lazy(() => import('./pages/auth/Login.jsx'))
 const Register = lazy(() => import('./pages/auth/Register.jsx'))
-import { LanguageProvider } from './LanguageContext.jsx'
-import { ThemeProvider } from './ThemeContext.jsx'
+import { LanguageProvider } from './context/LanguageContext.jsx'
+import { ThemeProvider } from './context/ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'
 import { ApiProvider } from './context/ApiContext.jsx'
 

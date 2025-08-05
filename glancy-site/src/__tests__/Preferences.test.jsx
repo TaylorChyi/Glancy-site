@@ -23,10 +23,10 @@ const mockT = {
   M1: 'M1'
 }
 
-jest.unstable_mockModule('../LanguageContext.jsx', () => ({
+jest.unstable_mockModule('../context/LanguageContext.jsx', () => ({
   useLanguage: () => ({ t: mockT })
 }))
-jest.unstable_mockModule('../ThemeContext.jsx', () => ({
+jest.unstable_mockModule('../context/ThemeContext.jsx', () => ({
   useTheme: () => ({ theme: 'light', setTheme: mockSetTheme })
 }))
 jest.unstable_mockModule('../context/AppContext.jsx', () => ({

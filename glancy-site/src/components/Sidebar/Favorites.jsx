@@ -1,4 +1,4 @@
-import { useLanguage } from '../../LanguageContext.jsx'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 import styles from './Sidebar.module.css'
 
 function Favorites({ onToggle }) {

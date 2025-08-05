@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import '../../App.css'
-import { useLanguage } from '../../LanguageContext.jsx'
+import '../App.css'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 import { API_PATHS } from '../../config/api.js'
 import { useApi } from '../../hooks/useApi.js'
 import MessagePopup from '../../components/ui/MessagePopup.jsx'

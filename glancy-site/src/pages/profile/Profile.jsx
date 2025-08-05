@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
-import '../../App.css'
+import '../App.css'
 import styles from './Profile.module.css'
 import Avatar from '../../components/ui/Avatar.jsx'
-import { useLanguage } from '../../LanguageContext.jsx'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 import MessagePopup from '../../components/ui/MessagePopup.jsx'
 import AgeStepper from '../../components/form/AgeStepper/AgeStepper.jsx'
 import GenderSelect from '../../components/form/GenderSelect/GenderSelect.jsx'
 import { useApi } from '../../hooks/useApi.js'
 import { useUser } from '../../context/AppContext.jsx'
-import { cacheBust } from '../../utils.js'
+import { cacheBust } from '../../utils/index.js'
 import { CakeIcon, UserIcon, StarIcon, TargetIcon } from '../../components/ui/Icon'
 
 function Profile({ onCancel }) {

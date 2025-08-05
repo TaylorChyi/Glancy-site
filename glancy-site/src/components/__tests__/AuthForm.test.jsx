@@ -4,7 +4,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { jest } from '@jest/globals'
 
-jest.unstable_mockModule('../../ThemeContext.jsx', () => ({
+jest.unstable_mockModule('../../context/ThemeContext.jsx', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 
