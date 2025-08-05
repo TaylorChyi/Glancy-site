@@ -93,53 +93,6 @@
   background-color: rgb(255 255 255 / 10%);
 }
 
-.history-action-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.history-action {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-  padding: 0 4px;
-}
-
-.history-menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 4px);
-  background: var(--sidebar-bg);
-  color: var(--sidebar-color);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  z-index: 100;
-}
-
-.history-menu button {
-  display: block;
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 4px 8px;
-  text-align: left;
-  color: inherit;
-  cursor: pointer;
-}
-
-.history-menu .icon {
-  margin-right: 4px;
-}
-
-.history-menu button:hover {
-  background: rgb(255 255 255 / 10%);
-}
-
-.history-menu .delete-btn {
-  color: #e34343;
-}
-
 .sidebar-user .user-menu button.with-name:hover {
 background-color: rgb(255 255 255 / 10%);
 border-radius: 4px;
