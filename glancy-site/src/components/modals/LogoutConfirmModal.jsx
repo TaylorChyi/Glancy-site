@@ -1,6 +1,6 @@
 import BaseModal from './BaseModal.jsx'
 import styles from './LogoutConfirmModal.module.css'
-import { useLanguage } from '../context/LanguageContext.jsx'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 
 function LogoutConfirmModal({ open, onConfirm, onCancel, email }) {
   const { t } = useLanguage()

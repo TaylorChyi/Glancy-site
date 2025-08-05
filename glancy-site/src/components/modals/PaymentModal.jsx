@@ -1,6 +1,6 @@
 import BaseModal from './BaseModal.jsx'
 import styles from './PaymentModal.module.css'
-import { useLanguage } from '../context/LanguageContext.jsx'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 
 function PaymentModal({ open, onClose }) {
   const { t } = useLanguage()

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import '../App.css'
+import '../App/App.css'
 import styles from './Profile.module.css'
 import Avatar from '../../components/ui/Avatar.jsx'
 import { useLanguage } from '../../context/LanguageContext.jsx'

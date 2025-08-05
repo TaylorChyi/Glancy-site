@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import '../App.css'
+import '../App/App.css'
 import { useLanguage } from '../../context/LanguageContext.jsx'
 import { API_PATHS } from '../../config/api.js'
 import { useApi } from '../../hooks/useApi.js'

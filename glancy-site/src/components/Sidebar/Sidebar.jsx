@@ -1,4 +1,4 @@
-import Brand from '../Brand.jsx'
+import Brand from '../Brand'
 import SidebarFunctions from './SidebarFunctions.jsx'
 import SidebarUser from './SidebarUser.jsx'
 import { useIsMobile } from '../../utils/index.js'

@@ -24,7 +24,7 @@ jest.unstable_mockModule('react-router-dom', async () => {
 
 const router = await import('react-router-dom')
 const { MemoryRouter } = router
-const { default: Login } = await import('../pages/auth/Login.jsx')
+const { default: Login } = await import('../pages/auth/Login')
 
 test('logs in and navigates home', async () => {
   render(

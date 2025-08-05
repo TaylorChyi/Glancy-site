@@ -1,7 +1,7 @@
-import { useLanguage } from '../context/LanguageContext.jsx'
-import { useTheme } from '../context/ThemeContext.jsx'
-import { GlancyWebLightIcon, GlancyWebDarkIcon } from './ui/Icon'
-import { UserMenu } from './Header'
+import { useLanguage } from '../../context/LanguageContext.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
+import { GlancyWebLightIcon, GlancyWebDarkIcon } from '../ui/Icon'
+import { UserMenu } from '../Header'
 
 function Brand() {
   const { lang } = useLanguage()

@@ -1,4 +1,4 @@
-import Profile from '../pages/profile/Profile.jsx'
+import Profile from '../../pages/profile'
 import BaseModal from './BaseModal.jsx'
 import styles from './ProfileModal.module.css'
 
