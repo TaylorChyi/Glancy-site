@@ -7,12 +7,24 @@ import type { User } from './userStore.ts'
 interface HistoryState {
   history: string[]
   recordMap: Record<string, string>
+  error: string | null
   loadHistory: (user?: User | null) => Promise<void>
   addHistory: (term: string, user?: User | null, language?: string) => Promise<void>
   clearHistory: (user?: User | null) => Promise<void>
   removeHistory: (term: string, user?: User | null) => Promise<void>
   favoriteHistory: (term: string, user?: User | null) => Promise<void>
   unfavoriteHistory: (term: string, user?: User | null) => Promise<void>
+}
+
+type SetState = (
+  partial: Partial<HistoryState> | ((state: HistoryState) => Partial<HistoryState>),
+  replace?: boolean
+) => void
+
+function handleApiError(err: unknown, set: SetState) {
+  console.error(err)
+  const message = err instanceof Error ? err.message : String(err)
+  set({ error: message })
 }
 
 const STORAGE_KEY = 'searchHistory'
@@ -40,13 +52,14 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
         recordMap: { ...state.recordMap, ...map }
       }))
     } catch (err) {
-      console.error(err)
+      handleApiError(err, set)
     }
   }
 
   return {
     history: initial,
     recordMap: initialMap,
+    error: null,
     loadHistory: async (user?: User | null) => {
       if (user) {
         refreshHistory(user)
@@ -70,7 +83,7 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
           // refresh history from server to ensure sync
           refreshHistory(user)
         } catch (err) {
-          console.error(err)
+          handleApiError(err, set)
         }
       }
       const unique = Array.from(new Set([term, ...get().history])).slice(0, 20)
@@ -79,9 +92,9 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
     },
     clearHistory: async (user?: User | null) => {
       if (user) {
-        api.searchRecords.clearSearchRecords({ userId: user.id, token: user.token }).catch((err) => {
-          console.error(err)
-        })
+        api.searchRecords
+          .clearSearchRecords({ userId: user.id, token: user.token })
+          .catch((err) => handleApiError(err, set))
       }
       localStorage.removeItem(STORAGE_KEY)
       set({ history: [], recordMap: {} })
@@ -90,9 +103,9 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
       if (user) {
         const id = get().recordMap[term]
         if (id) {
-          api.searchRecords.deleteSearchRecord({ userId: user.id, recordId: id, token: user.token }).catch((err) => {
-            console.error(err)
-          })
+          api.searchRecords
+            .deleteSearchRecord({ userId: user.id, recordId: id, token: user.token })
+            .catch((err) => handleApiError(err, set))
         }
       }
       const updated = get().history.filter((t) => t !== term)
@@ -104,20 +117,20 @@ export const useHistoryStore = create<HistoryState>((set, get) => {
       })
     },
     favoriteHistory: async (term: string, user?: User | null) => {
-        const id = get().recordMap[term]
-        if (user && id) {
-          api.searchRecords.favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
-            console.error(err)
-          })
-        }
-      },
-    unfavoriteHistory: async (term: string, user?: User | null) => {
-        const id = get().recordMap[term]
-        if (user && id) {
-          api.searchRecords.unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id }).catch((err) => {
-            console.error(err)
-          })
-        }
+      const id = get().recordMap[term]
+      if (user && id) {
+        api.searchRecords
+          .favoriteSearchRecord({ userId: user.id, token: user.token, recordId: id })
+          .catch((err) => handleApiError(err, set))
       }
+    },
+    unfavoriteHistory: async (term: string, user?: User | null) => {
+      const id = get().recordMap[term]
+      if (user && id) {
+        api.searchRecords
+          .unfavoriteSearchRecord({ userId: user.id, token: user.token, recordId: id })
+          .catch((err) => handleApiError(err, set))
+      }
+    }
     }
   })
