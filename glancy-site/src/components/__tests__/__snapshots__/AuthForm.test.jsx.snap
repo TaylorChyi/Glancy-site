@@ -11,11 +11,6 @@ exports[`AuthForm submits valid credentials 1`] = `
     >
       ×
     </a>
-    <img
-      alt="glancy-web-light"
-      class="auth-logo"
-      src="file-mock"
-    />
     <div
       class="auth-brand"
     >
