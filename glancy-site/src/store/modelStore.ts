@@ -1,20 +1,19 @@
-import { create } from 'zustand'
+import { createPersistentStore } from './createPersistentStore.ts'
 
 interface ModelState {
   model: string
   setModel: (value: string) => void
 }
 
-const STORAGE_KEY = 'dictionaryModel'
-
-export const useModelStore = create<ModelState>((set) => {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  const initial = stored || 'DEEPSEEK'
-  return {
-    model: initial,
+export const useModelStore = createPersistentStore<ModelState>({
+  key: 'dictionaryModel',
+  initializer: (set) => ({
+    model: 'DEEPSEEK',
     setModel: (value: string) => {
-      localStorage.setItem(STORAGE_KEY, value)
       set({ model: value })
     }
+  }),
+  persistOptions: {
+    partialize: (state) => ({ model: state.model })
   }
 })
