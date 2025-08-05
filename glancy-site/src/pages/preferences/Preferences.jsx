@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import '../../App.css'
+import '../App.css'
 import styles from './Preferences.module.css'
-import { useLanguage } from '../../LanguageContext.jsx'
-import { useTheme } from '../../ThemeContext.jsx'
+import { useLanguage } from '../../context/LanguageContext.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
 import { useUser } from '../../context/AppContext.jsx'
 import { API_PATHS } from '../../config/api.js'
 import MessagePopup from '../../components/ui/MessagePopup.jsx'
@@ -80,8 +80,9 @@ function Preferences() {
       <h2>{t.prefTitle}</h2>
       <form className={styles['preferences-form']} onSubmit={handleSave}>
         <div>
-          <label>{t.prefLanguage}</label>
+          <label htmlFor="source-lang">{t.prefLanguage}</label>
           <select
+            id="source-lang"
             value={sourceLang}
             onChange={(e) => setSourceLang(e.target.value)}
           >
@@ -91,8 +92,9 @@ function Preferences() {
           </select>
         </div>
         <div>
-          <label>{t.prefSearchLanguage}</label>
+          <label htmlFor="target-lang">{t.prefSearchLanguage}</label>
           <select
+            id="target-lang"
             value={targetLang}
             onChange={(e) => setTargetLang(e.target.value)}
           >
@@ -101,8 +103,9 @@ function Preferences() {
           </select>
         </div>
         <div>
-          <label>{t.prefDictionaryModel}</label>
+          <label htmlFor="dictionary-model">{t.prefDictionaryModel}</label>
           <select
+            id="dictionary-model"
             value={defaultModel}
             onChange={(e) => setDefaultModel(e.target.value)}
           >
@@ -114,8 +117,12 @@ function Preferences() {
           </select>
         </div>
         <div>
-          <label>{t.prefTheme}</label>
-          <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+          <label htmlFor="theme-select">{t.prefTheme}</label>
+          <select
+            id="theme-select"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+          >
             <option value="light">light</option>
             <option value="dark">dark</option>
             <option value="system">system</option>

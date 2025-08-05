@@ -1,7 +1,7 @@
-@import url('./theme/colors.css');
-@import url("./theme/variables.css");
-@import url('./theme/spacing.css');
-@import url('./theme/typography.css');
+@import url('../theme/colors.css');
+@import url("../theme/variables.css");
+@import url('../theme/spacing.css');
+@import url('../theme/typography.css');
 
 :root {
   font-family: var(--font-family-base);

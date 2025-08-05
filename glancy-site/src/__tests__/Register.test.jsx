@@ -17,7 +17,7 @@ jest.unstable_mockModule('../context/AppContext.jsx', () => ({
 jest.unstable_mockModule('../hooks/useApi.js', () => ({
   useApi: () => ({ request: mockRequest })
 }))
-jest.unstable_mockModule('../ThemeContext.jsx', () => ({
+jest.unstable_mockModule('../context/ThemeContext.jsx', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 jest.unstable_mockModule('react-router-dom', async () => {

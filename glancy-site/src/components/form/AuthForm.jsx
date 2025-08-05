@@ -15,7 +15,7 @@ import {
   GlancyWebLightIcon,
   GlancyWebDarkIcon
 } from '../ui/Icon'
-import { useTheme } from '../../ThemeContext.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
 
 const defaultIcons = {
   username: UserIcon,

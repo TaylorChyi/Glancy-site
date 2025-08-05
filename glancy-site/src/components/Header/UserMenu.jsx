@@ -1,5 +1,5 @@
 import { useUser, useHistory } from '../../context/AppContext.jsx'
-import { useLanguage } from '../../LanguageContext.jsx'
+import { useLanguage } from '../../context/LanguageContext.jsx'
 import styles from './Header.module.css'
 import Avatar from '../ui/Avatar.jsx'
 import { Link } from 'react-router-dom'

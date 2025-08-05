@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { useApi } from './hooks/useApi.js'
+import { useApi } from '../hooks/useApi.js'
 
 const LocaleContext = createContext({
   locale: null,

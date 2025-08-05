@@ -1,5 +1,5 @@
-import { useLanguage } from '../LanguageContext.jsx'
-import { useTheme } from '../ThemeContext.jsx'
+import { useLanguage } from '../context/LanguageContext.jsx'
+import { useTheme } from '../context/ThemeContext.jsx'
 import { GlancyWebLightIcon, GlancyWebDarkIcon } from './ui/Icon'
 import { UserMenu } from './Header'
 

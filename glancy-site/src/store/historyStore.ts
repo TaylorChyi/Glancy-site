@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import api from '../api/index.js'
-import { safeJSONParse } from '../utils.js'
+import { safeJSONParse } from '../utils/index.js'
 
 import type { User } from './userStore.ts'
 

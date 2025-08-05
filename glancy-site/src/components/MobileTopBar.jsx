@@ -1,5 +1,5 @@
-import { useTheme } from '../ThemeContext.jsx'
-import { useLanguage } from '../LanguageContext.jsx'
+import { useTheme } from '../context/ThemeContext.jsx'
+import { useLanguage } from '../context/LanguageContext.jsx'
 import lightIcon from '../assets/glancy-web-light.svg'
 import darkIcon from '../assets/glancy-web-dark.svg'
 import TopBarActions from './TopBarActions.jsx'

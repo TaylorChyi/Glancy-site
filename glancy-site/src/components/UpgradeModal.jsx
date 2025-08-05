@@ -3,7 +3,7 @@ import { useUser } from '../context/AppContext.jsx'
 import PaymentModal from './PaymentModal.jsx'
 import Modal from './Modal.jsx'
 import styles from './UpgradeModal.module.css'
-import { useLanguage } from '../LanguageContext.jsx'
+import { useLanguage } from '../context/LanguageContext.jsx'
 
 function UpgradeModal({ open, onClose }) {
   const { user } = useUser()

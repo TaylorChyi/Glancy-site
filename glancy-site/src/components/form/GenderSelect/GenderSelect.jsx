@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from '../../../LanguageContext.jsx'
+import { useLanguage } from '../../../context/LanguageContext.jsx'
 import styles from './GenderSelect.module.css'
 
 const OPTIONS = ['male', 'female', 'none']
