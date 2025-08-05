@@ -37,7 +37,7 @@ function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
           </button>
           <button
             type="button"
-            className={styles.delete-btn}
+            className={styles['delete-btn']}
             onClick={(e) => {
               e.stopPropagation()
               onDelete()
