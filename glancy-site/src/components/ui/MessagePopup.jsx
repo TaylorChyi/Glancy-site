@@ -1,5 +1,6 @@
 import styles from './MessagePopup.module.css'
 import useEscapeKey from '@/hooks/useEscapeKey.js'
+import { withStopPropagation } from '@/utils/stopPropagation.js'
 
 function MessagePopup({ open, message, onClose }) {
   useEscapeKey(onClose, open)
@@ -7,7 +8,7 @@ function MessagePopup({ open, message, onClose }) {
   if (!open) return null
   return (
     <div className={styles['popup-overlay']} onClick={onClose}>
-      <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.popup} onClick={withStopPropagation()}>
         <div>{message}</div>
         <button
           type="button"
