@@ -3,11 +3,13 @@ import { AuthForm } from '@/components'
 import { API_PATHS } from '@/config/api.js'
 import { useApi } from '@/hooks/useApi.js'
 import { useUser } from '@/context/AppContext.jsx'
+import { useLanguage } from '@/context/LanguageContext.jsx'
 
 function Register() {
   const api = useApi()
   const { setUser } = useUser()
   const navigate = useNavigate()
+  const { t } = useLanguage()
 
   const validateAccount = (account, method) => {
     if (method === 'email') {
@@ -38,8 +40,8 @@ function Register() {
   }
 
   const placeholders = {
-    phone: 'Phone number',
-    email: 'Email address'
+    phone: t.phonePlaceholder,
+    email: t.emailPlaceholder
   }
 
   const formMethods = ['phone', 'email']
@@ -47,14 +49,14 @@ function Register() {
 
   return (
     <AuthForm
-      title="Create an account"
-      switchText="Already have an account?"
+      title={t.registerCreate}
+      switchText={t.registerSwitch}
       switchLink="/login"
       onSubmit={handleRegister}
       placeholders={placeholders}
       formMethods={formMethods}
       methodOrder={methodOrder}
-      passwordPlaceholder={() => 'Code'}
+      passwordPlaceholder={() => t.codePlaceholder}
       showCodeButton={() => true}
       validateAccount={validateAccount}
     />

@@ -8,6 +8,21 @@ jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 
+jest.unstable_mockModule('@/context/LanguageContext.jsx', () => ({
+  useLanguage: () => ({
+    t: {
+      continueButton: 'Continue',
+      invalidAccount: 'Invalid account',
+      loginButton: 'Log in',
+      registerButton: 'Sign up',
+      or: 'OR',
+      notImplementedYet: 'Not implemented yet',
+      termsOfUse: 'Terms of Use',
+      privacyPolicy: 'Privacy Policy'
+    }
+  })
+}))
+
 const { default: AuthForm } = await import('@/components/form/AuthForm.jsx')
 
 describe('AuthForm', () => {
