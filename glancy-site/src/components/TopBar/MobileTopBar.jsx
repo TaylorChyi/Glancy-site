@@ -1,4 +1,4 @@
-import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useLanguage } from '@/context'
 import ThemeIcon from '@/components/ui/Icon'
 import TopBarActions from './TopBarActions.jsx'
 import common from './TopBarCommon.module.css'

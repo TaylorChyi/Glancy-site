@@ -2,7 +2,8 @@ import { createContext, useContext, useMemo } from 'react'
 import { useUser } from './AppContext.jsx'
 import { createApi } from '@/api/index.js'
 
-const ApiContext = createContext(createApi())
+// eslint-disable-next-line react-refresh/only-export-components
+export const ApiContext = createContext(createApi())
 
 export function ApiProvider({ children }) {
   const { user, clearUser } = useUser()

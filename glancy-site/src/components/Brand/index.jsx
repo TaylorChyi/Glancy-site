@@ -1,4 +1,4 @@
-import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useLanguage } from '@/context'
 import ThemeIcon from '@/components/ui/Icon'
 import { UserMenu } from '@/components/Header'
 

@@ -2,7 +2,8 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import lightIcon from '@/assets/brand/glancy-web-light.svg'
 import darkIcon from '@/assets/brand/glancy-web-dark.svg'
 
-const ThemeContext = createContext({
+// eslint-disable-next-line react-refresh/only-export-components
+export const ThemeContext = createContext({
   theme: 'system',
   resolvedTheme: 'light',
   setTheme: () => {}

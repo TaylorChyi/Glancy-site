@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import { AuthForm } from '@/components'
 import { API_PATHS } from '@/config/api.js'
 import { useApi } from '@/hooks/useApi.js'
-import { useUser } from '@/context/AppContext.jsx'
-import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useUser } from '@/context'
+import { useLanguage } from '@/context'
 
 function Register() {
   const api = useApi()

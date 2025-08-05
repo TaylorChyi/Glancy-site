@@ -1,4 +1,4 @@
-import { useUser } from '@/context/AppContext.jsx'
+import { useUser } from '@/context'
 import { useMemo } from 'react'
 import { cacheBust } from '@/utils/url.js'
 import ThemeIcon from '@/components/ui/Icon'

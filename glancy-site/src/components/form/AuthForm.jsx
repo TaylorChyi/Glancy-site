@@ -7,7 +7,7 @@ import styles from '@/pages/auth/AuthPage.module.css'
 import MessagePopup from '@/components/ui/MessagePopup.jsx'
 import ThemeIcon from '@/components/ui/Icon'
 import ICP from '@/components/ui/ICP.jsx'
-import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useLanguage } from '@/context'
 
 const defaultIcons = {
   username: 'user',

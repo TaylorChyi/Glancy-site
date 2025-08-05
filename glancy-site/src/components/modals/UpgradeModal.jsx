@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useUser } from '@/context/AppContext.jsx'
+import { useUser } from '@/context'
 import PaymentModal from './PaymentModal.jsx'
 import Modal from './Modal.jsx'
 import styles from './UpgradeModal.module.css'
-import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useLanguage } from '@/context'
 
 function UpgradeModal({ open, onClose }) {
   const { user } = useUser()

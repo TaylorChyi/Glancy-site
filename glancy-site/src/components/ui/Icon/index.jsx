@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTheme } from '@/context/ThemeContext.jsx'
+import { useTheme } from '@/context'
 
 // automatically import all svg assets and group them by theme
 // use relative paths instead of alias to ensure compatibility across build tools

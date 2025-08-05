@@ -9,10 +9,7 @@ import AuthWatcher from './components/AuthWatcher'
 const App = lazy(() => import('./pages/App'))
 const Login = lazy(() => import('./pages/auth/Login'))
 const Register = lazy(() => import('./pages/auth/Register'))
-import { LanguageProvider } from './context/LanguageContext.jsx'
-import { ThemeProvider } from './context/ThemeContext.jsx'
-import { AppProvider } from './context/AppContext.jsx'
-import { ApiProvider } from './context/ApiContext.jsx'
+import { LanguageProvider, ThemeProvider, AppProvider, ApiProvider } from '@/context'
 
 // eslint-disable-next-line react-refresh/only-export-components
 function ViewportHeightUpdater() {
