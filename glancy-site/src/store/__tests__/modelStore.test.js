@@ -7,6 +7,7 @@ describe('modelStore', () => {
   test('setModel updates state and storage', () => {
     act(() => useModelStore.getState().setModel('GPT'))
     expect(useModelStore.getState().model).toBe('GPT')
-    expect(localStorage.getItem('dictionaryModel')).toBe('GPT')
+    const stored = JSON.parse(localStorage.getItem('dictionaryModel'))
+    expect(stored.state.model).toBe('GPT')
   })
 })
