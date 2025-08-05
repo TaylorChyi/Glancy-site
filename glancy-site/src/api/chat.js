@@ -1,13 +1,13 @@
 import { API_PATHS } from '@/config/api.js'
-import { apiRequest } from './client.js'
+import { apiRequest, createJsonRequest } from './client.js'
 import { useApi } from '@/hooks/useApi.js'
 
 export function createChatApi(request = apiRequest) {
+  const jsonRequest = createJsonRequest(request)
   const sendChatMessage = (text) =>
-    request(API_PATHS.chat, {
+    jsonRequest(API_PATHS.chat, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text })
+      body: { text }
     })
 
   return { sendChatMessage }

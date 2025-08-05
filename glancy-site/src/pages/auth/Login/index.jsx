@@ -12,10 +12,9 @@ function Login() {
   const { t } = useLanguage()
 
   const handleLogin = async ({ account, password, method }) => {
-    const data = await api.request(API_PATHS.login, {
+    const data = await api.jsonRequest(API_PATHS.login, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ account, password, method })
+      body: { account, password, method }
     })
     setUser(data)
     navigate('/')

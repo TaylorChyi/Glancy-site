@@ -22,18 +22,16 @@ function Register() {
   }
 
   const handleRegister = async ({ account, password, method }) => {
-    await api.request(API_PATHS.register, {
+    await api.jsonRequest(API_PATHS.register, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      body: {
         [method]: account,
         code: password
-      })
+      }
     })
-    const loginData = await api.request(API_PATHS.login, {
+    const loginData = await api.jsonRequest(API_PATHS.login, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ account, method, password })
+      body: { account, method, password }
     })
     setUser(loginData)
     navigate('/')

@@ -1,19 +1,17 @@
 import { API_PATHS } from '@/config/api.js'
-import { apiRequest } from './client.js'
+import { apiRequest, createJsonRequest } from './client.js'
 import { useApi } from '@/hooks/useApi.js'
 
 export function createSearchRecordsApi(request = apiRequest) {
+  const jsonRequest = createJsonRequest(request)
   const fetchSearchRecords = ({ userId, token }) =>
     request(`${API_PATHS.searchRecords}/user/${userId}`, { token })
 
   const saveSearchRecord = ({ userId, token, term, language }) =>
-    request(`${API_PATHS.searchRecords}/user/${userId}`, {
+    jsonRequest(`${API_PATHS.searchRecords}/user/${userId}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ term, language }),
-      token
+      token,
+      body: { term, language }
     })
 
   const clearSearchRecords = ({ userId, token }) =>
