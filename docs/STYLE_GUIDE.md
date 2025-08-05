@@ -10,7 +10,8 @@ Common variables are defined under `src/theme` and imported across modules.
 - Modals should use `Modal.jsx` as wrapper and apply custom classes.
 
 ### Icons
-SVG files live under `src/assets` and are exported as React components from
+SVG files are organized under `src/assets` in structured subdirectories (such as
+`icons/`, `brand/`, and `logos/`) and are exported as React components from
 `src/components/Icon`.
 Use these components instead of `<img>` when adding icons:
 

@@ -2,8 +2,8 @@ import { useTheme } from '@/context/ThemeContext.jsx'
 import { useUser } from '@/context/AppContext.jsx'
 import { useMemo } from 'react'
 import { cacheBust } from '@/utils/index.js'
-import avatarLight from '@/assets/default-user-avatar-light.svg'
-import avatarDark from '@/assets/default-user-avatar-dark.svg'
+import avatarLight from '@/assets/avatars/default-user-avatar-light.svg'
+import avatarDark from '@/assets/avatars/default-user-avatar-dark.svg'
 
 // 基于当前主题切换默认头像
 function Avatar({ src, alt = 'User Avatar', ...props }) {
