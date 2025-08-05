@@ -8,7 +8,10 @@ const glob =
     : () => ({})
 
 // use relative paths instead of alias to ensure compatibility across build tools
-const modules = glob('../../assets/**/*.svg', {
+// NOTE: this file lives in `src/components/ui/Icon`, so we need to go up three levels
+// to reach `src/assets`. Keeping this explicit helps future refactors remain aware
+// of the relationship between components and shared assets.
+const modules = glob('../../../assets/**/*.svg', {
   eager: true,
   import: 'default'
 })
