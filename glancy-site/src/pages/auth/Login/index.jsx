@@ -3,11 +3,13 @@ import { AuthForm } from '@/components'
 import { API_PATHS } from '@/config/api.js'
 import { useUser } from '@/context/AppContext.jsx'
 import { useApi } from '@/hooks/useApi.js'
+import { useLanguage } from '@/context/LanguageContext.jsx'
 
 function Login() {
   const { setUser } = useUser()
   const api = useApi()
   const navigate = useNavigate()
+  const { t } = useLanguage()
 
   const handleLogin = async ({ account, password, method }) => {
     const data = await api.request(API_PATHS.login, {
@@ -20,9 +22,9 @@ function Login() {
   }
 
   const placeholders = {
-    phone: 'Phone number',
-    email: 'Email address',
-    username: 'Username'
+    phone: t.phonePlaceholder,
+    email: t.emailPlaceholder,
+    username: t.usernamePlaceholder
   }
 
   const formMethods = ['phone', 'email', 'username']
@@ -30,15 +32,17 @@ function Login() {
 
   return (
     <AuthForm
-      title="Welcome back"
-      switchText="Don’t have an account?"
+      title={t.loginWelcome}
+      switchText={t.loginSwitch}
       switchLink="/register"
       onSubmit={handleLogin}
       placeholders={placeholders}
       formMethods={formMethods}
       methodOrder={methodOrder}
       passwordPlaceholder={(m) =>
-        m === 'username' ? 'Password' : 'Password / code'
+        m === 'username'
+          ? t.passwordPlaceholder
+          : t.passwordOrCodePlaceholder
       }
       showCodeButton={(m) => m !== 'username'}
     />

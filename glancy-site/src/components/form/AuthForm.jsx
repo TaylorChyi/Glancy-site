@@ -7,6 +7,7 @@ import styles from '@/pages/auth/AuthPage.module.css'
 import MessagePopup from '@/components/ui/MessagePopup.jsx'
 import ThemeIcon from '@/components/ui/Icon'
 import ICP from '@/components/ui/ICP.jsx'
+import { useLanguage } from '@/context/LanguageContext.jsx'
 
 const defaultIcons = {
   username: 'user',
@@ -35,13 +36,14 @@ function AuthForm({
   const [method, setMethod] = useState(formMethods[0])
   const [showNotice, setShowNotice] = useState(false)
   const [noticeMsg, setNoticeMsg] = useState('')
+  const { t } = useLanguage()
   const handleSendCode = () => {}
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setNoticeMsg('')
     if (!validateAccount(account, method)) {
-      setNoticeMsg('Invalid account')
+      setNoticeMsg(t.invalidAccount || 'Invalid account')
       setShowNotice(true)
       return
     }
@@ -82,7 +84,7 @@ function AuthForm({
           {showCodeButton(method) && <CodeButton onClick={handleSendCode} />}
         </div>
         <Button type="submit" className={styles['auth-primary-btn']}>
-          Continue
+          {t.continueButton}
         </Button>
       </form>
     )
@@ -98,10 +100,10 @@ function AuthForm({
       <h1 className={styles['auth-title']}>{title}</h1>
       {renderForm()}
       <div className={styles['auth-switch']}>
-        {switchText} <Link to={switchLink}>{switchLink.includes('login') ? 'Log in' : 'Sign up'}</Link>
+        {switchText} <Link to={switchLink}>{switchLink.includes('login') ? t.loginButton : t.registerButton}</Link>
       </div>
       <div className={styles.divider}>
-        <span>OR</span>
+        <span>{t.or}</span>
       </div>
       <div className={styles['login-options']}>
         {methodOrder
@@ -116,7 +118,7 @@ function AuthForm({
                   if (formMethods.includes(m)) {
                     setMethod(m)
                   } else {
-                    setNoticeMsg('Not implemented yet')
+                    setNoticeMsg(t.notImplementedYet || 'Not implemented yet')
                     setShowNotice(true)
                   }
                 }}
@@ -128,7 +130,7 @@ function AuthForm({
       </div>
       <div className={styles['auth-footer']}>
         <div className={styles['footer-links']}>
-          <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+          <a href="#">{t.termsOfUse}</a> | <a href="#">{t.privacyPolicy}</a>
         </div>
         <ICP />
       </div>

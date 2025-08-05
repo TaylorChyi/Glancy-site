@@ -175,7 +175,7 @@ function Profile({ onCancel }) {
             {t.saveButton}
           </button>
           <button type="button" className={styles['cancel-btn']} onClick={onCancel}>
-            {t.cancelButton || '取消'}
+            {t.cancelButton}
           </button>
         </div>
       </form>
