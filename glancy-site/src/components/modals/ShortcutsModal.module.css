@@ -1,8 +1,6 @@
+@import url('./ModalContent.module.css');
+
 .shortcuts-modal {
-  background: var(--app-bg);
-  color: var(--app-color);
-  padding: 20px;
-  border-radius: 8px;
   width: 400px;
   max-width: 90%;
 }

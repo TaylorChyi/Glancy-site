@@ -4,7 +4,11 @@ import styles from './HelpModal.module.css'
 
 function HelpModal({ open, onClose }) {
   return (
-    <BaseModal open={open} onClose={onClose} className={styles['help-modal']}>
+    <BaseModal
+      open={open}
+      onClose={onClose}
+      className={`modal-content ${styles['help-modal']}`}
+    >
       <Faq />
     </BaseModal>
   )

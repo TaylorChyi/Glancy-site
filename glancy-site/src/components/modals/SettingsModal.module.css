@@ -1,8 +1,6 @@
+@import url('./ModalContent.module.css');
+
 .auth-modal {
-  background: var(--app-bg);
-  color: var(--app-color);
-  padding: 20px;
-  border-radius: 8px;
   max-width: 400px;
   width: 90%;
   max-height: 90vh;
@@ -11,7 +9,6 @@
   flex-direction: column;
   align-items: center;
 }
-
 
 .auth-modal .app {
   width: 100%;
@@ -46,4 +43,3 @@
 .auth-modal button[type='submit'] {
   width: 100%;
 }
-

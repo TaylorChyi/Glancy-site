@@ -5,7 +5,11 @@ import { useLanguage } from '@/context/LanguageContext.jsx'
 function PaymentModal({ open, onClose }) {
   const { t } = useLanguage()
   return (
-    <BaseModal open={open} onClose={onClose} className={styles['payment-modal']}>
+    <BaseModal
+      open={open}
+      onClose={onClose}
+      className={`modal-content ${styles['payment-modal']}`}
+    >
       <h3>{t.paymentTitle}</h3>
       <div className={styles.methods}>
         <button type="button">{t.alipay}</button>
