@@ -1,13 +1,9 @@
-import { useTheme } from '@/context/ThemeContext.jsx'
-import { ProTagLightIcon, ProTagDarkIcon } from '@/components/ui/Icon'
+import ThemeIcon from '@/components/ui/Icon'
 import styles from './Header.module.css'
 
 function ProTag({ small }) {
-  const { resolvedTheme } = useTheme()
-  const IconComponent =
-    resolvedTheme === 'dark' ? ProTagDarkIcon : ProTagLightIcon
   const className = small ? styles['pro-tag-small'] : styles['pro-tag']
-  return <IconComponent className={className} />
+  return <ThemeIcon name="pro-tag" className={className} />
 }
 
 export default ProTag

@@ -9,7 +9,7 @@ import GenderSelect from '@/components/form/GenderSelect/GenderSelect.jsx'
 import { useApi } from '@/hooks/useApi.js'
 import { useUser } from '@/context/AppContext.jsx'
 import { cacheBust } from '@/utils/index.js'
-import { CakeIcon, UserIcon, StarIcon, TargetIcon } from '@/components/ui/Icon'
+import ThemeIcon from '@/components/ui/Icon'
 
 function Profile({ onCancel }) {
   const { t } = useLanguage()
@@ -167,7 +167,7 @@ function Profile({ onCancel }) {
         </div>
         <div className={styles.basic}>
           <div className={styles.item}>
-            <CakeIcon className={styles.icon} width={20} height={20} />
+            <ThemeIcon name="cake" className={styles.icon} width={20} height={20} />
             <span>{t.ageLabel}</span>
             <AgeStepper value={age} onChange={setAge} />
             <span className={styles.tooltip}>
@@ -175,7 +175,7 @@ function Profile({ onCancel }) {
             </span>
           </div>
           <div className={styles.item}>
-            <UserIcon className={styles.icon} width={20} height={20} />
+            <ThemeIcon name="user" className={styles.icon} width={20} height={20} />
             <span>{t.genderLabel}</span>
             <GenderSelect value={gender} onChange={setGender} />
             <span className={styles.tooltip}>
@@ -183,7 +183,7 @@ function Profile({ onCancel }) {
             </span>
           </div>
           <div className={styles.item}>
-            <StarIcon className={styles.icon} width={20} height={20} />
+            <ThemeIcon name="star-outline" className={styles.icon} width={20} height={20} />
             <span>{t.interestsLabel}</span>
             <input
               value={interests}
@@ -195,7 +195,7 @@ function Profile({ onCancel }) {
             </span>
           </div>
           <div className={styles.item}>
-            <TargetIcon className={styles.icon} width={20} height={20} />
+            <ThemeIcon name="target" className={styles.icon} width={20} height={20} />
             <span>{t.goalLabel}</span>
             <input
               value={goal}
