@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
-import './App.css'
-import styles from './Preferences.module.css'
-import { useLanguage } from './LanguageContext.jsx'
-import { useTheme } from './ThemeContext.jsx'
-import { useUser } from './context/AppContext.jsx'
-import { API_PATHS } from './config/api.js'
-import MessagePopup from './components/MessagePopup.jsx'
-import { useApi } from './hooks/useApi.js'
-import { useModelStore } from './store/modelStore.ts'
+import '../../App.css'
+import styles from './index.module.css'
+import { useLanguage } from '../../LanguageContext.jsx'
+import { useTheme } from '../../ThemeContext.jsx'
+import { useUser } from '../../context/AppContext.jsx'
+import { API_PATHS } from '../../config/api.js'
+import MessagePopup from '../../components/MessagePopup.jsx'
+import { useApi } from '../../hooks/useApi.js'
+import { useModelStore } from '../../store/modelStore.ts'
 
 function Preferences() {
   const { t } = useLanguage()
@@ -80,8 +80,9 @@ function Preferences() {
       <h2>{t.prefTitle}</h2>
       <form className={styles['preferences-form']} onSubmit={handleSave}>
         <div>
-          <label>{t.prefLanguage}</label>
+          <label htmlFor="sourceLang">{t.prefLanguage}</label>
           <select
+            id="sourceLang"
             value={sourceLang}
             onChange={(e) => setSourceLang(e.target.value)}
           >
@@ -91,8 +92,9 @@ function Preferences() {
           </select>
         </div>
         <div>
-          <label>{t.prefSearchLanguage}</label>
+          <label htmlFor="targetLang">{t.prefSearchLanguage}</label>
           <select
+            id="targetLang"
             value={targetLang}
             onChange={(e) => setTargetLang(e.target.value)}
           >
@@ -101,8 +103,9 @@ function Preferences() {
           </select>
         </div>
         <div>
-          <label>{t.prefDictionaryModel}</label>
+          <label htmlFor="defaultModel">{t.prefDictionaryModel}</label>
           <select
+            id="defaultModel"
             value={defaultModel}
             onChange={(e) => setDefaultModel(e.target.value)}
           >
@@ -114,8 +117,12 @@ function Preferences() {
           </select>
         </div>
         <div>
-          <label>{t.prefTheme}</label>
-          <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+          <label htmlFor="theme">{t.prefTheme}</label>
+          <select
+            id="theme"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+          >
             <option value="light">light</option>
             <option value="dark">dark</option>
             <option value="system">system</option>

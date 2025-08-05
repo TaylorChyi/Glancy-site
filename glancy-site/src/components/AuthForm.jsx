@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CodeButton from './CodeButton.jsx'
 import PhoneInput from './PhoneInput.jsx'
 import { Button } from './index.js'
-import styles from '../AuthPage.module.css'
+import styles from '../pages/auth/AuthPage.module.css'
 import MessagePopup from './MessagePopup.jsx'
 import {
   GoogleIcon,
