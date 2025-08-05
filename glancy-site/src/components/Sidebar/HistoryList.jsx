@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useHistory, useFavorites, useUser } from '@/context/AppContext.jsx'
-import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useHistory, useFavorites, useUser } from '@/context'
+import { useLanguage } from '@/context'
 import ListItem from '@/components/ui/ListItem/ListItem.jsx'
 import ItemMenu from '@/components/ui/ItemMenu/ItemMenu.jsx'
 import styles from './Sidebar.module.css'

@@ -2,7 +2,8 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import translations from '@/i18n/index.js'
 import { useLocale } from './LocaleContext.jsx'
 
-const LanguageContext = createContext({
+// eslint-disable-next-line react-refresh/only-export-components
+export const LanguageContext = createContext({
   lang: 'zh',
   t: translations.zh,
   setLang: () => {}

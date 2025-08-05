@@ -4,11 +4,11 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { jest } from '@jest/globals'
 
-jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
+jest.unstable_mockModule('@/context', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 
-jest.unstable_mockModule('@/context/LanguageContext.jsx', () => ({
+jest.unstable_mockModule('@/context', () => ({
   useLanguage: () => ({
     t: {
       continueButton: 'Continue',

@@ -3,29 +3,28 @@ import { useUserStore } from '@/store/userStore.ts'
 import { useHistoryStore } from '@/store/historyStore.ts'
 import { useFavoritesStore } from '@/store/favoritesStore.ts'
 
-const UserContext = createContext(null)
-const HistoryContext = createContext(null)
-const FavoritesContext = createContext(null)
+// eslint-disable-next-line react-refresh/only-export-components
+export const AppContext = createContext({
+  user: null,
+  history: null,
+  favorites: null,
+})
 
 export function AppProvider({ children }) {
-  const userState = useUserStore()
-  const historyState = useHistoryStore()
-  const favoritesState = useFavoritesStore()
+  const user = useUserStore()
+  const history = useHistoryStore()
+  const favorites = useFavoritesStore()
 
   return (
-    <UserContext.Provider value={userState}>
-      <HistoryContext.Provider value={historyState}>
-        <FavoritesContext.Provider value={favoritesState}>
-          {children}
-        </FavoritesContext.Provider>
-      </HistoryContext.Provider>
-    </UserContext.Provider>
+    <AppContext.Provider value={{ user, history, favorites }}>
+      {children}
+    </AppContext.Provider>
   )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useUser = () => useContext(UserContext)
+export const useUser = () => useContext(AppContext).user
 // eslint-disable-next-line react-refresh/only-export-components
-export const useHistory = () => useContext(HistoryContext)
+export const useHistory = () => useContext(AppContext).history
 // eslint-disable-next-line react-refresh/only-export-components
-export const useFavorites = () => useContext(FavoritesContext)
+export const useFavorites = () => useContext(AppContext).favorites

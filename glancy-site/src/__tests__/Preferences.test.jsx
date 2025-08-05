@@ -23,13 +23,13 @@ const mockT = {
   M1: 'M1'
 }
 
-jest.unstable_mockModule('@/context/LanguageContext.jsx', () => ({
+jest.unstable_mockModule('@/context', () => ({
   useLanguage: () => ({ t: mockT })
 }))
-jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
+jest.unstable_mockModule('@/context', () => ({
   useTheme: () => ({ theme: 'light', setTheme: mockSetTheme })
 }))
-jest.unstable_mockModule('@/context/AppContext.jsx', () => ({
+jest.unstable_mockModule('@/context', () => ({
   useUser: () => ({ user: { id: '1', token: 't' } })
 }))
 jest.unstable_mockModule('@/hooks/useApi.js', () => ({

@@ -11,13 +11,13 @@ const mockRequest = jest
   .mockResolvedValueOnce({ id: '1', token: 't' })
 const mockNavigate = jest.fn()
 
-jest.unstable_mockModule('@/context/AppContext.jsx', () => ({
+jest.unstable_mockModule('@/context', () => ({
   useUser: () => ({ setUser: mockSetUser })
 }))
 jest.unstable_mockModule('@/hooks/useApi.js', () => ({
   useApi: () => ({ request: mockRequest })
 }))
-jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
+jest.unstable_mockModule('@/context', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 jest.unstable_mockModule('react-router-dom', async () => {

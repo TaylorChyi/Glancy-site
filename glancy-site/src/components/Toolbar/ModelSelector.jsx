@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './Toolbar.module.css'
-import { useLanguage } from '@/context/LanguageContext.jsx'
+import { useLanguage } from '@/context'
 import useOutsideToggle from '@/hooks/useOutsideToggle.js'
 import { useModelStore } from '@/store/modelStore.ts'
 import { useApi } from '@/hooks/useApi.js'
