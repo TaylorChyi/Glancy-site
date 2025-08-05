@@ -1,5 +1,6 @@
 import ThemeIcon from '@/components/ui/Icon'
 import useOutsideToggle from '@/hooks/useOutsideToggle.js'
+import { withStopPropagation } from '@/utils/stopPropagation.js'
 import styles from './ItemMenu.module.css'
 
 function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
@@ -10,10 +11,9 @@ function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
       <button
         type="button"
         className={styles.action}
-        onClick={(e) => {
-          e.stopPropagation()
+        onClick={withStopPropagation(() => {
           setOpen(!open)
-        }}
+        })}
       >
         <ThemeIcon name="ellipsis-vertical" width={16} height={16} />
       </button>
@@ -21,11 +21,10 @@ function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
         <div className={styles.menu}>
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation()
+            onClick={withStopPropagation(() => {
               onFavorite()
               setOpen(false)
-            }}
+            })}
           >
             <ThemeIcon
               name="star-solid"
@@ -38,11 +37,10 @@ function ItemMenu({ onFavorite, onDelete, favoriteLabel, deleteLabel }) {
           <button
             type="button"
             className={styles['delete-btn']}
-            onClick={(e) => {
-              e.stopPropagation()
+            onClick={withStopPropagation(() => {
               onDelete()
               setOpen(false)
-            }}
+            })}
           >
             <ThemeIcon
               name="trash"
