@@ -13,7 +13,7 @@
   color: inherit;
 }
 
-.editBtn {
+.edit-btn {
   border: 1px solid var(--primary-bg);
   background: transparent;
   color: var(--primary-bg);

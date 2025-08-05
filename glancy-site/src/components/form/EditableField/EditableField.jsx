@@ -19,7 +19,7 @@ function EditableField({
 
   const containerCls = [styles.field, className].filter(Boolean).join(' ')
   const inputCls = [styles.input, inputClassName].filter(Boolean).join(' ')
-  const btnCls = [styles.editBtn, buttonClassName].filter(Boolean).join(' ')
+  const btnCls = [styles.edit-btn, buttonClassName].filter(Boolean).join(' ')
 
   const enableEdit = () => setEditing(true)
 
