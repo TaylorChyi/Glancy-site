@@ -1,8 +1,6 @@
+@import url('./ModalContent.module.css');
+
 .help-modal {
-  background: var(--app-bg);
-  color: var(--app-color);
-  padding: 20px;
-  border-radius: 8px;
   max-width: 600px;
   width: 90%;
   max-height: 90vh;

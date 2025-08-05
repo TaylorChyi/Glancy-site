@@ -36,7 +36,7 @@ function UpgradeModal({ open, onClose }) {
   }
 
   return (
-    <Modal onClose={onClose} className={styles['upgrade-modal']}>
+    <Modal onClose={onClose} className={`modal-content ${styles['upgrade-modal']}`}>
       <h3>{t.choosePlan}</h3>
       <div className={styles.plans}>
         {plans.map((p) => (

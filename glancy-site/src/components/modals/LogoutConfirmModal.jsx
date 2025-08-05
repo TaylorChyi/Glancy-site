@@ -6,7 +6,11 @@ function LogoutConfirmModal({ open, onConfirm, onCancel, email }) {
   const { t } = useLanguage()
   const message = t.logoutConfirmMessage.replace('{email}', email)
   return (
-    <BaseModal open={open} onClose={onCancel} className={styles['logout-modal']}>
+    <BaseModal
+      open={open}
+      onClose={onCancel}
+      className={`modal-content ${styles['logout-modal']}`}
+    >
       <h3>{t.logoutConfirmTitle}</h3>
       <p className={styles.message}>{message}</p>
       <div className={styles.actions}>

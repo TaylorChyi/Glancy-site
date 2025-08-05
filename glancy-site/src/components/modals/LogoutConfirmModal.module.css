@@ -1,8 +1,6 @@
+@import url('./ModalContent.module.css');
+
 .logout-modal {
-  background: var(--app-bg);
-  color: var(--app-color);
-  padding: 20px;
-  border-radius: var(--radius-md);
   width: 320px;
   max-width: 90%;
   text-align: center;

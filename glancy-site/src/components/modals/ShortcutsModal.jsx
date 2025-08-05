@@ -15,7 +15,11 @@ function ShortcutsModal({ open, onClose }) {
   ]
 
   return (
-    <BaseModal open={open} onClose={onClose} className={styles['shortcuts-modal']}>
+    <BaseModal
+      open={open}
+      onClose={onClose}
+      className={`modal-content ${styles['shortcuts-modal']}`}
+    >
       <h3>{t.shortcutsTitle}</h3>
       <ul>
         {shortcuts.map((s) => (
