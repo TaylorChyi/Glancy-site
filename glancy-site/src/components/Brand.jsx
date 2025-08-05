@@ -1,6 +1,6 @@
 import { useLanguage } from '../LanguageContext.jsx'
 import { useTheme } from '../ThemeContext.jsx'
-import { GlancyWebLightIcon, GlancyWebDarkIcon } from './Icon'
+import { GlancyWebLightIcon, GlancyWebDarkIcon } from './ui/Icon'
 import { UserMenu } from './Header'
 
 function Brand() {

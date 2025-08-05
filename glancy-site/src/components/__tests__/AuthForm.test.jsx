@@ -8,7 +8,7 @@ jest.unstable_mockModule('../../ThemeContext.jsx', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 
-const { default: AuthForm } = await import('../AuthForm.jsx')
+const { default: AuthForm } = await import('../form/AuthForm.jsx')
 
 describe('AuthForm', () => {
   test('submits valid credentials', async () => {

@@ -1,4 +1,4 @@
-import Preferences from '../Preferences.jsx'
+import Preferences from '../pages/preferences/Preferences.jsx'
 import BaseModal from './BaseModal.jsx'
 import styles from './AuthModal.module.css'
 

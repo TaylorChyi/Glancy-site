@@ -1,4 +1,4 @@
-import Avatar from '../Avatar.jsx'
+import Avatar from '../ui/Avatar.jsx'
 import styles from './Header.module.css'
 import {
   ShieldCheckIcon,
@@ -7,7 +7,7 @@ import {
   CommandLineIcon,
   QuestionMarkCircleIcon,
   ArrowRightOnRectangleIcon
-} from '../Icon'
+} from '../ui/Icon'
 
 function UserMenuDropdown({
   open,

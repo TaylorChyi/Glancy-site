@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import CodeButton from './CodeButton.jsx'
 import PhoneInput from './PhoneInput.jsx'
-import { Button } from './index.js'
-import styles from '../AuthPage.module.css'
-import MessagePopup from './MessagePopup.jsx'
+import Button from '../ui/Button/Button.jsx'
+import styles from '../../pages/auth/AuthPage.module.css'
+import MessagePopup from '../ui/MessagePopup.jsx'
 import {
   GoogleIcon,
   AppleIcon,
@@ -14,8 +14,8 @@ import {
   EmailIcon,
   GlancyWebLightIcon,
   GlancyWebDarkIcon
-} from './Icon'
-import { useTheme } from '../ThemeContext.jsx'
+} from '../ui/Icon'
+import { useTheme } from '../../ThemeContext.jsx'
 
 const defaultIcons = {
   username: UserIcon,

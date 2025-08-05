@@ -1,5 +1,5 @@
 import { useTheme } from '../../ThemeContext.jsx'
-import { ProTagLightIcon, ProTagDarkIcon } from '../Icon'
+import { ProTagLightIcon, ProTagDarkIcon } from '../ui/Icon'
 import styles from './Header.module.css'
 
 function ProTag({ small }) {

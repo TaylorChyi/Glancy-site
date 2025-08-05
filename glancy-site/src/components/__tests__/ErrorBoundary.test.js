@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { jest } from '@jest/globals'
-import ErrorBoundary from '../ErrorBoundary.jsx'
+import ErrorBoundary from '../ui/ErrorBoundary.jsx'
 import React from 'react'
 
 function ProblemChild() {
