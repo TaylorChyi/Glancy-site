@@ -33,9 +33,13 @@ jest.unstable_mockModule('@/context/AppContext.jsx', () => ({
   useUser: () => ({ user: { id: '1', token: 't' } })
 }))
 jest.unstable_mockModule('@/hooks/useApi.js', () => ({
-  useApi: () => ({ request: mockRequest, llm: { fetchModels: mockFetchModels } })
+  useApi: () => ({
+    request: mockRequest,
+    jsonRequest: mockRequest,
+    llm: { fetchModels: mockFetchModels }
+  })
 }))
-jest.unstable_mockModule('@/store/modelStore.ts', () => ({
+jest.unstable_mockModule('@/store', () => ({
   useModelStore: () => ({ model: 'M1', setModel: mockSetModel })
 }))
 

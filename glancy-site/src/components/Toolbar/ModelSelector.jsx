@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './Toolbar.module.css'
 import { useLanguage } from '@/context/LanguageContext.jsx'
 import useOutsideToggle from '@/hooks/useOutsideToggle.js'
-import { useModelStore } from '@/store/modelStore.ts'
+import { useModelStore } from '@/store'
 import { useApi } from '@/hooks/useApi.js'
 
 function ModelSelector() {

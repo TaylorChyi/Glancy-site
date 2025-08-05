@@ -1,5 +1,5 @@
 import { act } from '@testing-library/react'
-import { useUserStore } from '@/store/userStore.ts'
+import { useUserStore } from '@/store'
 
 describe('userStore', () => {
   beforeEach(() => {
