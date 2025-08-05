@@ -1,14 +1,8 @@
-import { useEffect } from 'react'
 import styles from './Modal.module.css'
+import useEscapeKey from '@/hooks/useEscapeKey.js'
 
 function Modal({ onClose, className = '', children }) {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [onClose])
+  useEscapeKey(onClose)
 
   return (
     <div className={styles.overlay} onClick={onClose}>

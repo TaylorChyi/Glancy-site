@@ -1,15 +1,8 @@
-import { useEffect } from 'react'
 import styles from './MessagePopup.module.css'
+import useEscapeKey from '@/hooks/useEscapeKey.js'
 
 function MessagePopup({ open, message, onClose }) {
-  useEffect(() => {
-    if (!open) return undefined
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [open, onClose])
+  useEscapeKey(onClose, open)
 
   if (!open) return null
   return (
