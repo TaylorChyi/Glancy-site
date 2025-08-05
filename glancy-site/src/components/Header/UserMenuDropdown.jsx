@@ -1,13 +1,6 @@
 import Avatar from '@/components/ui/Avatar.jsx'
 import styles from './Header.module.css'
-import {
-  ShieldCheckIcon,
-  AdjustmentsHorizontalIcon,
-  Cog6ToothIcon,
-  CommandLineIcon,
-  QuestionMarkCircleIcon,
-  ArrowRightOnRectangleIcon
-} from '@/components/ui/Icon'
+import ThemeIcon from '@/components/ui/Icon'
 
 function UserMenuDropdown({
   open,
@@ -34,26 +27,26 @@ function UserMenuDropdown({
       <ul>
         {!isPro && (
           <li onClick={() => openUpgrade()}>
-            <ShieldCheckIcon className={styles.icon} width={20} height={20} />
+            <ThemeIcon name="shield-check" className={styles.icon} width={20} height={20} />
             {t.upgrade}
           </li>
         )}
         <li onClick={openProfile}>
-          <AdjustmentsHorizontalIcon className={styles.icon} width={20} height={20} />
+          <ThemeIcon name="adjustments-horizontal" className={styles.icon} width={20} height={20} />
           {t.profile}
         </li>
         <li onClick={openSettings}>
-          <Cog6ToothIcon className={styles.icon} width={20} height={20} />
+          <ThemeIcon name="cog-6-tooth" className={styles.icon} width={20} height={20} />
           {t.settings}
         </li>
         <li onClick={openShortcuts}>
-          <CommandLineIcon className={styles.icon} width={20} height={20} />
+          <ThemeIcon name="command-line" className={styles.icon} width={20} height={20} />
           {t.shortcuts}
         </li>
       </ul>
       <ul>
         <li>
-          <QuestionMarkCircleIcon className={styles.icon} width={20} height={20} />
+          <ThemeIcon name="question-mark-circle" className={styles.icon} width={20} height={20} />
           <button
             type="button"
             onClick={() => {
@@ -66,7 +59,7 @@ function UserMenuDropdown({
           </button>
         </li>
         <li>
-          <ArrowRightOnRectangleIcon className={styles.icon} width={20} height={20} />
+          <ThemeIcon name="arrow-right-on-rectangle" className={styles.icon} width={20} height={20} />
           <button
             type="button"
             onClick={() => {

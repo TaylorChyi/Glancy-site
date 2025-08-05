@@ -1,7 +1,5 @@
-import { useTheme } from '@/context/ThemeContext.jsx'
 import { useLanguage } from '@/context/LanguageContext.jsx'
-import lightIcon from '@/assets/brand/glancy-web-light.svg'
-import darkIcon from '@/assets/brand/glancy-web-dark.svg'
+import ThemeIcon from '@/components/ui/Icon'
 import TopBarActions from './TopBarActions.jsx'
 import common from './TopBarCommon.module.css'
 import styles from './MobileTopBar.module.css'
@@ -15,14 +13,12 @@ function MobileTopBar({
   canFavorite = false,
   onOpenSidebar
 }) {
-  const { resolvedTheme } = useTheme()
   const { lang } = useLanguage()
-  const icon = resolvedTheme === 'dark' ? darkIcon : lightIcon
 
   return (
     <header className={styles['mobile-topbar']}>
       <button className={styles['topbar-btn']} onClick={onOpenSidebar}>
-        <img src={icon} alt="brand" width={24} height={24} />
+        <ThemeIcon name="glancy-web" alt="brand" width={24} height={24} />
       </button>
       <button
         type="button"
