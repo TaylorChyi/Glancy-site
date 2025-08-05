@@ -1,25 +1,25 @@
 import { useState, useEffect, useRef } from 'react'
-import MessagePopup from '../components/ui/MessagePopup.jsx'
-import { useHistory, useUser, useFavorites } from '../context/AppContext.jsx'
+import MessagePopup from '../../components/ui/MessagePopup.jsx'
+import { useHistory, useUser, useFavorites } from '../../context/AppContext.jsx'
 import { useNavigate } from 'react-router-dom'
-import { useTheme } from '../context/ThemeContext.jsx'
-import translations from '../i18n/index.js'
-import DictionaryEntry from '../components/ui/DictionaryEntry.jsx'
+import { useTheme } from '../../context/ThemeContext.jsx'
+import translations from '../../i18n/index.js'
+import DictionaryEntry from '../../components/ui/DictionaryEntry.jsx'
 import {
   SendButtonLightIcon,
   SendButtonDarkIcon,
   VoiceButtonLightIcon,
   VoiceButtonDarkIcon
-} from '../components/ui/Icon'
-import { useApi } from '../hooks/useApi.js'
-import { useLanguage } from '../context/LanguageContext.jsx'
-import { detectWordLanguage, clientNameFromModel } from '../utils/index.js'
+} from '../../components/ui/Icon'
+import { useApi } from '../../hooks/useApi.js'
+import { useLanguage } from '../../context/LanguageContext.jsx'
+import { detectWordLanguage, clientNameFromModel } from '../../utils/index.js'
 import './App.css'
 import styles from './App.module.css'
-import Layout from '../components/Layout.jsx'
-import HistoryDisplay from '../components/ui/HistoryDisplay.jsx'
-import ListItem from '../components/ui/ListItem/ListItem.jsx'
-import { useModelStore } from '../store/modelStore.ts'
+import Layout from '../../components/Layout'
+import HistoryDisplay from '../../components/ui/HistoryDisplay.jsx'
+import ListItem from '../../components/ui/ListItem/ListItem.jsx'
+import { useModelStore } from '../../store/modelStore.ts'
 
 function App() {
   const [text, setText] = useState('')

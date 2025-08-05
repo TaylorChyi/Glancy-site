@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/ui/ErrorBoundary.jsx'
 import './styles/index.css'
 import Loader from './components/ui/Loader.jsx'
-import AuthWatcher from './components/AuthWatcher.jsx'
+import AuthWatcher from './components/AuthWatcher'
 
-const App = lazy(() => import('./pages/App.jsx'))
-const Login = lazy(() => import('./pages/auth/Login.jsx'))
-const Register = lazy(() => import('./pages/auth/Register.jsx'))
+const App = lazy(() => import('./pages/App'))
+const Login = lazy(() => import('./pages/auth/Login'))
+const Register = lazy(() => import('./pages/auth/Register'))
 import { LanguageProvider } from './context/LanguageContext.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
 import { AppProvider } from './context/AppContext.jsx'

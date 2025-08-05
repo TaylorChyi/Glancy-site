@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import '../App.css'
+import '../App/App.css'
 import styles from './Preferences.module.css'
 import { useLanguage } from '../../context/LanguageContext.jsx'
 import { useTheme } from '../../context/ThemeContext.jsx'

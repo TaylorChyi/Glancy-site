@@ -1,6 +1,6 @@
-import Preferences from '../pages/preferences/Preferences.jsx'
+import Preferences from '../../pages/preferences'
 import BaseModal from './BaseModal.jsx'
-import styles from './AuthModal.module.css'
+import styles from './SettingsModal.module.css'
 
 function SettingsModal({ open, onClose }) {
   return (

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useUser } from '../context/AppContext.jsx'
+import { useUser } from '../../context/AppContext.jsx'
 
 function AuthWatcher() {
   const { user } = useUser()
