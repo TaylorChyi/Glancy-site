@@ -43,3 +43,27 @@ export function createApiClient({ token, headers: defaultHeaders = {}, onUnautho
 
 // default instance without preset headers
 export const apiRequest = createApiClient()
+
+/**
+ * Create a helper for JSON-based requests.
+ *
+ * @param {Function} [request=apiRequest] base request function
+ * @returns {Function} json request function
+ */
+export function createJsonRequest(request = apiRequest) {
+  return function jsonRequest(
+    url,
+    { token, method = 'POST', body, headers = {}, ...options } = {},
+  ) {
+    return request(url, {
+      ...options,
+      token,
+      method,
+      headers: { 'Content-Type': 'application/json', ...headers },
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+    })
+  }
+}
+
+// default JSON request instance
+export const jsonRequest = createJsonRequest()

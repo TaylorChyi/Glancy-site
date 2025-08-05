@@ -58,15 +58,14 @@ function Preferences() {
   const handleSave = async (e) => {
     e.preventDefault()
     if (!user) return
-    await api.request(`${API_PATHS.preferences}/user/${user.id}`, {
+    await api.jsonRequest(`${API_PATHS.preferences}/user/${user.id}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+      body: {
         systemLanguage: sourceLang,
         searchLanguage: targetLang,
         dictionaryModel: defaultModel,
         theme
-      })
+      }
     })
     localStorage.setItem('sourceLang', sourceLang)
     localStorage.setItem('targetLang', targetLang)

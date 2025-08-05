@@ -1,4 +1,4 @@
-import { createApiClient } from './client.js'
+import { createApiClient, createJsonRequest } from './client.js'
 import { createChatApi } from './chat.js'
 import { createWordsApi } from './words.js'
 import { createLocaleApi } from './locale.js'
@@ -9,8 +9,10 @@ import { createLlmApi } from './llm.js'
 
 export function createApi(config) {
   const request = createApiClient(config)
+  const jsonRequest = createJsonRequest(request)
   return {
     request,
+    jsonRequest,
     chat: createChatApi(request),
     words: createWordsApi(request),
     locale: createLocaleApi(request),
