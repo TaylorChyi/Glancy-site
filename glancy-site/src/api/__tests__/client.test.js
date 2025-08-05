@@ -5,6 +5,7 @@ import { createApiClient } from '../client.js'
 describe('apiRequest error handling', () => {
   afterEach(() => {
     jest.restoreAllMocks()
+    delete global.fetch
   })
 
   test('throws message from JSON body on non-ok response', async () => {
@@ -13,7 +14,7 @@ describe('apiRequest error handling', () => {
       text: jest.fn().mockResolvedValue(JSON.stringify({ message: 'Bad request' })),
       headers: { get: () => 'application/json' },
     }
-    jest.spyOn(global, 'fetch').mockResolvedValue(resp)
+    global.fetch = jest.fn().mockResolvedValue(resp)
     const apiRequest = createApiClient()
     await expect(apiRequest('/api')).rejects.toThrow('Bad request')
   })
@@ -24,7 +25,7 @@ describe('apiRequest error handling', () => {
       text: jest.fn().mockResolvedValue('Server error'),
       headers: { get: () => 'text/plain' },
     }
-    jest.spyOn(global, 'fetch').mockResolvedValue(resp)
+    global.fetch = jest.fn().mockResolvedValue(resp)
     const apiRequest = createApiClient()
     await expect(apiRequest('/api')).rejects.toThrow('Server error')
   })

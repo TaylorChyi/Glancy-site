@@ -1,11 +1,22 @@
 export default {
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
-    '^.+\\.css$': 'identity-obj-proxy'
+    '^.+\\.css$': 'identity-obj-proxy',
+    '^.+\\.(svg)$': '<rootDir>/test/__mocks__/fileMock.js'
   },
-  extensionsToTreatAsEsm: ['.jsx'],
+  extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
   transform: {
-    '^.+\\.(jsx?)$': ['babel-jest', { presets: ['@babel/preset-react'] }]
-  }
+    '^.+\\.(t|j)sx?$': [
+      'babel-jest',
+      {
+        presets: [
+          ['@babel/preset-react', { runtime: 'automatic' }],
+          '@babel/preset-typescript'
+        ]
+      }
+    ]
+  },
+  setupFilesAfterEnv: ['@testing-library/jest-dom'],
+  collectCoverage: false
 }

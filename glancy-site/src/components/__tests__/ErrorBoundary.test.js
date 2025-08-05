@@ -1,6 +1,4 @@
-/** @jest-environment jsdom */
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import { jest } from '@jest/globals'
 import ErrorBoundary from '../ErrorBoundary.jsx'
 import React from 'react'
@@ -18,12 +16,11 @@ afterEach(() => {
 })
 
 test('displays fallback UI on error', () => {
-  render(
-    React.createElement(
-      ErrorBoundary,
-      { fallback: React.createElement('div', null, 'Fallback') },
-      React.createElement(ProblemChild)
-    )
+  const { asFragment } = render(
+    <ErrorBoundary fallback={<div>Fallback</div>}>
+      <ProblemChild />
+    </ErrorBoundary>
   )
   expect(screen.getByText('Fallback')).toBeInTheDocument()
+  expect(asFragment()).toMatchSnapshot()
 })
