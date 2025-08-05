@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { AuthForm } from '@/components'
 import { API_PATHS } from '@/config/api.js'
-import { useApi } from '@/hooks/useApi.js'
+import { useApiResource } from '@/hooks/useApiResource.js'
 import { useUser } from '@/context/AppContext.jsx'
 import { useLanguage } from '@/context/LanguageContext.jsx'
 
 function Register() {
-  const api = useApi()
+  const jsonRequest = useApiResource('jsonRequest')
   const { setUser } = useUser()
   const navigate = useNavigate()
   const { t } = useLanguage()
@@ -22,14 +22,14 @@ function Register() {
   }
 
   const handleRegister = async ({ account, password, method }) => {
-    await api.jsonRequest(API_PATHS.register, {
+    await jsonRequest(API_PATHS.register, {
       method: 'POST',
       body: {
         [method]: account,
         code: password
       }
     })
-    const loginData = await api.jsonRequest(API_PATHS.login, {
+    const loginData = await jsonRequest(API_PATHS.login, {
       method: 'POST',
       body: { account, method, password }
     })

@@ -1,6 +1,5 @@
 import { API_PATHS } from '@/config/api.js'
 import { apiRequest, createJsonRequest } from './client.js'
-import { useApi } from '@/hooks/useApi.js'
 
 export function createSearchRecordsApi(request = apiRequest) {
   const jsonRequest = createJsonRequest(request)
@@ -62,7 +61,3 @@ export const {
   favoriteSearchRecord,
   unfavoriteSearchRecord
 } = createSearchRecordsApi()
-
-export function useSearchRecordsApi() {
-  return useApi().searchRecords
-}

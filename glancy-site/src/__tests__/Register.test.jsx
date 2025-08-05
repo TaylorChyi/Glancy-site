@@ -5,7 +5,7 @@ import { jest } from '@jest/globals'
 import { API_PATHS } from '@/config/api.js'
 
 const mockSetUser = jest.fn()
-const mockRequest = jest
+const mockJsonRequest = jest
   .fn()
   .mockResolvedValueOnce(undefined)
   .mockResolvedValueOnce({ id: '1', token: 't' })
@@ -14,8 +14,11 @@ const mockNavigate = jest.fn()
 jest.unstable_mockModule('@/context/AppContext.jsx', () => ({
   useUser: () => ({ setUser: mockSetUser })
 }))
-jest.unstable_mockModule('@/hooks/useApi.js', () => ({
-  useApi: () => ({ request: mockRequest })
+jest.unstable_mockModule('@/hooks/useApiResource.js', () => ({
+  useApiResource: (resource) => {
+    if (resource === 'jsonRequest') return mockJsonRequest
+    return () => {}
+  }
 }))
 jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
@@ -42,9 +45,9 @@ test('registers and logs in user', async () => {
     target: { value: '0000' }
   })
   fireEvent.click(screen.getByRole('button', { name: 'Continue' }))
-  await waitFor(() => expect(mockRequest).toHaveBeenCalledTimes(2))
-  expect(mockRequest.mock.calls[0][0]).toBe(API_PATHS.register)
-  expect(mockRequest.mock.calls[1][0]).toBe(API_PATHS.login)
+  await waitFor(() => expect(mockJsonRequest).toHaveBeenCalledTimes(2))
+  expect(mockJsonRequest.mock.calls[0][0]).toBe(API_PATHS.register)
+  expect(mockJsonRequest.mock.calls[1][0]).toBe(API_PATHS.login)
   await waitFor(() => expect(mockSetUser).toHaveBeenCalledWith({ id: '1', token: 't' }))
   expect(mockNavigate).toHaveBeenCalledWith('/')
 })

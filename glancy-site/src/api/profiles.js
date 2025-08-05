@@ -1,6 +1,5 @@
 import { API_PATHS } from '@/config/api.js'
 import { apiRequest, createJsonRequest } from './client.js'
-import { useApi } from '@/hooks/useApi.js'
 
 export function createProfilesApi(request = apiRequest) {
   const jsonRequest = createJsonRequest(request)
@@ -18,7 +17,3 @@ export function createProfilesApi(request = apiRequest) {
 }
 
 export const { fetchProfile, saveProfile } = createProfilesApi()
-
-export function useProfilesApi() {
-  return useApi().profiles
-}

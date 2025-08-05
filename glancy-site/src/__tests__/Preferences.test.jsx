@@ -5,6 +5,7 @@ import { jest } from '@jest/globals'
 import { API_PATHS } from '@/config/api.js'
 
 const mockRequest = jest.fn().mockResolvedValue({})
+const mockJsonRequest = jest.fn().mockResolvedValue({})
 const mockFetchModels = jest.fn().mockResolvedValue(['M1'])
 const mockSetTheme = jest.fn()
 const mockSetModel = jest.fn()
@@ -32,8 +33,13 @@ jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
 jest.unstable_mockModule('@/context/AppContext.jsx', () => ({
   useUser: () => ({ user: { id: '1', token: 't' } })
 }))
-jest.unstable_mockModule('@/hooks/useApi.js', () => ({
-  useApi: () => ({ request: mockRequest, llm: { fetchModels: mockFetchModels } })
+jest.unstable_mockModule('@/hooks/useApiResource.js', () => ({
+  useApiResource: (resource) => {
+    if (resource === 'request') return mockRequest
+    if (resource === 'jsonRequest') return mockJsonRequest
+    if (resource === 'llm') return { fetchModels: mockFetchModels }
+    return {}
+  }
 }))
 jest.unstable_mockModule('@/store/modelStore.ts', () => ({
   useModelStore: () => ({ model: 'M1', setModel: mockSetModel })
@@ -48,8 +54,9 @@ beforeEach(() => {
 test('saves preferences via api', async () => {
   render(<Preferences />)
   await waitFor(() => expect(mockFetchModels).toHaveBeenCalled())
+  await waitFor(() => expect(mockRequest).toHaveBeenCalled())
   fireEvent.change(screen.getByLabelText('Language'), { target: { value: 'CHINESE' } })
   fireEvent.click(screen.getByRole('button', { name: 'Save' }))
-  await waitFor(() => expect(mockRequest).toHaveBeenCalled())
+  await waitFor(() => expect(mockJsonRequest).toHaveBeenCalled())
   expect(mockRequest.mock.calls[0][0]).toBe(`${API_PATHS.preferences}/user/1`)
 })

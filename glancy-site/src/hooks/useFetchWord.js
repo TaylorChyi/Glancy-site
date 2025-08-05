@@ -1,9 +1,8 @@
-import { useApi } from '@/hooks/useApi.js'
+import { useApiResource } from '@/hooks/useApiResource.js'
 import { detectWordLanguage, clientNameFromModel } from '@/utils/index.js'
 
 export function useFetchWord() {
-  const api = useApi()
-  const { fetchWord } = api.words
+  const { fetchWord } = useApiResource('words')
 
   const fetchWordWithHandling = async ({ user, term, model }) => {
     const language = detectWordLanguage(term)

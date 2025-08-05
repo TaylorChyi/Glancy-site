@@ -1,6 +1,5 @@
 import { API_PATHS } from '@/config/api.js'
 import { apiRequest } from './client.js'
-import { useApi } from '@/hooks/useApi.js'
 
 export function createUsersApi(request = apiRequest) {
   const uploadAvatar = async ({ userId, file, token }) => {
@@ -17,7 +16,3 @@ export function createUsersApi(request = apiRequest) {
 }
 
 export const { uploadAvatar } = createUsersApi()
-
-export function useUsersApi() {
-  return useApi().users
-}

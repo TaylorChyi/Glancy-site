@@ -1,6 +1,5 @@
 import { API_PATHS } from '@/config/api.js'
 import { apiRequest, createJsonRequest } from './client.js'
-import { useApi } from '@/hooks/useApi.js'
 
 export function createChatApi(request = apiRequest) {
   const jsonRequest = createJsonRequest(request)
@@ -14,7 +13,3 @@ export function createChatApi(request = apiRequest) {
 }
 
 export const { sendChatMessage } = createChatApi()
-
-export function useChatApi() {
-  return useApi().chat
-}

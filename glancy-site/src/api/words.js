@@ -1,6 +1,5 @@
 import { API_PATHS } from '@/config/api.js'
 import { apiRequest } from './client.js'
-import { useApi } from '@/hooks/useApi.js'
 
 /**
  * Query a word definition
@@ -27,7 +26,3 @@ export function createWordsApi(request = apiRequest) {
 }
 
 export const { fetchWord, fetchWordAudio } = createWordsApi()
-
-export function useWordsApi() {
-  return useApi().words
-}

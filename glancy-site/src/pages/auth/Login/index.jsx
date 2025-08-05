@@ -2,17 +2,17 @@ import { useNavigate } from 'react-router-dom'
 import { AuthForm } from '@/components'
 import { API_PATHS } from '@/config/api.js'
 import { useUser } from '@/context/AppContext.jsx'
-import { useApi } from '@/hooks/useApi.js'
+import { useApiResource } from '@/hooks/useApiResource.js'
 import { useLanguage } from '@/context/LanguageContext.jsx'
 
 function Login() {
   const { setUser } = useUser()
-  const api = useApi()
+  const jsonRequest = useApiResource('jsonRequest')
   const navigate = useNavigate()
   const { t } = useLanguage()
 
   const handleLogin = async ({ account, password, method }) => {
-    const data = await api.jsonRequest(API_PATHS.login, {
+    const data = await jsonRequest(API_PATHS.login, {
       method: 'POST',
       body: { account, password, method }
     })

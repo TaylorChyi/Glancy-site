@@ -6,15 +6,17 @@ import { useTheme } from '@/context/ThemeContext.jsx'
 import { useUser } from '@/context/AppContext.jsx'
 import { API_PATHS } from '@/config/api.js'
 import MessagePopup from '@/components/ui/MessagePopup.jsx'
-import { useApi } from '@/hooks/useApi.js'
+import { useApiResource } from '@/hooks/useApiResource.js'
 import { useModelStore } from '@/store/modelStore.ts'
 
 function Preferences() {
   const { t } = useLanguage()
   const { theme, setTheme } = useTheme()
   const { user } = useUser()
-  const api = useApi()
   const { model, setModel } = useModelStore()
+  const { fetchModels } = useApiResource('llm')
+  const request = useApiResource('request')
+  const jsonRequest = useApiResource('jsonRequest')
   const [models, setModels] = useState([])
   const [sourceLang, setSourceLang] = useState(
     localStorage.getItem('sourceLang') || 'auto'
@@ -27,15 +29,14 @@ function Preferences() {
   const [popupMsg, setPopupMsg] = useState('')
 
   useEffect(() => {
-    api.llm
-      .fetchModels()
+    fetchModels()
       .then((list) => setModels(list))
       .catch((err) => console.error(err))
-  }, [api])
+  }, [fetchModels])
 
   useEffect(() => {
     if (!user) return
-    api.request(`${API_PATHS.preferences}/user/${user.id}`)
+    request(`${API_PATHS.preferences}/user/${user.id}`)
       .then((data) => {
         const sl = data.systemLanguage || 'auto'
         const tl = data.searchLanguage || 'ENGLISH'
@@ -53,12 +54,12 @@ function Preferences() {
         setPopupMsg(t.fail)
         setPopupOpen(true)
       })
-  }, [setTheme, t, user, api, model, setModel])
+  }, [setTheme, t, user, request, model, setModel])
 
   const handleSave = async (e) => {
     e.preventDefault()
     if (!user) return
-    await api.jsonRequest(`${API_PATHS.preferences}/user/${user.id}`, {
+    await jsonRequest(`${API_PATHS.preferences}/user/${user.id}`, {
       method: 'POST',
       body: {
         systemLanguage: sourceLang,

@@ -3,21 +3,20 @@ import styles from './Toolbar.module.css'
 import { useLanguage } from '@/context/LanguageContext.jsx'
 import useOutsideToggle from '@/hooks/useOutsideToggle.js'
 import { useModelStore } from '@/store/modelStore.ts'
-import { useApi } from '@/hooks/useApi.js'
+import { useApiResource } from '@/hooks/useApiResource.js'
 
 function ModelSelector() {
   const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
   const { model, setModel } = useModelStore()
   const [models, setModels] = useState([])
   const { t } = useLanguage()
-  const api = useApi()
+  const { fetchModels } = useApiResource('llm')
 
   useEffect(() => {
-    api.llm
-      .fetchModels()
+    fetchModels()
       .then((list) => setModels(list))
       .catch((err) => console.error(err))
-  }, [api])
+  }, [fetchModels])
 
   const selectModel = (value) => {
     setModel(value)

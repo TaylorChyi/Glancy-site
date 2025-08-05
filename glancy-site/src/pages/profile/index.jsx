@@ -7,7 +7,7 @@ import MessagePopup from '@/components/ui/MessagePopup.jsx'
 import AgeStepper from '@/components/form/AgeStepper/AgeStepper.jsx'
 import GenderSelect from '@/components/form/GenderSelect/GenderSelect.jsx'
 import EditableField from '@/components/form/EditableField/EditableField.jsx'
-import { useApi } from '@/hooks/useApi.js'
+import { useApiResource } from '@/hooks/useApiResource.js'
 import { useUser } from '@/context/AppContext.jsx'
 import { cacheBust } from '@/utils/url.js'
 import ThemeIcon from '@/components/ui/Icon'
@@ -15,7 +15,8 @@ import ThemeIcon from '@/components/ui/Icon'
 function Profile({ onCancel }) {
   const { t } = useLanguage()
   const { user: currentUser, setUser } = useUser()
-  const api = useApi()
+  const { uploadAvatar } = useApiResource('users')
+  const { fetchProfile, saveProfile } = useApiResource('profiles')
   const [username, setUsername] = useState(currentUser?.username || '')
   const [email, setEmail] = useState(currentUser?.email || '')
   const [phone, setPhone] = useState(currentUser?.phone || '')
@@ -33,7 +34,7 @@ function Profile({ onCancel }) {
     const preview = URL.createObjectURL(file)
     setAvatar(preview)
     try {
-      const data = await api.users.uploadAvatar({
+      const data = await uploadAvatar({
         userId: currentUser.id,
         file,
         token: currentUser.token
@@ -52,8 +53,7 @@ function Profile({ onCancel }) {
 
   useEffect(() => {
     if (!currentUser) return
-    api.profiles
-      .fetchProfile({ userId: currentUser.id, token: currentUser.token })
+    fetchProfile({ userId: currentUser.id, token: currentUser.token })
       .then((data) => {
         setAge(data.age)
         setGender(data.gender)
@@ -69,12 +69,12 @@ function Profile({ onCancel }) {
         setPopupMsg(t.fail)
         setPopupOpen(true)
       })
-  }, [api, t, currentUser])
+  }, [fetchProfile, t, currentUser])
 
   const handleSave = async (e) => {
     e.preventDefault()
     if (!currentUser) return
-    await api.profiles.saveProfile({
+    await saveProfile({
       userId: currentUser.id,
       token: currentUser.token,
       profile: {
