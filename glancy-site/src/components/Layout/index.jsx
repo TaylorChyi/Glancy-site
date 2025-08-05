@@ -2,13 +2,11 @@ import { useState } from 'react'
 import Sidebar from '@/components/Sidebar'
 import DesktopTopBar from '@/components/TopBar/DesktopTopBar.jsx'
 import MobileTopBar from '@/components/TopBar/MobileTopBar.jsx'
-import useMediaQuery from '@/hooks/useMediaQuery.js'
+import { useIsMobile } from '@/utils/index.js'
 import styles from './Layout.module.css'
 
-const MOBILE_QUERY = '(max-width: 600px)'
-
 function Layout({ children, sidebarProps = {}, topBarProps = {}, bottomContent = null }) {
-  const isMobile = useMediaQuery(MOBILE_QUERY)
+  const isMobile = useIsMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
