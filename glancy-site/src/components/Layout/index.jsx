@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import Sidebar from '../Sidebar'
-import DesktopTopBar from '../TopBar/DesktopTopBar.jsx'
-import MobileTopBar from '../TopBar/MobileTopBar.jsx'
-import { useIsMobile } from '../../utils/index.js'
+import Sidebar from '@/components/Sidebar'
+import DesktopTopBar from '@/components/TopBar/DesktopTopBar.jsx'
+import MobileTopBar from '@/components/TopBar/MobileTopBar.jsx'
+import { useIsMobile } from '@/utils/index.js'
 import styles from './Layout.module.css'
 
 function Layout({ children, sidebarProps = {}, topBarProps = {}, bottomContent = null }) {

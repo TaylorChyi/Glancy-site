@@ -4,11 +4,11 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { jest } from '@jest/globals'
 
-jest.unstable_mockModule('../../context/ThemeContext.jsx', () => ({
+jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
   useTheme: () => ({ resolvedTheme: 'light' })
 }))
 
-const { default: AuthForm } = await import('../form/AuthForm.jsx')
+const { default: AuthForm } = await import('@/components/form/AuthForm.jsx')
 
 describe('AuthForm', () => {
   test('submits valid credentials', async () => {

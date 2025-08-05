@@ -1,4 +1,4 @@
-import Preferences from '../../pages/preferences'
+import Preferences from '@/pages/preferences'
 import BaseModal from './BaseModal.jsx'
 import styles from './SettingsModal.module.css'
 

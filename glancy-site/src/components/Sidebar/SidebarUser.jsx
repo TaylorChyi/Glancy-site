@@ -1,4 +1,4 @@
-import { UserMenu } from '../Header'
+import { UserMenu } from '@/components/Header'
 import styles from './Sidebar.module.css'
 
 function SidebarUser() {

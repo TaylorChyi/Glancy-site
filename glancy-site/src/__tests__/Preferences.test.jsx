@@ -2,7 +2,7 @@
 import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { jest } from '@jest/globals'
-import { API_PATHS } from '../config/api.js'
+import { API_PATHS } from '@/config/api.js'
 
 const mockRequest = jest.fn().mockResolvedValue({})
 const mockFetchModels = jest.fn().mockResolvedValue(['M1'])
@@ -23,23 +23,23 @@ const mockT = {
   M1: 'M1'
 }
 
-jest.unstable_mockModule('../context/LanguageContext.jsx', () => ({
+jest.unstable_mockModule('@/context/LanguageContext.jsx', () => ({
   useLanguage: () => ({ t: mockT })
 }))
-jest.unstable_mockModule('../context/ThemeContext.jsx', () => ({
+jest.unstable_mockModule('@/context/ThemeContext.jsx', () => ({
   useTheme: () => ({ theme: 'light', setTheme: mockSetTheme })
 }))
-jest.unstable_mockModule('../context/AppContext.jsx', () => ({
+jest.unstable_mockModule('@/context/AppContext.jsx', () => ({
   useUser: () => ({ user: { id: '1', token: 't' } })
 }))
-jest.unstable_mockModule('../hooks/useApi.js', () => ({
+jest.unstable_mockModule('@/hooks/useApi.js', () => ({
   useApi: () => ({ request: mockRequest, llm: { fetchModels: mockFetchModels } })
 }))
-jest.unstable_mockModule('../store/modelStore.ts', () => ({
+jest.unstable_mockModule('@/store/modelStore.ts', () => ({
   useModelStore: () => ({ model: 'M1', setModel: mockSetModel })
 }))
 
-const { default: Preferences } = await import('../pages/preferences/Preferences.jsx')
+const { default: Preferences } = await import('@/pages/preferences')
 
 beforeEach(() => {
   localStorage.clear()

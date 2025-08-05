@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import { jest } from "@jest/globals"
-import { createApiClient } from '../client.js'
+import { createApiClient } from '@/api/client.js'
 
 describe('apiRequest error handling', () => {
   afterEach(() => {

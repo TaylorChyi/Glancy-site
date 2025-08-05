@@ -1,5 +1,5 @@
-import { createSearchRecordsApi } from '../searchRecords.js'
-import { API_PATHS } from '../../config/api.js'
+import { createSearchRecordsApi } from '@/api/searchRecords.js'
+import { API_PATHS } from '@/config/api.js'
 import { jest } from '@jest/globals'
 
 test('fetchSearchRecords calls with token', async () => {

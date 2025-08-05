@@ -1,5 +1,5 @@
 import { act } from '@testing-library/react'
-import { useFavoritesStore } from '../favoritesStore.ts'
+import { useFavoritesStore } from '@/store/favoritesStore.ts'
 
 describe('favoritesStore', () => {
   beforeEach(() => localStorage.clear())

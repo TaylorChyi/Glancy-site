@@ -1,4 +1,4 @@
-import { useHistory } from '../../context/AppContext.jsx'
+import { useHistory } from '@/context/AppContext.jsx'
 import styles from './HistoryDisplay.module.css'
 
 function HistoryDisplay() {

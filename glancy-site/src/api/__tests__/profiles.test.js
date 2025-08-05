@@ -1,5 +1,5 @@
-import { createProfilesApi } from '../profiles.js'
-import { API_PATHS } from '../../config/api.js'
+import { createProfilesApi } from '@/api/profiles.js'
+import { API_PATHS } from '@/config/api.js'
 import { jest } from '@jest/globals'
 
 test('fetchProfile calls correct path', async () => {

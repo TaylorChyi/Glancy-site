@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useHistory, useFavorites, useUser } from '../../context/AppContext.jsx'
-import { useLanguage } from '../../context/LanguageContext.jsx'
-import ListItem from '../ui/ListItem/ListItem.jsx'
+import { useHistory, useFavorites, useUser } from '@/context/AppContext.jsx'
+import { useLanguage } from '@/context/LanguageContext.jsx'
+import ListItem from '@/components/ui/ListItem/ListItem.jsx'
 import styles from './Sidebar.module.css'
-import useOutsideToggle from '../../hooks/useOutsideToggle.js'
+import useOutsideToggle from '@/hooks/useOutsideToggle.js'
 import {
   EllipsisVerticalIcon,
   StarSolidIcon,
   TrashIcon
-} from '../ui/Icon'
+} from '@/components/ui/Icon'
 
 function HistoryList({ onSelect }) {
   const { history, loadHistory, removeHistory, favoriteHistory } = useHistory()

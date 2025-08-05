@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals'
 import { act } from '@testing-library/react'
-import api from '../../api/index.js'
-import { useHistoryStore } from '../historyStore.ts'
+import api from '@/api/index.js'
+import { useHistoryStore } from '@/store/historyStore.ts'
 
 const mockApi = api
 mockApi.searchRecords = {

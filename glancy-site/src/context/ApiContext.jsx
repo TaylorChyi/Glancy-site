@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from 'react'
 import { useUser } from './AppContext.jsx'
-import { createApi } from '../api/index.js'
+import { createApi } from '@/api/index.js'
 
 const ApiContext = createContext(createApi())
 

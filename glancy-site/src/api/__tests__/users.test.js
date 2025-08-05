@@ -1,5 +1,5 @@
-import { createUsersApi } from '../users.js'
-import { API_PATHS } from '../../config/api.js'
+import { createUsersApi } from '@/api/users.js'
+import { API_PATHS } from '@/config/api.js'
 import { jest } from '@jest/globals'
 
 test('uploadAvatar posts FormData', async () => {

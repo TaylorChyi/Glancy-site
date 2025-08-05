@@ -1,5 +1,5 @@
 import { act } from '@testing-library/react'
-import { useModelStore } from '../modelStore.ts'
+import { useModelStore } from '@/store/modelStore.ts'
 
 describe('modelStore', () => {
   beforeEach(() => localStorage.clear())

@@ -1,6 +1,6 @@
-import { API_PATHS } from '../config/api.js'
+import { API_PATHS } from '@/config/api.js'
 import { apiRequest } from './client.js'
-import { useApi } from '../hooks/useApi.js'
+import { useApi } from '@/hooks/useApi.js'
 
 export function createProfilesApi(request = apiRequest) {
   const fetchProfile = ({ userId, token }) =>
