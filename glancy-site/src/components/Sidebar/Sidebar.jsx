@@ -1,7 +1,9 @@
 import Brand from '@/components/Brand'
 import SidebarFunctions from './SidebarFunctions.jsx'
 import SidebarUser from './SidebarUser.jsx'
-import { useIsMobile } from '@/utils/index.js'
+import useMediaQuery from '@/hooks/useMediaQuery.js'
+
+const MOBILE_QUERY = '(max-width: 600px)'
 
 function Sidebar({
   isMobile: mobileProp,
@@ -10,7 +12,7 @@ function Sidebar({
   onToggleFavorites,
   onSelectHistory
 }) {
-  const defaultMobile = useIsMobile()
+  const defaultMobile = useMediaQuery(MOBILE_QUERY)
   const isMobile = mobileProp ?? defaultMobile
   return (
     <>

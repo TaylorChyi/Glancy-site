@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import useMediaQuery from '@/hooks/useMediaQuery.js'
 
 export function extractMessage(text) {
   if (!text) return ''
@@ -28,19 +28,7 @@ export function getModifierKey() {
 }
 
 export function useIsMobile(maxWidth = 600) {
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' ? window.innerWidth <= maxWidth : false
-  )
-
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth <= maxWidth)
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [maxWidth])
-
-  return isMobile
+  return useMediaQuery(`(max-width: ${maxWidth}px)`)
 }
 
 export function detectWordLanguage(text) {
