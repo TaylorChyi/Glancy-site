@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { safeJSONParse } from '@/utils/index.js'
+import { safeJSONParse } from '@/utils/json.js'
 
 interface FavoritesState {
   favorites: string[]

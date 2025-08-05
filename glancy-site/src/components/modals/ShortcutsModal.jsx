@@ -1,6 +1,6 @@
 import BaseModal from './BaseModal.jsx'
 import styles from './ShortcutsModal.module.css'
-import { getModifierKey } from '@/utils/index.js'
+import { getModifierKey } from '@/utils/device.js'
 import { useLanguage } from '@/context/LanguageContext.jsx'
 
 function ShortcutsModal({ open, onClose }) {
