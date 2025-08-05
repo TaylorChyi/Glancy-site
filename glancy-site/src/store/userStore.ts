@@ -1,5 +1,4 @@
-import { create } from 'zustand'
-import { safeJSONParse } from '@/utils/json.js'
+import { createPersistentStore } from './createPersistentStore.ts'
 
 export interface User {
   id: string
@@ -14,19 +13,18 @@ interface UserState {
   clearUser: () => void
 }
 
-const STORAGE_KEY = 'user'
-export const useUserStore = create<UserState>((set) => {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  const initialUser: User | null = stored ? safeJSONParse(stored, null) : null
-  return {
-    user: initialUser,
+export const useUserStore = createPersistentStore<UserState>({
+  key: 'user',
+  initializer: (set) => ({
+    user: null,
     setUser: (user: User) => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(user))
       set({ user })
     },
     clearUser: () => {
-      localStorage.removeItem(STORAGE_KEY)
       set({ user: null })
     }
+  }),
+  persistOptions: {
+    partialize: (state) => ({ user: state.user })
   }
 })
