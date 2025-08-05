@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext.jsx'
 import MessagePopup from '@/components/ui/MessagePopup.jsx'
 import AgeStepper from '@/components/form/AgeStepper/AgeStepper.jsx'
 import GenderSelect from '@/components/form/GenderSelect/GenderSelect.jsx'
+import EditableField from '@/components/form/EditableField/EditableField.jsx'
 import { useApi } from '@/hooks/useApi.js'
 import { useUser } from '@/context/AppContext.jsx'
 import { cacheBust } from '@/utils/index.js'
@@ -25,11 +26,6 @@ function Profile({ onCancel }) {
   const [avatar, setAvatar] = useState('')
   const [popupOpen, setPopupOpen] = useState(false)
   const [popupMsg, setPopupMsg] = useState('')
-  const [editable, setEditable] = useState({
-    username: false,
-    email: false,
-    phone: false
-  })
 
   const handleAvatarChange = async (e) => {
     const file = e.target.files?.[0]
@@ -111,60 +107,27 @@ function Profile({ onCancel }) {
             style={{ position: 'absolute', inset: 0, opacity: 0 }}
           />
         </div>
-        <div className={styles['editable-item']}>
-          <input
-            className={styles['username-input']}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder={t.usernamePlaceholder}
-            disabled={!editable.username}
-          />
-          {!editable.username && (
-            <button
-              type="button"
-              className={styles['edit-btn']}
-              onClick={() => setEditable({ ...editable, username: true })}
-            >
-              {t.editButton}
-            </button>
-          )}
-        </div>
-        <div className={styles['editable-item']}>
-          <input
-            className={styles['email-input']}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder={t.emailPlaceholder}
-            disabled={!editable.email}
-          />
-          {!editable.email && (
-            <button
-              type="button"
-              className={styles['edit-btn']}
-              onClick={() => setEditable({ ...editable, email: true })}
-            >
-              {t.editButton}
-            </button>
-          )}
-        </div>
-        <div className={styles['editable-item']}>
-          <input
-            className={styles['phone-input']}
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder={t.phonePlaceholder}
-            disabled={!editable.phone}
-          />
-          {!editable.phone && (
-            <button
-              type="button"
-              className={styles['edit-btn']}
-              onClick={() => setEditable({ ...editable, phone: true })}
-            >
-              {t.editButton}
-            </button>
-          )}
-        </div>
+        <EditableField
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder={t.usernamePlaceholder}
+          inputClassName={styles['username-input']}
+          buttonText={t.editButton}
+        />
+        <EditableField
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={t.emailPlaceholder}
+          inputClassName={styles['email-input']}
+          buttonText={t.editButton}
+        />
+        <EditableField
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder={t.phonePlaceholder}
+          inputClassName={styles['phone-input']}
+          buttonText={t.editButton}
+        />
         <div className={styles.basic}>
           <div className={styles.item}>
             <ThemeIcon name="cake" className={styles.icon} width={20} height={20} />

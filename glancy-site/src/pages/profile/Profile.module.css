@@ -118,27 +118,11 @@
   opacity: 0.8;
 }
 
-.editable-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 6px;
-}
-
 .username-input,
 .email-input,
 .phone-input {
   flex: 1;
   text-align: left;
-}
-
-.edit-btn {
-  border: 1px solid var(--primary-bg);
-  background: transparent;
-  color: var(--primary-bg);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
 }
 
 .tooltip {
