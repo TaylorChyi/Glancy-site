@@ -1,4 +1,4 @@
-import ListItem from '@/components/ui/ListItem/ListItem.jsx'
+import ListItem from '@/components/ui/ListItem'
 
 function FavoritesView({ favorites = [], onSelect, onUnfavorite, emptyMessage }) {
   if (!favorites.length) {

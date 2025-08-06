@@ -3,7 +3,7 @@ import '@/pages/App/App.css'
 import { useLanguage } from '@/context'
 import { API_PATHS } from '@/config/api.js'
 import { useApi } from '@/hooks/useApi.js'
-import MessagePopup from '@/components/ui/MessagePopup.jsx'
+import MessagePopup from '@/components/ui/MessagePopup'
 
 function Faq() {
   const { t } = useLanguage()
