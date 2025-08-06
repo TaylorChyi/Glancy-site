@@ -1,4 +1,5 @@
 import { createPersistentStore } from './createPersistentStore.ts'
+import { pickState } from './persistUtils.ts'
 
 interface FavoritesState {
   favorites: string[]
@@ -18,6 +19,6 @@ export const useFavoritesStore = createPersistentStore<FavoritesState>({
     }
   }),
   persistOptions: {
-    partialize: (state) => ({ favorites: state.favorites })
+    partialize: pickState(['favorites'])
   }
 })

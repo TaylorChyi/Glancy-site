@@ -1,4 +1,5 @@
 import { createPersistentStore } from './createPersistentStore.ts'
+import { pickState } from './persistUtils.ts'
 
 interface ModelState {
   model: string
@@ -14,6 +15,6 @@ export const useModelStore = createPersistentStore<ModelState>({
     }
   }),
   persistOptions: {
-    partialize: (state) => ({ model: state.model })
+    partialize: pickState(['model'])
   }
 })
