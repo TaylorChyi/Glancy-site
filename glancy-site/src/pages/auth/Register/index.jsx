@@ -4,6 +4,7 @@ import { API_PATHS } from '@/config/api.js'
 import { useApi } from '@/hooks/useApi.js'
 import { useUser } from '@/context'
 import { useLanguage } from '@/context'
+import { useAuthFormConfig } from '../useAuthFormConfig.js'
 
 function Register() {
   const api = useApi()
@@ -37,13 +38,7 @@ function Register() {
     navigate('/')
   }
 
-  const placeholders = {
-    phone: t.phonePlaceholder,
-    email: t.emailPlaceholder
-  }
-
-  const formMethods = ['phone', 'email']
-  const methodOrder = ['phone', 'email', 'wechat', 'apple', 'google']
+  const { placeholders, formMethods, methodOrder } = useAuthFormConfig()
 
   return (
     <AuthForm
