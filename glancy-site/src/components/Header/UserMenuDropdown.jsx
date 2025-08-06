@@ -1,4 +1,4 @@
-import Avatar from '@/components/ui/Avatar.jsx'
+import Avatar from '@/components/ui/Avatar'
 import styles from './Header.module.css'
 import ThemeIcon from '@/components/ui/Icon'
 
