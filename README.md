@@ -2,6 +2,16 @@
 
 此仓库包含格律词典前端代码，采用 React + Vite 构建。
 
+## 开发环境
+所有前端代码位于 `glancy-site/` 目录。安装依赖时需先进入该目录：
+
+```bash
+cd glancy-site
+npm ci
+```
+
+后续的 lint、构建等脚本也在此目录执行。
+
 ## 部署方式
 
 通过 GitHub Actions 自动构建并将生成的静态文件同步到云服务器。你需要在仓库的 `Settings -> Secrets and variables -> Actions` 中设置以下几个 Secret：
