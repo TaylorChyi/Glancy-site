@@ -2,6 +2,12 @@
 
 此仓库包含格律词典前端代码，采用 React + Vite 构建。
 
+## 目录结构
+
+- `glancy-site/`：React 应用源代码与开发脚本。
+- `docs/`：部署与设计相关文档。
+- `nginx.conf.example`：Nginx 示例配置。
+
 ## 开发环境
 所有前端代码位于 `glancy-site/` 目录。安装依赖时需先进入该目录：
 
@@ -42,9 +48,16 @@ export default defineConfig({
 
 ## 开发脚本
 
+所有命令需在 `glancy-site` 目录内执行：
+
+- `npm ci`：安装依赖。
+- `npm run dev`：启动本地开发服务器。
 - `npm run lint`：执行 ESLint 检查 JavaScript 代码。
 - `npm run lint:css`：使用 Stylelint 扫描 `src/**/*.css`。
+- `npm test`：运行单元测试。
 - `npm run build`：构建生产环境文件。
+- `npm run preview`：本地预览构建产物。
+- `npm start`：以 Node 服务托管 `dist` 目录。
 
 ## 常见问题
 
