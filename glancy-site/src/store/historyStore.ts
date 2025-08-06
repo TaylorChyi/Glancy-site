@@ -1,5 +1,6 @@
 import api from '@/api/index.js'
 import { createPersistentStore } from './createPersistentStore.ts'
+import { pickState } from './persistUtils.ts'
 import type { User } from './userStore.ts'
 
 interface HistoryState {
@@ -124,6 +125,6 @@ export const useHistoryStore = createPersistentStore<HistoryState>({
     }
   },
   persistOptions: {
-    partialize: (state) => ({ history: state.history })
+    partialize: pickState(['history'])
   }
 })
