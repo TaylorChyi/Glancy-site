@@ -1,6 +1,6 @@
 import { API_PATHS } from '@/config/api.js'
 import { apiRequest, createJsonRequest } from './client.js'
-import { useApi } from '@/hooks/useApi.js'
+import { useApi } from '@/hooks'
 
 export function createProfilesApi(request = apiRequest) {
   const jsonRequest = createJsonRequest(request)

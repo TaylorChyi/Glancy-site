@@ -1,4 +1,4 @@
-import useMediaQuery from '@/hooks/useMediaQuery.js'
+import { useMediaQuery } from '@/hooks'
 
 export function getModifierKey() {
   const platform =

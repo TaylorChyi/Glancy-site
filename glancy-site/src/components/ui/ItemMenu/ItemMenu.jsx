@@ -1,5 +1,5 @@
 import ThemeIcon from '@/components/ui/Icon'
-import useOutsideToggle from '@/hooks/useOutsideToggle.js'
+import { useOutsideToggle } from '@/hooks'
 import { withStopPropagation } from '@/utils/stopPropagation.js'
 import styles from './ItemMenu.module.css'
 

@@ -6,7 +6,7 @@ import { useTheme } from '@/context'
 import DictionaryEntry from '@/components/ui/DictionaryEntry'
 import ThemeIcon from '@/components/ui/Icon'
 import { useLanguage } from '@/context'
-import { useFetchWord } from '@/hooks/useFetchWord.js'
+import { useFetchWord } from '@/hooks'
 import './App.css'
 import styles from './App.module.css'
 import Layout from '@/components/Layout'
@@ -14,7 +14,7 @@ import HistoryDisplay from '@/components/ui/HistoryDisplay'
 import { useModelStore } from '@/store'
 import ICP from '@/components/ui/ICP'
 import FavoritesView from './FavoritesView.jsx'
-import { useAppShortcuts } from '@/hooks/useAppShortcuts.js'
+import { useAppShortcuts } from '@/hooks'
 
 function App() {
   const [text, setText] = useState('')

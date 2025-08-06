@@ -14,7 +14,7 @@ const mockNavigate = jest.fn()
 jest.unstable_mockModule('@/context', () => ({
   useUser: () => ({ setUser: mockSetUser })
 }))
-jest.unstable_mockModule('@/hooks/useApi.js', () => ({
+jest.unstable_mockModule('@/hooks', () => ({
   useApi: () => ({ request: mockRequest })
 }))
 jest.unstable_mockModule('@/context', () => ({

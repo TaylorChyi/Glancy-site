@@ -1,6 +1,6 @@
 import { API_PATHS } from '@/config/api.js'
 import { apiRequest } from './client.js'
-import { useApi } from '@/hooks/useApi.js'
+import { useApi } from '@/hooks'
 
 export function createUsersApi(request = apiRequest) {
   const uploadAvatar = async ({ userId, file, token }) => {
