@@ -1,10 +1,11 @@
 import { useLanguage } from '@/context'
 import ThemeIcon from '@/components/ui/Icon'
 import { UserMenu } from '@/components/Header'
+import { getBrandText } from '@/utils'
 
 function Brand() {
   const { lang } = useLanguage()
-  const text = lang === 'zh' ? '格律词典' : 'Glancy'
+  const brandText = getBrandText(lang)
 
   const handleClick = () => {
     window.location.reload()
@@ -13,8 +14,8 @@ function Brand() {
   return (
     <div className="sidebar-brand">
       <div className="brand-main" onClick={handleClick}>
-        <ThemeIcon name="glancy-web" alt="Glancy" />
-        <span>{text}</span>
+        <ThemeIcon name="glancy-web" alt={brandText} />
+        <span>{brandText}</span>
       </div>
       <div className="mobile-user-menu">
         <UserMenu size={28} />
