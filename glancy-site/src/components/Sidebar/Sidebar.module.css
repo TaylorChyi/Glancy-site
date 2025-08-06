@@ -56,14 +56,14 @@
 
 .sidebar-functions {
   flex: 1;
-  overflow-y: auto;
+  overflow: visible auto;
   display: flex;
   flex-direction: column;
 }
 
 .history-list {
   flex: 1;
-  overflow-y: auto;
+  overflow: visible auto;
 }
 
 .history-list li {
@@ -102,7 +102,7 @@ border-radius: 4px;
   list-style: none;
   padding: 0;
   margin: 0;
-  overflow-y: auto;
+  overflow: visible auto;
   flex: 1;
 }
 
