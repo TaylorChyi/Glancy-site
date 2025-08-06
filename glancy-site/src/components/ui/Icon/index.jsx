@@ -1,38 +1,8 @@
 import React from 'react'
 import { useTheme } from '@/context'
+import ICONS from '@/assets/icons.js'
 
-// automatically import all svg assets and group them by theme
-// use relative paths instead of alias to ensure compatibility across build tools
-// NOTE: this file lives in `src/components/ui/Icon`, so we need to go up three levels
-// to reach `src/assets`. Keeping this explicit helps future refactors remain aware
-// of the relationship between components and shared assets.
-let modules = {}
-try {
-  modules = import.meta.glob('../../../assets/**/*.svg', {
-    eager: true,
-    import: 'default',
-  })
-} catch {
-  // ignore in environments without Vite's glob support
-}
-
-// shape: { [name]: { light?: url, dark?: url, single?: url } }
-const ICONS = {}
-
-for (const [path, mod] of Object.entries(modules)) {
-  const filename = path.split('/').pop().replace('.svg', '')
-
-  if (filename.endsWith('-light')) {
-    const name = filename.replace('-light', '')
-    ICONS[name] = { ...(ICONS[name] || {}), light: mod }
-  } else if (filename.endsWith('-dark')) {
-    const name = filename.replace('-dark', '')
-    ICONS[name] = { ...(ICONS[name] || {}), dark: mod }
-  } else {
-    const name = filename
-    ICONS[name] = { ...(ICONS[name] || {}), single: mod }
-  }
-}
+// ICONS shape: { [name]: { light?: url, dark?: url, single?: url } }
 
 export function ThemeIcon({ name, alt, ...props }) {
   const { resolvedTheme } = useTheme()
