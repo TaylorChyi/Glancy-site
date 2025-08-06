@@ -1,4 +1,4 @@
-import { useApi } from '@/hooks/useApi.js'
+import { useApi } from '@/hooks'
 import { detectWordLanguage, clientNameFromModel } from '@/utils/index.js'
 
 export function useFetchWord() {

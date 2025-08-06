@@ -6,7 +6,7 @@ import { useTheme } from '@/context'
 import { useUser } from '@/context'
 import { API_PATHS } from '@/config/api.js'
 import MessagePopup from '@/components/ui/MessagePopup.jsx'
-import { useApi } from '@/hooks/useApi.js'
+import { useApi } from '@/hooks'
 import { useModelStore } from '@/store'
 
 function Preferences() {

@@ -1,5 +1,5 @@
 import styles from './Modal.module.css'
-import useEscapeKey from '@/hooks/useEscapeKey.js'
+import { useEscapeKey } from '@/hooks'
 import { withStopPropagation } from '@/utils/stopPropagation.js'
 
 function Modal({ onClose, className = '', children }) {
