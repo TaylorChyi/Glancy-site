@@ -4,23 +4,30 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import postcssImport from 'postcss-import'
 
-// https://vite.dev/config/
+// centralised directory references
 const srcDir = fileURLToPath(new URL('./src', import.meta.url))
+const assetsDir = fileURLToPath(new URL('./src/assets', import.meta.url))
+
+// alias map reused by both Vite and PostCSS
+const aliases = {
+  '@': srcDir,
+  '@assets': assetsDir
+}
 
 export default defineConfig({
   base: './',
   resolve: {
-    alias: {
-      '@': srcDir
-    }
+    alias: aliases
   },
   css: {
     postcss: {
       plugins: [
         postcssImport({
           resolve(id) {
-            if (id.startsWith('@/')) {
-              return path.resolve(srcDir, id.slice(2))
+            for (const [key, target] of Object.entries(aliases)) {
+              if (id.startsWith(`${key}/`)) {
+                return path.resolve(target, id.slice(key.length + 1))
+              }
             }
             return undefined
           }
