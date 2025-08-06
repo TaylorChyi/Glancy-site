@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import '@/pages/App/App.css'
 import styles from './Profile.module.css'
 import Avatar from '@/components/ui/Avatar'
 import { useLanguage } from '@/context'

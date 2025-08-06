@@ -7,7 +7,6 @@ import DictionaryEntry from '@/components/ui/DictionaryEntry'
 import ThemeIcon from '@/components/ui/Icon'
 import { useLanguage } from '@/context'
 import { useFetchWord } from '@/hooks/useFetchWord.js'
-import './App.css'
 import styles from './App.module.css'
 import Layout from '@/components/Layout'
 import HistoryDisplay from '@/components/ui/HistoryDisplay'
@@ -155,7 +154,7 @@ function App() {
           canFavorite: !!entry && !showFavorites && !showHistory
         }}
         bottomContent={(
-          <form className="chatbox" onSubmit={handleSend}>
+          <form className={styles.chatbox} onSubmit={handleSend}>
             <input
               ref={inputRef}
               type="text"
@@ -174,7 +173,7 @@ function App() {
           </form>
         )}
       >
-        <div className="display">
+        <div className={styles.display}>
           {showFavorites ? (
             <FavoritesView
               favorites={favorites}
@@ -189,8 +188,8 @@ function App() {
           ) : entry ? (
             <DictionaryEntry entry={entry} />
           ) : (
-            <div className="display-content">
-              <div className="display-term">{placeholder}</div>
+            <div className={styles['display-content']}>
+              <div className={styles['display-term']}>{placeholder}</div>
             </div>
           )}
         </div>

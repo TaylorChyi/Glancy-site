@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import '@/pages/App/App.css'
 import styles from './Preferences.module.css'
 import { useLanguage } from '@/context'
 import { useTheme } from '@/context'
