@@ -16,3 +16,6 @@ This document tracks current cleanup efforts and future improvements.
 ## Future Work
 - Remove unused components and consolidate styles to reduce duplication.
 
+## Naming Conventions
+- Place all test files under a `tests` directory located alongside the module they verify.
+- Avoid using the legacy `__tests__` naming to maintain a consistent structure.
