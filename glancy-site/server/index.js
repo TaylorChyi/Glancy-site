@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import geoip from 'geoip-lite'
-import { COUNTRY_LANGUAGE_MAP } from './src/config/countryLanguageMap.js'
+import { COUNTRY_LANGUAGE_MAP } from './config/countryLanguageMap.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename)
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, '../dist')))
 
 app.set('trust proxy', true)
 
@@ -26,7 +26,7 @@ app.get('/api/locale', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'))
 })
 
 app.listen(port, () => {
