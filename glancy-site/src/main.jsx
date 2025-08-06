@@ -1,9 +1,9 @@
 import { StrictMode, Suspense, lazy, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ErrorBoundary from './components/ui/ErrorBoundary.jsx'
+import ErrorBoundary from './components/ui/ErrorBoundary'
 import './styles/index.css'
-import Loader from './components/ui/Loader.jsx'
+import Loader from './components/ui/Loader'
 import AuthWatcher from './components/AuthWatcher'
 
 const App = lazy(() => import('./pages/App'))

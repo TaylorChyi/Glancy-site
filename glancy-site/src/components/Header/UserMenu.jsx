@@ -1,7 +1,7 @@
 import { useUser, useHistory } from '@/context'
 import { useLanguage } from '@/context'
 import styles from './Header.module.css'
-import Avatar from '@/components/ui/Avatar.jsx'
+import Avatar from '@/components/ui/Avatar'
 import { Link } from 'react-router-dom'
 import UserMenuButton from './UserMenuButton.jsx'
 import UserMenuDropdown from './UserMenuDropdown.jsx'
