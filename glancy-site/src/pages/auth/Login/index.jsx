@@ -4,6 +4,7 @@ import { API_PATHS } from '@/config/api.js'
 import { useUser } from '@/context'
 import { useApi } from '@/hooks'
 import { useLanguage } from '@/context'
+import { useAuthFormConfig } from '../useAuthFormConfig.js'
 
 function Login() {
   const { setUser } = useUser()
@@ -20,14 +21,9 @@ function Login() {
     navigate('/')
   }
 
-  const placeholders = {
-    phone: t.phonePlaceholder,
-    email: t.emailPlaceholder,
-    username: t.usernamePlaceholder
-  }
-
-  const formMethods = ['phone', 'email', 'username']
-  const methodOrder = ['username', 'email', 'phone', 'wechat', 'apple', 'google']
+  const { placeholders, formMethods, methodOrder } = useAuthFormConfig({
+    includeUsername: true
+  })
 
   return (
     <AuthForm
