@@ -66,6 +66,7 @@ export default {
     searchHistory: 'History',
     noFavorites: "No favorites yet",
     noDefinition: 'No definition',
+    noHistory: 'No history yet',
     clearHistory: 'Clear History',
     notifications: 'Notifications',
     markRead: 'Mark read',

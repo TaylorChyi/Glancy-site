@@ -15,6 +15,7 @@ import { useModelStore } from '@/store'
 import ICP from '@/components/ui/ICP'
 import FavoritesView from './FavoritesView.jsx'
 import { useAppShortcuts } from '@/hooks/useAppShortcuts.js'
+import EmptyState from '@/components/ui/EmptyState'
 
 function App() {
   const [text, setText] = useState('')
@@ -183,15 +184,13 @@ function App() {
               emptyMessage={t.noFavorites}
             />
           ) : showHistory ? (
-            <HistoryDisplay />
+            <HistoryDisplay emptyMessage={t.noHistory} />
           ) : loading ? (
             '...'
           ) : entry ? (
             <DictionaryEntry entry={entry} />
           ) : (
-            <div className="display-content">
-              <div className="display-term">{placeholder}</div>
-            </div>
+            <EmptyState message={placeholder} />
           )}
         </div>
       </Layout>
