@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import styles from './Toolbar.module.css'
 import { useLanguage } from '@/context'
-import useOutsideToggle from '@/hooks/useOutsideToggle.js'
+import { useOutsideToggle } from '@/hooks'
 import { useModelStore } from '@/store'
-import { useApi } from '@/hooks/useApi.js'
+import { useApi } from '@/hooks'
 
 function ModelSelector() {
   const { open, setOpen, ref: menuRef } = useOutsideToggle(false)
