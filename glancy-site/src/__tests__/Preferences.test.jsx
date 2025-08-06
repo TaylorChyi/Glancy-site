@@ -32,7 +32,7 @@ jest.unstable_mockModule('@/context', () => ({
 jest.unstable_mockModule('@/context', () => ({
   useUser: () => ({ user: { id: '1', token: 't' } })
 }))
-jest.unstable_mockModule('@/hooks/useApi.js', () => ({
+jest.unstable_mockModule('@/hooks', () => ({
   useApi: () => ({
     request: mockRequest,
     jsonRequest: mockRequest,

@@ -1,7 +1,7 @@
 import ModelSelector from '@/components/Toolbar'
 import { useLanguage } from '@/context'
 import { useUser } from '@/context'
-import useOutsideToggle from '@/hooks/useOutsideToggle.js'
+import { useOutsideToggle } from '@/hooks'
 import common from './TopBarCommon.module.css'
 import ThemeIcon from '@/components/ui/Icon'
 
