@@ -1,6 +1,24 @@
-import zh from './zh.js'
-import en from './en.js'
+import authEn from './auth/en.js';
+import authZh from './auth/zh.js';
+import navigationEn from './navigation/en.js';
+import navigationZh from './navigation/zh.js';
+import profileEn from './profile/en.js';
+import profileZh from './profile/zh.js';
+import commonEn from './common/en.js';
+import commonZh from './common/zh.js';
 
-const translations = { zh, en }
+const en = {
+  ...navigationEn,
+  ...authEn,
+  ...profileEn,
+  ...commonEn,
+};
 
-export default translations
+const zh = {
+  ...navigationZh,
+  ...authZh,
+  ...profileZh,
+  ...commonZh,
+};
+
+export default { en, zh };
