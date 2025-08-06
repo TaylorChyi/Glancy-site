@@ -1,12 +1,9 @@
 import ListItem from '@/components/ui/ListItem'
+import EmptyState from '@/components/ui/EmptyState'
 
 function FavoritesView({ favorites = [], onSelect, onUnfavorite, emptyMessage }) {
   if (!favorites.length) {
-    return (
-      <div className="display-content">
-        <div className="display-term">{emptyMessage}</div>
-      </div>
-    )
+    return <EmptyState message={emptyMessage} />
   }
 
   return (

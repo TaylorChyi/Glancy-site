@@ -66,6 +66,7 @@ export default {
     searchHistory: '搜索记录',
     noDefinition: '暂无释义',
     noFavorites: '暂无收藏',
+    noHistory: '暂无记录',
     clearHistory: '清空记录',
     notifications: '通知',
     markRead: '标为已读',

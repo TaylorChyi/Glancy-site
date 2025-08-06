@@ -61,19 +61,6 @@
   text-align: center;
 }
 
-.display-content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-}
-
-.display-term {
-  margin-bottom: 1rem;
-}
-
 
 .chatbox {
   display: flex;

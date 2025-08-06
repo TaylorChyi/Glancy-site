@@ -1,14 +1,11 @@
 import { useHistory } from '@/context'
+import EmptyState from '@/components/ui/EmptyState'
 import styles from './HistoryDisplay.module.css'
 
-function HistoryDisplay() {
+function HistoryDisplay({ emptyMessage = 'No history' }) {
   const { history } = useHistory()
   if (!history.length) {
-    return (
-      <div className="display-content">
-        <div className="display-term">No history</div>
-      </div>
-    )
+    return <EmptyState message={emptyMessage} />
   }
   return (
     <ul className={styles['history-grid-display']}>

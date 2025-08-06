@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  margin-bottom: 1rem;
+}
+
+.message {
+  margin-bottom: 1rem;
+}
